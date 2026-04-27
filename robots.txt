@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spirit2k5.github.io/spirit2k5/sitemap.xml
+
+# Spirit2k5 - Carlton Mahlori Tshianeo
+# South African Gamer & Tech Enthusiast
