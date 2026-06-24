@@ -1,0 +1,30 @@
+IMPORTANT: Before publishing, replace this placeholder website URL in all HTML files, sitemap.xml and robots.txt:
+https://spirit2k5.github.io/spirit2k5-web-studio
+
+With your real GitHub Pages link, for example:
+https://YOUR-GITHUB-USERNAME.github.io/spirit2k5-web-studio/
+
+After publishing:
+1. Open Google Search Console.
+2. Add your website URL.
+3. Verify ownership.
+4. Submit sitemap.xml.
+5. Search Google later using: site:your-website-link
+6. Add the website link to Instagram bio and WhatsApp Business.
+7. Create a Google Business Profile using:
+   Business name: Spirit2k5 Web Studio
+   Category: Website Designer
+   Phone: 078 188 8220
+   Email: mahloricarlton@gmail.com
+   Location/service area: Johannesburg, South Africa
+
+SEO added:
+- Search titles
+- Meta descriptions
+- Keywords
+- Canonical links
+- Open Graph/Twitter previews
+- Local business structured data
+- sitemap.xml
+- robots.txt
+- Google-friendly business wording
