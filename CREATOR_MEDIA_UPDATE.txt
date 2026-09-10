@@ -1,0 +1,11 @@
+SPIRIT2K5 CREATOR MEDIA UPDATE - 2026-09-10
+
+Added:
+- Four real creator photos for Carlton Mahlori Tshianeo / spirit2k5.
+- One creator video, stored with no audio track.
+- Creator gallery on About page.
+- Creator showcase on Home page.
+- Founder image now uses real creator photo.
+- Copy clearly identifies Carlton / spirit2k5 as creator and credits the RONMAXAKS website.
+
+Existing site-entry music behavior remains: browser autoplay is attempted on entry; if blocked by browser policy it starts on the visitor's first interaction.

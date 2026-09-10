@@ -1,0 +1,8 @@
+SPIRIT2K5 WEB STUDIO — UI / MEDIA / AUDIO UPDATE
+
+- Added RONMAXAKS project development video and live-site link.
+- All website videos are physically silent or treated as muted.
+- Rebuilt responsive media rules so portrait and landscape images fit cleanly.
+- Reduced website package prices.
+- Added seamless same-origin page navigation so the background track keeps playing without restarting between pages.
+- Added mobile/tablet/desktop HUD polish and page transition handling.

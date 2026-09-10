@@ -1,0 +1,30 @@
+SPIRIT2K5 WEB STUDIO - FINAL VALIDATION
+
+RONMAXAKS
+- Real RONMAXAKS development video added to Home and Portfolio.
+- Placeholder removed.
+- Live RONMAXAKS website link added.
+- Creator credit retained: Carlton Mahlori Tshianeo / spirit2k5.
+
+MEDIA
+- Responsive media CSS rebuilt.
+- Project images/videos use contain fitting to prevent unwanted cropping.
+- Creator images preserve their original portrait proportions.
+- Creator gallery uses a masonry-style responsive layout.
+- All MP4 files in this build were verified to contain video streams only (no audio streams).
+
+PRICING
+- Starter: From R800
+- Business: From R1,500
+- Pro: From R2,500
+- Contact budget ranges reduced to match.
+
+MUSIC / NAVIGATION
+- Internal page navigation uses soft page swaps on normal web hosting.
+- The audio element remains mounted while moving between Home, Services, Portfolio, Pricing, About and Contact.
+- This prevents the track from restarting/stuttering between internal pages.
+- Browser autoplay restrictions can still require one initial click/tap before sound is allowed.
+
+FILE CHECKS
+- No missing local image/video/script/style references found.
+- No broken internal HTML page links found.

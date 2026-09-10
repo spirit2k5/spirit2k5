@@ -1,0 +1,9 @@
+SPIRIT2K5 WEB STUDIO — RESTORED WORKING MEDIA
+
+Restored at user request:
+- founder-working-restored.jpg
+- founder-working-restored.mp4
+
+The restored media is visible on Home, About, and Portfolio.
+The restored video contains no audio stream and is also set to muted/playsinline in HTML.
+Existing creator photos/videos remain in place.

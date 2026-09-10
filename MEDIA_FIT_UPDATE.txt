@@ -1,0 +1,8 @@
+MEDIA FIT UPDATE - 2026-09-10
+
+- Creator founder photo now uses a 3:4 portrait card so it is not cropped into a wide frame.
+- Creator portrait photos retain 3:4 proportions.
+- Creator portrait video retains 9:16 proportions.
+- Laptop/work-session video retains 4:3 proportions.
+- Creator gallery videos use contain instead of crop.
+- Responsive rules added for desktop, tablet, and mobile.

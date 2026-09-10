@@ -1,0 +1,14 @@
+MEDIA UPDATE
+
+Added:
+- FareMap backend/Supabase photo
+- Developer build session video
+- Website live-preview video
+- Spirit2k5 entry music track
+
+Both videos have had their audio streams physically removed.
+The site track attempts to start when a visitor enters. Browsers that block unmuted autoplay will start it after the visitor's first tap/click/keypress.
+
+PENDING:
+- The newest founder portrait/selfie from the latest chat message still needs the original image attachment file to be available for embedding.
+- RONMAXAKS project image/video can be added when supplied.
