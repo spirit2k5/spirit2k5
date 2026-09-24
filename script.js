@@ -128,7 +128,7 @@
     });
   };
 
-  // Soft navigation: swap only <main>. Header + music player remain alive, so music never restarts.
+  // Soft navigation: swap only <main> so page transitions stay fast and smooth.
   const navigate = async (targetUrl, { push = true, restoreScroll = false } = {}) => {
     const url = new URL(targetUrl, location.href);
     if (routeInFlight) return;
@@ -219,103 +219,6 @@
 
   window.addEventListener('popstate', () => navigate(location.href, { push: false }));
 
-  // Persistent site-entry music. Because soft navigation never destroys this node, playback is seamless between pages.
-  const initMusic = () => {
-    if (document.getElementById('spirit-site-audio')) return;
-
-    const KEY_TIME = 'spirit2k5MusicTime';
-    const KEY_ENDED = 'spirit2k5MusicEnded';
-    const KEY_PAUSED = 'spirit2k5MusicUserPaused';
-
-    const audio = document.createElement('audio');
-    audio.id = 'spirit-site-audio';
-    audio.src = 'assets/spirit2k5-entry-track.mp3';
-    audio.preload = 'auto';
-    audio.playsInline = true;
-    audio.volume = 0.62;
-    audio.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(audio);
-
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'site-music-toggle';
-    button.setAttribute('aria-label', 'Toggle site music');
-    document.body.appendChild(button);
-
-    const saved = Number.parseFloat(sessionStorage.getItem(KEY_TIME) || '0');
-    if (Number.isFinite(saved) && saved > 0) {
-      audio.addEventListener('loadedmetadata', () => {
-        if (saved < audio.duration - .5) audio.currentTime = saved;
-      }, { once: true });
-    }
-
-    const saveTime = () => {
-      if (Number.isFinite(audio.currentTime)) sessionStorage.setItem(KEY_TIME, String(audio.currentTime));
-    };
-
-    const updateButton = () => {
-      if (sessionStorage.getItem(KEY_ENDED) === '1') {
-        button.textContent = '♫ Track finished';
-        return;
-      }
-      button.textContent = audio.paused ? '♫ Play music' : '♫ Music on';
-    };
-
-    audio.addEventListener('play', () => {
-      sessionStorage.setItem(KEY_PAUSED, '0');
-      button.classList.remove('needs-gesture');
-      updateButton();
-    });
-    audio.addEventListener('pause', updateButton);
-    audio.addEventListener('ended', () => {
-      sessionStorage.setItem(KEY_ENDED, '1');
-      sessionStorage.setItem(KEY_TIME, '0');
-      updateButton();
-    });
-    setInterval(saveTime, 1500);
-    window.addEventListener('pagehide', saveTime);
-
-    button.addEventListener('click', async () => {
-      if (sessionStorage.getItem(KEY_ENDED) === '1') {
-        sessionStorage.setItem(KEY_ENDED, '0');
-        audio.currentTime = 0;
-      }
-      if (audio.paused) {
-        sessionStorage.setItem(KEY_PAUSED, '0');
-        try { await audio.play(); }
-        catch { button.classList.add('needs-gesture'); }
-      } else {
-        sessionStorage.setItem(KEY_PAUSED, '1');
-        audio.pause();
-        saveTime();
-      }
-      updateButton();
-    });
-
-    const tryStart = async () => {
-      if (sessionStorage.getItem(KEY_ENDED) === '1' || sessionStorage.getItem(KEY_PAUSED) === '1') {
-        updateButton();
-        return;
-      }
-      try {
-        await audio.play();
-      } catch {
-        button.classList.add('needs-gesture');
-        button.textContent = '♫ Tap for music';
-      }
-    };
-
-    const gestureStart = async () => {
-      if (sessionStorage.getItem(KEY_ENDED) === '1' || sessionStorage.getItem(KEY_PAUSED) === '1' || !audio.paused) return;
-      try { await audio.play(); } catch {}
-    };
-    document.addEventListener('pointerdown', gestureStart, { once: true, capture: true });
-    document.addEventListener('keydown', gestureStart, { once: true, capture: true });
-
-    updateButton();
-    tryStart();
-  };
 
   initPage();
-  initMusic();
 })();
