@@ -182,31 +182,6 @@
     if (!main || main.dataset.motionControls === '1') return;
     main.dataset.motionControls = '1';
 
-    // Pressable animation control available on every page.
-    const control = document.createElement('button');
-    control.type = 'button';
-    control.className = 'motion-trigger';
-    control.innerHTML = '<span class="motion-trigger-icon">✦</span><span>Animate page</span>';
-    control.setAttribute('aria-label', 'Play page animations');
-    main.appendChild(control);
-
-    const playWave = () => {
-      const targets = [...main.querySelectorAll('section, article, .card, .price-card, .service-list a, .process-track > div')];
-      control.classList.remove('playing');
-      void control.offsetWidth;
-      control.classList.add('playing');
-      targets.forEach((el, i) => {
-        setTimeout(() => {
-          el.classList.remove('press-animate');
-          void el.offsetWidth;
-          el.classList.add('press-animate');
-          setTimeout(() => el.classList.remove('press-animate'), 850);
-        }, Math.min(i * 65, 900));
-      });
-      setTimeout(() => control.classList.remove('playing'), 1500);
-    };
-    control.addEventListener('click', playWave);
-
     // Make visual project/media surfaces pressable, not hover-only.
     main.querySelectorAll('.case-media, .about-portrait, .media-card, .page-hero > img, .page-hero > video').forEach(el => {
       el.classList.add('pressable-visual');
@@ -246,6 +221,24 @@
     main.querySelectorAll('.btn, .price-card, .process-track > div').forEach(el => {
       el.addEventListener('pointerdown', () => el.classList.add('is-pressed'));
       ['pointerup','pointercancel','pointerleave'].forEach(evt => el.addEventListener(evt, () => el.classList.remove('is-pressed')));
+    });
+  };
+
+  const initPackageCards = () => {
+    document.querySelectorAll('.price-card[data-package-link]').forEach(card => {
+      if (card.dataset.packageBound === '1') return;
+      card.dataset.packageBound = '1';
+      const openPackage = () => navigate(new URL(card.dataset.packageLink, location.href).href);
+      card.addEventListener('click', event => {
+        if (event.target.closest('a,button,input,select,textarea')) return;
+        openPackage();
+      });
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openPackage();
+        }
+      });
     });
   };
 
@@ -413,6 +406,7 @@
     initProjectWizard();
     initMotion();
     initInteractiveMotion();
+    initPackageCards();
     initPageShowcaseAnimation();
     updateActiveNav();
     const nav = document.querySelector('.nav');
