@@ -131,6 +131,37 @@
     dots.forEach((dot,i) => dot.addEventListener('click', () => {
       if (i < current || (i === current + 1 && validStep())) show(i, i > current ? 1 : -1);
     }));
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!validStep()) return;
+      const data = new FormData(form);
+      const subject = 'New website project enquiry — ' + (data.get('Business') || data.get('Name') || 'Spirit2k5');
+      const body = [
+        'NEW PROJECT ENQUIRY',
+        '',
+        'ABOUT YOU',
+        'Name: ' + (data.get('Name') || ''),
+        'Business / brand: ' + (data.get('Business') || ''),
+        'Email: ' + (data.get('Email') || ''),
+        'Phone / WhatsApp: ' + (data.get('Phone') || ''),
+        '',
+        'WHAT DO YOU NEED?',
+        'Project type: ' + (data.get('Project type') || ''),
+        'Budget: ' + (data.get('Budget') || ''),
+        'Timeline: ' + (data.get('Timeline') || ''),
+        'Existing website: ' + (data.get('Existing site') || ''),
+        '',
+        'THE PROJECT',
+        data.get('Project details') || ''
+      ].join('\n');
+      const success = form.querySelector('.enquiry-success');
+      if (success) {
+        success.classList.add('show');
+        setTimeout(() => success.classList.remove('show'), 5000);
+      }
+      const mailto = 'mailto:mahloricarlton@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      setTimeout(() => { window.location.href = mailto; }, 350);
+    });
   };
 
   const initMotion = () => {
