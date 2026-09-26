@@ -353,11 +353,38 @@
       <div class="flow-visual">
         <div class="flow-browser" aria-hidden="true">
           <div class="flow-browser-bar"><i></i><i></i><i></i><span>spirit2k5 / project</span></div>
-          <div class="flow-screen">
+          <div class="flow-screen" data-scene="brief">
             <div class="flow-screen-label">01</div>
             <strong>Brief</strong>
-            <div class="flow-lines"><i></i><i></i><i></i></div>
-            <div class="flow-check">✓</div>
+            <div class="flow-stage-art">
+              <div class="art-brief">
+                <div class="brief-card"><b>PROJECT BRIEF</b><i></i><i></i><i></i><span>requirements ✓</span></div>
+              </div>
+              <div class="art-design">
+                <div class="wireframe-nav"></div><div class="wireframe-hero"></div>
+                <div class="wireframe-grid"><i></i><i></i><i></i></div>
+              </div>
+              <div class="art-code">
+                <span>&lt;main&gt;</span><span>&nbsp;&nbsp;&lt;section class="website"&gt;</span><span>&nbsp;&nbsp;&nbsp;&nbsp;build();</span><span>&nbsp;&nbsp;&nbsp;&nbsp;test();</span><span>&nbsp;&nbsp;&lt;/section&gt;</span><span>&lt;/main&gt;</span><b></b>
+              </div>
+              <div class="art-test">
+                <div class="device desktop"><i></i></div><div class="device tablet"><i></i></div><div class="device phone"><i></i></div>
+                <span class="test-check">Responsive ✓</span>
+              </div>
+              <div class="art-review">
+                <div class="review-site"><i></i><i></i><i></i></div>
+                <div class="review-comment one">Make this clearer</div><div class="review-comment two">✓ Updated</div>
+              </div>
+              <div class="art-pay">
+                <div class="payment-card"><small>PROJECT APPROVED</small><b>Payment</b><span>✓ received</span></div>
+              </div>
+              <div class="art-deploy">
+                <div class="deploy-code">BUILD</div><span class="deploy-arrow">→</span><div class="deploy-cloud">CLOUD</div><span class="deploy-arrow">→</span><div class="deploy-live">● LIVE</div>
+              </div>
+              <div class="art-domain">
+                <div class="domain-chip">yourbusiness.co.za</div><div class="dns-line"></div><div class="domain-server">DNS</div><div class="dns-line"></div><div class="domain-live">● CONNECTED</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="flow-track"><span class="flow-progress"></span></div>
@@ -370,6 +397,17 @@
     const screenLabel = section.querySelector('.flow-screen-label');
     const screenTitle = section.querySelector('.flow-screen strong');
     const screen = section.querySelector('.flow-screen');
+    const sceneFor = title => {
+      const value = title.toLowerCase();
+      if (/domain/.test(value)) return 'domain';
+      if (/deploy|launch|live/.test(value)) return 'deploy';
+      if (/pay|payment/.test(value)) return 'pay';
+      if (/review|approve|deliver/.test(value)) return 'review';
+      if (/test|refine/.test(value)) return 'test';
+      if (/design|plan/.test(value)) return 'design';
+      if (/build|work|code/.test(value)) return 'code';
+      return 'brief';
+    };
     let current = 0;
     let timer = null;
 
@@ -394,6 +432,7 @@
       status.textContent = step[2];
       screenLabel.textContent = step[0];
       screenTitle.textContent = step[1];
+      screen.dataset.scene = sceneFor(step[1]);
       screen.classList.remove('flow-screen-change');
       void screen.offsetWidth;
       screen.classList.add('flow-screen-change');
