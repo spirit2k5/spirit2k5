@@ -32,11 +32,12 @@
   const updateActiveNav = (url = location.href) => {
     const page = currentPageName(url);
     const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
+    const servicePages = ['wordpress.html'];
     document.querySelectorAll('.nav a').forEach(a => {
       const href = a.getAttribute('href') || '';
       if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
       const hrefPage = currentPageName(new URL(href, location.href).href);
-      const active = hrefPage === page || (packagePages.includes(page) && hrefPage === 'pricing.html');
+      const active = hrefPage === page || (packagePages.includes(page) && hrefPage === 'pricing.html') || (servicePages.includes(page) && hrefPage === 'services.html');
       a.classList.toggle('active', active && !a.classList.contains('nav-cta'));
     });
   };
@@ -311,6 +312,18 @@
           ['06','Deliver','You review the finished work.']
         ]
       },
+      'wordpress.html': {
+        label: 'WordPress workflow',
+        title: 'From WordPress setup to a finished live website.',
+        steps: [
+          ['01','Setup','I prepare WordPress, hosting and the project structure.'],
+          ['02','Design','I build the layout and visual direction.'],
+          ['03','Build','Themes, plugins, forms or WooCommerce are configured and developed.'],
+          ['04','Test','I test responsive layout, forms, store flows and key functions.'],
+          ['05','Review','You see and review the WordPress website before payment.'],
+          ['06','Launch','After approval and payment, I deploy and connect the approved domain.']
+        ]
+      },
       'contact.html': {
         label: 'What happens next',
         title: 'Your enquiry starts the real build process.',
@@ -384,6 +397,12 @@
               <div class="art-domain">
                 <div class="domain-chip">yourbusiness.co.za</div><div class="dns-line"></div><div class="domain-server">DNS</div><div class="dns-line"></div><div class="domain-live">● CONNECTED</div>
               </div>
+              <div class="art-wordpress">
+                <div class="wp-admin-mini">
+                  <div class="wp-side"><b>WP</b><i></i><i></i><i></i><i></i></div>
+                  <div class="wp-main-mini"><span>Pages</span><strong>Home</strong><em>Editing…</em><div class="wp-blocks"><i></i><i></i><i></i></div></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -404,6 +423,7 @@
       if (/pay|payment/.test(value)) return 'pay';
       if (/review|approve|deliver/.test(value)) return 'review';
       if (/test|refine/.test(value)) return 'test';
+      if (/wordpress|setup|theme|plugin|woocommerce/.test(value)) return 'wordpress';
       if (/design|plan/.test(value)) return 'design';
       if (/build|work|code/.test(value)) return 'code';
       return 'brief';
