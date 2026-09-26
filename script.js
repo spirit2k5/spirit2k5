@@ -104,20 +104,26 @@
     const dots = [...form.querySelectorAll('.wizard-dot')];
     const line = form.querySelector('.wizard-line i');
     let current = 0;
+    let transitioning = false;
     const show = (index, direction = 1) => {
-      if (index < 0 || index >= steps.length) return;
-      steps[current].classList.remove('active');
-      steps[current].classList.add(direction > 0 ? 'step-exit-left' : 'step-exit-right');
-      const old = current;
-      current = index;
-      setTimeout(() => steps[old].classList.remove('step-exit-left','step-exit-right'), 420);
-      steps[current].classList.add('active');
-      dots.forEach((dot,i) => {
-        dot.classList.toggle('active', i === current);
-        dot.classList.toggle('complete', i < current);
-      });
-      if (line) line.style.width = (current / (steps.length - 1) * 100) + '%';
-      form.scrollIntoView({behavior:'smooth', block:'center'});
+      if (index < 0 || index >= steps.length || index === current || transitioning) return;
+      transitioning = true;
+      const oldIndex = current;
+      const outgoing = steps[oldIndex];
+      const incoming = steps[index];
+      outgoing.classList.add(direction > 0 ? 'step-exit-left' : 'step-exit-right');
+      setTimeout(() => {
+        outgoing.classList.remove('active','step-exit-left','step-exit-right');
+        current = index;
+        incoming.classList.add('active');
+        dots.forEach((dot,i) => {
+          dot.classList.toggle('active', i === current);
+          dot.classList.toggle('complete', i < current);
+        });
+        if (line) line.style.width = (current / (steps.length - 1) * 100) + '%';
+        form.scrollIntoView({behavior:'smooth', block:'center'});
+        setTimeout(() => { transitioning = false; }, 460);
+      }, 260);
     };
     const validStep = () => {
       const required = [...steps[current].querySelectorAll('[required]')];
