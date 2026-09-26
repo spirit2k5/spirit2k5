@@ -1,38 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://spirit2k5.github.io/spirit2k5-web-studio/</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://spirit2k5.co.za/</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://spirit2k5.github.io/spirit2k5-web-studio/services.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://spirit2k5.co.za/services.html</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://spirit2k5.github.io/spirit2k5-web-studio/portfolio.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://spirit2k5.co.za/portfolio.html</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://spirit2k5.github.io/spirit2k5-web-studio/pricing.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://spirit2k5.co.za/pricing.html</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://spirit2k5.github.io/spirit2k5-web-studio/about.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://spirit2k5.co.za/about.html</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://spirit2k5.github.io/spirit2k5-web-studio/contact.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://spirit2k5.co.za/contact.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/wordpress.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/business-website.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/ecommerce-website.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/starter-website.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/custom-web-app.html</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
