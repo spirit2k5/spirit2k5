@@ -249,6 +249,162 @@
     });
   };
 
+  const initPageShowcaseAnimation = () => {
+    const main = document.querySelector('main');
+    if (!main || main.querySelector('.page-motion-showcase')) return;
+
+    const page = currentPageName();
+    const configs = {
+      'index.html': {
+        eyebrow: 'Interactive build',
+        title: 'Press a stage and watch the build move.',
+        buttons: ['Design','Develop','Launch'],
+        cards: [
+          ['DESIGN','Wireframes','Structure • layout • direction'],
+          ['DEVELOP','Code','HTML • CSS • JavaScript'],
+          ['LAUNCH','Live','Test • connect • publish']
+        ]
+      },
+      'services.html': {
+        eyebrow: 'Interactive services',
+        title: 'Press a service and watch the idea change.',
+        buttons: ['Website','Store','Redesign'],
+        cards: [
+          ['WEBSITE','Business site','Pages • enquiries • credibility'],
+          ['STORE','E-commerce','Products • cart • checkout'],
+          ['REDESIGN','Refresh','Modern UI • mobile • speed']
+        ]
+      },
+      'portfolio.html': {
+        eyebrow: 'Interactive work',
+        title: 'Press through real project stages.',
+        buttons: ['Denz','RONMAXAKS','FareMap'],
+        cards: [
+          ['LIVE','Denz iPhones','Storefront • stock • checkout'],
+          ['LIVE','RONMAXAKS','Business site • responsive • launch'],
+          ['BUILDING','FareMap','Supabase • SQL • product development']
+        ]
+      },
+      'pricing.html': {
+        eyebrow: 'Interactive pricing',
+        title: 'Press a package to bring it forward.',
+        buttons: ['Starter','Business','Store','Custom'],
+        cards: [
+          ['FROM','R1,500','Focused professional website'],
+          ['FROM','R3,500','Full business website'],
+          ['FROM','R6,500','E-commerce storefront'],
+          ['SCOPED','Quote','Custom web systems']
+        ]
+      },
+      'about.html': {
+        eyebrow: 'Behind the build',
+        title: 'Press a skill to move it into focus.',
+        buttons: ['Design','Frontend','Systems'],
+        cards: [
+          ['DESIGN','UI / UX','Clean layouts • responsive thinking'],
+          ['FRONTEND','Web build','HTML • CSS • JavaScript'],
+          ['SYSTEMS','Web apps','Supabase • APIs • integrations']
+        ]
+      },
+      'contact.html': {
+        eyebrow: 'Project journey',
+        title: 'Press through the enquiry journey.',
+        buttons: ['About you','Your needs','The project'],
+        cards: [
+          ['STEP 01','About you','Name • business • contact'],
+          ['STEP 02','What you need','Type • budget • timeline'],
+          ['STEP 03','The project','Details • goals • send enquiry']
+        ]
+      }
+    };
+    const cfg = configs[page] || configs['index.html'];
+    const anchor = main.querySelector('.hero, .page-hero, .about-hero, .contact-hero') || main.firstElementChild;
+    if (!anchor) return;
+
+    const section = document.createElement('section');
+    section.className = 'page-motion-showcase reveal visible';
+    section.setAttribute('aria-label', cfg.title);
+    section.innerHTML = `
+      <div class="page-motion-copy">
+        <p class="eyebrow">${cfg.eyebrow}</p>
+        <h2>${cfg.title}</h2>
+        <div class="page-motion-tabs" role="tablist"></div>
+      </div>
+      <div class="page-motion-scene" aria-live="polite">
+        <div class="motion-ring ring-a"></div>
+        <div class="motion-ring ring-b"></div>
+        <div class="motion-card-stack"></div>
+        <div class="motion-pulse"></div>
+      </div>`;
+
+    const tabs = section.querySelector('.page-motion-tabs');
+    const stack = section.querySelector('.motion-card-stack');
+
+    cfg.cards.forEach((card, i) => {
+      const panel = document.createElement('button');
+      panel.type = 'button';
+      panel.className = 'page-motion-card' + (i === 0 ? ' active' : '');
+      panel.dataset.index = String(i);
+      panel.innerHTML = `<span>${card[0]}</span><strong>${card[1]}</strong><small>${card[2]}</small>`;
+      stack.appendChild(panel);
+    });
+
+    cfg.buttons.forEach((label, i) => {
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'page-motion-tab' + (i === 0 ? ' active' : '');
+      tab.textContent = label;
+      tab.dataset.index = String(i);
+      tabs.appendChild(tab);
+    });
+
+    const cards = [...stack.querySelectorAll('.page-motion-card')];
+    const tabButtons = [...tabs.querySelectorAll('.page-motion-tab')];
+    const activate = index => {
+      const safe = Math.max(0, Math.min(index, cards.length - 1));
+      cards.forEach((card, i) => {
+        card.classList.toggle('active', i === safe);
+        card.classList.toggle('before', i < safe);
+        card.classList.toggle('after', i > safe);
+      });
+      tabButtons.forEach((tab, i) => tab.classList.toggle('active', i === safe));
+      section.classList.remove('motion-scene-pop');
+      void section.offsetWidth;
+      section.classList.add('motion-scene-pop');
+      setTimeout(() => section.classList.remove('motion-scene-pop'), 700);
+    };
+
+    tabButtons.forEach(tab => tab.addEventListener('click', () => activate(Number(tab.dataset.index))));
+    cards.forEach(card => {
+      card.addEventListener('click', () => activate(Number(card.dataset.index)));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate(Number(card.dataset.index));
+        }
+      });
+    });
+
+    anchor.insertAdjacentElement('afterend', section);
+
+    if (page === 'index.html') {
+      const buildWindows = [...main.querySelectorAll('.build-window')];
+      tabButtons.forEach((tab, i) => tab.addEventListener('click', () => {
+        const win = buildWindows[i];
+        if (!win) return;
+        buildWindows.forEach(w => w.classList.remove('build-active'));
+        win.classList.add('build-active');
+      }));
+    }
+
+    if (page === 'contact.html') {
+      tabButtons.forEach((tab, i) => tab.addEventListener('click', () => {
+        const wizardDot = main.querySelectorAll('.wizard-dot')[i];
+        if (wizardDot) wizardDot.click();
+      }));
+    }
+  };
+
   const initPage = () => {
     initMenu();
     initReveal();
@@ -256,6 +412,7 @@
     initProjectWizard();
     initMotion();
     initInteractiveMotion();
+    initPageShowcaseAnimation();
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
