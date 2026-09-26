@@ -179,3 +179,5 @@ body{background:#f6f0e6;color:#191b1d}body::before{background:radial-gradient(ci
   .proof-grid,.addon-grid,.faq-grid,.resource-grid{grid-template-columns:1fr}
   .trust-callout{grid-template-columns:1fr}.trust-actions{justify-content:flex-start}
 }
+
+.breadcrumbs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;width:min(90%,1480px);margin:24px auto 0;padding:0 2px;font-size:.82rem;color:var(--muted)}.breadcrumbs a{font-weight:800}.breadcrumbs a:hover{color:var(--orange)}.breadcrumbs span{opacity:.45}.breadcrumbs strong{color:var(--text);font-weight:900}
