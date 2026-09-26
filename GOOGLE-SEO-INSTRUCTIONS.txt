@@ -1,30 +1,55 @@
-IMPORTANT: Before publishing, replace this placeholder website URL in all HTML files, sitemap.xml and robots.txt:
-https://spirit2k5.github.io/spirit2k5-web-studio
+SPIRIT2K5 SEO / GOOGLE SEARCH SETUP
+Updated: 2026-09-26
 
-With your real GitHub Pages link, for example:
-https://YOUR-GITHUB-USERNAME.github.io/spirit2k5-web-studio/
+Primary website:
+https://spirit2k5.co.za/
 
-After publishing:
-1. Open Google Search Console.
-2. Add your website URL.
-3. Verify ownership.
-4. Submit sitemap.xml.
-5. Search Google later using: site:your-website-link
-6. Add the website link to Instagram bio and WhatsApp Business.
-7. Create a Google Business Profile using:
-   Business name: Spirit2k5 Web Studio
-   Category: Website Designer
-   Phone: 078 188 8220
-   Email: mahloricarlton@gmail.com
-   Location/service area: Johannesburg, South Africa
-
-SEO added:
-- Search titles
-- Meta descriptions
-- Keywords
-- Canonical links
-- Open Graph/Twitter previews
-- Local business structured data
+Current SEO setup in the website:
+- Unique page titles and meta descriptions
+- Canonical URLs using spirit2k5.co.za
+- index, follow robots tags
+- Open Graph metadata
+- ProfessionalService / Service structured data
+- South African language locale (en-ZA)
+- Internal links between service pages
+- Local landing pages for Soweto and Johannesburg
 - sitemap.xml
-- robots.txt
-- Google-friendly business wording
+- robots.txt pointing to the current sitemap
+- Local contact/location wording
+- Improved media loading on key pages
+
+Google Search Console:
+1. Open Google Search Console.
+2. Add a Domain property for: spirit2k5.co.za
+3. Verify ownership using the DNS TXT record Google provides.
+4. Submit:
+   https://spirit2k5.co.za/sitemap.xml
+5. Use URL Inspection and request indexing for these priority URLs:
+   https://spirit2k5.co.za/
+   https://spirit2k5.co.za/web-design-soweto.html
+   https://spirit2k5.co.za/web-design-johannesburg.html
+   https://spirit2k5.co.za/services.html
+   https://spirit2k5.co.za/business-website.html
+   https://spirit2k5.co.za/wordpress.html
+   https://spirit2k5.co.za/ecommerce-website.html
+   https://spirit2k5.co.za/pricing.html
+   https://spirit2k5.co.za/portfolio.html
+   https://spirit2k5.co.za/contact.html
+
+Local business details:
+Business name: Spirit2k5 Web Studio
+Category: Website Designer / Web Developer
+Phone: 078 188 8220
+Email: mahloricarlton@gmail.com
+Service area: Soweto, Johannesburg, Gauteng, South Africa
+
+Backlink / directory targets to consider:
+- Google Business Profile
+- BizKasi
+- Small Business Directory South Africa
+- Destinali
+- Yellow Pages South Africa
+- Snupit
+- BizMarket Link
+
+Do not use the old GitHub Pages path as the canonical or sitemap domain.
