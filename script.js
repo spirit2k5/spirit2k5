@@ -140,36 +140,57 @@
     dots.forEach((dot,i) => dot.addEventListener('click', () => {
       if (i < current || (i === current + 1 && validStep())) show(i, i > current ? 1 : -1);
     }));
-    form.addEventListener('submit', event => {
+    form.addEventListener('submit', async event => {
       event.preventDefault();
       if (!validStep()) return;
       const data = new FormData(form);
       const subject = 'New website project enquiry — ' + (data.get('Business') || data.get('Name') || 'Spirit2k5');
-      const body = [
-        'NEW PROJECT ENQUIRY',
-        '',
-        'ABOUT YOU',
-        'Name: ' + (data.get('Name') || ''),
-        'Business / brand: ' + (data.get('Business') || ''),
-        'Email: ' + (data.get('Email') || ''),
-        'Phone / WhatsApp: ' + (data.get('Phone') || ''),
-        '',
-        'WHAT DO YOU NEED?',
-        'Project type: ' + (data.get('Project type') || ''),
-        'Budget: ' + (data.get('Budget') || ''),
-        'Timeline: ' + (data.get('Timeline') || ''),
-        'Existing website: ' + (data.get('Existing site') || ''),
-        '',
-        'THE PROJECT',
-        data.get('Project details') || ''
-      ].join('\n');
+      const button = form.querySelector('.send-enquiry');
       const success = form.querySelector('.enquiry-success');
-      if (success) {
-        success.classList.add('show');
-        setTimeout(() => success.classList.remove('show'), 5000);
+      const originalButton = button ? button.innerHTML : '';
+      const payload = {};
+      data.forEach((value, key) => { payload[key] = value; });
+      payload._subject = subject;
+      payload._template = 'table';
+      payload._url = 'https://spirit2k5.co.za/contact.html';
+      try {
+        if (button) {
+          button.disabled = true;
+          button.textContent = 'Sending…';
+        }
+        const response = await fetch('https://formsubmit.co/ajax/mahloricarlton@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === false) throw new Error(result.message || 'Unable to send');
+        if (success) {
+          const title = success.querySelector('b');
+          const copy = success.querySelector('p');
+          if (title) title.textContent = 'Enquiry sent';
+          if (copy) copy.textContent = 'Thanks — your project details were submitted. I’ll reply using the contact details you provided.';
+          success.classList.add('show');
+        }
+        form.reset();
+      } catch (error) {
+        const phone = '27781888220';
+        const message = 'Hi Carlton, I tried to send a Spirit2k5 website enquiry but the form could not send. I would like to discuss a website project.';
+        if (success) {
+          const title = success.querySelector('b');
+          const copy = success.querySelector('p');
+          if (title) title.textContent = 'Use WhatsApp instead';
+          if (copy) copy.textContent = 'The form could not send right now. WhatsApp is available as an immediate backup.';
+          success.classList.add('show');
+        }
+        setTimeout(() => window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(message), '_blank', 'noopener'), 450);
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.innerHTML = originalButton;
+        }
+        if (success) setTimeout(() => success.classList.remove('show'), 7000);
       }
-      const mailto = 'mailto:mahloricarlton@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      setTimeout(() => { window.location.href = mailto; }, 350);
     });
   };
 
@@ -473,6 +494,28 @@
     restartAuto();
   };
 
+  const initConversionLayer = () => {
+    if (!document.getElementById('whatsapp-float')) {
+      const whatsapp = document.createElement('a');
+      whatsapp.id = 'whatsapp-float';
+      whatsapp.className = 'whatsapp-float';
+      whatsapp.href = 'https://wa.me/27781888220?text=' + encodeURIComponent('Hi Carlton, I found Spirit2k5 Web Studio and I want to discuss a website project.');
+      whatsapp.target = '_blank';
+      whatsapp.rel = 'noopener';
+      whatsapp.setAttribute('aria-label', 'Chat with Spirit2k5 on WhatsApp');
+      whatsapp.innerHTML = '<span aria-hidden="true">WA</span><b>WhatsApp</b>';
+      document.body.appendChild(whatsapp);
+    }
+
+    const footer = document.querySelector('.footer');
+    if (footer && !footer.querySelector('.footer-legal')) {
+      const legal = document.createElement('div');
+      legal.className = 'footer-legal';
+      legal.innerHTML = '<a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="https://github.com/spirit2k5" target="_blank" rel="noopener">GitHub ↗</a>';
+      footer.appendChild(legal);
+    }
+  };
+
   const initPage = () => {
     initMenu();
     initReveal();
@@ -482,6 +525,7 @@
     initInteractiveMotion();
     initPackageCards();
     initWorkProcessAnimation();
+    initConversionLayer();
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
