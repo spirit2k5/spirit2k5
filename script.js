@@ -244,201 +244,174 @@
     });
   };
 
-  const initPageShowcaseAnimation = () => {
+  const initWorkProcessAnimation = () => {
     const main = document.querySelector('main');
-    if (!main || main.querySelector('.page-motion-showcase')) return;
+    if (!main || main.querySelector('.work-flow-animation')) return;
 
     const page = currentPageName();
+    const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
     const configs = {
       'index.html': {
-        eyebrow: 'Interactive build',
-        title: 'Press a stage and watch the build move.',
-        buttons: ['Design','Develop','Launch'],
-        cards: [
-          ['DESIGN','Wireframes','Structure • layout • direction'],
-          ['DEVELOP','Code','HTML • CSS • JavaScript'],
-          ['LAUNCH','Live','Test • connect • publish']
+        label: 'How I work',
+        title: 'From your idea to a live website.',
+        steps: [
+          ['01','Brief','You tell me what you need.'],
+          ['02','Design','I shape the layout and direction.'],
+          ['03','Build','I develop the real website.'],
+          ['04','Review','You see the work and request changes.'],
+          ['05','Pay','You pay once you are happy.'],
+          ['06','Deploy','I deploy it and set up the approved domain.']
         ]
       },
       'services.html': {
-        eyebrow: 'Interactive services',
-        title: 'Press a service and watch the idea change.',
-        buttons: ['Website','Store','Redesign'],
-        cards: [
-          ['WEBSITE','Business site','Pages • enquiries • credibility'],
-          ['STORE','E-commerce','Products • cart • checkout'],
-          ['REDESIGN','Refresh','Modern UI • mobile • speed']
+        label: 'How the service works',
+        title: 'Choose it. I build it. You review it.',
+        steps: [
+          ['01','Choose','We confirm the website or service you need.'],
+          ['02','Plan','I map the pages, features and structure.'],
+          ['03','Build','I design and develop the project.'],
+          ['04','Review','You see it working before payment.'],
+          ['05','Pay','You pay after you approve the work.'],
+          ['06','Launch','I deploy and connect the approved domain.']
         ]
       },
       'portfolio.html': {
-        eyebrow: 'Interactive work',
-        title: 'Press through real project stages.',
-        buttons: ['Denz','RONMAXAKS','FareMap'],
-        cards: [
-          ['LIVE','Denz iPhones','Storefront • stock • checkout'],
-          ['LIVE','RONMAXAKS','Business site • responsive • launch'],
-          ['BUILDING','FareMap','Supabase • SQL • product development']
+        label: 'Behind the work',
+        title: 'This is how a project reaches live.',
+        steps: [
+          ['01','Build','The interface and features are developed.'],
+          ['02','Test','Responsive behaviour and functions are checked.'],
+          ['03','Refine','Problems and details are corrected.'],
+          ['04','Review','The client sees the actual project.'],
+          ['05','Approve','Payment follows approval.'],
+          ['06','Live','The project is deployed and connected.']
         ]
       },
       'pricing.html': {
-        eyebrow: 'Interactive pricing',
-        title: 'Press a package to bring it forward.',
-        buttons: ['Starter','Business','Store','Custom'],
-        cards: [
-          ['FROM','R1,500','Focused professional website'],
-          ['FROM','R3,500','Full business website'],
-          ['FROM','R6,500','E-commerce storefront'],
-          ['SCOPED','Quote','Custom web systems']
+        label: 'Payment process',
+        title: 'Work first. Review it. Pay. Then I deploy.',
+        steps: [
+          ['01','Scope','We agree on what must be built.'],
+          ['02','Work','I build the website first.'],
+          ['03','Review','You see and test the work.'],
+          ['04','Pay','You pay once you are happy.'],
+          ['05','Deploy','I put the approved website live.'],
+          ['06','Domain','I buy or connect the domain you approved.']
         ]
       },
       'about.html': {
-        eyebrow: 'Behind the build',
-        title: 'Press a skill to move it into focus.',
-        buttons: ['Design','Frontend','Systems'],
-        cards: [
-          ['DESIGN','UI / UX','Clean layouts • responsive thinking'],
-          ['FRONTEND','Web build','HTML • CSS • JavaScript'],
-          ['SYSTEMS','Web apps','Supabase • APIs • integrations']
-        ]
-      },
-      'starter-website.html': {
-        eyebrow: 'Starter package',
-        title: 'Press through what your Starter website includes.',
-        buttons: ['Structure','Responsive','Launch'],
-        cards: [
-          ['01','Structure','1–3 focused pages'],
-          ['02','Responsive','Mobile • tablet • desktop'],
-          ['03','Launch','Review • payment • deploy']
-        ]
-      },
-      'business-website.html': {
-        eyebrow: 'Business package',
-        title: 'Press through the Business website build.',
-        buttons: ['Pages','Interactions','Launch'],
-        cards: [
-          ['01','Business pages','Up to 6 custom pages'],
-          ['02','Interactions','Forms • UI • responsive'],
-          ['03','Launch','Review • payment • deploy']
-        ]
-      },
-      'ecommerce-website.html': {
-        eyebrow: 'E-commerce package',
-        title: 'Press through the online store build.',
-        buttons: ['Storefront','Checkout','Launch'],
-        cards: [
-          ['01','Storefront','Products • categories • variants'],
-          ['02','Checkout','Cart • payments • responsive'],
-          ['03','Launch','Review • payment • deploy']
-        ]
-      },
-      'custom-web-app.html': {
-        eyebrow: 'Custom build',
-        title: 'Press through a custom web app build.',
-        buttons: ['Plan','System','Launch'],
-        cards: [
-          ['01','Plan','Scope • features • flows'],
-          ['02','System','Auth • database • APIs'],
-          ['03','Launch','Review • payment • deploy']
+        label: 'My build method',
+        title: 'Plan carefully, build properly, refine the details.',
+        steps: [
+          ['01','Understand','I learn what the business needs.'],
+          ['02','Design','I shape the user interface and structure.'],
+          ['03','Code','I build the responsive website.'],
+          ['04','Test','I check the experience and functionality.'],
+          ['05','Refine','I fix the small details.'],
+          ['06','Deliver','You review the finished work.']
         ]
       },
       'contact.html': {
-        eyebrow: 'Project journey',
-        title: 'Press through the enquiry journey.',
-        buttons: ['About you','Your needs','The project'],
-        cards: [
-          ['STEP 01','About you','Name • business • contact'],
-          ['STEP 02','What you need','Type • budget • timeline'],
-          ['STEP 03','The project','Details • goals • send enquiry']
+        label: 'What happens next',
+        title: 'Your enquiry starts the real build process.',
+        steps: [
+          ['01','Enquiry','You send the project details.'],
+          ['02','Scope','I confirm what the project needs.'],
+          ['03','Build','I do the work first.'],
+          ['04','Review','You see the project before payment.'],
+          ['05','Pay','You pay after approval.'],
+          ['06','Launch','I deploy it and handle the approved domain.']
         ]
       }
     };
-    const cfg = configs[page] || configs['index.html'];
-    const anchor = main.querySelector('.hero, .page-hero, .about-hero, .contact-hero') || main.firstElementChild;
+
+    const packageConfig = {
+      label: 'Package workflow',
+      title: 'I build first. You review before you pay.',
+      steps: [
+        ['01','Confirm','We confirm the package and your content.'],
+        ['02','Build','I design and develop the website.'],
+        ['03','Test','I test the pages and responsive layout.'],
+        ['04','Review','You see the finished work.'],
+        ['05','Pay','You pay when you are happy.'],
+        ['06','Launch','I deploy it and set up the approved domain.']
+      ]
+    };
+
+    const cfg = packagePages.includes(page) ? packageConfig : (configs[page] || configs['index.html']);
+    const anchor = main.querySelector('.hero, .page-hero, .about-hero, .contact-hero, .package-hero') || main.firstElementChild;
     if (!anchor) return;
 
     const section = document.createElement('section');
-    section.className = 'page-motion-showcase reveal visible';
-    section.setAttribute('aria-label', cfg.title);
+    section.className = 'work-flow-animation reveal visible';
     section.innerHTML = `
-      <div class="page-motion-copy">
-        <p class="eyebrow">${cfg.eyebrow}</p>
+      <div class="flow-copy">
+        <p class="eyebrow">${cfg.label}</p>
         <h2>${cfg.title}</h2>
-        <div class="page-motion-tabs" role="tablist"></div>
+        <p class="flow-status" aria-live="polite"></p>
       </div>
-      <div class="page-motion-scene" aria-live="polite">
-        <div class="motion-ring ring-a"></div>
-        <div class="motion-ring ring-b"></div>
-        <div class="motion-card-stack"></div>
-        <div class="motion-pulse"></div>
+      <div class="flow-visual">
+        <div class="flow-browser" aria-hidden="true">
+          <div class="flow-browser-bar"><i></i><i></i><i></i><span>spirit2k5 / project</span></div>
+          <div class="flow-screen">
+            <div class="flow-screen-label">01</div>
+            <strong>Brief</strong>
+            <div class="flow-lines"><i></i><i></i><i></i></div>
+            <div class="flow-check">✓</div>
+          </div>
+        </div>
+        <div class="flow-track"><span class="flow-progress"></span></div>
+        <div class="flow-steps"></div>
       </div>`;
 
-    const tabs = section.querySelector('.page-motion-tabs');
-    const stack = section.querySelector('.motion-card-stack');
+    const stepsWrap = section.querySelector('.flow-steps');
+    const progress = section.querySelector('.flow-progress');
+    const status = section.querySelector('.flow-status');
+    const screenLabel = section.querySelector('.flow-screen-label');
+    const screenTitle = section.querySelector('.flow-screen strong');
+    const screen = section.querySelector('.flow-screen');
+    let current = 0;
+    let timer = null;
 
-    cfg.cards.forEach((card, i) => {
-      const panel = document.createElement('button');
-      panel.type = 'button';
-      panel.className = 'page-motion-card' + (i === 0 ? ' active' : '');
-      panel.dataset.index = String(i);
-      panel.style.setProperty('--slot', i);
-      panel.innerHTML = `<span>${card[0]}</span><strong>${card[1]}</strong><small>${card[2]}</small>`;
-      stack.appendChild(panel);
+    cfg.steps.forEach((step, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'flow-step' + (index === 0 ? ' active' : '');
+      button.dataset.index = String(index);
+      button.innerHTML = `<b>${step[0]}</b><span>${step[1]}</span>`;
+      stepsWrap.appendChild(button);
     });
 
-    cfg.buttons.forEach((label, i) => {
-      const tab = document.createElement('button');
-      tab.type = 'button';
-      tab.className = 'page-motion-tab' + (i === 0 ? ' active' : '');
-      tab.textContent = label;
-      tab.dataset.index = String(i);
-      tabs.appendChild(tab);
-    });
-
-    const cards = [...stack.querySelectorAll('.page-motion-card')];
-    const tabButtons = [...tabs.querySelectorAll('.page-motion-tab')];
+    const buttons = [...stepsWrap.querySelectorAll('.flow-step')];
     const activate = index => {
-      const safe = Math.max(0, Math.min(index, cards.length - 1));
-      cards.forEach((card, i) => {
-        card.classList.toggle('active', i === safe);
-        card.classList.toggle('before', i < safe);
-        card.classList.toggle('after', i > safe);
+      current = Math.max(0, Math.min(index, cfg.steps.length - 1));
+      const step = cfg.steps[current];
+      buttons.forEach((button, i) => {
+        button.classList.toggle('active', i === current);
+        button.classList.toggle('done', i < current);
       });
-      tabButtons.forEach((tab, i) => tab.classList.toggle('active', i === safe));
-      section.classList.remove('motion-scene-pop');
-      void section.offsetWidth;
-      section.classList.add('motion-scene-pop');
-      setTimeout(() => section.classList.remove('motion-scene-pop'), 700);
+      progress.style.width = (current / (cfg.steps.length - 1) * 100) + '%';
+      status.textContent = step[2];
+      screenLabel.textContent = step[0];
+      screenTitle.textContent = step[1];
+      screen.classList.remove('flow-screen-change');
+      void screen.offsetWidth;
+      screen.classList.add('flow-screen-change');
     };
 
-    tabButtons.forEach(tab => tab.addEventListener('click', () => activate(Number(tab.dataset.index))));
-    cards.forEach(card => {
-      card.addEventListener('click', () => activate(Number(card.dataset.index)));
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          activate(Number(card.dataset.index));
-        }
-      });
-    });
+    const restartAuto = () => {
+      clearInterval(timer);
+      timer = setInterval(() => activate((current + 1) % cfg.steps.length), 3200);
+    };
+
+    buttons.forEach(button => button.addEventListener('click', () => {
+      activate(Number(button.dataset.index));
+      restartAuto();
+    }));
 
     anchor.insertAdjacentElement('afterend', section);
-
-    if (page === 'index.html') {
-      const buildWindows = [...main.querySelectorAll('.build-window')];
-      tabButtons.forEach((tab, i) => tab.addEventListener('click', () => {
-        const win = buildWindows[i];
-        if (!win) return;
-        buildWindows.forEach(w => w.classList.remove('build-active'));
-        win.classList.add('build-active');
-      }));
-    }
-
-    if (page === 'contact.html') {
-      tabButtons.forEach((tab, i) => tab.addEventListener('click', () => {
-        const wizardDot = main.querySelectorAll('.wizard-dot')[i];
-        if (wizardDot) wizardDot.click();
-      }));
-    }
+    activate(0);
+    restartAuto();
   };
 
   const initPage = () => {
@@ -449,7 +422,7 @@
     initMotion();
     initInteractiveMotion();
     initPackageCards();
-    initPageShowcaseAnimation();
+    initWorkProcessAnimation();
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
