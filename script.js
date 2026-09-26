@@ -96,10 +96,56 @@
     });
   };
 
+  const initProjectWizard = () => {
+    const form = document.querySelector('.project-wizard');
+    if (!form || form.dataset.bound === '1') return;
+    form.dataset.bound = '1';
+    const steps = [...form.querySelectorAll('.wizard-step')];
+    const dots = [...form.querySelectorAll('.wizard-dot')];
+    const line = form.querySelector('.wizard-line i');
+    let current = 0;
+    const show = (index, direction = 1) => {
+      if (index < 0 || index >= steps.length) return;
+      steps[current].classList.remove('active');
+      steps[current].classList.add(direction > 0 ? 'step-exit-left' : 'step-exit-right');
+      const old = current;
+      current = index;
+      setTimeout(() => steps[old].classList.remove('step-exit-left','step-exit-right'), 420);
+      steps[current].classList.add('active');
+      dots.forEach((dot,i) => {
+        dot.classList.toggle('active', i === current);
+        dot.classList.toggle('complete', i < current);
+      });
+      if (line) line.style.width = (current / (steps.length - 1) * 100) + '%';
+      form.scrollIntoView({behavior:'smooth', block:'center'});
+    };
+    const validStep = () => {
+      const required = [...steps[current].querySelectorAll('[required]')];
+      for (const field of required) if (!field.reportValidity()) return false;
+      return true;
+    };
+    form.querySelectorAll('.wizard-next').forEach(btn => btn.addEventListener('click', () => {
+      if (validStep()) show(current + 1, 1);
+    }));
+    form.querySelectorAll('.wizard-back').forEach(btn => btn.addEventListener('click', () => show(current - 1, -1)));
+    dots.forEach((dot,i) => dot.addEventListener('click', () => {
+      if (i < current || (i === current + 1 && validStep())) show(i, i > current ? 1 : -1);
+    }));
+  };
+
+  const initMotion = () => {
+    document.querySelectorAll('main .card, main .price-card, main .case-study, main .service-list a, main .process-track>div').forEach((el,i) => {
+      el.style.setProperty('--motion-delay', (i % 6) * 55 + 'ms');
+      el.classList.add('motion-item');
+    });
+  };
+
   const initPage = () => {
     initMenu();
     initReveal();
     initVideos();
+    initProjectWizard();
+    initMotion();
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
