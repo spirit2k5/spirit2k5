@@ -31,10 +31,12 @@
 
   const updateActiveNav = (url = location.href) => {
     const page = currentPageName(url);
+    const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
     document.querySelectorAll('.nav a').forEach(a => {
       const href = a.getAttribute('href') || '';
       if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-      const active = currentPageName(new URL(href, location.href).href) === page;
+      const hrefPage = currentPageName(new URL(href, location.href).href);
+      const active = hrefPage === page || (packagePages.includes(page) && hrefPage === 'pricing.html');
       a.classList.toggle('active', active && !a.classList.contains('nav-cta'));
     });
   };
@@ -297,6 +299,46 @@
           ['DESIGN','UI / UX','Clean layouts • responsive thinking'],
           ['FRONTEND','Web build','HTML • CSS • JavaScript'],
           ['SYSTEMS','Web apps','Supabase • APIs • integrations']
+        ]
+      },
+      'starter-website.html': {
+        eyebrow: 'Starter package',
+        title: 'Press through what your Starter website includes.',
+        buttons: ['Structure','Responsive','Launch'],
+        cards: [
+          ['01','Structure','1–3 focused pages'],
+          ['02','Responsive','Mobile • tablet • desktop'],
+          ['03','Launch','Review • payment • deploy']
+        ]
+      },
+      'business-website.html': {
+        eyebrow: 'Business package',
+        title: 'Press through the Business website build.',
+        buttons: ['Pages','Interactions','Launch'],
+        cards: [
+          ['01','Business pages','Up to 6 custom pages'],
+          ['02','Interactions','Forms • UI • responsive'],
+          ['03','Launch','Review • payment • deploy']
+        ]
+      },
+      'ecommerce-website.html': {
+        eyebrow: 'E-commerce package',
+        title: 'Press through the online store build.',
+        buttons: ['Storefront','Checkout','Launch'],
+        cards: [
+          ['01','Storefront','Products • categories • variants'],
+          ['02','Checkout','Cart • payments • responsive'],
+          ['03','Launch','Review • payment • deploy']
+        ]
+      },
+      'custom-web-app.html': {
+        eyebrow: 'Custom build',
+        title: 'Press through a custom web app build.',
+        buttons: ['Plan','System','Launch'],
+        cards: [
+          ['01','Plan','Scope • features • flows'],
+          ['02','System','Auth • database • APIs'],
+          ['03','Launch','Review • payment • deploy']
         ]
       },
       'contact.html': {
