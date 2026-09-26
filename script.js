@@ -345,6 +345,7 @@
       panel.type = 'button';
       panel.className = 'page-motion-card' + (i === 0 ? ' active' : '');
       panel.dataset.index = String(i);
+      panel.style.setProperty('--slot', i);
       panel.innerHTML = `<span>${card[0]}</span><strong>${card[1]}</strong><small>${card[2]}</small>`;
       stack.appendChild(panel);
     });
