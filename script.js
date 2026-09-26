@@ -140,12 +140,85 @@
     });
   };
 
+  const initInteractiveMotion = () => {
+    const main = document.querySelector('main');
+    if (!main || main.dataset.motionControls === '1') return;
+    main.dataset.motionControls = '1';
+
+    // Pressable animation control available on every page.
+    const control = document.createElement('button');
+    control.type = 'button';
+    control.className = 'motion-trigger';
+    control.innerHTML = '<span class="motion-trigger-icon">✦</span><span>Animate page</span>';
+    control.setAttribute('aria-label', 'Play page animations');
+    main.appendChild(control);
+
+    const playWave = () => {
+      const targets = [...main.querySelectorAll('section, article, .card, .price-card, .service-list a, .process-track > div')];
+      control.classList.remove('playing');
+      void control.offsetWidth;
+      control.classList.add('playing');
+      targets.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.remove('press-animate');
+          void el.offsetWidth;
+          el.classList.add('press-animate');
+          setTimeout(() => el.classList.remove('press-animate'), 850);
+        }, Math.min(i * 65, 900));
+      });
+      setTimeout(() => control.classList.remove('playing'), 1500);
+    };
+    control.addEventListener('click', playWave);
+
+    // Make visual project/media surfaces pressable, not hover-only.
+    main.querySelectorAll('.case-media, .about-portrait, .media-card, .page-hero > img, .page-hero > video').forEach(el => {
+      el.classList.add('pressable-visual');
+      if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
+      const press = () => {
+        el.classList.remove('visual-pop');
+        void el.offsetWidth;
+        el.classList.add('visual-pop');
+        setTimeout(() => el.classList.remove('visual-pop'), 700);
+      };
+      el.addEventListener('click', press);
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); press(); }
+      });
+    });
+
+    // Home's design/development/live visual can be pressed to bring each stage forward.
+    const build = main.querySelector('.build-visual');
+    if (build) {
+      const windows = [...build.querySelectorAll('.build-window')];
+      windows.forEach((win, index) => {
+        win.classList.add('pressable-build');
+        win.tabIndex = 0;
+        const activate = () => {
+          windows.forEach(w => w.classList.remove('build-active'));
+          win.classList.add('build-active');
+          build.dataset.activeStage = String(index);
+        };
+        win.addEventListener('click', activate);
+        win.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+        });
+      });
+    }
+
+    // Buttons visibly react to touch/click on mobile and desktop.
+    main.querySelectorAll('.btn, .price-card, .process-track > div').forEach(el => {
+      el.addEventListener('pointerdown', () => el.classList.add('is-pressed'));
+      ['pointerup','pointercancel','pointerleave'].forEach(evt => el.addEventListener(evt, () => el.classList.remove('is-pressed')));
+    });
+  };
+
   const initPage = () => {
     initMenu();
     initReveal();
     initVideos();
     initProjectWizard();
     initMotion();
+    initInteractiveMotion();
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
