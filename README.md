@@ -73,6 +73,8 @@ Brand: **spirit2k5**
 
 Founder and creator of **spirit2k5 Web Studio**.
 
+Website: https://spirit2k5.co.za/
+
 ## Contact
 
 Interested in getting a website built?
@@ -81,4 +83,4 @@ Use the contact page on the website to get in touch.
 
 ---
 
-Created by **spirit2k5**
+Created by **spirit2k5** · https://spirit2k5.co.za/
