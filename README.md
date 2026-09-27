@@ -12,6 +12,18 @@ My goal is to help businesses and individuals improve their online presence with
 
 ## Featured Projects
 
+### Denz iPhones
+E-commerce iPhone storefront created by **spirit2k5** for Denz iPhones in Soweto.
+
+Live website: https://denziphone.com/
+
+The project includes:
+- Brand New, Pre-Owned and Cheaper Options categories
+- Product browsing and stock presentation
+- Responsive mobile-first shopping experience
+- Checkout and direct ordering flow
+- Technical SEO and Search Console setup
+
 ### RONMAXAKS Security Solutions
 Business website created by **spirit2k5** for RONMAXAKS Security Solutions.
 
