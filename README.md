@@ -1,83 +1,69 @@
-# spirit2k5 Web Studio
+# Spirit2k5 Web Studio
 
-Personal portfolio and web development website created by **Carlton Mahlori Tshianeo**, also known as **spirit2k5**.
+Official website source for **Spirit2k5 Web Studio**, created by **Carlton Mahlori Tshianeo (spirit2k5)** in Johannesburg / Soweto, South Africa.
 
-This website showcases my work, projects, website development services, media, and business websites I have created.
+**Official website:** https://spirit2k5.co.za/
 
-## About
+Spirit2k5 builds modern, mobile-friendly websites for businesses in Johannesburg, Soweto and across South Africa.
 
-I build websites, apps, digital projects and software tools.
+## Services
 
-My goal is to help businesses and individuals improve their online presence with clean, modern and mobile-friendly websites.
+- Business websites
+- WordPress websites
+- WooCommerce stores
+- E-commerce websites
+- Website redesigns
+- Responsive web development
+- Website maintenance and fixes
+- Landing pages
+- Portfolio websites
+- Basic technical SEO
+- Google Maps and WhatsApp integration
+- Domain, hosting and launch support
 
-## Featured Projects
+## How Spirit2k5 works
+
+Projects follow a simple process:
+
+**Idea → Design → Development → Review → Live**
+
+The payment approach is:
+
+**Work first → see the work → pay after.**
+
+## Featured Work
 
 ### Denz iPhones
-E-commerce iPhone storefront created by **spirit2k5** for Denz iPhones in Soweto.
+
+E-commerce iPhone storefront created by Spirit2k5.
 
 Live website: https://denziphone.com/
 
-The project includes:
-- Brand New, Pre-Owned and Cheaper Options categories
-- Product browsing and stock presentation
-- Responsive mobile-first shopping experience
-- Checkout and direct ordering flow
-- Technical SEO and Search Console setup
+Project work includes product browsing, stock presentation, responsive design, checkout flow and technical SEO.
 
 ### RONMAXAKS Security Solutions
-Business website created by **spirit2k5** for RONMAXAKS Security Solutions.
+
+Business website created by Spirit2k5 for RONMAXAKS Security Solutions.
 
 Live website: https://ronmaxaks.com/
 
-The website includes:
-- Business services
-- Project gallery
-- Contact information
-- Mobile responsive design
-- SEO setup
-- Modern user interface
+Project work includes services, project gallery, responsive design, contact flow, SEO setup and deployment.
 
 ### FareMap
-A South African public transport project focused on:
-- Taxi fare information
-- Route searching
-- Live vehicle tracking
-- Driver and passenger features
-- Fare reporting
-- Public transport information
 
-## Website Services
+FareMap is currently under development.
 
-I can create:
+It is a South African taxi-focused product with fare information, route search, live vehicle tracking, driver/passenger features and community fare reporting.
 
-- Business websites
-- Portfolio websites
-- Restaurant websites
-- Salon and barber websites
-- Security company websites
-- Online catalogues
-- Landing pages
-- Mobile-friendly websites
-- Website redesigns
-- Basic SEO setup
-- WhatsApp contact integration
-- Google Maps integration
+## Technology
 
-## Technologies
-
-This website uses:
+The Spirit2k5 website uses:
 
 - HTML
 - CSS
 - JavaScript
-- Responsive Web Design
-- GitHub Pages
-
-## Media
-
-All creator photos, project photos and videos displayed on this website are used as part of the spirit2k5 portfolio.
-
-Website videos are configured to play without sound.
+- Responsive web design
+- GitHub for source control and deployment
 
 ## Creator
 
@@ -85,16 +71,18 @@ Website videos are configured to play without sound.
 
 Brand: **spirit2k5**
 
-Founder and creator of **spirit2k5 Web Studio**.
+Founder of **Spirit2k5 Web Studio**
 
-Website: https://spirit2k5.co.za/
+Official website: https://spirit2k5.co.za/
 
 ## Contact
 
-Interested in getting a website built?
+For website enquiries, visit:
 
-Use the contact page on the website to get in touch.
+https://spirit2k5.co.za/contact.html
 
 ---
 
-Created by **spirit2k5** · https://spirit2k5.co.za/
+**Spirit2k5 Web Studio**  
+Web design, WordPress, e-commerce and website development in Johannesburg & Soweto.  
+https://spirit2k5.co.za/
