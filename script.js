@@ -1,6 +1,16 @@
 (() => {
   'use strict';
 
+  // Always send the old GitHub Pages address to the official Spirit2k5 domain.
+  if (location.hostname.toLowerCase() === 'spirit2k5.github.io') {
+    const legacyPrefix = '/spirit2k5';
+    let cleanPath = location.pathname;
+    if (cleanPath === legacyPrefix || cleanPath === legacyPrefix + '/') cleanPath = '/';
+    else if (cleanPath.startsWith(legacyPrefix + '/')) cleanPath = cleanPath.slice(legacyPrefix.length);
+    location.replace('https://spirit2k5.co.za' + cleanPath + location.search + location.hash);
+    return;
+  }
+
   const ROOT_PAGE = 'index.html';
   let revealObserver = null;
   let routeInFlight = false;
