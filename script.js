@@ -284,101 +284,101 @@
     const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
     const configs = {
       'index.html': {
-        label: 'How I work',
-        title: 'From your idea to a live website.',
+        label: 'What happens after you enquire',
+        title: 'Your website, from first idea to going live.',
         steps: [
-          ['01','Brief','You tell me what you need.'],
-          ['02','Design','I shape the layout and direction.'],
-          ['03','Build','I develop the real website.'],
-          ['04','Review','You see the work and request changes.'],
-          ['05','Pay','You pay once you are happy.'],
-          ['06','Deploy','I deploy it and set up the approved domain.']
+          ['01','Brief','Tell us what your business needs.'],
+          ['02','Design','Your layout and direction are prepared around your business.'],
+          ['03','Build','Your real website comes together.'],
+          ['04','Review','You review the website and request agreed changes.'],
+          ['05','Pay','You pay after you approve the agreed work.'],
+          ['06','Deploy','Your approved website is launched on the agreed domain.']
         ]
       },
       'services.html': {
-        label: 'How the service works',
-        title: 'Choose it. I build it. You review it.',
+        label: 'How your project moves',
+        title: 'Choose what you need. Review the work. Then go live.',
         steps: [
-          ['01','Choose','We confirm the website or service you need.'],
-          ['02','Plan','I map the pages, features and structure.'],
-          ['03','Build','I design and develop the project.'],
-          ['04','Review','You see it working before payment.'],
-          ['05','Pay','You pay after you approve the work.'],
-          ['06','Launch','I deploy and connect the approved domain.']
+          ['01','Choose','Your website needs and goals are confirmed.'],
+          ['02','Plan','The pages, customer journey and required features are planned.'],
+          ['03','Build','Your agreed website is prepared.'],
+          ['04','Review','You review the working website before payment.'],
+          ['05','Pay','Payment is due after you approve the agreed work.'],
+          ['06','Launch','The approved website is launched and connected to the agreed domain.']
         ]
       },
       'portfolio.html': {
-        label: 'Behind the work',
-        title: 'This is how a project reaches live.',
+        label: 'What you can expect',
+        title: 'This is how your project moves toward launch.',
         steps: [
-          ['01','Build','The interface and features are developed.'],
-          ['02','Test','Responsive behaviour and functions are checked.'],
-          ['03','Refine','Problems and details are corrected.'],
-          ['04','Review','The client sees the actual project.'],
-          ['05','Approve','Payment follows approval.'],
-          ['06','Live','The project is deployed and connected.']
+          ['01','Build','Your agreed pages and features come together.'],
+          ['02','Test','Mobile use, forms and important actions are checked.'],
+          ['03','Refine','Anything agreed during review is refined.'],
+          ['04','Review','You review the actual website.'],
+          ['05','Approve','Payment follows your approval of the agreed work.'],
+          ['06','Live','The approved website goes live on the agreed domain.']
         ]
       },
       'pricing.html': {
-        label: 'Payment process',
-        title: 'Work first. Review it. Pay. Then I deploy.',
+        label: 'How payment works',
+        title: 'See the website. Review it. Pay after approval. Then go live.',
         steps: [
-          ['01','Scope','We agree on what must be built.'],
-          ['02','Work','I build the website first.'],
-          ['03','Review','You see and test the work.'],
-          ['04','Pay','You pay once you are happy.'],
-          ['05','Deploy','I put the approved website live.'],
-          ['06','Domain','I buy or connect the domain you approved.']
+          ['01','Scope','Your website scope is agreed.'],
+          ['02','Work','Your agreed website is prepared first.'],
+          ['03','Review','You see and review the working website.'],
+          ['04','Pay','You pay after you approve the agreed work.'],
+          ['05','Deploy','Your approved website is put live.'],
+          ['06','Domain','The domain you approved is purchased or connected after confirmation.']
         ]
       },
       'about.html': {
-        label: 'My build method',
-        title: 'Plan carefully, build properly, refine the details.',
+        label: 'What you can expect',
+        title: 'Clear planning, careful review and a website ready for customers.',
         steps: [
-          ['01','Understand','I learn what the business needs.'],
-          ['02','Design','I shape the user interface and structure.'],
-          ['03','Code','I build the responsive website.'],
-          ['04','Test','I check the experience and functionality.'],
-          ['05','Refine','I fix the small details.'],
-          ['06','Deliver','You review the finished work.']
+          ['01','Understand','Your business, customers and goals are understood first.'],
+          ['02','Design','Your pages and customer journey are planned.'],
+          ['03','Code','Your mobile-friendly website comes together.'],
+          ['04','Test','Important customer actions and forms are checked.'],
+          ['05','Refine','The details are refined before launch.'],
+          ['06','Deliver','You review the finished website before it goes live.']
         ]
       },
       'wordpress.html': {
-        label: 'WordPress workflow',
-        title: 'From WordPress setup to a finished live website.',
+        label: 'Your WordPress project',
+        title: 'From your business needs to a customer-ready WordPress website.',
         steps: [
-          ['01','Setup','I prepare WordPress, hosting and the project structure.'],
-          ['02','Design','I build the layout and visual direction.'],
-          ['03','Build','Themes, plugins, forms or WooCommerce are configured and developed.'],
-          ['04','Test','I test responsive layout, forms, store flows and key functions.'],
-          ['05','Review','You see and review the WordPress website before payment.'],
-          ['06','Launch','After approval and payment, I deploy and connect the approved domain.']
+          ['01','Setup','The WordPress setup, pages and hosting needs are prepared.'],
+          ['02','Design','Your layout and visual direction are prepared around your business.'],
+          ['03','Build','Your pages, forms, store features and useful tools are set up as needed.'],
+          ['04','Test','Mobile use, forms, store journeys and key customer actions are checked.'],
+          ['05','Review','You review the WordPress website before payment.'],
+          ['06','Launch','After approval and payment, The approved website is launched and connected to the agreed domain.']
         ]
       },
       'contact.html': {
-        label: 'What happens next',
-        title: 'Your enquiry starts the real build process.',
+        label: 'What happens after you enquire',
+        title: 'Your enquiry starts a clear website process.',
         steps: [
-          ['01','Enquiry','You send the project details.'],
-          ['02','Scope','I confirm what the project needs.'],
-          ['03','Build','I do the work first.'],
-          ['04','Review','You see the project before payment.'],
-          ['05','Pay','You pay after approval.'],
-          ['06','Launch','I deploy it and handle the approved domain.']
+          ['01','Enquiry','You send your business and website details.'],
+          ['02','Scope','The scope and next steps are confirmed with you.'],
+          ['03','Build','Your agreed website is prepared first.'],
+          ['04','Review','You review the agreed website before payment.'],
+          ['05','Pay','You pay after approving the agreed work.'],
+          ['06','Launch','The approved website is launched and the agreed domain is connected.']
         ]
       }
     };
 
     const packageConfig = {
-      label: 'Package workflow',
-      title: 'I build first. You review before you pay.',
+      label: 'What happens with this package',
+      title: 'You see and review the agreed website before payment.',
       steps: [
-        ['01','Confirm','We confirm the package and your content.'],
-        ['02','Build','I design and develop the website.'],
-        ['03','Test','I test the pages and responsive layout.'],
-        ['04','Review','You see the finished work.'],
-        ['05','Pay','You pay when you are happy.'],
-        ['06','Launch','I deploy it and set up the approved domain.']
+        ['01','Confirm','Your package, pages and content are confirmed.'],
+        ['02','Build','Your agreed website is prepared.'],
+        ['03','Test','The pages, mobile experience and important actions are checked.'],
+        ['04','Review','You review the finished website.'],
+        ['05','Pay','You pay after approving the agreed work.'],
+        ['06','Launch','Your approved website is launched on the agreed domain.']
       ]
     };
 
