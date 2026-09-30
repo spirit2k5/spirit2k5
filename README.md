@@ -2,7 +2,7 @@
 
 **Official website:** https://spirit2k5.co.za/
 
-Official website source for **Spirit2k5 Web Studio**, created by **Carlton Mahlori Tshianeo (spirit2k5)** in Johannesburg / Soweto, South Africa.
+Official website for **Spirit2k5 Web Studio**, created by **Carlton Mahlori Tshianeo (spirit2k5)** in Johannesburg / Soweto, South Africa.
 
 **Official website:** https://spirit2k5.co.za/
 
@@ -65,7 +65,6 @@ The Spirit2k5 website uses:
 - CSS
 - JavaScript
 - Responsive web design
-- GitHub for source control and deployment
 
 ## Creator
 
