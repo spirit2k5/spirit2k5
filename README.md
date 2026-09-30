@@ -1,8 +1,6 @@
 # Spirit2k5 Web Studio
 
-> **Official website:** https://spirit2k5.co.za/
->
-> **Important:** The former GitHub Pages address `https://spirit2k5.github.io/spirit2k5/` is deprecated. The current and official Spirit2k5 Web Studio website is **https://spirit2k5.co.za/**.
+**Official website:** https://spirit2k5.co.za/
 
 Official website source for **Spirit2k5 Web Studio**, created by **Carlton Mahlori Tshianeo (spirit2k5)** in Johannesburg / Soweto, South Africa.
 
