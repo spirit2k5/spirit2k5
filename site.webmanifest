@@ -2,15 +2,22 @@
   "name": "Spirit2k5 Web Studio",
   "short_name": "Spirit2k5",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#F6F0E6",
   "theme_color": "#111111",
   "icons": [
     {
+      "src": "/assets/spirit2k5-google-logo-128.jpg",
+      "sizes": "128x128",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
       "src": "/favicon-48.png",
       "sizes": "48x48",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
