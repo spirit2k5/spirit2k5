@@ -41,7 +41,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}.shell{width:min(1180px
       <button class="tab active" data-view="pending">Needs approval</button>
       <button class="tab" data-view="questions">Top questions</button>
       <button class="tab" data-view="learned">Learned answers</button>
-      <button class="tab" data-view="usage">OpenAI usage</button>
+      <button class="tab" data-view="usage">Gemini usage</button>
       <button class="tab" data-view="issues">Issues</button>
       <button class="tab" data-view="maintenance">Maintenance</button>
     </div>
@@ -97,8 +97,8 @@ function renderStats(){
   const s=(Array.isArray(data.stats)?data.stats[0]:data.stats)||{};
   const list=[
     ['Approved topics',s.knowledge||0],['Question variations',s.variations||0],
-    ['Questions asked',s.questions||0],['OpenAI calls',s.openai_calls||0],
-    ['Needs approval',s.needs_approval||0],['Estimated API cost',money(s.openai_cost_usd)]
+    ['Questions asked',s.questions||0],['Gemini calls',s.openai_calls||0],
+    ['Needs approval',s.needs_approval||0],['Paid-tier estimate',money(s.openai_cost_usd)]
   ];
   const wrap=$('#stats');wrap.textContent='';
   list.forEach(([label,value])=>{const d=node('div','stat');d.append(node('b','cost',value),node('span','',label));wrap.append(d)});
@@ -108,7 +108,7 @@ const titles={
   pending:['Needs approval','Review answers before they become reusable knowledge.'],
   questions:['Top customer questions','See what visitors ask most often and which layer answered.'],
   learned:['Learned answers','Approved, pending and rejected answers from new customer questions.'],
-  usage:['OpenAI usage','Fallback calls, token usage and estimated API cost.'],
+  usage:['Gemini usage','Fallback calls, token usage and paid-tier cost estimate.'],
   issues:['Assistant issues','Errors or maintenance items that need attention.'],
   maintenance:['Maintenance runs','Results from the automatic 10-minute maintenance worker.']
 };
@@ -138,11 +138,11 @@ function render(){
     return;
   }
   if(current==='questions'){
-    rows.forEach(item=>{const c=node('article','card');c.append(node('h3','',item.sample_question),node('p','',item.last_answer_excerpt||'No answer recorded'));const m=node('div','meta');m.append(chip('asked '+item.ask_count+'×'),chip('OpenAI '+item.openai_count+'×'),chip(item.last_layer||'unknown'),chip(date(item.last_asked_at)));c.append(m);wrap.append(c)});
+    rows.forEach(item=>{const c=node('article','card');c.append(node('h3','',item.sample_question),node('p','',item.last_answer_excerpt||'No answer recorded'));const m=node('div','meta');m.append(chip('asked '+item.ask_count+'×'),chip('Gemini '+item.openai_count+'×'),chip(item.last_layer||'unknown'),chip(date(item.last_asked_at)));c.append(m);wrap.append(c)});
     return;
   }
   if(current==='usage'){
-    rows.forEach(item=>{const c=node('article','card');c.append(node('h3','',item.layer||'request'));const m=node('div','meta');m.append(chip(item.openai_used?'OpenAI used':'local'),chip(item.model||'—'),chip('in '+(item.input_tokens||0)),chip('out '+(item.output_tokens||0)),chip(money(item.estimated_cost_usd)),chip(item.status||'ok',item.status==='ok'?'good':'warn'));c.append(m,node('p','',date(item.created_at)));wrap.append(c)});
+    rows.forEach(item=>{const c=node('article','card');c.append(node('h3','',item.layer||'request'));const m=node('div','meta');m.append(chip(item.openai_used?'Gemini used':'local'),chip(item.model||'—'),chip('in '+(item.input_tokens||0)),chip('out '+(item.output_tokens||0)),chip(money(item.estimated_cost_usd)),chip(item.status||'ok',item.status==='ok'?'good':'warn'));c.append(m,node('p','',date(item.created_at)));wrap.append(c)});
     return;
   }
   if(current==='issues'){
