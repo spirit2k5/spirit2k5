@@ -1,0 +1,50 @@
+name: Spirit2k5 AI maintenance
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: spirit2k5-ai-maintenance
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check knowledge sources and public links
+        id: health
+        continue-on-error: true
+        run: python scripts/spirit2k5_ai_healthcheck.py
+
+      - name: Open or update approval issue
+        if: steps.health.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="Spirit2k5 AI maintenance needs review"
+          BODY="$(cat ai-health-report.md)"
+          EXISTING="$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi
+
+      - name: Fail workflow when review is needed
+        if: steps.health.outcome == 'failure'
+        run: exit 1
