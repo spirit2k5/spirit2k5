@@ -621,7 +621,7 @@
         else if (/^https:\/\//.test(href) && !href.includes('spirit2k5.co.za')) trackEvent('live_site_click', href);
       }, { capture: true });
     }
-    if (!document.getElementById('whatsapp-float')) {
+    if (!document.getElementById('spirit-ai-launcher') && !document.getElementById('whatsapp-float')) {
       const whatsapp = document.createElement('a');
       whatsapp.id = 'whatsapp-float';
       whatsapp.className = 'whatsapp-float';
@@ -825,6 +825,8 @@
 
   ready(() => {
     if (document.getElementById('spirit-ai-launcher')) return;
+    const legacyWhatsApp = document.getElementById('whatsapp-float');
+    if (legacyWhatsApp) legacyWhatsApp.remove();
 
     const launcher = el('button','spirit-ai-launcher');
     launcher.id = 'spirit-ai-launcher';
