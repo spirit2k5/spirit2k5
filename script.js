@@ -521,7 +521,7 @@
     if (footer && !footer.querySelector('.footer-legal')) {
       const legal = document.createElement('div');
       legal.className = 'footer-legal';
-      legal.innerHTML = '<a href="resources.html">Resources</a><a href="free-website-check.html">Free website check</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a>';
+      legal.innerHTML = '<a href="resources.html">Resources</a><a href="free-website-check.html">Free website check</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy / POPIA</a><a href="terms.html">Terms</a><a href="cancellations.html">Cancellations & refunds</a><a href="cookies.html">Cookies</a>';
       footer.appendChild(legal);
     }
   };
