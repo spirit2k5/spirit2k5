@@ -629,7 +629,7 @@
       whatsapp.target = '_blank';
       whatsapp.rel = 'noopener';
       whatsapp.setAttribute('aria-label', 'Chat with Spirit2k5 on WhatsApp');
-      whatsapp.innerHTML = '<span aria-hidden="true">WA</span><b>WhatsApp</b>';
+      whatsapp.innerHTML = '<span class="whatsapp-brand-icon" aria-hidden="true"><img src="/assets/logo-mark.svg" alt=""></span><b>Chat with us</b>';
       document.body.appendChild(whatsapp);
     }
 
