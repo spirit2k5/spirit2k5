@@ -5,19 +5,31 @@
   const getTrackingContext = () => {
     const params = new URLSearchParams(location.search);
     let sessionId = '';
+    let campaign = { source:'', medium:'', name:'' };
     try {
       sessionId = sessionStorage.getItem('spirit2k5_session') || '';
       if (!sessionId) {
         sessionId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(36).slice(2));
         sessionStorage.setItem('spirit2k5_session', sessionId);
       }
+      const incoming = {
+        source: params.get('utm_source') || '',
+        medium: params.get('utm_medium') || '',
+        name: params.get('utm_campaign') || ''
+      };
+      if (incoming.source || incoming.medium || incoming.name) {
+        sessionStorage.setItem('spirit2k5_campaign', JSON.stringify(incoming));
+        campaign = incoming;
+      } else {
+        campaign = JSON.parse(sessionStorage.getItem('spirit2k5_campaign') || '{}');
+      }
     } catch (_) {}
     return {
       page_path: location.pathname + location.search,
       referrer: document.referrer || '',
-      utm_source: params.get('utm_source') || '',
-      utm_medium: params.get('utm_medium') || '',
-      utm_campaign: params.get('utm_campaign') || '',
+      utm_source: campaign.source || '',
+      utm_medium: campaign.medium || '',
+      utm_campaign: campaign.name || '',
       session_id: sessionId
     };
   };
@@ -38,7 +50,7 @@
 
   const trackEvent = (eventName, target = '') => {
     const payload = {
-      kind: 'event',
+      type: 'event',
       event_name: eventName,
       target: String(target || '').slice(0, 500),
       ...getTrackingContext()
@@ -211,7 +223,7 @@
       payload._url = 'https://spirit2k5.co.za/contact.html';
 
       const leadPayload = {
-        kind: 'enquiry',
+        type: 'enquiry',
         website: data.get('_honey') || '',
         name: data.get('Name') || '',
         business: data.get('Business') || '',
@@ -222,6 +234,7 @@
         timeline: data.get('Timeline') || '',
         existing_site: data.get('Existing site') || '',
         project_details: data.get('Project details') || '',
+        source_page: location.pathname + location.search,
         ...getTrackingContext()
       };
 
@@ -598,10 +611,13 @@
         const href = anchor.href || '';
         const text = (anchor.textContent || '').trim().toLowerCase();
         if (/wa\.me\/27781888220/.test(href)) trackEvent('whatsapp_click', href);
+        else if (href.startsWith('tel:')) trackEvent('phone_click', href);
+        else if (href.startsWith('mailto:')) trackEvent('email_click', href);
+        else if (href.includes('contact.html#project-form') || text.includes('start a project') || text.includes('start this project')) trackEvent('start_project_click', href);
         else if (href.includes('free-website-check.html')) trackEvent('free_check_click', href);
         else if (href.includes('pricing.html')) trackEvent('pricing_click', href);
         else if (href.includes('portfolio.html') || href.includes('case-study-')) trackEvent('portfolio_click', href);
-        else if (href.includes('contact.html#project-form') || text.includes('start a project') || text.includes('start this project')) trackEvent('start_project_click', href);
+        else if (/^https:\/\//.test(href) && !href.includes('spirit2k5.co.za')) trackEvent('live_site_click', href);
       }, { capture: true });
     }
     if (!document.getElementById('whatsapp-float')) {
@@ -636,6 +652,7 @@
     initWorkProcessAnimation();
     initConversionLayer();
     trackEvent('page_view', location.pathname);
+    if (currentPageName() === 'pricing.html') trackEvent('pricing_view', location.pathname);
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
