@@ -10,7 +10,7 @@ on:
       - "sitemap.xml"
       - "robots.txt"
       - "CNAME"
-      - "38c485090bb1b3a3720b1cba8c55319e.txt"
+      - "38c485090bb1b3a3720b1cba8c55319e.txt"\n      - ".github/workflows/indexnow.yml"
   workflow_dispatch:
 
 permissions:
