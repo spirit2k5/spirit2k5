@@ -92,7 +92,7 @@ def main():
             "question":"Do I need to pay upfront?",
             "session_id":"scheduled-health-check"
         })
-        if status != 200 or not ai.get("answer") or ai.get("openai_used") is not False:
+        if status != 200 or not ai.get("answer") or ai.get("layer") not in ("local","semantic","learned"):
             report["assistant_errors"].append({"status":status,"response":ai})
     except Exception as e:
         report["assistant_errors"].append({"error":str(e)})
