@@ -1,5 +1,51 @@
 (() => {
   'use strict';
+  const SPIRIT_COLLECT_URL = 'https://vpgexijihrozwugqqagy.supabase.co/functions/v1/spirit2k5-collect';
+
+  const getTrackingContext = () => {
+    const params = new URLSearchParams(location.search);
+    let sessionId = '';
+    try {
+      sessionId = sessionStorage.getItem('spirit2k5_session') || '';
+      if (!sessionId) {
+        sessionId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(36).slice(2));
+        sessionStorage.setItem('spirit2k5_session', sessionId);
+      }
+    } catch (_) {}
+    return {
+      page_path: location.pathname + location.search,
+      referrer: document.referrer || '',
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      session_id: sessionId
+    };
+  };
+
+  const sendToCollector = async payload => {
+    try {
+      const response = await fetch(SPIRIT_COLLECT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify(payload)
+      });
+      return response.ok;
+    } catch (_) {
+      return false;
+    }
+  };
+
+  const trackEvent = (eventName, target = '') => {
+    const payload = {
+      kind: 'event',
+      event_name: eventName,
+      target: String(target || '').slice(0, 500),
+      ...getTrackingContext()
+    };
+    sendToCollector(payload);
+  };
+
 
   // Always send the old GitHub Pages address to the official Spirit2k5 domain.
   if (location.hostname.toLowerCase() === 'spirit2k5.github.io') {
@@ -163,29 +209,68 @@
       payload._subject = subject;
       payload._template = 'table';
       payload._url = 'https://spirit2k5.co.za/contact.html';
+
+      const leadPayload = {
+        kind: 'enquiry',
+        website: data.get('_honey') || '',
+        name: data.get('Name') || '',
+        business: data.get('Business') || '',
+        email: data.get('Email') || '',
+        phone: data.get('Phone') || '',
+        project_type: data.get('Project type') || '',
+        budget: data.get('Budget') || '',
+        timeline: data.get('Timeline') || '',
+        existing_site: data.get('Existing site') || '',
+        project_details: data.get('Project details') || '',
+        ...getTrackingContext()
+      };
+
+      trackEvent('enquiry_submit', 'project-enquiry-form');
+
       try {
         if (button) {
           button.disabled = true;
           button.textContent = 'Sending…';
         }
-        const response = await fetch('https://formsubmit.co/ajax/mahloricarlton@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok || result.success === false) throw new Error(result.message || 'Unable to send');
+
+        const [stored, emailResult] = await Promise.all([
+          sendToCollector(leadPayload),
+          fetch('https://formsubmit.co/ajax/mahloricarlton@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          }).then(async response => {
+            const result = await response.json().catch(() => ({}));
+            return { ok: response.ok && result.success !== false, message: result.message || '' };
+          }).catch(() => ({ ok: false, message: '' }))
+        ]);
+
+        if (!stored && !emailResult.ok) throw new Error(emailResult.message || 'Unable to send');
+
+        trackEvent('enquiry_success', stored && emailResult.ok ? 'stored+email' : stored ? 'stored' : 'email');
+
         if (success) {
           const title = success.querySelector('b');
           const copy = success.querySelector('p');
-          if (title) title.textContent = 'Enquiry sent';
-          if (copy) copy.textContent = 'Thanks — your project details were submitted. I’ll reply using the contact details you provided.';
+          if (title) title.textContent = 'Enquiry received';
+          if (copy) copy.textContent = emailResult.ok
+            ? 'Thanks — your project details were submitted. I’ll reply using the contact details you provided.'
+            : 'Your project details were saved securely. WhatsApp will open as an extra backup so I can respond faster.';
           success.classList.add('show');
         }
+
         form.reset();
+
+        if (!emailResult.ok && stored) {
+          const phone = '27781888220';
+          const message = 'Hi Carlton, I submitted a Spirit2k5 website enquiry on spirit2k5.co.za. My details were saved, and I am following up here on WhatsApp.';
+          trackEvent('enquiry_fallback_whatsapp', 'stored-without-email');
+          setTimeout(() => window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(message), '_blank', 'noopener'), 450);
+        }
       } catch (error) {
         const phone = '27781888220';
         const message = 'Hi Carlton, I tried to send a Spirit2k5 website enquiry but the form could not send. I would like to discuss a website project.';
+        trackEvent('enquiry_fallback_whatsapp', 'form-failed');
         if (success) {
           const title = success.querySelector('b');
           const copy = success.querySelector('p');
@@ -505,6 +590,20 @@
   };
 
   const initConversionLayer = () => {
+    if (document.documentElement.dataset.spiritTrackingBound !== '1') {
+      document.documentElement.dataset.spiritTrackingBound = '1';
+      document.addEventListener('click', event => {
+        const anchor = event.target.closest('a[href]');
+        if (!anchor) return;
+        const href = anchor.href || '';
+        const text = (anchor.textContent || '').trim().toLowerCase();
+        if (/wa\.me\/27781888220/.test(href)) trackEvent('whatsapp_click', href);
+        else if (href.includes('free-website-check.html')) trackEvent('free_check_click', href);
+        else if (href.includes('pricing.html')) trackEvent('pricing_click', href);
+        else if (href.includes('portfolio.html') || href.includes('case-study-')) trackEvent('portfolio_click', href);
+        else if (href.includes('contact.html#project-form') || text.includes('start a project') || text.includes('start this project')) trackEvent('start_project_click', href);
+      }, { capture: true });
+    }
     if (!document.getElementById('whatsapp-float')) {
       const whatsapp = document.createElement('a');
       whatsapp.id = 'whatsapp-float';
@@ -536,6 +635,7 @@
     initPackageCards();
     initWorkProcessAnimation();
     initConversionLayer();
+    trackEvent('page_view', location.pathname);
     updateActiveNav();
     const nav = document.querySelector('.nav');
     const btn = document.querySelector('.menu-btn');
