@@ -610,7 +610,8 @@
         if (!anchor) return;
         const href = anchor.href || '';
         const text = (anchor.textContent || '').trim().toLowerCase();
-        if (/wa\.me\/27781888220/.test(href)) trackEvent('whatsapp_click', href);
+        if (href === 'https://search.google.com/local/writereview?placeid=ChIJ2xvi1PahlR4RscgChP2mlp0') trackEvent('google_review_click', href);
+        else if (/wa\.me\/27781888220/.test(href)) trackEvent('whatsapp_click', href);
         else if (href.startsWith('tel:')) trackEvent('phone_click', href);
         else if (href.startsWith('mailto:')) trackEvent('email_click', href);
         else if (href.includes('contact.html#project-form') || text.includes('start a project') || text.includes('start this project')) trackEvent('start_project_click', href);
@@ -633,6 +634,18 @@
     }
 
     const footer = document.querySelector('.footer');
+    if (footer && !footer.querySelector('[data-google-review-link]')) {
+      const contactBlock = [...footer.children].find(el => el.querySelector && el.querySelector('h4')?.textContent.trim() === 'Contact');
+      if (contactBlock) {
+        const review = document.createElement('a');
+        review.href = 'https://search.google.com/local/writereview?placeid=ChIJ2xvi1PahlR4RscgChP2mlp0';
+        review.target = '_blank';
+        review.rel = 'noopener';
+        review.dataset.googleReviewLink = '1';
+        review.textContent = 'Review Spirit2k5 on Google ↗';
+        contactBlock.appendChild(review);
+      }
+    }
     if (footer && !footer.querySelector('.footer-legal')) {
       const legal = document.createElement('div');
       legal.className = 'footer-legal';
