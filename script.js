@@ -788,3 +788,219 @@
 
   initPage();
 })();
+
+
+/* SPIRIT2K5 CUSTOMER ASSISTANT */
+(() => {
+  'use strict';
+
+  const ENDPOINT = 'https://vpgexijihrozwugqqagy.supabase.co/functions/v1/spirit2k5-ai-chat';
+  const WHATSAPP = 'https://wa.me/27781888220?text=' + encodeURIComponent('Hi Carlton, I would like to discuss a website project.');
+  const PROJECT = 'https://spirit2k5.co.za/contact.html#project-form';
+
+  const ready = (fn) => {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once:true });
+    else fn();
+  };
+
+  const getSession = () => {
+    try {
+      let id = sessionStorage.getItem('spirit2k5_ai_session') || '';
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(36).slice(2);
+        sessionStorage.setItem('spirit2k5_ai_session', id);
+      }
+      return id;
+    } catch (_) {
+      return String(Date.now()) + '-' + Math.random().toString(36).slice(2);
+    }
+  };
+
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (typeof text === 'string') node.textContent = text;
+    return node;
+  };
+
+  ready(() => {
+    if (document.getElementById('spirit-ai-launcher')) return;
+
+    const launcher = el('button','spirit-ai-launcher');
+    launcher.id = 'spirit-ai-launcher';
+    launcher.type = 'button';
+    launcher.setAttribute('aria-label','Open Spirit2k5 Customer Assistant');
+    launcher.setAttribute('aria-expanded','false');
+    const launchLogo = document.createElement('img');
+    launchLogo.src = 'assets/logo-mark.svg';
+    launchLogo.alt = '';
+    launchLogo.width = 32;
+    launchLogo.height = 32;
+    launcher.appendChild(launchLogo);
+    launcher.appendChild(el('span','spirit-ai-launcher-label','Need help?'));
+
+    const panel = el('section','spirit-ai-panel');
+    panel.id = 'spirit-ai-panel';
+    panel.setAttribute('aria-label','Spirit2k5 Customer Assistant');
+    panel.setAttribute('aria-hidden','true');
+
+    const head = el('div','spirit-ai-head');
+    const brand = el('div','spirit-ai-brand');
+    const brandLogo = document.createElement('img');
+    brandLogo.src = 'assets/logo-mark.svg';
+    brandLogo.alt = '';
+    brandLogo.width = 34;
+    brandLogo.height = 34;
+    const brandCopy = el('div','');
+    const title = el('strong','', 'Spirit2k5 Customer Assistant');
+    const status = el('small','', 'Website help • customer support');
+    brandCopy.append(title,status);
+    brand.append(brandLogo,brandCopy);
+    const close = el('button','spirit-ai-close','×');
+    close.type='button';
+    close.setAttribute('aria-label','Close assistant');
+    head.append(brand,close);
+
+    const body = el('div','spirit-ai-body');
+    body.setAttribute('role','log');
+    body.setAttribute('aria-live','polite');
+
+    const greeting = el('div','spirit-ai-message spirit-ai-bot');
+    greeting.appendChild(el('p','', 'Hi 👋 How can we help your business today?'));
+    body.appendChild(greeting);
+
+    const quick = el('div','spirit-ai-quick');
+    const quickItems = [
+      ['I need a website','How do I start a project?'],
+      ['View pricing','What are your website starting prices?'],
+      ['WordPress','Do you build WordPress websites?'],
+      ['Online store','What can an e-commerce website include?'],
+      ['Redesign my website','Can you redesign my existing website?'],
+      ['See your work','Can I see your work?'],
+      ['How payment works','Do I need to pay upfront?'],
+      ['Talk to someone','How can I contact Spirit2k5?']
+    ];
+    quickItems.forEach(([label,q]) => {
+      const b=el('button','spirit-ai-chip',label);
+      b.type='button';
+      b.dataset.question=q;
+      quick.appendChild(b);
+    });
+
+    const footer = el('div','spirit-ai-footer');
+    const note = el('div','spirit-ai-note','Answers check Spirit2k5 website information first.');
+    const form = el('form','spirit-ai-form');
+    const input = document.createElement('textarea');
+    input.className='spirit-ai-input';
+    input.rows=1;
+    input.maxLength=800;
+    input.placeholder='Ask about websites, pricing, WordPress…';
+    input.setAttribute('aria-label','Ask Spirit2k5 a question');
+    const send=el('button','spirit-ai-send','Send');
+    send.type='submit';
+    form.append(input,send);
+
+    const actions = el('div','spirit-ai-actions');
+    const project = el('a','spirit-ai-action-primary','Start a project');
+    project.href=PROJECT;
+    const whatsapp = el('a','spirit-ai-action','WhatsApp');
+    whatsapp.href=WHATSAPP;
+    whatsapp.target='_blank';
+    whatsapp.rel='noopener';
+    actions.append(project,whatsapp);
+    footer.append(note,form,actions);
+
+    panel.append(head,body,quick,footer);
+    document.body.append(panel,launcher);
+
+    let busy=false;
+    const openPanel=()=>{
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      launcher.setAttribute('aria-expanded','true');
+      setTimeout(()=>input.focus(),120);
+    };
+    const closePanel=()=>{
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      launcher.setAttribute('aria-expanded','false');
+    };
+
+    launcher.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
+    close.addEventListener('click',closePanel);
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&panel.classList.contains('open')) closePanel(); });
+
+    const addMessage=(text,who='bot',meta=null)=>{
+      const wrap=el('div','spirit-ai-message '+(who==='user'?'spirit-ai-user':'spirit-ai-bot'));
+      wrap.appendChild(el('p','',text));
+      if(meta?.source_url){
+        const a=el('a','spirit-ai-source','Read more →');
+        a.href=meta.source_url;
+        a.target='_self';
+        wrap.appendChild(a);
+      }
+      if(meta?.contact_url && !meta?.source_url){
+        const a=el('a','spirit-ai-source','Ask on WhatsApp →');
+        a.href=meta.contact_url;
+        a.target='_blank';
+        a.rel='noopener';
+        wrap.appendChild(a);
+      }
+      body.appendChild(wrap);
+      body.scrollTop=body.scrollHeight;
+    };
+
+    const setBusy=(state)=>{
+      busy=state;
+      input.disabled=state;
+      send.disabled=state;
+      send.textContent=state?'Checking…':'Send';
+    };
+
+    const ask=async(question)=>{
+      question=String(question||'').trim().slice(0,800);
+      if(!question||busy)return;
+      openPanel();
+      addMessage(question,'user');
+      setBusy(true);
+      try{
+        const response=await fetch(ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({question,session_id:getSession()})
+        });
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok && !data?.answer) throw new Error('assistant_unavailable');
+        addMessage(data.answer||'I could not confirm that right now. Please contact Spirit2k5 directly.','bot',data);
+      }catch(_){
+        addMessage('I could not reach the website assistant right now. You can still contact Spirit2k5 directly on WhatsApp or send a project enquiry.','bot',{contact_url:WHATSAPP});
+      }finally{
+        setBusy(false);
+        input.value='';
+        input.style.height='';
+        input.focus();
+      }
+    };
+
+    quick.addEventListener('click',e=>{
+      const b=e.target.closest('button[data-question]');
+      if(b) ask(b.dataset.question);
+    });
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      ask(input.value);
+    });
+
+    input.addEventListener('keydown',e=>{
+      if(e.key==='Enter'&&!e.shiftKey){
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    });
+    input.addEventListener('input',()=>{
+      input.style.height='auto';
+      input.style.height=Math.min(input.scrollHeight,110)+'px';
+    });
+  });
+})();
