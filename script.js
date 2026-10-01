@@ -552,7 +552,7 @@
       if (/approval|pay|payment/.test(value)) return 'pay';
       if (/review|feedback|changes/.test(value)) return 'review';
       if (/every screen|customer action|customer journey|details/.test(value)) return 'test';
-      if (/wordpress|setup|package/.test(value)) return 'wordpress';
+      if (/wordpress|setup/.test(value)) return 'wordpress';
       if (/look|journey|pages/.test(value)) return 'design';
       if (/website/.test(value)) return 'code';
       return 'brief';
