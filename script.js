@@ -267,8 +267,8 @@
           const copy = success.querySelector('p');
           if (title) title.textContent = 'Enquiry received';
           if (copy) copy.textContent = emailResult.ok
-            ? 'Thanks — your project details were submitted. I’ll reply using the contact details you provided.'
-            : 'Your project details were saved securely. WhatsApp will open as an extra backup so I can respond faster.';
+            ? 'Thanks — your project details were submitted. You’ll receive a reply using the contact details you provided.'
+            : 'Your project details were saved securely. WhatsApp will open as an extra backup so you can reach Spirit2k5 immediately.';
           success.classList.add('show');
         }
 
@@ -382,101 +382,101 @@
     const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
     const configs = {
       'index.html': {
-        label: 'What happens after you enquire',
-        title: 'Your website, from first idea to going live.',
+        label: 'What you get after you enquire',
+        title: 'See your business move from idea to a website customers can use.',
         steps: [
-          ['01','Brief','Tell us what your business needs.'],
-          ['02','Design','Your layout and direction are prepared around your business.'],
-          ['03','Build','Your real website comes together.'],
-          ['04','Review','You review the website and request agreed changes.'],
-          ['05','Pay','You pay after you approve the agreed work.'],
-          ['06','Deploy','Your approved website is launched on the agreed domain.']
+          ['01','Your goals','Tell us what your business needs customers to understand or do.'],
+          ['02','Your look','See a direction shaped around your business and customers.'],
+          ['03','Your website','Your real pages, contact options and features come together.'],
+          ['04','Your review','You check the website on your own device and request agreed changes.'],
+          ['05','Your approval','You approve the agreed work before payment is due.'],
+          ['06','Customers online','Your approved website goes live on your domain for customers to use.']
         ]
       },
       'services.html': {
-        label: 'How your project moves',
-        title: 'Choose what you need. Review the work. Then go live.',
+        label: 'What your business gets',
+        title: 'Choose what you need, see it working, then put it in front of customers.',
         steps: [
-          ['01','Choose','Your website needs and goals are confirmed.'],
-          ['02','Plan','The pages, customer journey and required features are planned.'],
-          ['03','Build','Your agreed website is prepared.'],
-          ['04','Review','You review the working website before payment.'],
-          ['05','Pay','Payment is due after you approve the agreed work.'],
-          ['06','Launch','The approved website is launched and connected to the agreed domain.']
+          ['01','Your needs','Tell us what customers should be able to find, understand or do.'],
+          ['02','Your pages','Your pages and customer journey are shaped around those needs.'],
+          ['03','Your website','Your agreed website and features come together.'],
+          ['04','Your review','You check the working website before payment.'],
+          ['05','Your approval','Payment follows your approval of the agreed work.'],
+          ['06','Customers online','Your approved website is connected to your domain and ready for customers.']
         ]
       },
       'portfolio.html': {
         label: 'What you can expect',
-        title: 'This is how your project moves toward launch.',
+        title: 'See what happens before customers see your website.',
         steps: [
-          ['01','Build','Your agreed pages and features come together.'],
-          ['02','Test','Mobile use, forms and important actions are checked.'],
-          ['03','Refine','Anything agreed during review is refined.'],
-          ['04','Review','You review the actual website.'],
-          ['05','Approve','Payment follows your approval of the agreed work.'],
-          ['06','Live','The approved website goes live on the agreed domain.']
+          ['01','Your website','Your agreed pages and customer features come together.'],
+          ['02','Every screen','The website is checked on phones, tablets and desktops.'],
+          ['03','Your details','Forms, contact actions and agreed details are checked and refined.'],
+          ['04','Your review','You review the real website on your own device.'],
+          ['05','Your approval','Payment follows your approval of the agreed work.'],
+          ['06','Customers online','Your approved website goes live on your domain.']
         ]
       },
       'pricing.html': {
-        label: 'How payment works',
-        title: 'See the website. Review it. Pay after approval. Then go live.',
+        label: 'How payment works for you',
+        title: 'See your website first. Approve it. Pay. Then welcome customers.',
         steps: [
-          ['01','Scope','Your website scope is agreed.'],
-          ['02','Work','Your agreed website is prepared first.'],
-          ['03','Review','You see and review the working website.'],
-          ['04','Pay','You pay after you approve the agreed work.'],
-          ['05','Deploy','Your approved website is put live.'],
-          ['06','Domain','The domain you approved is purchased or connected after confirmation.']
+          ['01','Your package','Your pages, features and price are agreed.'],
+          ['02','Your website','Your agreed website is prepared first.'],
+          ['03','Your review','You see and review the working website.'],
+          ['04','Your approval','You approve the agreed work before payment.'],
+          ['05','Go live','Your approved website is published.'],
+          ['06','Your domain','Your approved domain is connected so customers can find you.']
         ]
       },
       'about.html': {
         label: 'What you can expect',
-        title: 'Clear planning, careful review and a website ready for customers.',
+        title: 'A website experience built around your customers from the start.',
         steps: [
-          ['01','Understand','Your business, customers and goals are understood first.'],
-          ['02','Design','Your pages and customer journey are planned.'],
-          ['03','Code','Your mobile-friendly website comes together.'],
-          ['04','Test','Important customer actions and forms are checked.'],
-          ['05','Refine','The details are refined before launch.'],
-          ['06','Deliver','You review the finished website before it goes live.']
+          ['01','Your business','Your goals, customers and priorities come first.'],
+          ['02','Your journey','Your pages and customer journey are shaped around what matters.'],
+          ['03','Your website','Your mobile-friendly website comes together.'],
+          ['04','Customer actions','Forms, contact options and important actions are checked.'],
+          ['05','Your changes','Agreed details are refined before launch.'],
+          ['06','Ready for customers','You review the finished website before it goes live.']
         ]
       },
       'wordpress.html': {
-        label: 'Your WordPress project',
-        title: 'From your business needs to a customer-ready WordPress website.',
+        label: 'Your WordPress website',
+        title: 'From your business needs to a WordPress website customers can use easily.',
         steps: [
-          ['01','Setup','The WordPress setup, pages and hosting needs are prepared.'],
-          ['02','Design','Your layout and visual direction are prepared around your business.'],
-          ['03','Build','Your pages, forms, store features and useful tools are set up as needed.'],
-          ['04','Test','Mobile use, forms, store journeys and key customer actions are checked.'],
-          ['05','Review','You review the WordPress website before payment.'],
-          ['06','Launch','After approval and payment, The approved website is launched and connected to the agreed domain.']
+          ['01','Your needs','Your pages, store needs and content are confirmed.'],
+          ['02','Your look','Your layout and visual direction are shaped around your business.'],
+          ['03','Your website','Your pages, forms, store features and useful tools come together.'],
+          ['04','Customer journey','Mobile use, forms, checkout and important actions are checked.'],
+          ['05','Your review','You review the WordPress website before payment.'],
+          ['06','Customers online','After approval and payment, your website goes live on the agreed domain.']
         ]
       },
       'contact.html': {
         label: 'What happens after you enquire',
-        title: 'Your enquiry starts a clear website process.',
+        title: 'Your enquiry turns into clear next steps for your business.',
         steps: [
-          ['01','Enquiry','You send your business and website details.'],
-          ['02','Scope','The scope and next steps are confirmed with you.'],
-          ['03','Build','Your agreed website is prepared first.'],
-          ['04','Review','You review the agreed website before payment.'],
-          ['05','Pay','You pay after approving the agreed work.'],
-          ['06','Launch','The approved website is launched and the agreed domain is connected.']
+          ['01','Your enquiry','You send your business and website details.'],
+          ['02','Your quote','The scope, price and next steps are confirmed with you.'],
+          ['03','Your website','Your agreed website is prepared first.'],
+          ['04','Your review','You review the working website before payment.'],
+          ['05','Your approval','You approve the agreed work and payment follows.'],
+          ['06','Customers online','Your approved website goes live on the agreed domain.']
         ]
       }
     };
 
     const packageConfig = {
-      label: 'What happens with this package',
-      title: 'You see and review the agreed website before payment.',
+      label: 'What you get with this package',
+      title: 'You see the real website before payment, then it goes live for customers.',
       steps: [
-        ['01','Confirm','Your package, pages and content are confirmed.'],
-        ['02','Build','Your agreed website is prepared.'],
-        ['03','Test','The pages, mobile experience and important actions are checked.'],
-        ['04','Review','You review the finished website.'],
-        ['05','Pay','You pay after approving the agreed work.'],
-        ['06','Launch','Your approved website is launched on the agreed domain.']
+        ['01','Your package','Your pages, content and agreed features are confirmed.'],
+        ['02','Your website','Your agreed website is prepared.'],
+        ['03','Every screen','Mobile use and important customer actions are checked.'],
+        ['04','Your review','You review the finished website.'],
+        ['05','Your approval','You approve the agreed work before payment.'],
+        ['06','Customers online','Your approved website goes live on your domain.']
       ]
     };
 
@@ -494,42 +494,42 @@
       </div>
       <div class="flow-visual">
         <div class="flow-browser" aria-hidden="true">
-          <div class="flow-browser-bar"><i></i><i></i><i></i><span>spirit2k5 / project</span></div>
+          <div class="flow-browser-bar"><i></i><i></i><i></i><span>spirit2k5 / your website</span></div>
           <div class="flow-screen" data-scene="brief">
             <div class="flow-screen-label">01</div>
-            <strong>Brief</strong>
+            <strong>Your business</strong>
             <div class="flow-stage-art">
               <div class="art-brief">
-                <div class="brief-card"><b>PROJECT BRIEF</b><i></i><i></i><i></i><span>requirements ✓</span></div>
+                <div class="brief-card"><b>YOUR WEBSITE GOALS</b><i></i><i></i><i></i><span>goals confirmed ✓</span></div>
               </div>
               <div class="art-design">
                 <div class="wireframe-nav"></div><div class="wireframe-hero"></div>
                 <div class="wireframe-grid"><i></i><i></i><i></i></div>
               </div>
               <div class="art-code">
-                <span>&lt;main&gt;</span><span>&nbsp;&nbsp;&lt;section class="website"&gt;</span><span>&nbsp;&nbsp;&nbsp;&nbsp;build();</span><span>&nbsp;&nbsp;&nbsp;&nbsp;test();</span><span>&nbsp;&nbsp;&lt;/section&gt;</span><span>&lt;/main&gt;</span><b></b>
+                <span>YOUR WEBSITE</span><span>clear services</span><span>easy contact</span><span>mobile friendly</span><span>ready for customers</span><span>yourbusiness.co.za</span><b></b>
               </div>
               <div class="art-test">
                 <div class="device desktop"><i></i></div><div class="device tablet"><i></i></div><div class="device phone"><i></i></div>
-                <span class="test-check">Responsive ✓</span>
+                <span class="test-check">Looks good on every screen ✓</span>
               </div>
               <div class="art-review">
                 <div class="review-site"><i></i><i></i><i></i></div>
-                <div class="review-comment one">Make this clearer</div><div class="review-comment two">✓ Updated</div>
+                <div class="review-comment one">Your feedback</div><div class="review-comment two">✓ Updated for you</div>
               </div>
               <div class="art-pay">
-                <div class="payment-card"><small>PROJECT APPROVED</small><b>Payment</b><span>✓ received</span></div>
+                <div class="payment-card"><small>YOU APPROVED IT</small><b>Payment</b><span>✓ confirmed</span></div>
               </div>
               <div class="art-deploy">
-                <div class="deploy-code">BUILD</div><span class="deploy-arrow">→</span><div class="deploy-cloud">CLOUD</div><span class="deploy-arrow">→</span><div class="deploy-live">● LIVE</div>
+                <div class="deploy-code">YOUR WEBSITE</div><span class="deploy-arrow">→</span><div class="deploy-cloud">YOUR DOMAIN</div><span class="deploy-arrow">→</span><div class="deploy-live">● READY FOR CUSTOMERS</div>
               </div>
               <div class="art-domain">
-                <div class="domain-chip">yourbusiness.co.za</div><div class="dns-line"></div><div class="domain-server">DNS</div><div class="dns-line"></div><div class="domain-live">● CONNECTED</div>
+                <div class="domain-chip">yourbusiness.co.za</div><div class="dns-line"></div><div class="domain-server">YOUR DOMAIN</div><div class="dns-line"></div><div class="domain-live">● READY FOR CUSTOMERS</div>
               </div>
               <div class="art-wordpress">
                 <div class="wp-admin-mini">
                   <div class="wp-side"><b>WP</b><i></i><i></i><i></i><i></i></div>
-                  <div class="wp-main-mini"><span>Pages</span><strong>Home</strong><em>Editing…</em><div class="wp-blocks"><i></i><i></i><i></i></div></div>
+                  <div class="wp-main-mini"><span>Your website</span><strong>Homepage</strong><em>Ready to review</em><div class="wp-blocks"><i></i><i></i><i></i></div></div>
                 </div>
               </div>
             </div>
@@ -548,13 +548,13 @@
     const sceneFor = title => {
       const value = title.toLowerCase();
       if (/domain/.test(value)) return 'domain';
-      if (/deploy|launch|live/.test(value)) return 'deploy';
-      if (/pay|payment/.test(value)) return 'pay';
-      if (/review|approve|deliver/.test(value)) return 'review';
-      if (/test|refine/.test(value)) return 'test';
-      if (/wordpress|setup|theme|plugin|woocommerce/.test(value)) return 'wordpress';
-      if (/design|plan/.test(value)) return 'design';
-      if (/build|work|code/.test(value)) return 'code';
+      if (/customers online|ready for customers|go live|launch|live/.test(value)) return 'deploy';
+      if (/approval|pay|payment/.test(value)) return 'pay';
+      if (/review|feedback|changes/.test(value)) return 'review';
+      if (/every screen|customer action|customer journey|details/.test(value)) return 'test';
+      if (/wordpress|setup|package/.test(value)) return 'wordpress';
+      if (/look|journey|pages/.test(value)) return 'design';
+      if (/website/.test(value)) return 'code';
       return 'brief';
     };
     let current = 0;
