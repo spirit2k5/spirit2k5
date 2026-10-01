@@ -1,6 +1,15 @@
 name: Spirit2k5 AI maintenance
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "script.js"
+      - "style.css"
+      - "assistant-admin.html"
+      - "ai/**"
+      - "scripts/spirit2k5_ai_healthcheck.py"
+      - ".github/workflows/spirit2k5-ai-maintenance.yml"
   schedule:
     - cron: "*/10 * * * *"
   workflow_dispatch:
