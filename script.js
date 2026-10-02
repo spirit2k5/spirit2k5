@@ -57,6 +57,7 @@
     };
     sendToCollector(payload);
   };
+  window.spirit2k5TrackEvent = trackEvent;
 
 
   // Always send the old GitHub Pages address to the official Spirit2k5 domain.
@@ -176,6 +177,14 @@
     const line = form.querySelector('.wizard-line i');
     let current = 0;
     let transitioning = false;
+    let formStarted = false;
+    const markFormStarted = () => {
+      if (formStarted) return;
+      formStarted = true;
+      trackEvent('enquiry_form_start', 'project-enquiry-form');
+    };
+    form.addEventListener('input', markFormStarted, { passive:true });
+    form.addEventListener('change', markFormStarted, { passive:true });
     const show = (index, direction = 1) => {
       if (index < 0 || index >= steps.length || index === current || transitioning) return;
       transitioning = true;
@@ -202,7 +211,11 @@
       return true;
     };
     form.querySelectorAll('.wizard-next').forEach(btn => btn.addEventListener('click', () => {
-      if (validStep()) show(current + 1, 1);
+      if (validStep()) {
+        markFormStarted();
+        trackEvent('enquiry_step', 'step-' + (current + 1) + '-complete');
+        show(current + 1, 1);
+      }
     }));
     form.querySelectorAll('.wizard-back').forEach(btn => btn.addEventListener('click', () => show(current - 1, -1)));
     dots.forEach((dot,i) => dot.addEventListener('click', () => {
@@ -797,6 +810,9 @@
   const ENDPOINT = 'https://vpgexijihrozwugqqagy.supabase.co/functions/v1/spirit2k5-ai-chat';
   const WHATSAPP = 'https://wa.me/27781888220?text=' + encodeURIComponent('Hi Carlton, I would like to discuss a website project.');
   const PROJECT = 'https://spirit2k5.co.za/contact.html#project-form';
+  const track = (name,target='') => {
+    try { if (typeof window.spirit2k5TrackEvent === 'function') window.spirit2k5TrackEvent(name,target); } catch (_) {}
+  };
 
   const ready = (fn) => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once:true });
@@ -907,6 +923,8 @@
     whatsapp.href=WHATSAPP;
     whatsapp.target='_blank';
     whatsapp.rel='noopener';
+    project.addEventListener('click',()=>track('ai_project_click','start-project'));
+    whatsapp.addEventListener('click',()=>track('ai_whatsapp_click','whatsapp'));
     actions.append(project,whatsapp);
     footer.append(note,form,actions);
 
@@ -926,7 +944,10 @@
       launcher.setAttribute('aria-expanded','false');
     };
 
-    launcher.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
+    launcher.addEventListener('click',()=>{
+      if (panel.classList.contains('open')) closePanel();
+      else { track('ai_open','launcher'); openPanel(); }
+    });
     close.addEventListener('click',closePanel);
     document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&panel.classList.contains('open')) closePanel(); });
 
@@ -937,6 +958,7 @@
         const a=el('a','spirit-ai-source','Read more →');
         a.href=meta.source_url;
         a.target='_self';
+        a.addEventListener('click',()=>track('ai_source_click',meta.source_url));
         wrap.appendChild(a);
       }
       if(meta?.contact_url && !meta?.source_url){
@@ -944,6 +966,7 @@
         a.href=meta.contact_url;
         a.target='_blank';
         a.rel='noopener';
+        a.addEventListener('click',()=>track('ai_whatsapp_click','answer-contact'));
         wrap.appendChild(a);
       }
       body.appendChild(wrap);
@@ -962,6 +985,7 @@
       if(!question||busy)return;
       openPanel();
       addMessage(question,'user');
+      track('ai_question','submitted');
       setBusy(true);
       try{
         const response=await fetch(ENDPOINT,{
@@ -972,6 +996,7 @@
         const data=await response.json().catch(()=>({}));
         if(!response.ok && !data?.answer) throw new Error('assistant_unavailable');
         addMessage(data.answer||'I could not confirm that right now. Please contact Spirit2k5 directly.','bot',data);
+        track('ai_answer',[data.layer||'unknown',data.ai_provider||'local',data.learned_status||''].filter(Boolean).join('|'));
       }catch(_){
         addMessage('I could not reach the website assistant right now. You can still contact Spirit2k5 directly on WhatsApp or send a project enquiry.','bot',{contact_url:WHATSAPP});
       }finally{
