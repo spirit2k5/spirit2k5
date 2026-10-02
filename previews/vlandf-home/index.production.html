@@ -13,7 +13,15 @@
 <link rel="mask-icon" href="favicon.svg" color="#1717ff">
 <link rel="manifest" href="site.webmanifest">
 <link rel="canonical" href="https://www.vlandf.co.za/">
-<script>try{if(location.search){history.replaceState(null,"",location.pathname+location.hash)}}catch(e){}</script>
+<script>try{if(location.search){history.replaceState(null,"",location.pathname+location.hash)}}catch(e){}</script>\n<script>
+try{
+  const narrow=matchMedia('(max-width: 900px)').matches;
+  const coarse=matchMedia('(pointer: coarse)').matches;
+  const uaMobile=(navigator.userAgentData&&navigator.userAgentData.mobile===true)||/iPhone|iPod|Android.*Mobile|Mobile/i.test(navigator.userAgent||'');
+  const phoneSized=Math.min(screen.width||9999,screen.height||9999)<=700;
+  if(narrow&&phoneSized&&(uaMobile||coarse)) document.documentElement.classList.add('mobile-phone-view');
+}catch(e){}
+</script>
 <title>VL&F IT Services | Network, Security & IT Support</title>
 <meta property="og:type" content="website">
 <meta property="og:title" content="VL&F IT Services | Network, Security & IT Support">
@@ -153,7 +161,502 @@ img{display:block;max-width:100%;image-rendering:auto}
   body.mobile-viewer footer{padding-bottom:calc(115px + env(safe-area-inset-bottom))}
 }
 
-</style>
+
+/* 2026-10-02 smartphone-only compact layout
+   Applied only when JS detects a phone-sized touch/mobile device. Desktop/PC is unchanged. */
+@media(max-width:900px){
+  html.mobile-phone-view body{
+    font-size:14px;
+    padding-bottom:calc(78px + env(safe-area-inset-bottom));
+  }
+
+  html.mobile-phone-view .topline{display:none}
+  html.mobile-phone-view .info .inner{
+    min-height:32px;
+    padding:0 4px;
+    gap:4px;
+    font-size:9px;
+    letter-spacing:.02em;
+    overflow:hidden;
+  }
+  html.mobile-phone-view .info .inner a{
+    padding:5px 6px;
+    white-space:nowrap;
+  }
+  html.mobile-phone-view .info .inner a:nth-child(2){display:none}
+  html.mobile-phone-view .info .inner a:nth-child(3){
+    margin-left:auto;
+    font-size:9px;
+  }
+
+  html.mobile-phone-view .nav .inner{
+    height:60px;
+    width:calc(100% - 20px);
+    gap:8px;
+  }
+  html.mobile-phone-view .logo{
+    width:96px!important;
+    height:44px!important;
+  }
+  html.mobile-phone-view .quote-btn{display:none}
+  html.mobile-phone-view .mobile-menu-btn{
+    width:39px;height:39px;border-radius:11px;
+  }
+  html.mobile-phone-view .navlinks{
+    left:0;right:0;top:calc(100% + 6px);
+    padding:8px;
+    border-radius:14px;
+    max-height:calc(100vh - 112px);
+    overflow:auto;
+  }
+  html.mobile-phone-view .navlinks>a,
+  html.mobile-phone-view .dropbtn{
+    padding:10px 11px;
+    font-size:11px;
+  }
+  html.mobile-phone-view .menu a{
+    padding:9px 10px;
+    font-size:11px;
+  }
+
+  html.mobile-phone-view .wrap{
+    width:calc(100% - 22px);
+  }
+
+  html.mobile-phone-view .hero{
+    min-height:430px!important;
+    padding:46px 0 34px;
+  }
+  html.mobile-phone-view .hero h1{
+    max-width:320px;
+    margin:12px 0 14px;
+    font-size:34px!important;
+    line-height:.98;
+    letter-spacing:-.045em;
+  }
+  html.mobile-phone-view .hero p{
+    max-width:330px;
+    margin-bottom:18px;
+    font-size:13.5px!important;
+    line-height:1.45;
+  }
+  html.mobile-phone-view .eyebrow{
+    font-size:9px;
+    letter-spacing:.1em;
+  }
+  html.mobile-phone-view .buttons{
+    gap:8px;
+  }
+  html.mobile-phone-view .btn{
+    min-height:40px;
+    padding:0 13px;
+    border-radius:11px;
+    font-size:11.5px;
+  }
+  html.mobile-phone-view .proof{
+    flex-wrap:nowrap;
+    gap:6px;
+    margin-top:19px;
+    overflow-x:auto;
+    padding-bottom:3px;
+    scrollbar-width:none;
+  }
+  html.mobile-phone-view .proof::-webkit-scrollbar{display:none}
+  html.mobile-phone-view .pill{
+    flex:0 0 auto;
+    padding:6px 8px;
+    font-size:9px;
+  }
+
+  html.mobile-phone-view .ticker{overflow:hidden}
+  html.mobile-phone-view .ticker-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:0;
+  }
+  html.mobile-phone-view .tick{
+    min-width:0;
+    padding:10px 11px;
+    border-right:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  html.mobile-phone-view .tick small{font-size:8px}
+  html.mobile-phone-view .tick strong{
+    margin-top:3px;
+    font-size:10.5px;
+    line-height:1.25;
+  }
+
+  html.mobile-phone-view section{
+    padding:38px 0!important;
+  }
+  html.mobile-phone-view .head{
+    margin-bottom:18px;
+    gap:8px;
+  }
+  html.mobile-phone-view .kicker{
+    font-size:9px;
+    letter-spacing:.1em;
+  }
+  html.mobile-phone-view h2,
+  html.mobile-phone-view .quote-intro h2{
+    margin:7px 0 8px;
+    font-size:27px!important;
+    line-height:1.04;
+    letter-spacing:-.035em;
+  }
+  html.mobile-phone-view .sub{
+    font-size:12.5px;
+    line-height:1.45;
+  }
+
+  /* Main IT service categories: compact app tiles, 2 per row */
+  html.mobile-phone-view .grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+  }
+  html.mobile-phone-view .card{
+    min-height:218px!important;
+    padding:14px!important;
+    border-radius:17px;
+  }
+  html.mobile-phone-view .no{
+    right:12px;
+    top:11px;
+    font-size:10px;
+  }
+  html.mobile-phone-view .anim{
+    width:55px;
+    height:55px;
+    margin:0 0 13px;
+    border-radius:14px;
+  }
+  html.mobile-phone-view .anim svg{
+    width:38px;
+    height:38px;
+  }
+  html.mobile-phone-view .card h3{
+    min-height:34px;
+    margin:0 0 7px;
+    font-size:15.5px;
+    line-height:1.08;
+  }
+  html.mobile-phone-view .card p{
+    display:-webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    margin:0 0 10px;
+    font-size:11.5px;
+    line-height:1.35;
+  }
+  html.mobile-phone-view .card a{
+    font-size:10.5px;
+  }
+
+  html.mobile-phone-view .photo-band{
+    display:flex!important;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  html.mobile-phone-view .photo-band::-webkit-scrollbar{display:none}
+  html.mobile-phone-view .photo-card,
+  html.mobile-phone-view .photo-band .photo-card:last-child{
+    flex:0 0 82%;
+    min-height:0;
+    aspect-ratio:16/10!important;
+    border-radius:17px;
+    scroll-snap-align:start;
+  }
+  html.mobile-phone-view .photo-card .caption{
+    left:10px;right:10px;bottom:10px;
+    padding:10px;
+    border-radius:11px;
+  }
+  html.mobile-phone-view .caption strong{font-size:12.5px}
+  html.mobile-phone-view .caption span{font-size:10.5px}
+
+  /* Long service-summary cards become a compact swipe row instead of huge stacked blocks */
+  html.mobile-phone-view .value-grid{
+    display:flex!important;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  html.mobile-phone-view .value-grid::-webkit-scrollbar{display:none}
+  html.mobile-phone-view .value-card{
+    flex:0 0 86%;
+    max-width:310px;
+    padding:16px;
+    border-radius:17px;
+    scroll-snap-align:start;
+  }
+  html.mobile-phone-view .value-card h3{
+    margin-bottom:10px;
+    font-size:16px;
+    line-height:1.15;
+  }
+  html.mobile-phone-view .value-card p,
+  html.mobile-phone-view .value-card li{
+    font-size:11.5px;
+    line-height:1.35;
+  }
+  html.mobile-phone-view .value-card ul{
+    gap:5px;
+    padding-left:16px;
+  }
+
+  html.mobile-phone-view .server-health,
+  html.mobile-phone-view .security-visual,
+  html.mobile-phone-view .security-image{
+    border-radius:17px;
+  }
+  html.mobile-phone-view .server-health{
+    aspect-ratio:16/9!important;
+  }
+  html.mobile-phone-view .server-badge{
+    left:9px;top:9px;
+    padding:7px 9px;
+    border-radius:9px;
+  }
+  html.mobile-phone-view .server-badge small{font-size:7px}
+  html.mobile-phone-view .server-badge strong{font-size:11px}
+  html.mobile-phone-view .security-visual{
+    min-height:300px!important;
+  }
+  html.mobile-phone-view .security-copy{
+    padding:17px!important;
+    border-radius:17px;
+  }
+  html.mobile-phone-view .security-copy h2{font-size:24px!important}
+  html.mobile-phone-view .security-copy ul{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:6px;
+    margin-top:15px;
+  }
+  html.mobile-phone-view .security-copy li{
+    padding:8px 9px;
+    border-radius:9px;
+    font-size:10.5px;
+    line-height:1.3;
+  }
+
+  html.mobile-phone-view .story{
+    gap:10px;
+  }
+  html.mobile-phone-view .story-card{
+    padding:17px!important;
+    border-radius:17px;
+  }
+  html.mobile-phone-view .story-card h3{
+    font-size:18px;
+    margin-bottom:8px;
+  }
+  html.mobile-phone-view .story-card p,
+  html.mobile-phone-view .story-card li,
+  html.mobile-phone-view .detail-body{
+    font-size:11.5px;
+    line-height:1.42;
+  }
+  html.mobile-phone-view .details{
+    margin-top:10px;
+    border-radius:13px;
+  }
+  html.mobile-phone-view .details summary{
+    padding:12px 14px;
+    font-size:12px;
+  }
+  html.mobile-phone-view .details .detail-body{
+    padding:0 14px 14px;
+  }
+
+  /* Client list: compact swipe cards to avoid a very long page */
+  html.mobile-phone-view .clients-grid{
+    display:flex!important;
+    gap:9px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  html.mobile-phone-view .clients-grid::-webkit-scrollbar{display:none}
+  html.mobile-phone-view .client-card{
+    flex:0 0 76%;
+    max-width:270px;
+    min-height:170px;
+    padding:15px;
+    border-radius:17px;
+    scroll-snap-align:start;
+  }
+  html.mobile-phone-view .client-card small{font-size:8px}
+  html.mobile-phone-view .client-card h3{
+    margin:7px 0;
+    font-size:16px;
+    line-height:1.15;
+  }
+  html.mobile-phone-view .client-card p{
+    font-size:11px;
+    line-height:1.35;
+  }
+  html.mobile-phone-view .client-card .client-service{
+    margin-top:10px;
+    padding:6px 8px;
+    font-size:9px;
+  }
+
+  html.mobile-phone-view .triples{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:8px;
+  }
+  html.mobile-phone-view .action-tile{
+    min-height:72px;
+    grid-template-columns:44px 1fr;
+    gap:11px;
+    padding:11px 13px!important;
+    border-radius:15px;
+  }
+  html.mobile-phone-view .engage-icon{
+    width:44px!important;
+    height:44px!important;
+    border-radius:12px;
+  }
+  html.mobile-phone-view .engage-icon svg{
+    width:23px;
+    height:23px;
+  }
+  html.mobile-phone-view .action-copy span{font-size:8px}
+  html.mobile-phone-view .action-copy strong{
+    margin-top:3px;
+    font-size:13px;
+    line-height:1.15;
+  }
+  html.mobile-phone-view .action-copy em{
+    margin-top:3px;
+    font-size:9.5px;
+  }
+
+  html.mobile-phone-view .quote-section{padding-top:18px!important}
+  html.mobile-phone-view .quote-layout{gap:10px}
+  html.mobile-phone-view .quote-intro,
+  html.mobile-phone-view .quote-form{
+    padding:16px!important;
+    border-radius:17px;
+  }
+  html.mobile-phone-view .quote-points{
+    gap:5px;
+    margin-top:15px;
+  }
+  html.mobile-phone-view .quote-point{
+    padding:7px 0;
+    font-size:10.5px;
+  }
+  html.mobile-phone-view .form-grid{gap:10px}
+  html.mobile-phone-view .field{gap:5px}
+  html.mobile-phone-view .field label{font-size:9px}
+  html.mobile-phone-view .field input,
+  html.mobile-phone-view .field select,
+  html.mobile-phone-view .field textarea{
+    min-height:42px;
+    padding:10px 11px;
+    border-radius:10px;
+    font-size:13px;
+  }
+  html.mobile-phone-view .field textarea{min-height:96px}
+
+  html.mobile-phone-view .locations-grid{
+    display:flex!important;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  html.mobile-phone-view .locations-grid::-webkit-scrollbar{display:none}
+  html.mobile-phone-view .location-card{
+    flex:0 0 86%;
+    max-width:315px;
+    border-radius:17px;
+    scroll-snap-align:start;
+  }
+  html.mobile-phone-view .location-copy{
+    min-height:0!important;
+    padding:14px!important;
+  }
+  html.mobile-phone-view .location-copy small{font-size:8px}
+  html.mobile-phone-view .location-copy strong{
+    font-size:13px;
+    line-height:1.32;
+  }
+  html.mobile-phone-view .location-copy p{font-size:10.5px}
+  html.mobile-phone-view .location-copy a{font-size:10.5px}
+  html.mobile-phone-view .location-card iframe{
+    height:190px!important;
+  }
+
+  html.mobile-phone-view .contactbox{
+    padding:17px!important;
+    gap:14px;
+    border-radius:17px;
+  }
+  html.mobile-phone-view .contact-list{gap:6px}
+  html.mobile-phone-view .contact-item{
+    padding:10px 11px;
+    border-radius:10px;
+  }
+  html.mobile-phone-view .contact-item small{font-size:8px}
+  html.mobile-phone-view .contact-item b{
+    font-size:11.5px;
+    line-height:1.3;
+  }
+
+  html.mobile-phone-view footer{
+    padding:28px 0 calc(98px + env(safe-area-inset-bottom))!important;
+    font-size:11px;
+  }
+  html.mobile-phone-view .footer-logo{
+    width:105px;
+    padding:6px;
+    margin-bottom:10px;
+  }
+  html.mobile-phone-view .foot{gap:16px}
+
+  html.mobile-phone-view .mobile-bottom-nav{
+    left:8px;right:8px;
+    bottom:calc(6px + env(safe-area-inset-bottom));
+    padding:6px 6px 5px;
+    border-radius:19px;
+  }
+  html.mobile-phone-view .mobile-bottom-nav a{
+    min-height:47px;
+    padding:5px 2px;
+    border-radius:12px;
+    font-size:8px;
+  }
+  html.mobile-phone-view .mobile-bottom-nav svg{
+    width:18px;height:18px;
+  }
+  html.mobile-phone-view .mobile-bottom-nav .mobile-quote{
+    min-height:56px;
+    margin-top:-15px;
+    border-radius:15px;
+  }
+}
+
+@media(max-width:360px){
+  html.mobile-phone-view .hero h1{font-size:31px!important}
+  html.mobile-phone-view .card{padding:12px!important}
+  html.mobile-phone-view .card h3{font-size:14.5px}
+  html.mobile-phone-view .card p{font-size:10.8px}
+  html.mobile-phone-view .anim{width:50px;height:50px}
+}
+\n</style>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -324,10 +827,11 @@ function detectMobileViewer(){
   const coarse=window.matchMedia('(pointer: coarse)').matches;
   const uaMobile=(navigator.userAgentData&&navigator.userAgentData.mobile===true) || /iPhone|iPod|Android.*Mobile|Mobile/i.test(navigator.userAgent||'');
   const phoneSized=Math.min(window.screen.width||9999,window.screen.height||9999)<=700;
-  return narrow && (uaMobile || (coarse && phoneSized));
+  return narrow && phoneSized && (uaMobile || coarse);
 }
 function applyMobileViewerMode(){
   const enabled=detectMobileViewer();
+  document.documentElement.classList.toggle('mobile-phone-view',enabled);
   document.body.classList.toggle('mobile-viewer',enabled);
   if(mobileBottomNav) mobileBottomNav.setAttribute('aria-hidden',String(!enabled));
 }
