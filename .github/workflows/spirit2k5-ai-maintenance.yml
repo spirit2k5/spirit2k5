@@ -1,4 +1,4 @@
-name: Spirit2k5 AI maintenance
+name: Spirit2k5 autonomous website agent
 
 on:
   push:
@@ -9,51 +9,129 @@ on:
       - "assistant-admin.html"
       - "ai/**"
       - "scripts/spirit2k5_ai_healthcheck.py"
+      - "scripts/spirit2k5_auto_maintain.py"
       - ".github/workflows/spirit2k5-ai-maintenance.yml"
   schedule:
     - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 concurrency:
-  group: spirit2k5-ai-maintenance
-  cancel-in-progress: true
+  group: spirit2k5-autonomous-maintenance
+  cancel-in-progress: false
 
 jobs:
-  check:
+  maintain:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 9
+
     steps:
       - name: Check out website
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Check knowledge sources and public links
+      - name: Apply safe automatic repairs
+        id: repair
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python scripts/spirit2k5_auto_maintain.py | tee /tmp/spirit2k5-maintenance.txt
+
+      - name: Validate website build
+        id: build
+        continue-on-error: true
+        shell: bash
+        run: |
+          python -m py_compile scripts/spirit2k5_auto_maintain.py scripts/spirit2k5_ai_healthcheck.py
+          node --check script.js
+          python - <<'PY'
+          from pathlib import Path
+          required = ["index.html", "style.css", "script.js", "CNAME", "robots.txt", "sitemap.xml"]
+          missing = [p for p in required if not Path(p).is_file() or Path(p).stat().st_size == 0]
+          if missing:
+              raise SystemExit("Missing/empty required files: " + ", ".join(missing))
+          pages = list(Path(".").glob("*.html"))
+          if not pages:
+              raise SystemExit("No HTML pages found")
+          print(f"Static build validation passed for {len(pages)} HTML pages.")
+          PY
+
+      - name: Commit and deploy automatic repairs
+        id: commit
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No repository changes to commit."
+            exit 0
+          fi
+
+          git config user.name "spirit2k5-site-agent[bot]"
+          git config user.email "spirit2k5-site-agent@users.noreply.github.com"
+          git add -A
+          git commit -m "Auto-maintain Spirit2k5 website"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Check live website and customer assistant
         id: health
         continue-on-error: true
         run: python scripts/spirit2k5_ai_healthcheck.py
 
-      - name: Open or update approval issue
-        if: steps.health.outcome == 'failure'
+      - name: Open or update unresolved maintenance issue
+        if: steps.repair.outcome == 'failure' || steps.build.outcome == 'failure' || steps.health.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          TITLE="Spirit2k5 AI maintenance needs review"
-          BODY="$(cat ai-health-report.md)"
+          TITLE="Spirit2k5 autonomous maintenance needs attention"
+          {
+            echo "# Spirit2k5 autonomous maintenance report"
+            echo
+            echo "- Repair step: ${{ steps.repair.outcome }}"
+            echo "- Build validation: ${{ steps.build.outcome }}"
+            echo "- Live health check: ${{ steps.health.outcome }}"
+            echo "- Automatic changes committed: ${{ steps.commit.outputs.changed || 'false' }}"
+            echo
+            if [ -f /tmp/spirit2k5-maintenance.txt ]; then
+              echo "## Automatic maintainer"
+              echo '~~~'
+              cat /tmp/spirit2k5-maintenance.txt
+              echo '~~~'
+              echo
+            fi
+            if [ -f ai-health-report.md ]; then
+              echo "## Live health check"
+              cat ai-health-report.md
+            fi
+          } > /tmp/issue-body.md
+
           EXISTING="$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')"
           if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body "$BODY"
+            gh issue comment "$EXISTING" --body-file /tmp/issue-body.md
           else
-            gh issue create --title "$TITLE" --body "$BODY"
+            gh issue create --title "$TITLE" --body-file /tmp/issue-body.md
           fi
 
-      - name: Fail workflow when review is needed
-        if: steps.health.outcome == 'failure'
-        run: exit 1
+      - name: Close resolved maintenance issue
+        if: steps.repair.outcome == 'success' && steps.build.outcome == 'success' && steps.health.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          TITLE="Spirit2k5 autonomous maintenance needs attention"
+          EXISTING="$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" --comment "All automated repair, build, and live-site checks are passing again."
+          fi
