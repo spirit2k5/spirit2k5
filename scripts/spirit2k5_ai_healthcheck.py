@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, subprocess, sys, urllib.request, urllib.parse, urllib.error, xml.etree.ElementTree as ET
+import json, subprocess, sys, time, urllib.request, urllib.parse, urllib.error, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -8,6 +8,7 @@ MANIFEST = ROOT / "ai" / "knowledge-sources.json"
 SITE = "https://spirit2k5.co.za"
 AI_ENDPOINT = "https://vpgexijihrozwugqqagy.supabase.co/functions/v1/spirit2k5-ai-chat"
 TIMEOUT = 15
+RETRIES = 3
 
 class LinkParser(HTMLParser):
     def __init__(self):
@@ -20,24 +21,56 @@ class LinkParser(HTMLParser):
         if href:
             self.links.add(href.strip())
 
-def request(url):
-    req = urllib.request.Request(url, headers={"User-Agent":"Spirit2k5-AI-Maintenance/1.0"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
-        return res.status, res.read()
+def request(url, attempts=RETRIES):
+    last = None
+    for attempt in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent":"Spirit2k5-AI-Maintenance/2.0"})
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
+                return res.status, res.read()
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code >= 500 and attempt < attempts - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise
+        except (urllib.error.URLError, TimeoutError) as e:
+            last = e
+            if attempt < attempts - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise
+    raise last
 
-def post_json(url, payload):
-    req = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        method="POST",
-        headers={
-            "User-Agent":"Spirit2k5-AI-Maintenance/1.0",
-            "Origin":"https://spirit2k5.co.za",
-            "Content-Type":"application/json"
-        }
-    )
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
-        return res.status, json.loads(res.read().decode("utf-8","ignore"))
+def post_json(url, payload, attempts=2):
+    last = None
+    for attempt in range(attempts):
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                method="POST",
+                headers={
+                    "User-Agent":"Spirit2k5-AI-Maintenance/2.0",
+                    "Origin":"https://spirit2k5.co.za",
+                    "Content-Type":"application/json"
+                }
+            )
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
+                return res.status, json.loads(res.read().decode("utf-8","ignore"))
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code >= 500 and attempt < attempts - 1:
+                time.sleep(2)
+                continue
+            raise
+        except (urllib.error.URLError, TimeoutError) as e:
+            last = e
+            if attempt < attempts - 1:
+                time.sleep(2)
+                continue
+            raise
+    raise last
 
 def git_blob_sha(path):
     p = subprocess.run(["git","hash-object",str(path)], cwd=ROOT, text=True, capture_output=True)
@@ -143,7 +176,7 @@ def main():
         ""
     ]
     if report["knowledge_changed"]:
-        md += ["## Knowledge sources changed",""] + [f"- \`{x['path']}\`" for x in report["knowledge_changed"]] + [""]
+        md += ["## Knowledge sources changed",""] + [f"- `{x['path']}`" for x in report["knowledge_changed"]] + [""]
     if report["broken_pages"]:
         md += ["## Broken pages",""] + [f"- {x}" for x in report["broken_pages"]] + [""]
     if report["broken_links"]:
