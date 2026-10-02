@@ -52,14 +52,22 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          python -m py_compile scripts/spirit2k5_auto_maintain.py scripts/spirit2k5_ai_healthcheck.py
           node --check script.js
           python - <<'PY'
           from pathlib import Path
+
+          for filename in [
+              "scripts/spirit2k5_auto_maintain.py",
+              "scripts/spirit2k5_ai_healthcheck.py",
+          ]:
+              source = Path(filename).read_text(encoding="utf-8")
+              compile(source, filename, "exec")
+
           required = ["index.html", "style.css", "script.js", "CNAME", "robots.txt", "sitemap.xml"]
           missing = [p for p in required if not Path(p).is_file() or Path(p).stat().st_size == 0]
           if missing:
               raise SystemExit("Missing/empty required files: " + ", ".join(missing))
+
           pages = list(Path(".").glob("*.html"))
           if not pages:
               raise SystemExit("No HTML pages found")
