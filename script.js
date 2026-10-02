@@ -825,8 +825,6 @@
 
   ready(() => {
     if (document.getElementById('spirit-ai-launcher')) return;
-    const legacyWhatsApp = document.getElementById('whatsapp-float');
-    if (legacyWhatsApp) legacyWhatsApp.remove();
 
     const launcher = el('button','spirit-ai-launcher');
     launcher.id = 'spirit-ai-launcher';
