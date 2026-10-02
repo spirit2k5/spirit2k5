@@ -3,7 +3,7 @@
 <head>
   <meta property="og:url" content="https://www.vlandf.co.za/">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#071522">
 <meta name="application-name" content="VL&F IT Services">
@@ -125,6 +125,34 @@ img{display:block;max-width:100%;image-rendering:auto}
 @media(max-width:1000px){.security-visual{min-height:480px}}
 @media(max-width:650px){.info .inner{flex-wrap:wrap;justify-content:center;padding:5px 0}.info .inner a{font-size:10px;padding:5px 7px}.security-visual{min-height:410px}.security-status-grid{grid-template-columns:1fr}.server-badge{left:12px;top:12px}.server-led-stack{right:12px;top:12px}}
 @media(prefers-reduced-motion:reduce){.hero-bg,.photo-card img,.photo-card:after,.server-health img,.server-health:before,.server-led-stack i,.server-data-flow span,.ring-a,.ring-b,.ring-c,.orbit-a,.orbit-b,.sec-link,.sec-check,.security-scan,.security-status-grid i{animation:none!important}}
+
+/* Mobile phone app-style bottom navigation — hidden everywhere except detected phones */
+.mobile-bottom-nav{display:none}
+@media(max-width:900px){
+  body.mobile-viewer{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  body.mobile-viewer .mobile-bottom-nav{
+    position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:220;
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:4px;
+    padding:8px 8px 7px;border-radius:22px;
+    background:rgba(250,252,253,.96);border:1px solid rgba(7,21,34,.12);
+    box-shadow:0 18px 50px rgba(0,0,0,.28);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+  }
+  body.mobile-viewer .mobile-bottom-nav a{
+    min-width:0;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    padding:6px 3px;border-radius:14px;color:#24303a;font-size:9px;font-weight:900;letter-spacing:.02em;text-align:center;
+    -webkit-tap-highlight-color:transparent;transition:transform .16s ease,background .16s ease,color .16s ease
+  }
+  body.mobile-viewer .mobile-bottom-nav a:active{transform:scale(.94)}
+  body.mobile-viewer .mobile-bottom-nav a.active{background:#edf5e5;color:#4d7920}
+  body.mobile-viewer .mobile-bottom-nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  body.mobile-viewer .mobile-bottom-nav .mobile-quote{
+    min-height:64px;margin-top:-20px;border-radius:18px;background:linear-gradient(135deg,var(--green),var(--green2));color:#07150b;
+    box-shadow:0 12px 28px rgba(131,183,68,.32);border:4px solid rgba(250,252,253,.98)
+  }
+  body.mobile-viewer .mobile-bottom-nav .mobile-quote.active{background:linear-gradient(135deg,var(--green),var(--green2));color:#07150b}
+  body.mobile-viewer footer{padding-bottom:calc(115px + env(safe-area-inset-bottom))}
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -281,8 +309,47 @@ img{display:block;max-width:100%;image-rendering:auto}
 </div></div></section>
 <section id="contact"><div class="wrap contactbox"><div><span class="kicker">Contact us</span><h2>Need network, security or IT support?</h2><p class="sub">Use the online quote form above, call VL&amp;F, or contact the team directly.</p><div class="buttons" style="margin-top:25px"><a class="btn primary" href="#quote-request">Request a quote →</a><a class="btn ghost" href="tel:+27115682723">Call VL&amp;F</a></div></div><div class="contact-list"><div class="contact-item"><span><small>Gauteng address</small><b>3140 Thubelisha Park, Phase 3 Doornkop, Soweto Gauteng, 1863</b></span></div><div class="contact-item"><span><small>North West address</small><b>Unit 35 Palm Drive, 17 Hendrik Verwoerd Ave, Brits, 0250</b></span></div><div class="contact-item"><span><small>Limpopo address</small><b>Stand 109, Shihoko Village, Tzaneen, 0872</b></span></div><a class="contact-item" href="tel:+27115682723"><span><small>Phone</small><b>+27 11 568 2723</b></span><span>↗</span></a><a class="contact-item" href="mailto:info@vlandf.co.za"><span><small>Email</small><b>info@vlandf.co.za</b></span><span>↗</span></a><a class="contact-item" href="https://www.vlandf.co.za"><span><small>Website</small><b>www.vlandf.co.za</b></span><span>↗</span></a></div></div></section>
 </main>
+<nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Mobile quick navigation" aria-hidden="true">
+  <a href="#top" data-mobile-target="top" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg><span>Home</span></a>
+  <a href="#services" data-mobile-target="services" aria-label="Services"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg><span>Services</span></a>
+  <a class="mobile-quote" href="#quote-request" data-mobile-target="quote-request" aria-label="Request a quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Quote</span></a>
+  <a href="tel:+27115682723" aria-label="Call VL&F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4 4.5 6.5c.8 5.9 7.1 12.2 13 13L20 17l-4-3-2 2c-2.8-1.2-4.8-3.2-6-6l2-2z"/></svg><span>Call</span></a>
+  <a href="#contact" data-mobile-target="contact" aria-label="Contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="m5 7 7 6 7-6"/></svg><span>Contact</span></a>
+</nav>
 <footer><div class="wrap foot"><div><img class="footer-logo" src="assets/vlandf-logo-client.svg" alt="VL&amp;F IT Services logo"><strong>VL&amp;F IT SERVICES</strong><br>“We are PROVIDING solutions to the world class networks and ICT Security”<br><br>Copyright ©2026 All rights reserved</div><div>Website by <a href="https://spirit2k5.co.za/">Spirit2k5 Web Studio</a></div></div></footer>
 <script>
+const mobileBottomNav=document.getElementById('mobileBottomNav');
+function detectMobileViewer(){
+  const narrow=window.matchMedia('(max-width: 900px)').matches;
+  const coarse=window.matchMedia('(pointer: coarse)').matches;
+  const uaMobile=(navigator.userAgentData&&navigator.userAgentData.mobile===true) || /iPhone|iPod|Android.*Mobile|Mobile/i.test(navigator.userAgent||'');
+  return narrow && (uaMobile || coarse);
+}
+function applyMobileViewerMode(){
+  const enabled=detectMobileViewer();
+  document.body.classList.toggle('mobile-viewer',enabled);
+  if(mobileBottomNav) mobileBottomNav.setAttribute('aria-hidden',String(!enabled));
+}
+applyMobileViewerMode();
+window.addEventListener('resize',applyMobileViewerMode);
+window.addEventListener('orientationchange',applyMobileViewerMode);
+
+const mobileNavLinks=[...document.querySelectorAll('#mobileBottomNav [data-mobile-target]')];
+if('IntersectionObserver' in window){
+  const watched=mobileNavLinks.map(a=>document.getElementById(a.dataset.mobileTarget)).filter(Boolean);
+  const mobileObserver=new IntersectionObserver(entries=>{
+    if(!document.body.classList.contains('mobile-viewer')) return;
+    const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!visible) return;
+    mobileNavLinks.forEach(a=>a.classList.toggle('active',a.dataset.mobileTarget===visible.target.id));
+  },{rootMargin:'-25% 0px -55% 0px',threshold:[0,.2,.5]});
+  watched.forEach(el=>mobileObserver.observe(el));
+}
+mobileNavLinks.forEach(a=>a.addEventListener('click',()=>{
+  mobileNavLinks.forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
+}));
+
 const siteNav=document.querySelector('.nav');
 const mobileMenuButton=document.getElementById('mobileMenuButton');
 const mainNavLinks=document.getElementById('mainNavLinks');
