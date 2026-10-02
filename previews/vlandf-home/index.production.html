@@ -323,7 +323,8 @@ function detectMobileViewer(){
   const narrow=window.matchMedia('(max-width: 900px)').matches;
   const coarse=window.matchMedia('(pointer: coarse)').matches;
   const uaMobile=(navigator.userAgentData&&navigator.userAgentData.mobile===true) || /iPhone|iPod|Android.*Mobile|Mobile/i.test(navigator.userAgent||'');
-  return narrow && (uaMobile || coarse);
+  const phoneSized=Math.min(window.screen.width||9999,window.screen.height||9999)<=700;
+  return narrow && (uaMobile || (coarse && phoneSized));
 }
 function applyMobileViewerMode(){
   const enabled=detectMobileViewer();
