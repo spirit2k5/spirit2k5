@@ -42,6 +42,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}.shell{width:min(1180px
       <button class="tab" data-view="questions">Top questions</button>
       <button class="tab" data-view="learned">Learned answers</button>
       <button class="tab" data-view="usage">Gemini usage</button>
+      <button class="tab" data-view="conversions">Conversions</button>
       <button class="tab" data-view="issues">Issues</button>
       <button class="tab" data-view="maintenance">Maintenance</button>
     </div>
@@ -109,6 +110,7 @@ const titles={
   questions:['Top customer questions','See what visitors ask most often and which layer answered.'],
   learned:['Learned answers','Approved, pending and rejected answers from new customer questions.'],
   usage:['Gemini usage','Fallback calls, token usage and paid-tier cost estimate.'],
+  conversions:['Conversions','30-day website funnel, traffic sources and customer actions.'],
   issues:['Assistant issues','Errors or maintenance items that need attention.'],
   maintenance:['Maintenance runs','Results from the automatic 10-minute maintenance worker.']
 };
@@ -116,6 +118,22 @@ const titles={
 function render(){
   renderStats();const [title,help]=titles[current];$('#viewTitle').textContent=title;$('#viewHelp').textContent=help;
   const wrap=$('#content');wrap.textContent='';
+  if(current==='conversions'){
+    const raw=data.conversions||{};
+    const x=Array.isArray(raw)?(raw[0]||{}):raw;
+    const metrics=[
+      ['Sessions',x.sessions||0],['Page views',x.page_views||0],['Pricing views',x.pricing_views||0],
+      ['Portfolio clicks',x.portfolio_clicks||0],['WhatsApp clicks',x.whatsapp_clicks||0],['Start Project clicks',x.start_project_clicks||0],
+      ['Form starts',x.form_starts||0],['Form submits',x.form_submits||0],['Enquiries received',x.enquiry_successes||0],
+      ['AI opens',x.ai_opens||0],['AI questions',x.ai_questions||0]
+    ];
+    const grid=node('div','stats');metrics.forEach(([label,value])=>{const d=node('div','stat');d.append(node('b','cost',value),node('span','',label));grid.append(d)});wrap.append(grid);
+    const src=node('article','card');src.append(node('h3','','Top traffic sources'));
+    (x.top_sources||[]).forEach(s=>{const m=node('div','meta');m.append(chip(s.source||'direct'),chip((s.sessions||0)+' sessions'),chip((s.events||0)+' events'));src.append(m)});wrap.append(src);
+    const pages=node('article','card');pages.append(node('h3','','Top pages'));
+    (x.top_pages||[]).forEach(p=>{const m=node('div','meta');m.append(chip(p.page||'/'),chip((p.views||0)+' views'));pages.append(m)});wrap.append(pages);
+    return;
+  }
   const rows=data[current]||[];
   if(!rows.length){wrap.append(node('div','empty','Nothing here right now.'));return}
   if(current==='pending'||current==='learned'){
