@@ -37,11 +37,11 @@ The payment approach is:
 
 ### Denz iPhones
 
-E-commerce iPhone storefront created by Spirit2k5.
+Business information website created by Spirit2k5 for a mobile trading company.
 
 Live website: https://denziphone.com/
 
-Project work includes product browsing, stock presentation, responsive design, checkout flow and technical SEO.
+The live website focuses on clear company information, mobile trading, logistics, bulk distribution, responsive design and customer contact paths.
 
 ### RONMAXAKS Security Solutions
 
