@@ -123,6 +123,14 @@ function render(){
   renderStats();const [title,help]=titles[current];$('#viewTitle').textContent=title;$('#viewHelp').textContent=help;
   const wrap=$('#content');wrap.textContent='';
   if(current==='leads'){
+    const ssRaw=data.salesStats||{};
+    const ss=Array.isArray(ssRaw)?(ssRaw[0]||{}):ssRaw;
+    const salesGrid=node('div','stats');
+    [['Qualified',ss.qualified||0],['High score',ss.high_score||0],['Contacted',ss.contacted||0],
+     ['Replied',ss.replied||0],['Interested',ss.interested||0],['Won',ss.won||0]].forEach(([label,value])=>{
+       const d=node('div','stat');d.append(node('b','cost',value),node('span','',label));salesGrid.append(d);
+    });
+    wrap.append(salesGrid);
     const rows=data.leads||[];
     if(!rows.length){wrap.append(node('div','empty','No qualified leads yet.'));return}
     rows.forEach(item=>{
