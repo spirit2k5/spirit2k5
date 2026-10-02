@@ -96,6 +96,15 @@ function money(v){return '$'+Number(v||0).toFixed(6)}
 function date(v){if(!v)return '—';try{return new Date(v).toLocaleString()}catch{return escText(v)}}
 function safeUrl(v){try{const u=new URL(String(v||''));return /^https?:$/.test(u.protocol)?u.href:''}catch{return ''}}
 function phoneDigits(v){return String(v||'').replace(/\D/g,'')}
+async function copyText(v,button){
+  try{
+    await navigator.clipboard.writeText(String(v||''));
+    const old=button.textContent;button.textContent='Copied ✓';setTimeout(()=>button.textContent=old,1400);
+  }catch{
+    const ta=document.createElement('textarea');ta.value=String(v||'');document.body.append(ta);ta.select();document.execCommand('copy');ta.remove();
+    const old=button.textContent;button.textContent='Copied ✓';setTimeout(()=>button.textContent=old,1400);
+  }
+}
 
 function renderStats(){
   const s=(Array.isArray(data.stats)?data.stats[0]:data.stats)||{};
@@ -143,16 +152,19 @@ function render(){
       c.append(m,node('p','',item.opportunity||''));
       if(item.outreach_message){
         const ta=document.createElement('textarea');ta.className='answer-edit';ta.readOnly=true;ta.value=item.outreach_message;c.append(ta);
+        const copy=node('button','btn ghost','Copy message');copy.onclick=()=>copyText(item.outreach_message,copy);c.append(copy);
       }
       const links=node('div','card-actions');
       if(item.phone){
         const tel=node('a','btn ghost','Call');tel.href='tel:+'+phoneDigits(item.phone);links.append(tel);
-        const wa=node('a','btn ghost','WhatsApp');wa.href='https://wa.me/'+phoneDigits(item.phone);wa.target='_blank';wa.rel='noopener';links.append(wa);
+        const wa=node('a','btn primary','WhatsApp with message');
+        wa.href='https://wa.me/'+phoneDigits(item.phone)+(item.outreach_message?'?text='+encodeURIComponent(item.outreach_message):'');
+        wa.target='_blank';wa.rel='noopener';links.append(wa);
       }
       const website=safeUrl(item.website_url);
       if(website){const a=node('a','btn ghost','Website');a.href=website;a.target='_blank';a.rel='noopener';links.append(a)}
       const source=safeUrl(item.source_url);
-      if(source){const a=node('a','btn ghost','Source');a.href=source;a.target='_blank';a.rel='noopener';links.append(a)}
+      if(source){const a=node('a','btn ghost',item.outreach_channel==='website form'?'Open form':'Source');a.href=source;a.target='_blank';a.rel='noopener';links.append(a)}
       c.append(links);
       const actions=node('div','card-actions');
       [['contacted','Mark contacted'],['replied','Replied'],['interested','Interested'],['won','Won'],['not_interested','Not interested']].forEach(([status,label])=>{
