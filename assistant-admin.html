@@ -43,6 +43,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}.shell{width:min(1180px
       <button class="tab" data-view="learned">Learned answers</button>
       <button class="tab" data-view="usage">Gemini usage</button>
       <button class="tab" data-view="conversions">Conversions</button>
+      <button class="tab" data-view="leads">Sales leads</button>
       <button class="tab" data-view="issues">Issues</button>
       <button class="tab" data-view="maintenance">Maintenance</button>
     </div>
@@ -93,6 +94,8 @@ function node(tag,cls,text){const n=document.createElement(tag);if(cls)n.classNa
 function chip(text,kind=''){return node('span','chip '+kind,text)}
 function money(v){return '$'+Number(v||0).toFixed(6)}
 function date(v){if(!v)return '—';try{return new Date(v).toLocaleString()}catch{return escText(v)}}
+function safeUrl(v){try{const u=new URL(String(v||''));return /^https?:$/.test(u.protocol)?u.href:''}catch{return ''}}
+function phoneDigits(v){return String(v||'').replace(/\D/g,'')}
 
 function renderStats(){
   const s=(Array.isArray(data.stats)?data.stats[0]:data.stats)||{};
@@ -111,6 +114,7 @@ const titles={
   learned:['Learned answers','Approved, pending and rejected answers from new customer questions.'],
   usage:['Gemini usage','Fallback calls, token usage and paid-tier cost estimate.'],
   conversions:['Conversions','30-day website funnel, traffic sources and customer actions.'],
+  leads:['Sales leads','Qualified local businesses, outreach messages and sales status.'],
   issues:['Assistant issues','Errors or maintenance items that need attention.'],
   maintenance:['Maintenance runs','Results from the automatic 10-minute maintenance worker.']
 };
@@ -118,6 +122,41 @@ const titles={
 function render(){
   renderStats();const [title,help]=titles[current];$('#viewTitle').textContent=title;$('#viewHelp').textContent=help;
   const wrap=$('#content');wrap.textContent='';
+  if(current==='leads'){
+    const rows=data.leads||[];
+    if(!rows.length){wrap.append(node('div','empty','No qualified leads yet.'));return}
+    rows.forEach(item=>{
+      const c=node('article','card');
+      c.append(node('h3','',item.business_name||'Lead'));
+      const m=node('div','meta');
+      m.append(chip('score '+(item.lead_score||0),Number(item.lead_score||0)>=90?'good':''),
+               chip(item.status||'qualified',item.status==='won'?'good':item.status==='not_interested'||item.status==='invalid'?'bad':''),
+               chip(item.category||'business'),chip(item.area||''));
+      c.append(m,node('p','',item.opportunity||''));
+      if(item.outreach_message){
+        const ta=document.createElement('textarea');ta.className='answer-edit';ta.readOnly=true;ta.value=item.outreach_message;c.append(ta);
+      }
+      const links=node('div','card-actions');
+      if(item.phone){
+        const tel=node('a','btn ghost','Call');tel.href='tel:+'+phoneDigits(item.phone);links.append(tel);
+        const wa=node('a','btn ghost','WhatsApp');wa.href='https://wa.me/'+phoneDigits(item.phone);wa.target='_blank';wa.rel='noopener';links.append(wa);
+      }
+      const website=safeUrl(item.website_url);
+      if(website){const a=node('a','btn ghost','Website');a.href=website;a.target='_blank';a.rel='noopener';links.append(a)}
+      const source=safeUrl(item.source_url);
+      if(source){const a=node('a','btn ghost','Source');a.href=source;a.target='_blank';a.rel='noopener';links.append(a)}
+      c.append(links);
+      const actions=node('div','card-actions');
+      [['contacted','Mark contacted'],['replied','Replied'],['interested','Interested'],['won','Won'],['not_interested','Not interested']].forEach(([status,label])=>{
+        const b=node('button',status==='won'?'btn primary':status==='not_interested'?'btn danger':'btn ghost',label);
+        b.onclick=()=>updateLead(item.id,status);
+        actions.append(b);
+      });
+      c.append(actions,node('p','','Last checked: '+date(item.last_checked_at)));
+      wrap.append(c);
+    });
+    return;
+  }
   if(current==='conversions'){
     const raw=data.conversions||{};
     const x=Array.isArray(raw)?(raw[0]||{}):raw;
@@ -179,6 +218,10 @@ async function load(){
 async function moderate(id,status,answer){
   if(!confirm((status==='approved'?'Approve':'Reject')+' this learned answer?'))return;
   await admin('moderate',{id,status,answer});await load();
+}
+async function updateLead(id,status){
+  await admin('lead_update',{id,status});
+  await load();
 }
 
 $('#loginForm').addEventListener('submit',async e=>{
