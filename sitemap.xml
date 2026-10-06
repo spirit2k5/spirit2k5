@@ -138,4 +138,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
   </url>
+  <url>
+    <loc>https://spirit2k5.co.za/privacy.html</loc>
+    <lastmod>2026-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/terms.html</loc>
+    <lastmod>2026-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/cancellations.html</loc>
+    <lastmod>2026-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/cookies.html</loc>
+    <lastmod>2026-10-06</lastmod>
+  </url>
 </urlset>
