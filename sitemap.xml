@@ -154,4 +154,10 @@
     <loc>https://spirit2k5.co.za/cookies.html</loc>
     <lastmod>2026-10-06</lastmod>
   </url>
+  <url>
+    <loc>https://spirit2k5.co.za/code-of-conduct.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
 </urlset>
