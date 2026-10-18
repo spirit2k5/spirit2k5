@@ -390,15 +390,19 @@ function renderHome() {
   const list = $("homeNearbyList"), fareList = $("homeFareList");
   list.replaceChildren();
   fareList.replaceChildren();
+  // Don't describe arbitrary database records as "nearby" before a location fix.
+  // The native passenger app uses device location and a 20 km radius.
   if (!state.points.length) {
-    list.append(element("div", "fm-row", "No suggested taxi pickup points yet."));
+    list.append(element("div", "fm-row", "No taxi pickup points are recorded yet."));
   } else {
-    const topPoints = state.points.slice(0, 4);
-    for (const point of topPoints) {
-      list.append(homeRow("⌖", point.name || "Taxi pickup point",
-        [point.suburb, point.city, point.province].filter(Boolean).join(" · ") || "Location not independently verified",
-        () => { setTab("points"); $("pointSearch").value = point.name || ""; renderPoints(); openPoint(point); }));
-    }
+    const locate = homeRow("⌖", "Find pickup points near me",
+      "Tap My location and allow browser location access to view recorded points within 20 km.",
+      locatePassengerOnWeb);
+    list.append(locate);
+    const browse = homeRow("▧", "Browse all pickup points",
+      "Search by taxi rank, suburb or province — accuracy is not guaranteed.",
+      () => setTab("points"));
+    list.append(browse);
   }
   if (!state.fares.length) {
     fareList.append(element("div", "fm-row", "No fare records are available right now."));
