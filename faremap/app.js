@@ -335,6 +335,7 @@ async function displaySession(session) {
   $("fmBottomNav").classList.toggle("hidden", !(signedIn || guest));
   $("profileQuickBtn").classList.toggle("hidden", !(signedIn || guest));
   $("signOutBtn").textContent = guest ? "Sign in to FareMap" : "Sign out";
+  $("fmAccountStatus").textContent = guest ? "PUBLIC PASSENGER PREVIEW" : "PASSENGER ACCOUNT ACTIVE";
   if (signedIn) {
     $("accountLabel").textContent = "Signed in as " + (user.email || "FareMap account") + " · passenger interface only";
     $("profileEmail").textContent = user.email || "FareMap account";
