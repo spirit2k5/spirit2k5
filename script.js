@@ -772,6 +772,10 @@
     const url = new URL(anchor.href, location.href);
     if (url.origin !== location.origin) return;
 
+    // The FareMap passenger web is a standalone app with its own module and auth lifecycle.
+    // Let the browser load it normally instead of swapping only <main> via soft navigation.
+    if (url.pathname === '/faremap' || url.pathname.startsWith('/faremap/')) return;
+
     if (raw.startsWith('#')) {
       const target = document.querySelector(raw);
       if (target) {
