@@ -362,13 +362,25 @@ async function signInWithPassword() {
 async function signInWithGoogle() {
   if (busy) return;
   setBusy(true);
-  status("authMessage", "Opening Google sign-in…");
+  status("authMessage", "Opening Google sign-in for FareMap Passenger Web…");
   try {
+    // Generate the PKCE verifier in this website's browser session, and
+    // return here rather than using Expo Go's temporary exp:// callback.
+    const webReturnUrl = "https://spirit2k5.co.za/faremap/";
     const result = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "https://spirit2k5.co.za/faremap/" }
+      options: { redirectTo: webReturnUrl, skipBrowserRedirect: true }
     });
     if (result.error) throw result.error;
+    if (!result.data?.url) throw new Error("Missing Google authorization URL");
+    const authorizationUrl = new URL(result.data.url);
+    const requestedRedirect = authorizationUrl.searchParams.get("redirect_to");
+    if (authorizationUrl.protocol !== "https:" ||
+        authorizationUrl.origin !== "https://gspydyktmdepgjhpgvyv.supabase.co" ||
+        requestedRedirect !== webReturnUrl) {
+      throw new Error("Invalid FareMap Passenger Web redirect URL");
+    }
+    window.location.assign(authorizationUrl.toString());
   } catch (error) {
     status("authMessage", authError(error), "error");
   } finally { setBusy(false); }
