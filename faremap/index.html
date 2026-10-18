@@ -58,9 +58,10 @@
 <section class="auth-card" id="authSection" aria-labelledby="authTitle">
 <h2 id="authTitle">Welcome Back!</h2><p class="muted micro">Know the fare before you go. Continue with your FareMap account to use the passenger features. Your saved account role stays unchanged.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-<div class="auth-grid"><button type="button" class="action" id="emailLinkBtn">✉ &nbsp; Continue with Email</button><button type="button" class="action secondary" id="googleBtn">G &nbsp; Continue with Google</button></div>
+<div class="auth-grid"><button type="button" class="action" id="emailLinkBtn">✉ &nbsp; Continue with Email</button><button type="button" class="action secondary" id="googleBtn" aria-describedby="googleStatus">G &nbsp; Google login · setup pending</button></div>
 <button type="button" class="action secondary" id="guestBtn" style="display:block;width:100%;margin-top:12px">Browse fares &amp; taxi ranks without signing in →</button>
 <p class="muted micro" style="margin:8px 0 0">No app or Expo required. Public preview data is dated and may not reflect current fares or boarding locations.</p>
+<p id="googleStatus" class="muted micro" style="margin:9px 0 0">Google sign-in is being fixed in Supabase so it returns to this website, never Expo Go.</p>
 <details style="margin-top:18px"><summary style="font-weight:780;cursor:pointer">Already have an email password?</summary><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your FareMap password"></div><button type="button" class="action secondary" id="passwordBtn">Sign in with password</button></details>
 <div class="notice warn">Email sign-in depends on the FareMap email provider being correctly configured. If delivery fails, the app will tell you. Never share sign-in codes or links.</div><p id="authMessage" class="notice hidden" role="status" aria-live="polite"></p>
 </section>
