@@ -168,3 +168,11 @@ html[data-theme="dark"] .footinfo{background:var(--fm-bg)!important}
  .fm-home{max-width:760px;margin:0 auto 20px}.panel{max-width:760px;margin-left:auto!important;margin-right:auto!important}
  .fm-bottom-nav{width:min(680px,90%)}
 }
+
+/* Exact FareMap light/dark map artwork, used as the passenger map loading background. */
+.fm-map-frame{background-image:url('/faremap/assets/faremap_route_texture_light_4k.png');
+  background-position:center;background-size:cover}
+html[data-theme="dark"] .fm-map-frame{background-image:url('/faremap/assets/faremap_route_texture_dark_4k.png')}
+.fm-nav-icon ion-icon{font-size:33px}
+ion-icon.fm-nav-icon{display:block;font-size:22px;width:23px;height:24px}
+.fm-icon-btn ion-icon{font-size:22px}
