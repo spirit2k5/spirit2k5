@@ -241,15 +241,22 @@ function calculateBudget() {
     ". This is an estimate, not a guaranteed fare.");
 }
 function setTab(tab) {
-  currentTab = tab;
+  const target = ["home", "fares", "points", "budget", "saved", "profile"].includes(tab) ? tab : "home";
+  currentTab = target;
+  $("fmHomeView").classList.toggle("hidden", target !== "home");
   for (const button of document.querySelectorAll("[data-tab]")) {
-    const active = button.dataset.tab === tab;
-    button.setAttribute("aria-selected", String(active));
+    button.setAttribute("aria-selected", String(button.dataset.tab === target));
   }
-  for (const id of ["fares", "points", "budget", "saved"]) {
-    $("view-" + id).classList.toggle("hidden", id !== tab);
+  for (const id of ["fares", "points", "budget", "saved", "profile"]) {
+    $("view-" + id).classList.toggle("hidden", id !== target);
   }
-  if (tab === "saved") renderSaved();
+  for (const button of document.querySelectorAll("[data-nav]")) {
+    const nav = button.dataset.nav;
+    if (nav !== "add") button.setAttribute("aria-current", nav === target || (nav === "fares" && ["saved","budget"].includes(target)) ? "page" : "false");
+  }
+  if (target === "saved") renderSaved();
+  if (target === "profile" && state.user) $("profileEmail").textContent = state.user.email || "FareMap account";
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 async function loadData() {
   if (!state.user) return;
@@ -277,6 +284,7 @@ async function loadData() {
     renderFares();
     renderPoints();
     renderSaved();
+    renderHome();
     status("dataMessage", "Information loaded. Fares and locations may be unconfirmed or outdated; verify locally.", "warn");
   } catch (_) {
     status("dataMessage", "Unable to load FareMap information right now. Your account remains signed in — check your connection and choose Refresh.", "error");
@@ -289,9 +297,13 @@ async function displaySession(session) {
   const signedIn = Boolean(user);
   $("authSection").classList.toggle("hidden", signedIn);
   $("appSection").classList.toggle("hidden", !signedIn);
-  $("signOutBtn").classList.toggle("hidden", !signedIn);
+  $("welcomeSection").classList.toggle("hidden", signedIn);
+  $("fmBottomNav").classList.toggle("hidden", !signedIn);
+  $("profileQuickBtn").classList.toggle("hidden", !signedIn);
   if (signedIn) {
     $("accountLabel").textContent = "Signed in as " + (user.email || "FareMap account") + " · passenger interface only";
+    $("profileEmail").textContent = user.email || "FareMap account";
+    setTab(currentTab);
     if (previousUserId !== user.id || state.loadedFor !== user.id) {
       state.loadedFor = user.id;
       restoreSaved();
@@ -303,6 +315,8 @@ async function displaySession(session) {
     state.fares = [];
     state.points = [];
     state.saved.clear();
+    currentTab = "home";
+    setTab("home");
   }
 }
 async function sendEmailLink() {
@@ -359,6 +373,128 @@ async function signInWithGoogle() {
     status("authMessage", authError(error), "error");
   } finally { setBusy(false); }
 }
+
+function homeRow(icon, title, subtitle, onClick, price = "") {
+  const row = element("button", "fm-row");
+  row.type = "button";
+  const iconEl = element("span", "fm-row-icon", icon);
+  const content = element("span", "fm-row-copy");
+  content.append(element("b", "", title), element("small", "", subtitle));
+  row.append(iconEl, content);
+  if (price) row.append(element("span", "fm-mini-price", price));
+  row.append(element("span", "fm-chevron", "›"));
+  row.addEventListener("click", onClick);
+  return row;
+}
+function renderHome() {
+  const list = $("homeNearbyList"), fareList = $("homeFareList");
+  list.replaceChildren();
+  fareList.replaceChildren();
+  if (!state.points.length) {
+    list.append(element("div", "fm-row", "No suggested taxi pickup points yet."));
+  } else {
+    const topPoints = state.points.slice(0, 4);
+    for (const point of topPoints) {
+      list.append(homeRow("⌖", point.name || "Taxi pickup point",
+        [point.suburb, point.city, point.province].filter(Boolean).join(" · ") || "Location not independently verified",
+        () => { setTab("points"); $("pointSearch").value = point.name || ""; renderPoints(); openPoint(point); }));
+    }
+  }
+  if (!state.fares.length) {
+    fareList.append(element("div", "fm-row", "No fare records are available right now."));
+  } else {
+    for (const fare of state.fares.slice(0, 4)) {
+      fareList.append(homeRow("◈", routeName(fare), "Fare record · confirm locally", () => {
+        $("fromInput").value = fare.route_from || "";
+        $("toInput").value = fare.route_to || "";
+        renderFares();
+        setTab("fares");
+      }, formatMoney(fare.fare_price)));
+    }
+  }
+}
+function setMapAt(lat, lng, label) {
+  const coords = { lat: Number(lat), lng: Number(lng) };
+  if (!Number.isFinite(coords.lat) || !Number.isFinite(coords.lng) ||
+      Math.abs(coords.lat) > 90 || Math.abs(coords.lng) > 180) return;
+  const map = $("fmHomeMap");
+  const bounds = [coords.lng - .022, coords.lat - .016, coords.lng + .022, coords.lat + .016].join(",");
+  map.src = "https://www.openstreetmap.org/export/embed.html?bbox=" + encodeURIComponent(bounds) +
+    "&layer=mapnik&marker=" + encodeURIComponent(coords.lat + "," + coords.lng);
+  $("homeMapStatus").textContent = label + " · verify actual boarding points locally";
+}
+function locatePassengerOnWeb() {
+  if (!("geolocation" in navigator)) {
+    $("homeMapStatus").textContent = "Browser location is unavailable. You can search pickup points manually.";
+    return;
+  }
+  $("homeMapStatus").textContent = "Requesting your location…";
+  navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude } = position.coords;
+    setMapAt(latitude, longitude, "Approximate device location");
+    const toRadians = d => d * Math.PI / 180;
+    const distanceKm = point => {
+      const position = pointCoordinate(point);
+      if (!position) return Infinity;
+      const dLat = toRadians(position.lat - latitude);
+      const dLng = toRadians(position.lng - longitude);
+      const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(toRadians(latitude)) * Math.cos(toRadians(position.lat)) *
+        Math.sin(dLng / 2) ** 2;
+      return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    };
+    const nearby = state.points.map(p => ({ point: p, dist: distanceKm(p) }))
+      .filter(x => x.dist <= 20).sort((a, b) => a.dist - b.dist).slice(0, 4);
+    const list = $("homeNearbyList");
+    list.replaceChildren();
+    if (!nearby.length) {
+      list.append(element("div", "fm-row", "No recorded pickup points within 20 km. Try searching all pickup points."));
+    }
+    for (const item of nearby) {
+      const point = item.point;
+      list.append(homeRow("⌖", point.name || "Taxi pickup point",
+        (item.dist < 1 ? Math.round(item.dist * 1000) + " m" : item.dist.toFixed(1) + " km") +
+          " from your location · not independently verified",
+        () => { setTab("points"); $("pointSearch").value = point.name || ""; renderPoints(); openPoint(point); }));
+    }
+  }, () => {
+    $("homeMapStatus").textContent = "Location unavailable or not allowed. You can still search taxi fares and ranks.";
+  }, { enableHighAccuracy: false, maximumAge: 60000, timeout: 11000 });
+}
+function openAddSheet() {
+  $("fmAddSheet").classList.remove("hidden");
+  $("fmCloseAdd").focus();
+}
+function closeAddSheet() {
+  $("fmAddSheet").classList.add("hidden");
+}
+function suggestFareMapData(kind) {
+  const templates = {
+    fare: ["Taxi fare suggestion", "From:\nTo:\nFare paid (R):\nDate:\nAssociation (if known):\nAdditional evidence:"],
+    point: ["Taxi pickup point suggestion", "Pickup point name:\nLocation/landmark:\nDestination/direction:\nObserved on:\nWhat needs correction:"],
+    route: ["Taxi route correction", "From:\nTo:\nIncorrect information:\nCorrect information (if known):\nDate observed:"]
+  };
+  const [subject, body] = templates[kind] || templates.route;
+  closeAddSheet();
+  location.href = "mailto:mahloricarlton@gmail.com?subject=" + encodeURIComponent("FareMap: " + subject) +
+    "&body=" + encodeURIComponent(body + "\n\nPlease do not include sensitive personal information.");
+}
+const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
+function applyTheme() {
+  let saved = "system";
+  try { saved = localStorage.getItem("faremap_web_theme_v1") || "system"; } catch (_) {}
+  const dark = saved === "dark" || (saved !== "light" && themeMedia.matches);
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  $("themeToggleBtn").textContent = dark ? "☀" : "☾";
+  $("themeToggleBtn").setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+  $("profileThemeLabel").textContent = dark ? "Dark theme (FareMap)" : "Light theme (FareMap)";
+}
+function toggleTheme() {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  try { localStorage.setItem("faremap_web_theme_v1", next); } catch (_) {}
+  applyTheme();
+}
+
 $("emailLinkBtn").addEventListener("click", sendEmailLink);
 $("passwordBtn").addEventListener("click", signInWithPassword);
 $("googleBtn").addEventListener("click", signInWithGoogle);
@@ -375,6 +511,46 @@ $("budgetBtn").addEventListener("click", calculateBudget);
 for (const button of document.querySelectorAll("[data-tab]")) {
   button.addEventListener("click", () => setTab(button.dataset.tab));
 }
+
+$("themeToggleBtn").addEventListener("click", toggleTheme);
+$("profileQuickBtn").addEventListener("click", () => setTab("profile"));
+$("profileSavedBtn").addEventListener("click", () => setTab("saved"));
+$("homeSearchBtn").addEventListener("click", () => {
+  $("fromInput").value = "";
+  $("toInput").value = $("homeDestinationInput").value.trim();
+  renderFares();
+  setTab("fares");
+});
+$("homeDestinationInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") $("homeSearchBtn").click();
+});
+$("homeAllFaresBtn").addEventListener("click", () => setTab("fares"));
+$("homeAllPointsBtn").addEventListener("click", () => setTab("points"));
+$("homeFullMapBtn").addEventListener("click", () => setTab("points"));
+$("homeLocateButton").addEventListener("click", locatePassengerOnWeb);
+$("myLocationBtn").addEventListener("click", locatePassengerOnWeb);
+for (const el of document.querySelectorAll("[data-open]")) {
+  el.addEventListener("click", () => setTab(el.dataset.open));
+}
+for (const el of document.querySelectorAll("[data-nav]")) {
+  el.addEventListener("click", () => {
+    if (el.dataset.nav === "add") openAddSheet();
+    else setTab(el.dataset.nav);
+  });
+}
+for (const el of document.querySelectorAll("[data-report-kind]")) {
+  el.addEventListener("click", () => suggestFareMapData(el.dataset.reportKind));
+}
+$("fmCloseAdd").addEventListener("click", closeAddSheet);
+$("fmAddSheet").addEventListener("click", e => {
+  if (e.target === $("fmAddSheet")) closeAddSheet();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeAddSheet();
+});
+if (themeMedia.addEventListener) themeMedia.addEventListener("change", applyTheme);
+applyTheme();
+
 supabase.auth.onAuthStateChange((_event, session) => {
   // Avoid awaiting further Supabase work inside an auth callback.
   setTimeout(() => { displaySession(session); }, 0);
