@@ -15,6 +15,8 @@ const $ = (id) => document.getElementById(id);
 const state = { user: null, fares: [], points: [], saved: new Set(), loadedFor: null };
 let currentTab = "fares";
 let busy = false;
+let browsingAsGuest = false;
+let previewLoaded = false;
 
 function status(id, message, kind = "") {
   const el = $(id);
@@ -258,8 +260,38 @@ function setTab(tab) {
   if (target === "profile" && state.user) $("profileEmail").textContent = state.user.email || "FareMap account";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+async function loadPreview() {
+  status("dataMessage", "Loading public FareMap taxi information…");
+  try {
+    // Snapshot includes only intended public route and taxi-rank fields.
+    // Guest mode never requests private Supabase tables or sessions.
+    const response = await fetch("/faremap/passenger-snapshot.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Public snapshot could not be loaded");
+    const snapshot = await response.json();
+    if (snapshot.schema !== 1 || !Array.isArray(snapshot.fares) || !Array.isArray(snapshot.points)) {
+      throw new Error("Invalid public FareMap snapshot");
+    }
+    state.fares = snapshot.fares.filter(f => Number.isFinite(Number(f.fare_price)) && Number(f.fare_price) > 0);
+    state.points = snapshot.points.filter(p => p.point_type === "Taxi rank");
+    previewLoaded = true;
+    $("fareCount").textContent = state.fares.length;
+    $("pointCount").textContent = state.points.length;
+    populateChoices();
+    renderFares();
+    renderPoints();
+    renderSaved();
+    renderHome();
+    status("dataMessage", "Public preview · captured " + readableDate(snapshot.generated_on) +
+      ". This is NOT live verified data. Fares and pickup locations can change; confirm locally.", "warn");
+  } catch (_) {
+    status("dataMessage", "Public taxi information is temporarily unavailable. Please try Refresh.", "error");
+  }
+}
 async function loadData() {
-  if (!state.user) return;
+  if (!state.user) {
+    if (browsingAsGuest) await loadPreview();
+    return;
+  }
   status("dataMessage", "Loading current taxi fares and pickup points…");
   try {
     const [faresResponse, pointsResponse] = await Promise.all([
@@ -295,14 +327,18 @@ async function displaySession(session) {
   const previousUserId = state.user?.id || null;
   state.user = user;
   const signedIn = Boolean(user);
-  $("authSection").classList.toggle("hidden", signedIn);
-  $("appSection").classList.toggle("hidden", !signedIn);
-  $("welcomeSection").classList.toggle("hidden", signedIn);
-  $("fmBottomNav").classList.toggle("hidden", !signedIn);
-  $("profileQuickBtn").classList.toggle("hidden", !signedIn);
+  if (signedIn) browsingAsGuest = false;
+  const guest = !signedIn && browsingAsGuest;
+  $("authSection").classList.toggle("hidden", signedIn || guest);
+  $("appSection").classList.toggle("hidden", !(signedIn || guest));
+  $("welcomeSection").classList.toggle("hidden", signedIn || guest);
+  $("fmBottomNav").classList.toggle("hidden", !(signedIn || guest));
+  $("profileQuickBtn").classList.toggle("hidden", !(signedIn || guest));
+  $("signOutBtn").textContent = guest ? "Sign in to FareMap" : "Sign out";
   if (signedIn) {
     $("accountLabel").textContent = "Signed in as " + (user.email || "FareMap account") + " · passenger interface only";
     $("profileEmail").textContent = user.email || "FareMap account";
+    $("guestModeLabel").textContent = "Your FareMap passenger session is active.";
     setTab(currentTab);
     if (previousUserId !== user.id || state.loadedFor !== user.id) {
       state.loadedFor = user.id;
@@ -310,14 +346,30 @@ async function displaySession(session) {
       $("savedCount").textContent = state.saved.size;
       await loadData();
     }
+  } else if (guest) {
+    $("accountLabel").textContent = "Guest passenger · public taxi information";
+    $("profileEmail").textContent = "Browsing without signing in";
+    $("guestModeLabel").textContent = "Guest preview: fares and taxi ranks are a dated snapshot. Sign in for account features.";
+    $("savedCount").textContent = state.saved.size;
+    setTab(currentTab === "profile" ? "home" : currentTab);
+    if (!previewLoaded) await loadPreview();
   } else {
     state.loadedFor = null;
+    previewLoaded = false;
     state.fares = [];
     state.points = [];
     state.saved.clear();
     currentTab = "home";
     setTab("home");
   }
+}
+async function enterGuestMode() {
+  browsingAsGuest = true;
+  previewLoaded = false;
+  restoreSaved();
+  currentTab = "home";
+  await displaySession(null);
+  $("appSection").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 async function sendEmailLink() {
   if (busy) return;
@@ -514,8 +566,20 @@ function toggleTheme() {
 $("emailLinkBtn").addEventListener("click", sendEmailLink);
 $("passwordBtn").addEventListener("click", signInWithPassword);
 $("googleBtn").addEventListener("click", signInWithGoogle);
+$("guestBtn").addEventListener("click", enterGuestMode);
 $("signOutBtn").addEventListener("click", async () => {
-  await supabase.auth.signOut();
+  if (browsingAsGuest && !state.user) {
+    browsingAsGuest = false;
+    await displaySession(null);
+    $("authSection").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    status("dataMessage", "Sign-out could not be completed; please retry.", "error");
+    return;
+  }
+  browsingAsGuest = false;
   await displaySession(null);
   status("authMessage", "Signed out of the FareMap website.");
 });
@@ -580,8 +644,12 @@ try {
   if (data.session && (url.searchParams.has("code") || url.hash.includes("access_token"))) {
     history.replaceState(null, "", "/faremap/");
   }
-  const redirectError = url.searchParams.get("error_description");
-  if (redirectError && !data.session) status("authMessage", "Sign-in was not completed. Please retry or choose another sign-in method.", "error");
+  const redirectError = url.searchParams.get("error_description") ||
+    new URLSearchParams(url.hash.slice(1)).get("error_description");
+  if (redirectError && !data.session) {
+    status("authMessage", "Google or email sign-in could not finish. Please request a fresh login, use an existing email password, or browse as a guest while website redirects are being configured.", "error");
+    history.replaceState(null, "", "/faremap/");
+  }
 } catch (_) {
   status("authMessage", "Cannot connect to FareMap sign-in at the moment. Retry when your connection is available.", "error");
 }
