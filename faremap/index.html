@@ -59,12 +59,14 @@
 <h2 id="authTitle">Welcome Back!</h2><p class="muted micro">Know the fare before you go. Continue with your FareMap account to use the passenger features. Your saved account role stays unchanged.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
 <div class="auth-grid"><button type="button" class="action" id="emailLinkBtn">✉ &nbsp; Continue with Email</button><button type="button" class="action secondary" id="googleBtn">G &nbsp; Continue with Google</button></div>
+<button type="button" class="action secondary" id="guestBtn" style="display:block;width:100%;margin-top:12px">Browse fares &amp; taxi ranks without signing in →</button>
+<p class="muted micro" style="margin:8px 0 0">No app or Expo required. Public preview data is dated and may not reflect current fares or boarding locations.</p>
 <details style="margin-top:18px"><summary style="font-weight:780;cursor:pointer">Already have an email password?</summary><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your FareMap password"></div><button type="button" class="action secondary" id="passwordBtn">Sign in with password</button></details>
 <div class="notice warn">Email sign-in depends on the FareMap email provider being correctly configured. If delivery fails, the app will tell you. Never share sign-in codes or links.</div><p id="authMessage" class="notice hidden" role="status" aria-live="polite"></p>
 </section>
 <section id="appSection" class="hidden" aria-label="FareMap passenger dashboard">
 <section class="fm-home" id="fmHomeView" aria-label="FareMap Passenger Home">
- <div class="fm-greeting"><div class="fm-greeting-kicker"><span class="fm-dot"></span> PASSENGER ACCOUNT ACTIVE</div>
+ <div class="fm-greeting"><div class="fm-greeting-kicker"><span class="fm-dot"></span> <span id="fmAccountStatus">PASSENGER ACCOUNT ACTIVE</span></div>
  <h2>Welcome to <span>FareMap.</span></h2><p id="accountLabel"></p></div>
  <div class="fm-search-card"><span class="fm-search-icon">⌕</span>
    <input id="homeDestinationInput" type="search" placeholder="Where are you heading today?" autocomplete="off" aria-label="Find a taxi destination">
@@ -103,7 +105,8 @@
 <section id="view-saved" class="panel hidden" role="tabpanel"><div class="fm-screen-header"><h2>Saved Routes</h2><p>Your favourite journeys in one place.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Your saved routes</h2><p class="muted micro">Saved routes are kept on this browser, separate for each signed-in account. They do not yet sync to the mobile app.</p><div id="savedResults" class="results"></div></section>
 
 <section id="view-profile" class="panel hidden" role="tabpanel"><div class="fm-screen-header"><h2>My Profile</h2><p>Your FareMap passenger-web account</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
-<div class="fm-profile-row"><strong>Signed-in email</strong><p id="profileEmail">—</p></div>
+<div class="fm-profile-row"><strong>Account</strong><p id="profileEmail">—</p></div>
+<div class="fm-profile-row"><strong>Passenger access</strong><p id="guestModeLabel">A signed-in FareMap account offers account features. Guest access provides a public read-only preview.</p></div>
 <div class="fm-profile-row"><strong>Website mode</strong><p>Passenger only. Your saved FareMap role is never changed here.</p></div>
 <div class="fm-profile-row"><strong>Appearance</strong><p id="profileThemeLabel">Same light or dark colour palette as FareMap</p></div>
 <button type="button" class="action secondary" id="profileSavedBtn">☆ Saved Routes</button>
