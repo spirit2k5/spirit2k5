@@ -44,7 +44,7 @@
       </a>
       <div class="fm-brand-buttons">
         <button type="button" class="fm-icon-btn" id="themeToggleBtn" aria-label="Switch to dark mode" title="Toggle light or dark mode">☾</button>
-        <button type="button" class="fm-icon-btn hidden" id="profileQuickBtn" aria-label="Open passenger profile" title="Profile">♙</button>
+        <button type="button" class="fm-icon-btn hidden" id="profileQuickBtn" aria-label="Open passenger profile" title="Profile"><ion-icon name="person-outline" aria-hidden="true">♙</ion-icon></button>
       </div>
     </div>
   </div>
@@ -110,11 +110,11 @@
 <button type="button" class="action secondary" id="signOutBtn">Sign out</button></section>
 </section>
 <nav id="fmBottomNav" class="fm-bottom-nav hidden" aria-label="Passenger app navigation">
- <button type="button" class="fm-nav-item" data-nav="home" aria-current="page"><span class="fm-nav-icon">⌂</span><span>Home</span></button>
- <button type="button" class="fm-nav-item" data-nav="fares"><span class="fm-nav-icon">◇</span><span>Prices</span></button>
- <button type="button" class="fm-nav-item fm-nav-add" data-nav="add"><span class="fm-nav-icon">+</span><span class="fm-nav-label">Add</span></button>
- <button type="button" class="fm-nav-item" data-nav="points"><span class="fm-nav-icon">▧</span><span>Map</span></button>
- <button type="button" class="fm-nav-item" data-nav="profile"><span class="fm-nav-icon">♙</span><span>Profile</span></button>
+ <button type="button" class="fm-nav-item" data-nav="home" aria-current="page"><ion-icon class="fm-nav-icon" name="home-outline" aria-hidden="true">⌂</ion-icon><span>Home</span></button>
+ <button type="button" class="fm-nav-item" data-nav="fares"><ion-icon class="fm-nav-icon" name="pricetag-outline" aria-hidden="true">◇</ion-icon><span>Prices</span></button>
+ <button type="button" class="fm-nav-item fm-nav-add" data-nav="add"><span class="fm-nav-icon"><ion-icon name="add" aria-hidden="true">+</ion-icon></span><span class="fm-nav-label">Add</span></button>
+ <button type="button" class="fm-nav-item" data-nav="points"><ion-icon class="fm-nav-icon" name="map-outline" aria-hidden="true">▧</ion-icon><span>Map</span></button>
+ <button type="button" class="fm-nav-item" data-nav="profile"><ion-icon class="fm-nav-icon" name="person-outline" aria-hidden="true">♙</ion-icon><span>Profile</span></button>
 </nav>
 <div id="fmAddSheet" class="fm-modal hidden" role="dialog" aria-modal="true" aria-labelledby="fmAddTitle">
  <div class="fm-modal-box"><h2 id="fmAddTitle">Add to FareMap</h2><p class="muted micro">Help improve information for South African taxi passengers.</p>
@@ -127,6 +127,7 @@
 </main>
 <section class="seo-content" aria-label="About FareMap"><h2>South African minibus taxi information for passengers</h2><p>FareMap is a passenger-focused web experience for browsing minibus taxi routes, reported fares and pickup-point information in South Africa. Information can be incorrect, disputed or outdated; always confirm your destination, actual boarding point, fare and surroundings before travelling. Data-confidence indicators describe the reliability of information and never guarantee physical safety.</p><p>FareMap is developed by <a href="/">Spirit2k5 Web Studio</a> in Soweto, Johannesburg. If a fare or pickup location is incorrect, passenger reports can help the project identify information that needs review.</p><h2>Questions passengers often ask</h2><p><strong>Are taxi fares guaranteed?</strong> No. Fare records are indicative and may differ by taxi association, direction and date. <strong>Does FareMap verify location safety?</strong> No. Pin accuracy and personal safety are separate questions. <strong>Can drivers use this website?</strong> Anyone with an existing FareMap account can access passenger features, but the website does not offer Driver Mode.</p></section>
 <footer class="footinfo">FareMap passenger web · A <a href="/">Spirit2k5 Web Studio</a> project · <a href="/privacy.html">Privacy</a> · <a href="mailto:mahloricarlton@gmail.com?subject=FareMap%20passenger%20web%20feedback">Send feedback</a><div style="margin-top:6px">Taxi data is informational. Confirm locally before travelling.</div></footer>
+<script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
 <script type="module" src="/faremap/app.js"></script>
 </body>
 </html>
