@@ -412,18 +412,9 @@ async function signInWithPassword() {
     status("authMessage", authError(error), "error");
   } finally { setBusy(false); }
 }
-// Temporarily prevent an invalid production OAuth redirect from sending web users
-// to Expo Go. Re-enable only once Supabase Auth URL Configuration includes the
-// exact HTTPS FareMap passenger URL and a real-browser round-trip succeeds.
-const GOOGLE_WEB_REDIRECT_READY = false;
+// The public FareMap HTTPS callback is allowlisted in Supabase Auth.
+// This website uses browser PKCE, not the Expo/Android auth-callback.
 async function signInWithGoogle() {
-  if (!GOOGLE_WEB_REDIRECT_READY) {
-    status("authMessage",
-      "Google sign-in is temporarily unavailable while we correct FareMap's Supabase web redirect. " +
-      "You can browse fares and taxi ranks without an app, or sign in with your existing email password.",
-      "warn");
-    return;
-  }
   if (busy) return;
   setBusy(true);
   status("authMessage", "Opening Google sign-in for FareMap Passenger Web…");
