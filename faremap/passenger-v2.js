@@ -132,7 +132,11 @@ export function createPassengerWebEnhancements({
       ? [lat, lng] : null;
   }
   function ensureMap() {
-    if (map || !window.L || !$("v2Map")) return;
+    if (!window.L) {
+      $("v2MapNote").textContent = "Interactive map is temporarily unavailable. The pickup-point list and individual map links still work.";
+      return;
+    }
+    if (map || !$("v2Map")) return;
     const L = window.L;
     map = L.map("v2Map", { scrollWheelZoom: false }).setView([-26.247, 27.855], 11);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -255,6 +259,8 @@ export function createPassengerWebEnhancements({
       ? "Your report will be private until reviewed. It does not automatically change the displayed fare or pin."
       : "Sign in to submit a report. Guest browsing remains available without an account.";
     $("v2ReportSubmit").disabled = !state.user;
+    $("v2ReportSubmit").classList.toggle("hidden", !state.user);
+    $("v2ReportLogin").classList.toggle("hidden", !!state.user);
   }
   function openIssue(type, item) {
     if (!issueTypes[type] || !item?.id) return;
