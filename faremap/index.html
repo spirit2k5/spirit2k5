@@ -14,6 +14,8 @@
 <meta property="og:url" content="https://spirit2k5.co.za/faremap/">
 <meta name="theme-color" content="#0c2028">
 <link rel="icon" href="/favicon-48.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/faremap/passenger-v2.css">
 <meta name="google-site-verification" content="QhMxAh_XEDwUKgHbBXPk90Hqn8c-KR7zEQWvM7P7mQ0">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"FareMap Passenger Web","url":"https://spirit2k5.co.za/faremap/","description":"A passenger-focused web interface for South African minibus taxi fare lookup, pickup-point discovery and trip budgeting. Data may be unconfirmed and should be checked locally.","applicationCategory":"TravelApplication","operatingSystem":"Any modern web browser","isAccessibleForFree":true,"inLanguage":"en-ZA","creator":{"@type":"Organization","name":"Spirit2k5 Web Studio","url":"https://spirit2k5.co.za/"}}</script>
 <style>
@@ -91,6 +93,7 @@
   <button type="button" class="fm-quick-btn" data-open="saved"><span class="fm-search-icon">☆</span><b>Saved</b><small>Favourite routes</small></button>
   <button type="button" class="fm-quick-btn" data-open="points"><span class="fm-search-icon">⌖</span><b>Pickup Points</b><small>Find taxi ranks</small></button>
   <button type="button" class="fm-quick-btn" data-open="budget"><span class="fm-search-icon">▤</span><b>Trip Budget</b><small>Estimate your trips</small></button>
+  <button type="button" class="fm-quick-btn" data-open="planner"><span class="fm-search-icon">⇢</span><b>Journey Planner</b><small>Direct and possible transfer fares</small></button>
  </div>
  <div style="margin-top:16px"><button class="action secondary" id="refreshBtn" type="button" style="width:100%">↻ Refresh fare and pickup information</button></div>
 </section>
@@ -98,10 +101,23 @@
 <div class="stats"><div class="stat"><strong id="fareCount">—</strong><span>Active fare records</span></div><div class="stat"><strong id="pointCount">—</strong><span>Pickup-point records</span></div><div class="stat"><strong id="savedCount">0</strong><span>Saved routes on this browser</span></div></div>
 <div id="dataMessage" class="notice" role="status" aria-live="polite">Loading passenger information…</div>
 <div class="tabs" role="tablist" aria-label="Passenger features"><button class="tab" data-tab="fares" role="tab" aria-selected="true">Taxi fares</button><button class="tab" data-tab="points" role="tab" aria-selected="false">Pickup points</button><button class="tab" data-tab="budget" role="tab" aria-selected="false">Trip budget</button><button class="tab" data-tab="saved" role="tab" aria-selected="false">Saved routes</button></div>
+<section id="view-planner" class="panel hidden" role="tabpanel">
+ <div class="fm-screen-header"><h2>Journey Planner</h2><p>Explore fare records without assuming taxi services or transfers exist.</p>
+  <div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+ <p class="notice warn">Possible transfers only mean FareMap has two fares sharing a named stop. Ask local taxi-rank staff about boarding, direction, availability and final price before travelling.</p>
+ <div class="filter-grid">
+  <div class="field"><label for="v2PlanFrom">Travelling from</label><select id="v2PlanFrom"><option value="">Choose a place</option></select></div>
+  <div class="field"><label for="v2PlanTo">Travelling to</label><select id="v2PlanTo"><option value="">Choose a place</option></select></div>
+ </div><button type="button" class="action" id="v2PlanBtn" style="width:100%;margin:15px 0 5px">Find recorded fare options →</button>
+ <div id="v2PlanResults" aria-live="polite"></div>
+</section>
 <section id="view-fares" class="panel hidden" role="tabpanel">
 <div class="fm-screen-header"><h2>Taxi Prices</h2><p>Search current fare information and routes. Check the fare locally before travelling.</p>
-<div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Find a taxi fare</h2><p class="muted micro">These are current database records, not guaranteed prices. Fares may vary by association, trip direction and date.</p><div class="filter-grid"><div class="field"><label for="fromInput">From</label><input list="originList" id="fromInput" autocomplete="off" placeholder="e.g. Meadowlands"><datalist id="originList"></datalist></div><div class="field"><label for="toInput">To</label><input list="destinationList" id="toInput" autocomplete="off" placeholder="e.g. Baragwanath"><datalist id="destinationList"></datalist></div></div><p id="fareResultLabel" class="muted micro" aria-live="polite"></p><div id="fareResults" class="results"></div></section>
-<section id="view-points" class="panel hidden" role="tabpanel"><div class="fm-screen-header"><h2>Pickup Points</h2><p>Suggested taxi boarding points. Check locally before travelling.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Taxi pickup points</h2><p class="muted micro">A map pin is not a safety guarantee. Check the boarding location and direction with a local rank marshal or operator.</p><div class="field"><label for="pointSearch">Search taxi ranks and pickup points</label><input type="search" id="pointSearch" placeholder="Search area, rank or province"></div><div class="map-layout"><div class="points-list" id="pointResults"></div><div id="pointMap" class="mapbox"><strong>Choose a pickup point</strong><p class="muted micro">The map will appear here when a location is selected.</p></div></div></section>
+<div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Find a taxi fare</h2><button type="button" class="action secondary" data-open="planner" style="width:100%;margin:3px 0 14px">⇢ Plan a journey or possible transfer</button><p class="muted micro">These are current database records, not guaranteed prices. Fares may vary by association, trip direction and date.</p><div class="filter-grid"><div class="field"><label for="fromInput">From</label><input list="originList" id="fromInput" autocomplete="off" placeholder="e.g. Meadowlands"><datalist id="originList"></datalist></div><div class="field"><label for="toInput">To</label><input list="destinationList" id="toInput" autocomplete="off" placeholder="e.g. Baragwanath"><datalist id="destinationList"></datalist></div></div><p id="fareResultLabel" class="muted micro" aria-live="polite"></p><div id="fareResults" class="results"></div></section>
+<section id="view-points" class="panel hidden" role="tabpanel"><div class="fm-screen-header"><h2>Pickup Points</h2><p>Suggested taxi boarding points. Check locally before travelling.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Taxi pickup points</h2><p class="muted micro">A map pin is not a safety guarantee. Check the boarding location and direction with a local rank marshal or operator.</p><div class="field"><label for="pointSearch">Search taxi ranks and pickup points</label><input type="search" id="pointSearch" placeholder="Search area, rank or province"></div><div id="v2Map" class="fm-v2-map" role="region" aria-label="Interactive taxi pickup point map"></div>
+<p id="v2MapNote" class="muted micro">Loading pickup-point map… Pin colour means information confidence, not physical safety.</p>
+<div class="fm-map-legend"><span><i style="background:#13A957"></i> Multiple observations</span><span><i style="background:#3997A6"></i> Community</span><span><i style="background:#E9B000"></i> Stale</span><span><i style="background:#DC3344"></i> Disputed</span><span><i style="background:#8794A2"></i> Unconfirmed</span></div>
+<div class="map-layout"><div class="points-list" id="pointResults"></div><div id="pointMap" class="mapbox"><strong>Choose a pickup point</strong><p class="muted micro">The map will appear here when a location is selected.</p></div></div></section>
 <section id="view-budget" class="panel hidden" role="tabpanel"><div class="fm-screen-header"><h2>Trip Budget</h2><p>Plan your journeys and budget your taxi fares.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Trip budget calculator</h2><p class="muted micro">Estimate your budget from a fare currently listed in FareMap. Prices may change without notice.</p><div class="budget"><div class="field" style="flex:3 1 220px"><label for="budgetRoute">Taxi route</label><select id="budgetRoute"><option value="">Choose a route</option></select></div><div class="field"><label for="budgetTrips">Number of rides</label><input id="budgetTrips" type="number" min="1" max="120" value="2"></div><button class="action" id="budgetBtn" type="button">Calculate</button></div><p class="notice" id="budgetResult">Select a route to estimate your total fare.</p></section>
 <section id="view-saved" class="panel hidden" role="tabpanel"><div class="fm-screen-header"><h2>Saved Routes</h2><p>Your favourite journeys in one place.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><h2>Your saved routes</h2><p class="muted micro">Saved routes are kept on this browser, separate for each signed-in account. They do not yet sync to the mobile app.</p><div id="savedResults" class="results"></div></section>
 
@@ -128,10 +144,25 @@
  <button class="action secondary" style="width:100%" type="button" id="fmCloseAdd">Close</button>
  </div>
 </div>
+<div id="v2ReportModal" class="fm-modal hidden" role="dialog" aria-modal="true" aria-labelledby="v2ReportHeading">
+ <div class="fm-modal-box fm-report-dialog">
+  <div class="fm-report-head"><h2 id="v2ReportHeading">Report an issue</h2><button type="button" id="v2ReportClose" class="fm-icon-btn" aria-label="Close report form">×</button></div>
+  <p class="muted micro">FareMap reviews reports before changing prices or locations. Do not share private personal details.</p>
+  <div id="v2ReportRecordWrap" class="field hidden"><label for="v2ReportRecord">Choose a recorded fare or point</label><select id="v2ReportRecord"></select></div>
+  <p id="v2ReportTitle" class="fm-report-target"></p>
+  <div class="field"><label for="v2ReportKind">What is incorrect?</label><select id="v2ReportKind"></select></div>
+  <div class="field"><label for="v2ReportDetails">Describe what you observed (8–1000 characters)</label>
+   <textarea id="v2ReportDetails" maxlength="1000" rows="4" placeholder="What is incorrect, where, and when did you notice it? Avoid sensitive personal details."></textarea></div>
+  <p id="v2ReportMessage" role="status" aria-live="polite" class="muted micro"></p>
+  <button id="v2ReportSubmit" type="button" class="action">Submit private report for review</button>
+  <button id="v2ReportLogin" type="button" class="action secondary">Sign in to report</button>
+ </div>
+</div>
 </main>
 <section class="seo-content" aria-label="About FareMap"><h2>South African minibus taxi information for passengers</h2><p>FareMap is a passenger-focused web experience for browsing minibus taxi routes, reported fares and pickup-point information in South Africa. Information can be incorrect, disputed or outdated; always confirm your destination, actual boarding point, fare and surroundings before travelling. Data-confidence indicators describe the reliability of information and never guarantee physical safety.</p><p>FareMap is developed by <a href="/">Spirit2k5 Web Studio</a> in Soweto, Johannesburg. If a fare or pickup location is incorrect, passenger reports can help the project identify information that needs review.</p><h2>Questions passengers often ask</h2><p><strong>Are taxi fares guaranteed?</strong> No. Fare records are indicative and may differ by taxi association, direction and date. <strong>Does FareMap verify location safety?</strong> No. Pin accuracy and personal safety are separate questions. <strong>Can drivers use this website?</strong> Anyone with an existing FareMap account can access passenger features, but the website does not offer Driver Mode.</p></section>
 <footer class="footinfo">FareMap passenger web · A <a href="/">Spirit2k5 Web Studio</a> project · <a href="/privacy.html">Privacy</a> · <a href="mailto:mahloricarlton@gmail.com?subject=FareMap%20passenger%20web%20feedback">Send feedback</a><div style="margin-top:6px">Taxi data is informational. Confirm locally before travelling.</div></footer>
 <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="module" src="/faremap/app.js"></script>
 </body>
 </html>
