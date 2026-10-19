@@ -1,4 +1,5 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
+import { createPassengerWebEnhancements } from "./passenger-v2.js";
 
 // A publishable key is intended for browser apps. Never embed a service-role key.
 // All reads and account operations remain subject to Supabase Row Level Security.
@@ -17,6 +18,7 @@ let currentTab = "fares";
 let busy = false;
 let browsingAsGuest = false;
 let previewLoaded = false;
+let catalogRequest = 0;
 
 function status(id, message, kind = "") {
   const el = $(id);
@@ -100,15 +102,9 @@ function addFeedbackButton(card, fare) {
     renderFares();
     renderSaved();
   });
-  const report = element("button", "", "Report incorrect fare");
+  const report = element("button", "", "Report an issue");
   report.type = "button";
-  report.addEventListener("click", () => {
-    const subject = "FareMap fare correction: " + routeName(fare);
-    const body = "I would like to report a possible fare error.\nRoute: " + routeName(fare) +
-      "\nFare currently shown: " + formatMoney(fare.fare_price) +
-      "\nCorrect fare (if known): \nDate observed: \nSupporting information (optional): \n\nPlease do not include sensitive personal or location details.";
-    location.href = "mailto:mahloricarlton@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  });
+  report.addEventListener("click", () => v2.openIssue("fare", fare));
   row.append(save, report);
   card.append(row);
 }
@@ -120,6 +116,7 @@ function fareCard(fare) {
     element("span", "tag-low", "Fare information — confirm locally"),
     element("p", "micro muted", "Record updated " + readableDate(fare.updated_at) + " · not a verification date")
   );
+  v2.showTrust(card, "fare", fare);
   addFeedbackButton(card, fare);
   return card;
 }
@@ -202,12 +199,7 @@ function openPoint(point) {
   const report = element("button", "action secondary", "Report inaccurate location");
   report.type = "button";
   report.style.marginTop = "12px";
-  report.addEventListener("click", () => {
-    const subject = "FareMap pickup-point correction: " + (point.name || "Unknown pickup point");
-    const body = "Please review this pickup point.\nPoint name: " + (point.name || "") +
-      "\nIssue (wrong location / moved / route / other): \nUpdated location (if known): \nObservation date: \n\nPlease do not include sensitive personal details.";
-    location.href = "mailto:mahloricarlton@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  });
+  report.addEventListener("click", () => v2.openIssue("pickup", point));
   box.append(report);
 }
 function renderPoints() {
@@ -226,7 +218,8 @@ function renderPoints() {
     button.append(element("strong", "", point.name || "Unnamed pickup point"));
     const place = [point.suburb, point.city, point.province].filter(Boolean).join(" · ");
     button.append(element("small", "", (place || point.point_type || "Taxi pickup") + " · Location not independently confirmed"));
-    button.addEventListener("click", () => openPoint(point));
+    v2.showTrust(button, "pickup", point);
+    button.addEventListener("click", () => { openPoint(point); v2.focusPoint(point); });
     box.append(button);
   }
   if (matches.length > 35) box.append(element("p", "micro muted", "Showing first 35 matches — narrow your search."));
@@ -243,36 +236,56 @@ function calculateBudget() {
     ". This is an estimate, not a guaranteed fare.");
 }
 function setTab(tab) {
-  const target = ["home", "fares", "points", "budget", "saved", "profile"].includes(tab) ? tab : "home";
+  const target = ["home", "fares", "points", "budget", "saved", "profile", "planner"].includes(tab) ? tab : "home";
   currentTab = target;
   $("fmHomeView").classList.toggle("hidden", target !== "home");
   for (const button of document.querySelectorAll("[data-tab]")) {
     button.setAttribute("aria-selected", String(button.dataset.tab === target));
   }
-  for (const id of ["fares", "points", "budget", "saved", "profile"]) {
+  for (const id of ["fares", "points", "budget", "saved", "profile", "planner"]) {
     $("view-" + id).classList.toggle("hidden", id !== target);
   }
   for (const button of document.querySelectorAll("[data-nav]")) {
     const nav = button.dataset.nav;
-    if (nav !== "add") button.setAttribute("aria-current", nav === target || (nav === "fares" && ["saved","budget"].includes(target)) ? "page" : "false");
+    if (nav !== "add") button.setAttribute("aria-current", nav === target || (nav === "fares" && ["saved","budget","planner"].includes(target)) ? "page" : "false");
   }
   if (target === "saved") renderSaved();
   if (target === "profile" && state.user) $("profileEmail").textContent = state.user.email || "FareMap account";
+  v2.onTab(target);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-async function loadPreview() {
-  status("dataMessage", "Loading public FareMap taxi information…");
+async function getSafePassengerCatalog() {
   try {
-    // Snapshot includes only intended public route and taxi-rank fields.
-    // Guest mode never requests private Supabase tables or sessions.
-    const response = await fetch("/faremap/passenger-snapshot.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Public snapshot could not be loaded");
-    const snapshot = await response.json();
-    if (snapshot.schema !== 1 || !Array.isArray(snapshot.fares) || !Array.isArray(snapshot.points)) {
-      throw new Error("Invalid public FareMap snapshot");
+    // Public RPC returns only active taxi fares and approved public pickup fields,
+    // and works with both anon and authenticated FareMap users.
+    const { data, error } = await supabase.rpc("faremap_public_passenger_catalog");
+    if (error) throw error;
+    if (!data || data.schema !== 2 || !Array.isArray(data.fares) || !Array.isArray(data.points)) {
+      throw new Error("Unexpected FareMap catalog response");
     }
-    state.fares = snapshot.fares.filter(f => Number.isFinite(Number(f.fare_price)) && Number(f.fare_price) > 0);
-    state.points = snapshot.points.filter(p => p.point_type === "Taxi rank");
+    return { source: "live", generatedAt: data.generated_at, fares: data.fares, points: data.points };
+  } catch (_) {
+    // A dated public fallback must never be passed off as fresh verification.
+    const response = await fetch("/faremap/passenger-snapshot.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("FareMap catalog and fallback are unavailable");
+    const data = await response.json();
+    if (data.schema !== 1 || !Array.isArray(data.fares) || !Array.isArray(data.points)) {
+      throw new Error("Invalid public fallback");
+    }
+    return { source: "snapshot", generatedAt: data.generated_on, fares: data.fares, points: data.points };
+  }
+}
+async function loadData() {
+  if (!state.user && !browsingAsGuest) return;
+  const request = ++catalogRequest;
+  status("dataMessage", "Loading current taxi fare records and pickup points…");
+  try {
+    const data = await getSafePassengerCatalog();
+    if (request !== catalogRequest) return;
+    state.fares = data.fares.filter(f =>
+      Number.isFinite(Number(f.fare_price)) && Number(f.fare_price) > 0 &&
+      f.route_from && f.route_to);
+    state.points = data.points.filter(p => p.id && p.name);
     previewLoaded = true;
     $("fareCount").textContent = state.fares.length;
     $("pointCount").textContent = state.points.length;
@@ -281,46 +294,20 @@ async function loadPreview() {
     renderPoints();
     renderSaved();
     renderHome();
-    status("dataMessage", "Public preview · captured " + readableDate(snapshot.generated_on) +
-      ". This is NOT live verified data. Fares and pickup locations can change; confirm locally.", "warn");
+    status("dataMessage", data.source === "live"
+      ? "Live FareMap catalog checked " + readableDate(data.generatedAt) +
+        " · These are current records, NOT independently verified prices or safe locations. Confirm locally."
+      : "Offline-style fallback from " + readableDate(data.generatedAt) +
+        " · This is a dated snapshot, NOT current verified information. Confirm locally.", "warn");
+    await v2.onData();
   } catch (_) {
-    status("dataMessage", "Public taxi information is temporarily unavailable. Please try Refresh.", "error");
+    if (request === catalogRequest) {
+      status("dataMessage", "Taxi information is currently unavailable. Please check your internet connection and retry.", "error");
+    }
   }
 }
-async function loadData() {
-  if (!state.user) {
-    if (browsingAsGuest) await loadPreview();
-    return;
-  }
-  status("dataMessage", "Loading current taxi fares and pickup points…");
-  try {
-    const [faresResponse, pointsResponse] = await Promise.all([
-      supabase.from("fare_prices")
-        .select("id,route_from,route_to,fare_price,currency,updated_at")
-        .eq("status", "active")
-        .order("route_from", { ascending: true })
-        .limit(1000),
-      supabase.from("pickup_points")
-        .select("id,name,point_type,route_name,province,suburb,city,latitude,longitude,lat,lng")
-        .eq("is_active", true)
-        .order("name", { ascending: true })
-        .limit(1000)
-    ]);
-    if (faresResponse.error) throw faresResponse.error;
-    if (pointsResponse.error) throw pointsResponse.error;
-    state.fares = (faresResponse.data || []).filter(f => Number.isFinite(Number(f.fare_price)));
-    state.points = pointsResponse.data || [];
-    $("fareCount").textContent = state.fares.length;
-    $("pointCount").textContent = state.points.length;
-    populateChoices();
-    renderFares();
-    renderPoints();
-    renderSaved();
-    renderHome();
-    status("dataMessage", "Information loaded. Fares and locations may be unconfirmed or outdated; verify locally.", "warn");
-  } catch (_) {
-    status("dataMessage", "Unable to load FareMap information right now. Your account remains signed in — check your connection and choose Refresh.", "error");
-  }
+async function loadPreview() {
+  await loadData();
 }
 async function displaySession(session) {
   const user = session?.user || null;
@@ -355,6 +342,7 @@ async function displaySession(session) {
     setTab(currentTab === "profile" ? "home" : currentTab);
     if (!previewLoaded) await loadPreview();
   } else {
+    catalogRequest++;
     state.loadedFor = null;
     previewLoaded = false;
     state.fares = [];
@@ -540,15 +528,8 @@ function closeAddSheet() {
   $("fmAddSheet").classList.add("hidden");
 }
 function suggestFareMapData(kind) {
-  const templates = {
-    fare: ["Taxi fare suggestion", "From:\nTo:\nFare paid (R):\nDate:\nAssociation (if known):\nAdditional evidence:"],
-    point: ["Taxi pickup point suggestion", "Pickup point name:\nLocation/landmark:\nDestination/direction:\nObserved on:\nWhat needs correction:"],
-    route: ["Taxi route correction", "From:\nTo:\nIncorrect information:\nCorrect information (if known):\nDate observed:"]
-  };
-  const [subject, body] = templates[kind] || templates.route;
   closeAddSheet();
-  location.href = "mailto:mahloricarlton@gmail.com?subject=" + encodeURIComponent("FareMap: " + subject) +
-    "&body=" + encodeURIComponent(body + "\n\nPlease do not include sensitive personal information.");
+  v2.openGeneralReport(kind);
 }
 const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
 function applyTheme() {
@@ -633,6 +614,17 @@ document.addEventListener("keydown", e => {
 });
 if (themeMedia.addEventListener) themeMedia.addEventListener("change", applyTheme);
 applyTheme();
+
+// V2 is kept inside FareMap's existing passenger UI and five-button native HUD.
+const v2 = createPassengerWebEnhancements({
+  supabase, state, $, element, setTab, openPoint, formatMoney, readableDate, status,
+  showLogin: async () => {
+    browsingAsGuest = false;
+    await displaySession(null);
+    $("authSection").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+});
+v2.init();
 
 supabase.auth.onAuthStateChange((_event, session) => {
   // Avoid awaiting further Supabase work inside an auth callback.
