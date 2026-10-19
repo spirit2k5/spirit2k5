@@ -1,0 +1,30 @@
+/* FareMap Passenger Web 2.0 — extends the actual FareMap native UI palette */
+.fm-v2-map{height:350px;min-height:240px;width:100%;border-radius:20px;overflow:hidden;background:var(--fm-bg2);border:1px solid var(--fm-border);margin:12px 0 7px;z-index:0}
+.fm-v2-map .leaflet-control-attribution{font-size:9px}
+.fm-map-legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:11px 0 15px;padding:9px;border:1px solid var(--fm-border);border-radius:12px}
+.fm-map-legend span{display:inline-flex;align-items:center;gap:6px;font-size:10px;color:var(--fm-muted)}
+.fm-map-legend i{height:10px;width:10px;display:inline-block;border-radius:50%}
+.fm-plan-card{background:var(--fm-card2);border:1px solid var(--fm-border);border-radius:17px;padding:16px;margin:12px 0}
+.fm-plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--fm-text)}
+.fm-plan-price{color:var(--fm-green);font-size:21px;font-weight:900}
+.fm-plan-leg{font-size:12px;font-weight:800;color:var(--fm-text);margin:10px 0 4px}
+.fm-trust{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:8px 0 6px}
+.fm-trust small{font-size:10px;line-height:1.5}
+.fm-trust-pill{font-size:10px;font-weight:850;padding:4px 8px;border-radius:999px;display:inline-block;background:var(--fm-bg2);color:var(--fm-muted);border:1px solid var(--fm-border)}
+.fm-trust-high{color:var(--fm-green);background:var(--fm-green-soft)}
+.fm-trust-community{color:var(--fm-blue)}
+.fm-trust-stale{color:#875f00;background:rgba(233,176,0,.12)}
+.fm-trust-disputed{color:var(--fm-red);background:rgba(220,51,68,.12)}
+.fm-trust-unverified,.fm-trust-unknown{color:var(--fm-muted)}
+.fm-small-link{font-size:11px;color:var(--fm-green);background:none;border:0;text-align:left;padding:5px 0;font-weight:900}
+.fm-report-dialog{max-height:92vh;overflow-y:auto}
+.fm-report-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fm-report-head h2{font-size:23px;margin:0 0 10px;letter-spacing:-.04em}
+.fm-report-target{font-size:14px;font-weight:900;padding:11px 12px;border:1px solid var(--fm-border);border-radius:12px;background:var(--fm-card2)}
+.fm-report-dialog .field{margin:10px 0}
+.fm-report-dialog textarea{border:1px solid var(--fm-border);background:var(--fm-card2);color:var(--fm-text);padding:12px;border-radius:14px;width:100%;resize:vertical;line-height:1.4}
+.fm-report-dialog #v2ReportSubmit{width:100%;margin:9px 0}
+.fm-report-dialog #v2ReportLogin{width:100%;margin:8px 0}
+#view-planner{max-width:760px;margin-left:auto!important;margin-right:auto!important}
+#view-planner .filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:580px){.fm-v2-map{height:300px}#view-planner .filter-grid{grid-template-columns:1fr}.fm-report-dialog{padding:16px 14px calc(18px + env(safe-area-inset-bottom))}}
