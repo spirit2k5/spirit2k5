@@ -1,0 +1,37 @@
+name: Export VL&F Production ZIP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/export-vlandf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare production package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p deploy/assets
+          cp previews/vlandf-home/index.production.html deploy/index.html
+          cp previews/vlandf-home/robots.production.txt deploy/robots.txt
+          cp previews/vlandf-home/sitemap.production.xml deploy/sitemap.xml
+          cp previews/vlandf-home/favicon.svg deploy/favicon.svg
+          cp previews/vlandf-home/site.webmanifest deploy/site.webmanifest
+          cp -R previews/vlandf-home/assets/. deploy/assets/
+
+      - name: Upload production website
+        uses: actions/upload-artifact@v4
+        with:
+          name: VL-F-Website-Production
+          path: deploy/
+          if-no-files-found: error
+          retention-days: 1
