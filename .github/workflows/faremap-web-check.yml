@@ -19,8 +19,11 @@ jobs:
     steps:
       - name: Checkout website
         uses: actions/checkout@v4
-      - name: Check passenger script syntax
-        run: node --check faremap/app.js
+      - name: Check passenger scripts and journey tests
+        run: |
+          node --check faremap/app.js
+          node --check faremap/passenger-v2.js
+          node --experimental-default-type=module --test faremap/tests/*.test.mjs
       - name: Validate passenger page and HUD
         run: |
           python3 - <<'PY'
@@ -55,9 +58,15 @@ jobs:
           assert p.nav == ['home','fares','add','points','profile'], p.nav
           assert '/faremap/mobile-ui.css?v=20261018-native1' in p.links
           assert '/faremap/app.js' in p.links
+          assert '/faremap/passenger-v2.css' in p.links
+          for required in ('view-planner','v2Map','v2ReportModal','v2ReportSubmit','v2PlanFrom','v2PlanTo'):
+              assert required in p.ids, f'Missing FareMap V2 UI node: {required}'
           assert 'getElementById' in js
           assert 'signInWithOtp' in js and 'signInWithOAuth' in js
-          assert 'fare_prices' in js and 'pickup_points' in js
+          assert 'faremap_public_passenger_catalog' in js
+          assert 'passenger-v2.js' in js
+          assert 'faremap_get_data_confidence' in Path('faremap/passenger-v2.js').read_text(encoding='utf-8')
+          assert 'faremap_report_data_issue_as' in Path('faremap/passenger-v2.js').read_text(encoding='utf-8')
           assert 'service_role' not in js
           assert '.fm-bottom-nav' in css and '--fm-green:#13A957' in css
           print('FareMap passenger layout and source checks passed')
