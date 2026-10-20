@@ -1,1 +1,1056 @@
-{"schema":1,"generated_on":"2026-10-18","notice":"Public preview snapshot of FareMap taxi fare and taxi-rank records. NOT independently verified. Data may be stale or disputed. Always confirm locally; the map does not assess physical safety.","fares":[{"id":"35302af1-0299-42bb-8e3d-47fc3d60ae91","route_from":"Aeroton","route_to":"Alberton North Taxi Rank","fare_price":"20.00","currency":"ZAR","updated_at":"2026-09-23 14:27:04.529433+00"},{"id":"00c6ab4b-3baf-4ac8-aabc-817854bd4e17","route_from":"Alberton North Taxi Rank","route_to":"Bloemfontein Central","fare_price":"390.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"8d93474f-8f6f-4ce4-8211-24c1b5c32222","route_from":"Alberton North Taxi Rank","route_to":"Botshabelo Taxi Rank","fare_price":"400.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"12f6f371-07c4-478d-8818-698d62b6a643","route_from":"Alberton North Taxi Rank","route_to":"Northam","fare_price":"220.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"c282e8d1-cd23-4cab-aa4d-c5e1afddb105","route_from":"Alberton North Taxi Rank","route_to":"Sasolburg Taxi Rank","fare_price":"80.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"60b75850-e4cf-4beb-ae23-42f0ae6e68a2","route_from":"Alberton North Taxi Rank","route_to":"Welkom Taxi Rank","fare_price":"300.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"a2193cd1-b6ac-4883-b243-3d413fa8df09","route_from":"Baragwanath Taxi Rank","route_to":"Aeroton","fare_price":"16.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"466ab8a2-b101-48ac-8e6a-a632a05e5255","route_from":"Baragwanath Taxi Rank","route_to":"Drieziek","fare_price":"25.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"2691fa16-7de5-42ee-a4fc-217fb6a5e9b5","route_from":"Baragwanath Taxi Rank","route_to":"Elias Motsoaledi","fare_price":"18.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"0f74a7ed-34ce-41b8-b367-dc71dd8bab4b","route_from":"Baragwanath Taxi Rank","route_to":"Evaton","fare_price":"35.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"ab45edd5-248a-4b2e-bfe5-e72e93918b06","route_from":"Baragwanath Taxi Rank","route_to":"Freedom Park","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"87f56c0c-afa4-4ef4-a8ac-537761f7a8b8","route_from":"Baragwanath Taxi Rank","route_to":"Johannesburg CBD","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"c4a2a344-3b8c-401d-a59e-e6d37a6e3bbf","route_from":"Baragwanath Taxi Rank","route_to":"Klerksdorp","fare_price":"135.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"412e26d4-7f8e-4900-908f-33a514d58321","route_from":"Baragwanath Taxi Rank","route_to":"Nasrec","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"9d55506e-7147-45d1-b2fa-ebc7817d1ed1","route_from":"Baragwanath Taxi Rank","route_to":"Naturena","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"fb9f299b-1f58-4cc1-8de5-0719807871c1","route_from":"Baragwanath Taxi Rank","route_to":"Palm Springs","fare_price":"30.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"cd83eaac-698b-4382-90dc-2e0e57f56b86","route_from":"Baragwanath Taxi Rank","route_to":"Potchefstroom","fare_price":"115.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"81773927-b8e8-4fa5-bdaf-2efa3bead484","route_from":"Baragwanath Taxi Rank","route_to":"Robertsham","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"e7878717-d4a8-4022-878a-baa3639a10cf","route_from":"Baragwanath Taxi Rank","route_to":"Sandton","fare_price":"30.00","currency":"ZAR","updated_at":"2026-10-15 04:28:18.563818+00"},{"id":"f5088997-a699-4a56-ba62-d9a10c886882","route_from":"Baragwanath Taxi Rank","route_to":"Southgate","fare_price":"16.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"300d0637-ea37-4fce-8799-52d8fe80d4e9","route_from":"Baragwanath Taxi Rank","route_to":"Sun City","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"6bd9632f-dcd4-49f7-b93f-c78a200b7880","route_from":"Baragwanath Taxi Rank","route_to":"Wolmaransstad","fare_price":"215.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"c13c47c9-8f6d-4ffc-b18d-77809d7fec6a","route_from":"Bhamshela Taxi Rank","route_to":"Durban","fare_price":"90.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"1018a101-3ab4-4d7f-bbbf-8a6cc6bff2bb","route_from":"Bhamshela Taxi Rank","route_to":"Mona","fare_price":"22.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"626c971f-6469-4045-86b0-185fcbca7a67","route_from":"Bhamshela Taxi Rank","route_to":"Tongaat Taxi Rank","fare_price":"45.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"3faeed6b-5558-41f4-ba8f-4568d037d572","route_from":"Bloemfontein Central Taxi Rank","route_to":"Qwaqwa","fare_price":"260.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"888b8700-cf81-422e-80f5-7640589cc416","route_from":"Bloemfontein Central Taxi Rank","route_to":"Welkom","fare_price":"120.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"c8f8fe59-efa5-4946-a4e5-eafbfb083d42","route_from":"Bloemfontein Central Taxi Rank to Qwaqwa","route_to":"Bloemfontein Central Taxi Rank","fare_price":"52.00","currency":"ZAR","updated_at":"2026-09-05 16:52:21.317327+00"},{"id":"dd9e4b10-80a9-4f02-b329-e576ae0fcaae","route_from":"Bree Taxi Rank","route_to":"Meadowlands","fare_price":"20.00","currency":"ZAR","updated_at":"2026-09-27 09:26:01.687817+00"},{"id":"c0d25ddd-d1b6-4ea5-be7e-c7e3bf590140","route_from":"Cape Town Station Deck Taxi Rank","route_to":"Khayelitsha","fare_price":"28.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"e124a005-b9fa-4e6b-99e1-cf0207ca9f7a","route_from":"Caroline","route_to":"Johannesburg CBD","fare_price":"18.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"520cc1d4-553d-4869-a955-084567b44b2d","route_from":"Carr Street","route_to":"Johannesburg CBD","fare_price":"20.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"7d9f1a83-0f33-40e8-9af2-013aaabbdde9","route_from":"Croesus","route_to":"Johannesburg CBD","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"3f49b9a5-0f62-4454-855a-128da24ea278","route_from":"Crossroad Soweto","route_to":"Johannesburg CBD Taxi Rank","fare_price":"20.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"41147282-979a-4966-9d79-263d5ec47fe4","route_from":"Devland","route_to":"Johannesburg CBD","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"353bda62-1280-418a-b70b-d0abf4a35e04","route_from":"Diepkloof Ext / Nasrec / Southgate","route_to":"Johannesburg CBD","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"15e1190a-c6d8-46c4-9560-33a2b562d85c","route_from":"Dobsonville","route_to":"Baragwanath Taxi Rank","fare_price":"19.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"606209fe-c5aa-4a50-b8ce-cbe5c2db66bc","route_from":"Dobsonville","route_to":"Dube","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"b805cca3-0cc2-43b5-98e4-fe06415423cb","route_from":"Dobsonville","route_to":"Fleurhof","fare_price":"13.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"afbc957c-f7d1-4fee-9261-92c1221570ce","route_from":"Dobsonville","route_to":"Jabulani Mall","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"2a74f683-fea1-4c15-8b38-c7bc84f23366","route_from":"Dobsonville","route_to":"Johannesburg CBD","fare_price":"22.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"84c9c6e2-e15c-4638-b35b-06c9c552f9ea","route_from":"Dobsonville","route_to":"New Canada / Pennyville","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"f816b2b2-5543-4fae-bedd-fe5d7d340355","route_from":"Dobsonville via Zone 10 / Clinic / Forbes","route_to":"Baragwanath Taxi Rank","fare_price":"19.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"c1ee3261-ae8d-4ee9-949b-6919ebfce535","route_from":"Dube","route_to":"Fleurhof","fare_price":"13.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"3df20e6e-458a-43c2-90ac-16a09eadf2e8","route_from":"Durban CBD","route_to":"Umhlanga / Gateway","fare_price":"25.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"ee92c070-aa5b-454e-86f2-606cda2faca8","route_from":"Durban Taxi Rank","route_to":"Johannesburg CBD Taxi Rank","fare_price":"400.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"2870dc39-f777-4df7-8309-ba6188e18ac5","route_from":"eMbalenhle Taxi Rank","route_to":"Evander Taxi Rank","fare_price":"18.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"812675c6-7c2a-478d-b204-27460139cdce","route_from":"eMbalenhle Taxi Rank","route_to":"Kinross Taxi Rank","fare_price":"21.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"1f6a2bfa-672c-4c10-9f2a-aa310a7d9c4c","route_from":"eMbalenhle Taxi Rank","route_to":"Leslie (Leandra)","fare_price":"37.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"d0045b83-ab6d-4ee9-8687-15a7c7a5e3d4","route_from":"eMbalenhle Taxi Rank","route_to":"Sasol Secunda Operations","fare_price":"18.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"e4ddb960-132a-4f10-be64-6515d2d8a906","route_from":"eMbalenhle Taxi Rank","route_to":"Secunda Taxi Rank","fare_price":"18.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"14755a00-9eb3-49aa-a089-d9d977c27656","route_from":"eMbalenhle Taxi Rank","route_to":"Trichardt","fare_price":"21.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"73c3fdaf-24b5-4241-87df-64c9fb1e587f","route_from":"Fleurhof","route_to":"Baragwanath Taxi Rank","fare_price":"19.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"a3781ab8-90c0-48d5-badd-e595bf9a46e0","route_from":"Fleurhof","route_to":"Johannesburg CBD","fare_price":"20.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"e49b159c-2b66-4f27-be69-2755f97e3e1f","route_from":"Gqeberha CBD Taxi Rank","route_to":"Johannesburg","fare_price":"900.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"e723ac1c-202e-4f4e-9cd8-f8897aedc253","route_from":"Highgate","route_to":"Johannesburg CBD","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"e36a6d5a-58a4-4acb-ac59-c31132f767d5","route_from":"Highgate","route_to":"Meadowlands","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"678c4ad9-0af9-44c4-baa9-520e6445f003","route_from":"Johannesburg CBD","route_to":"Chiawelo","fare_price":"26.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"cbfb58f0-6d0c-4b46-b43c-17f2a07e228c","route_from":"Johannesburg CBD","route_to":"Dlamini","fare_price":"26.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"2bafe9a0-f23f-4dd6-9df7-c292ca3fff94","route_from":"Johannesburg CBD","route_to":"Edenvale Central","fare_price":"20.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"8740d437-ef0d-4c21-a338-dd127fefc093","route_from":"Johannesburg CBD","route_to":"Glen Ridge","fare_price":"32.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"8167a279-2b8e-40ba-b0e4-688308f92305","route_from":"Johannesburg CBD","route_to":"Green Village / Lufhereng","fare_price":"28.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"2617aee9-110f-4fe1-b1fa-8c5b5cb61f1a","route_from":"Johannesburg CBD","route_to":"Greenstone Shopping Centre","fare_price":"23.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"9c6e44fc-cdc7-4c6a-ba09-834e9a44b51b","route_from":"Johannesburg CBD","route_to":"Linbro Business Park","fare_price":"23.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"c4aa8fba-d4d7-4d21-908d-bc26cab8dd8f","route_from":"Johannesburg CBD","route_to":"Longmeadow Business Estate","fare_price":"23.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"a4fa0216-d9b8-4995-a13a-b00d9a9beebc","route_from":"Johannesburg CBD","route_to":"Lyndhurst","fare_price":"20.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"e303bfe1-fe57-4a64-b897-9469290f62b6","route_from":"Johannesburg CBD","route_to":"Merafe","fare_price":"25.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"70eb75f5-68b0-4b92-aa79-a80c0e603aa0","route_from":"Johannesburg CBD","route_to":"Modderfontein","fare_price":"23.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"f4f43f56-b9fd-4d33-abb0-7c0520c1ea69","route_from":"Johannesburg CBD","route_to":"Naledi","fare_price":"25.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"5b6904a3-8def-4980-9c9c-1ef22f784368","route_from":"Johannesburg CBD","route_to":"Pimville","fare_price":"23.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"f30f2ada-6405-4cbd-8203-172f7358ba5b","route_from":"Johannesburg CBD","route_to":"Protea Glen","fare_price":"32.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"0e8abbf3-f239-4ba9-88e8-72201bc7d7b1","route_from":"Johannesburg CBD","route_to":"Protea Glen Ext 22-35","fare_price":"32.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"d11d4fe3-d438-4af3-9582-9c6fcadb5ee1","route_from":"Johannesburg CBD","route_to":"Protea North / South","fare_price":"28.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"5d96bdaf-a564-4d4c-916e-4fcc38b939d7","route_from":"Johannesburg CBD","route_to":"Sandringham / Jewish Aged Home","fare_price":"20.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"720bf9ef-1e1a-4b27-91b7-eeb668df4cca","route_from":"Johannesburg CBD","route_to":"Zuurbekom","fare_price":"35.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"6a644767-acd9-4c26-ab3b-04f84b80472d","route_from":"Jumbo","route_to":"Johannesburg CBD","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"c05d3ce4-4697-4b9a-9bae-6d2659f46e49","route_from":"Kakamas","route_to":"Upington","fare_price":"120.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"2347bbcc-cf00-4442-93d3-f62bd7978185","route_from":"Khayelitsha Local Taxi Route","route_to":"Khayelitsha Local Taxi Route","fare_price":"17.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"1befdbda-2df1-43b1-8057-2e476926afaa","route_from":"Killer Road","route_to":"Johannesburg CBD","fare_price":"18.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"1861e5ac-7308-4ac3-a82a-cbdd942535f0","route_from":"Kinross Taxi Rank","route_to":"Evander Taxi Rank","fare_price":"18.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"05c00ea6-bf58-4d41-a87a-c531fac27c11","route_from":"Kinross Taxi Rank","route_to":"Secunda Taxi Rank","fare_price":"21.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"eafa6b04-c444-4ff2-93a2-d15c0f5a7314","route_from":"Kinross Taxi Rank","route_to":"Trichardt","fare_price":"21.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"d30fb1ba-25a7-49ee-b44b-b943515949ba","route_from":"Krugersdorp Taxi Rank","route_to":"Delareyville Taxi Rank","fare_price":"300.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"97607b98-2719-4f0a-98c3-a436041ccd04","route_from":"Krugersdorp Taxi Rank","route_to":"Johannesburg CBD","fare_price":"28.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"04afbb4c-c071-4039-ad65-07b533120e57","route_from":"Krugersdorp Taxi Rank","route_to":"Lichtenburg Taxi Rank","fare_price":"250.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"e5f26ec1-cb99-4f0b-b35b-8ba2327b9866","route_from":"Krugersdorp Taxi Rank","route_to":"Mahikeng Taxi Rank","fare_price":"250.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"212ff4ce-a4d1-4bc6-af1b-12a7910595b1","route_from":"Krugersdorp Taxi Rank","route_to":"R28 Krugersdorp (Key West / Pinehaven)","fare_price":"15.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"037c5670-9ba1-4850-a250-3d2f8ec1e1a8","route_from":"Krugersdorp Taxi Rank","route_to":"Randfontein Taxi Rank","fare_price":"18.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"7fe7db3a-a7df-4fd0-a6ba-d93656b70565","route_from":"Krugersdorp Taxi Rank","route_to":"Roodepoort Taxi Rank","fare_price":"20.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"7b26b6ca-a436-4fd3-a191-a9256dd7af78","route_from":"Krugersdorp Taxi Rank","route_to":"Taung Taxi Rank","fare_price":"340.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"c906f747-c01f-49a1-a773-ac44705d3066","route_from":"Krugersdorp Taxi Rank","route_to":"Toekomsrus","fare_price":"25.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"3d5940c6-9c74-4290-812f-8d4245255953","route_from":"Krugersdorp Taxi Rank","route_to":"Vryburg Taxi Rank","fare_price":"320.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"097060f2-5f9a-4c3a-9b58-29cb1b7932a9","route_from":"Krugersdorp Taxi Rank","route_to":"Westgate Shopping Centre","fare_price":"22.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"e98dde4f-4816-475f-b46d-2ebb4a921510","route_from":"Krugersdorp Taxi Rank","route_to":"Zeerust Taxi Rank","fare_price":"250.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"c658a5c8-7e4b-453a-90ef-b21c42b99578","route_from":"KuGompo City CBD","route_to":"Hemingways / Beacon Bay / Vincent / Berea / Gonubie","fare_price":"22.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"926dabb7-593d-4663-b0f5-b95db4b94f35","route_from":"Kwamhlanga Rank","route_to":"Johannesburg Taxi Rank","fare_price":"120.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"cd3a991a-1af5-4593-89f3-993f0dc07639","route_from":"Mayfair","route_to":"Johannesburg CBD","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"ff9aac27-09d7-4601-9278-636cef364e9b","route_from":"Mdantsane Highway","route_to":"KuGompo City CBD","fare_price":"30.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"94717a63-e2bc-4891-a5a0-cf3ee4138612","route_from":"Mdantsane Zone 6","route_to":"Ntabozuko","fare_price":"50.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"af45a517-e18d-4f5d-a598-a7234fb8b4fa","route_from":"Mdantsane Zones 1-12","route_to":"Mdantsane Local Route","fare_price":"20.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"b1170520-1fa8-4133-9ce7-0f8c42038f04","route_from":"Meadowlands","route_to":"Baragwanath Taxi Rank","fare_price":"19.00","currency":"ZAR","updated_at":"2026-10-15 04:29:04.026004+00"},{"id":"cb5a44c8-d561-4acb-82ec-f13ffb18f3ce","route_from":"Meadowlands","route_to":"Bree Taxi Rank","fare_price":"22.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"0ded8beb-46ca-4ed5-9694-2a993150e7b0","route_from":"Meadowlands","route_to":"Johannesburg CBD","fare_price":"22.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"f0f166a3-c202-4986-8565-379fb9a0fb2f","route_from":"Meadowlands","route_to":"Maponya Mall","fare_price":"16.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"3477011f-fc8e-4214-b672-efc6b1e3372a","route_from":"Mkhuhlu Taxi Rank","route_to":"Hazyview Taxi Rank","fare_price":"20.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"443a2172-0e5a-4c75-84b3-028c95598f0c","route_from":"Mofolo Rank","route_to":"Johannesburg CBD","fare_price":"17.00","currency":"ZAR","updated_at":"2026-08-10 09:05:26.277745+00"},{"id":"ff117c63-4b07-4051-89cd-0387da897573","route_from":"Motetema/Leeufontein Cross Taxi Rank","route_to":"Monsterlus Taxi Rank","fare_price":"40.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"0ffa217f-9cce-4be7-a94f-e3ff1e7d5cb3","route_from":"Ndingiliza","route_to":"Johannesburg CBD","fare_price":"22.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"f1edc083-a1a8-481d-9283-e8bc07528ffe","route_from":"Orlando","route_to":"Johannesburg CBD","fare_price":"19.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"7c979c8f-16b4-4161-8b63-bb1bf759fa91","route_from":"Pennyville","route_to":"Johannesburg CBD","fare_price":"18.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"7a440b97-c337-4363-9463-51451b910602","route_from":"Pietermaritzburg Market Square Taxi Rank","route_to":"Durban","fare_price":"90.00","currency":"ZAR","updated_at":"2026-09-27 11:00:14.045417+00"},{"id":"f6868c16-0429-4405-84d9-3aabcf5a7cc4","route_from":"Plaza","route_to":"Johannesburg CBD","fare_price":"15.00","currency":"ZAR","updated_at":"2026-10-13 14:19:18.704841+00"},{"id":"bf345fee-4966-466f-b806-de72e6d2db58","route_from":"Port St Johns Taxi Rank","route_to":"Bholani","fare_price":"42.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"b6bcfbaf-0f70-4fd5-bb0d-a91b10919095","route_from":"Port St Johns Taxi Rank","route_to":"Caguba","fare_price":"37.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"3ad69f9e-159f-4458-9746-ce4c21154242","route_from":"Port St Johns Taxi Rank","route_to":"Cwebeni","fare_price":"44.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"4bf84a99-2a44-4ded-8dba-4d49dff0e51d","route_from":"Port St Johns Taxi Rank","route_to":"Sicambeni","fare_price":"39.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"8343e733-25ae-46ae-923e-4d2af5f0d250","route_from":"Port St Johns Taxi Rank","route_to":"Vukandlule","fare_price":"39.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"f7b3999e-8965-43b5-88ff-9e38d8db0616","route_from":"Roodepoort Taxi Rank","route_to":"Keywest","fare_price":"23.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"c7d6c2e0-866f-498e-b95d-641647c79e1d","route_from":"Rustenburg Taxi Rank","route_to":"Johannesburg CBD Taxi Rank","fare_price":"210.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"6f1ceeee-0abf-4240-a398-ad09980e32dc","route_from":"Saldanha","route_to":"Eastern Cape","fare_price":"1200.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"13e1405f-86b6-410e-9b6c-c99db6c47d7f","route_from":"Secunda Taxi Rank","route_to":"Leslie (Leandra)","fare_price":"37.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"f2a7caee-469d-4c12-9f3c-8da770f06119","route_from":"Seshego","route_to":"Polokwane","fare_price":"20.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"9ede9b5b-58b7-4299-85d9-d3cb28d513e6","route_from":"Slovoville","route_to":"Dobsonville","fare_price":"14.00","currency":"ZAR","updated_at":"2026-09-25 08:14:43.374347+00"},{"id":"96d1268d-31ea-4031-ad94-9156d76f89b7","route_from":"Sundumbili Taxi Rank","route_to":"Durban","fare_price":"130.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"b54f313c-6eb8-4387-934b-6bd70cfc8d71","route_from":"Sundumbili Taxi Rank","route_to":"Empangeni","fare_price":"95.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"79b46fd3-00da-4f8f-998d-d6f3eee25cb3","route_from":"Sundumbili Taxi Rank","route_to":"Gingindlovu","fare_price":"45.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"13a9d242-df13-48d1-afb1-0427e2ba7010","route_from":"Sundumbili Taxi Rank","route_to":"KwaDukuza (Stanger)","fare_price":"45.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"4d71ba48-dc2c-4a3e-9fe2-0afe26151792","route_from":"Tikelane Rank","route_to":"Mohlabeng","fare_price":"25.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"},{"id":"230894d1-78c8-4268-acf2-1a64557a9306","route_from":"Tongaat Taxi Rank","route_to":"Durban","fare_price":"37.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"4fce2b82-ca78-4e27-98c7-e2dedaad86d4","route_from":"Tongaat Taxi Rank","route_to":"KwaDukuza (Stanger)","fare_price":"43.00","currency":"ZAR","updated_at":"2026-09-22 21:15:15.248299+00"},{"id":"ba313b34-f66a-4062-99e3-0021de9fb26b","route_from":"Western Cape","route_to":"Eastern Cape","fare_price":"1150.00","currency":"ZAR","updated_at":"2026-07-06 17:28:51.037593+00"}],"points":[{"id":"d2836fda-3f0c-473d-9ab1-129554d2ddd4","name":"Alexandra Taxi Rank (Selborne Street)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1056309","longitude":"28.1014268","lat":-26.1056309,"lng":28.1014268},{"id":"dd086a02-88cc-4bf3-ae46-a5d9735f7d44","name":"Algoa Taxi Association","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8941544","longitude":"25.5258416","lat":-33.8941544,"lng":25.5258416},{"id":"c998eec1-eb3d-408a-982b-4eee67e8c38e","name":"Atteridgeville Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7745423","longitude":"28.0519097","lat":-25.7745423,"lng":28.0519097},{"id":"20cf0a9e-6234-4af5-b8d1-74e21a949893","name":"Bafokeng Plaza Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.5765845","longitude":"27.1582441","lat":-25.5765845,"lng":27.1582441},{"id":"46e51bf6-cfd4-4c7e-bec4-214d19b77e1d","name":"Bakenburg Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.8640459","longitude":"28.7554452","lat":-23.8640459,"lng":28.7554452},{"id":"60af29d6-e02d-43e3-924a-c8107c52e837","name":"Bara Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Diepkloof","city":"Diepkloof","latitude":"-26.2591414","longitude":"27.9378266","lat":-26.2591414,"lng":27.9378266},{"id":"727ac6a3-a1dc-4e24-b468-21e493756926","name":"Bara Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2594489","longitude":"27.942013","lat":-26.2594489,"lng":27.942013},{"id":"2b049bf6-8340-4fea-bd90-0c71e1efae7b","name":"Baragwanath Taxi Rank Pickup Area","point_type":"Taxi rank","route_name":"Soweto taxi routes","province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2627","longitude":"27.9390","lat":-26.2627,"lng":27.939},{"id":"0a1bdb3d-514a-4f37-9e39-5208a032ca96","name":"Bellville","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9054392","longitude":"18.6304318","lat":-33.9054392,"lng":18.6304318},{"id":"955bc9a1-6971-49ca-81ad-099795856bad","name":"Border Alliance Taxi Association","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.3095294","longitude":"26.5348309","lat":-33.3095294,"lng":26.5348309},{"id":"4a48235e-026b-4f29-925e-8199a6146f92","name":"Bosman Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Pretoria","city":"Pretoria","latitude":"-25.7560153","longitude":"28.1839972","lat":-25.7560153,"lng":28.1839972},{"id":"716cb41d-c411-4e3b-9984-fad0559287c9","name":"Bree Street Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2008127","longitude":"28.0365335","lat":-26.2008127,"lng":28.0365335},{"id":"15986991-fb8d-482b-b83f-7c308eba2ea5","name":"Bree Taxi Rank Pickup Area","point_type":"Taxi rank","route_name":"Johannesburg CBD taxi routes","province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1996","longitude":"28.0392","lat":-26.1996,"lng":28.0392},{"id":"9956c6b9-b4f3-4024-b378-e3ce0e279a1c","name":"Brooklyn Mall Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7707935","longitude":"28.2353321","lat":-25.7707935,"lng":28.2353321},{"id":"9ff2437e-0a66-4e84-a114-c59413c87983","name":"Capetown Upper Deck Taxi Terminal","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9228626","longitude":"18.4271554","lat":-33.9228626,"lng":18.4271554},{"id":"ef142a8a-bb5a-4dfa-93a3-c467b2f1c56b","name":"Citybug","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.4774308","longitude":"30.9759843","lat":-25.4774308,"lng":30.9759843},{"id":"2e9992e9-b5b2-4b81-9b50-15dde895ac85","name":"Claremont Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9818826","longitude":"18.4664151","lat":-33.9818826,"lng":18.4664151},{"id":"10495fe4-6be5-419b-8e0c-68745092e8da","name":"Danville taxi","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7464939","longitude":"28.18558","lat":-25.7464939,"lng":28.18558},{"id":"a78b1e85-dd2e-42ae-b445-cb6a6177c9c1","name":"Dundee","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-28.1612183","longitude":"30.2384824","lat":-28.1612183,"lng":30.2384824},{"id":"dac4fc5b-07ee-4561-a4b9-327ed90f58be","name":"Eastgate Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1817457","longitude":"28.1189528","lat":-26.1817457,"lng":28.1189528},{"id":"0394a7d0-b016-447a-9a94-1c54f6d7c5e1","name":"Eastleigh Commuter Centre","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.133189","longitude":"28.1629303","lat":-26.133189,"lng":28.1629303},{"id":"9acdd84f-5de0-4d92-9a27-65e6c93650a2","name":"Eshowe Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-28.8971227","longitude":"31.4629879","lat":-28.8971227,"lng":31.4629879},{"id":"147fc09e-6f0e-45cf-9d28-69fc80117b4b","name":"Ext 2 Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.9225167","longitude":"28.020694","lat":-25.9225167,"lng":28.020694},{"id":"224c6496-214a-420d-b8f3-bf88b87027b3","name":"Faerie Glen Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7887572","longitude":"28.3280726","lat":-25.7887572,"lng":28.3280726},{"id":"6165fc26-d2ef-409a-8ded-a303a2d7279e","name":"Hammanskraal Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.4044731","longitude":"28.2835463","lat":-25.4044731,"lng":28.2835463},{"id":"0d7b84ef-782a-4a2f-adbd-6d1d84828e58","name":"Inkwazi Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.4980041","longitude":"31.5051157","lat":-25.4980041,"lng":31.5051157},{"id":"698ce0d8-9b60-495f-b50d-698ee0d45f6a","name":"Itshokolele Taxi Rank (Local)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-28.5352108","longitude":"28.8056474","lat":-28.5352108,"lng":28.8056474},{"id":"3f89ccf3-7230-4e6c-88e5-540e82d63ed2","name":"J-Bay Cabs","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":"Jeffreys Bay","city":"Jeffreys Bay","latitude":"-34.0530854","longitude":"24.9224635","lat":-34.0530854,"lng":24.9224635},{"id":"d57d4552-cdf3-4285-8996-90536d5540c3","name":"Kildare Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-24.8753434","longitude":"31.3040923","lat":-24.8753434,"lng":31.3040923},{"id":"b5c330ad-d461-437e-9835-f699277371ee","name":"Killarney Taxi Rank - JR069","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Killarney","city":"Killarney","latitude":"-26.1661282","longitude":"28.0530128","lat":-26.1661282,"lng":28.0530128},{"id":"808bff6d-a9f4-4511-a66b-b20302d52e52","name":"Klerksdorp Taxi rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-26.8621524","longitude":"26.6647075","lat":-26.8621524,"lng":26.6647075},{"id":"3e7ae267-5fa3-42d5-b6f0-5192f532e6cb","name":"Korsten Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9353738","longitude":"25.5810198","lat":-33.9353738,"lng":25.5810198},{"id":"42ccc9aa-e415-4b71-98c3-f3737b706179","name":"KwaMaqoma Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":"KwaMaqoma","city":"KwaMaqoma","latitude":"-32.7781701","longitude":"26.6330029","lat":-32.7781701,"lng":26.6330029},{"id":"fb3b1d1e-9642-4cef-b37d-e8efa6e3197d","name":"Lenasia Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3193781","longitude":"27.8244907","lat":-26.3193781,"lng":27.8244907},{"id":"8481c9e8-950b-4191-9215-5e1963beeb01","name":"Lerome Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.2035458","longitude":"27.2161924","lat":-25.2035458,"lng":27.2161924},{"id":"e3c229bf-1455-4c64-a30e-2be41ecb65f9","name":"local taxi tank","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-28.729876","longitude":"29.3531381","lat":-28.729876,"lng":29.3531381},{"id":"6593a7fe-0847-44fd-bb92-56640537896d","name":"local taxis","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2601243","longitude":"27.9032782","lat":-26.2601243,"lng":27.9032782},{"id":"e8558cd7-803d-4527-b362-815bece23ee5","name":"long distance taxi rank","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-28.3033493","longitude":"31.4223643","lat":-28.3033493,"lng":31.4223643},{"id":"9c1662bb-7cd8-49e4-9d34-1c39b2d88f42","name":"Luxury Chauffeur Service","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":"Plettenberg Bay","city":"Plettenberg Bay","latitude":"-34.0558047","longitude":"23.3722843","lat":-34.0558047,"lng":23.3722843},{"id":"b3cdf14c-ac8f-4b0b-93ad-b48728a50a73","name":"Mahikeng Long Distance Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":"Mahikeng","city":"Mahikeng","latitude":"-25.8613941","longitude":"25.6424209","lat":-25.8613941,"lng":25.6424209},{"id":"c75665be-fe64-449c-b85f-2f6eeb196e71","name":"Maja Ka Thata Taxi Rank (Long Distance)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-28.5321502","longitude":"28.8056823","lat":-28.5321502,"lng":28.8056823},{"id":"4bc6f08d-7249-4e4e-8eeb-cb580687ab01","name":"Mamaolo Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-24.3052237","longitude":"29.5631718","lat":-24.3052237,"lng":29.5631718},{"id":"7d1225de-7467-46ee-ac83-93cf078ab926","name":"Mapped taxi rank (osm:node:10313829154)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.8071522","longitude":"29.4596194","lat":-25.8071522,"lng":29.4596194},{"id":"8df24c16-11d5-45ab-86a5-70251f892c5d","name":"Mapped taxi rank (osm:node:10654255559)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.9423971","longitude":"28.0169298","lat":-25.9423971,"lng":28.0169298},{"id":"89cde030-77fb-4367-9c87-4fb01bf14479","name":"Mapped taxi rank (osm:node:10665555659)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.7976618","longitude":"25.5974136","lat":-33.7976618,"lng":25.5974136},{"id":"331d894b-33eb-4d42-b77a-cde601024d18","name":"Mapped taxi rank (osm:node:10666009995)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.9446306","longitude":"27.7549383","lat":-32.9446306,"lng":27.7549383},{"id":"9e6adc93-1519-4e9a-8ac6-88c259469bb3","name":"Mapped taxi rank (osm:node:10666009996)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.9437865","longitude":"27.755354","lat":-32.9437865,"lng":27.755354},{"id":"9f8deb0b-3696-4739-a22c-26e8ba39279f","name":"Mapped taxi rank (osm:node:10666009997)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.943163","longitude":"27.7544823","lat":-32.943163,"lng":27.7544823},{"id":"c0e6f7eb-ef71-46a2-9618-959bcebd7080","name":"Mapped taxi rank (osm:node:10666010000)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.9357278","longitude":"27.7394566","lat":-32.9357278,"lng":27.7394566},{"id":"5b1046fb-2e5f-4d1d-8c15-ad8dfb1b51a5","name":"Mapped taxi rank (osm:node:10674138047)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-26.0406134","longitude":"30.7915959","lat":-26.0406134,"lng":30.7915959},{"id":"8824e29e-7ec6-40fc-a319-7dd5715eaa86","name":"Mapped taxi rank (osm:node:10674138059)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-27.0090419","longitude":"30.8040194","lat":-27.0090419,"lng":30.8040194},{"id":"bc534591-cf8c-4d99-b4f8-1bd632571626","name":"Mapped taxi rank (osm:node:10681804894)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-24.3130825","longitude":"29.4766474","lat":-24.3130825,"lng":29.4766474},{"id":"22a564a1-1ac3-410a-8a54-5bdab26cd09a","name":"Mapped taxi rank (osm:node:11109126769)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.8909025","longitude":"29.4173236","lat":-23.8909025,"lng":29.4173236},{"id":"68afa605-af04-496a-b4ca-f003e50d0599","name":"Mapped taxi rank (osm:node:1137617924)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1873843","longitude":"27.9737069","lat":-26.1873843,"lng":27.9737069},{"id":"1cd29967-5975-47ab-9dbf-3c9d3fb14d24","name":"Mapped taxi rank (osm:node:11883661458)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3199659","longitude":"27.6515552","lat":-26.3199659,"lng":27.6515552},{"id":"dc08f155-e284-4552-a049-0bb50f06a690","name":"Mapped taxi rank (osm:node:12013406662)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.6397539","longitude":"27.7795663","lat":-25.6397539,"lng":27.7795663},{"id":"1ae3b746-7fe9-4757-8f68-4840c7763f6e","name":"Mapped taxi rank (osm:node:12052671464)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-27.92632","longitude":"30.166035","lat":-27.92632,"lng":30.166035},{"id":"e68b6ac5-cd60-40a5-a45c-08ac71f81126","name":"Mapped taxi rank (osm:node:12056975673)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-27.560903","longitude":"24.7471212","lat":-27.560903,"lng":24.7471212},{"id":"191c823b-ca07-4259-9abd-ff5b22cd5960","name":"Mapped taxi rank (osm:node:12072534369)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-30.3390478","longitude":"28.8080728","lat":-30.3390478,"lng":28.8080728},{"id":"f3943f58-ca11-421f-b001-a7e435995640","name":"Mapped taxi rank (osm:node:12072534370)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-30.3405606","longitude":"28.8061456","lat":-30.3405606,"lng":28.8061456},{"id":"ef4b1012-6940-4ca8-a75f-5e7e5b7c9668","name":"Mapped taxi rank (osm:node:12142733981)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-27.9115078","longitude":"31.6465215","lat":-27.9115078,"lng":31.6465215},{"id":"7c0fc53c-b357-4807-8f64-31400ec87f28","name":"Mapped taxi rank (osm:node:12198112682)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.7712013","longitude":"25.4018565","lat":-33.7712013,"lng":25.4018565},{"id":"009d3f6e-4d57-4372-93d6-6c496f75b8b3","name":"Mapped taxi rank (osm:node:12556088503)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1886427","longitude":"28.1213686","lat":-26.1886427,"lng":28.1213686},{"id":"87b3f856-f2b4-41b4-a975-f44797922871","name":"Mapped taxi rank (osm:node:12612402612)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.8330868","longitude":"27.2292683","lat":-32.8330868,"lng":27.2292683},{"id":"5fa1c048-003c-4f32-9d81-502d1e10aa91","name":"Mapped taxi rank (osm:node:12615427125)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.5040037","longitude":"27.8591313","lat":-26.5040037,"lng":27.8591313},{"id":"173ff83d-1086-43f4-b1b9-d1539b5008ce","name":"Mapped taxi rank (osm:node:12654234284)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-31.8989106","longitude":"26.8670131","lat":-31.8989106,"lng":26.8670131},{"id":"24244947-f7a8-42e1-a022-d2bdf1e3d133","name":"Mapped taxi rank (osm:node:12669198147)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0559202","longitude":"23.3722587","lat":-34.0559202,"lng":23.3722587},{"id":"4b64b957-72cc-4153-9b30-706f09e10ef6","name":"Mapped taxi rank (osm:node:1300616559)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.8399234","longitude":"28.3274593","lat":-25.8399234,"lng":28.3274593},{"id":"b4ca02d3-18c8-4421-b5d9-a682e5023cab","name":"Mapped taxi rank (osm:node:13058845201)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7433482","longitude":"28.1952093","lat":-25.7433482,"lng":28.1952093},{"id":"8e50241e-4dc4-40d7-ac0e-f153f8040d47","name":"Mapped taxi rank (osm:node:13130315808)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-24.3138733","longitude":"29.4768244","lat":-24.3138733,"lng":29.4768244},{"id":"d891eb21-a478-47e5-8486-cc6afd991361","name":"Mapped taxi rank (osm:node:1330392901)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1592864","longitude":"28.2805378","lat":-26.1592864,"lng":28.2805378},{"id":"15dbbf6f-c278-4cc2-ab43-227c7b3f596a","name":"Mapped taxi rank (osm:node:13617543042)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.3422869","longitude":"31.2945849","lat":-29.3422869,"lng":31.2945849},{"id":"f6676cce-9c1d-4885-ae4c-e9e0896bdd14","name":"Mapped taxi rank (osm:node:13959271124)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-22.9503516","longitude":"30.4710263","lat":-22.9503516,"lng":30.4710263},{"id":"1f6bd76c-c798-4494-ab28-28b306351290","name":"Mapped taxi rank (osm:node:14055782285)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9889334","longitude":"25.5901253","lat":-33.9889334,"lng":25.5901253},{"id":"796e6f2c-8c80-436d-960e-e75c8cb20de2","name":"Mapped taxi rank (osm:node:14055782291)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9890228","longitude":"25.5900947","lat":-33.9890228,"lng":25.5900947},{"id":"0ba4cb28-e7ae-4e2b-8cd3-46aef58649a9","name":"Mapped taxi rank (osm:node:14055782292)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9889727","longitude":"25.5901049","lat":-33.9889727,"lng":25.5901049},{"id":"752ff243-9ff4-48eb-83b1-42d8b2aee8f8","name":"Mapped taxi rank (osm:node:14100896220)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.993367","longitude":"25.6727713","lat":-33.993367,"lng":25.6727713},{"id":"67a8be40-d0b0-4934-8af8-217411f6014d","name":"Mapped taxi rank (osm:node:14103193653)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9500805","longitude":"25.6078586","lat":-33.9500805,"lng":25.6078586},{"id":"224efacc-7717-4adf-a2a5-ad155f1ce297","name":"Mapped taxi rank (osm:node:14103193654)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.95039","longitude":"25.6080746","lat":-33.95039,"lng":25.6080746},{"id":"69ffdec4-95d5-4f66-9029-c219c633dc19","name":"Mapped taxi rank (osm:node:14103193655)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9496936","longitude":"25.6078609","lat":-33.9496936,"lng":25.6078609},{"id":"42faacc0-dfb6-4d33-84cc-a9ed08b73166","name":"Mapped taxi rank (osm:node:14103193656)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9498667","longitude":"25.6077073","lat":-33.9498667,"lng":25.6077073},{"id":"04481318-01ee-4670-b303-fef411d9c2cb","name":"Mapped taxi rank (osm:node:14105403095)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.7833107","longitude":"25.4190252","lat":-33.7833107,"lng":25.4190252},{"id":"cf00dd1a-2b65-44bb-bd53-b771780489df","name":"Mapped taxi rank (osm:node:14105403096)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.7835524","longitude":"25.41909","lat":-33.7835524,"lng":25.41909},{"id":"4918eacb-65b4-4d20-afec-8a13bff73171","name":"Mapped taxi rank (osm:node:14109405976)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9574666","longitude":"25.6182741","lat":-33.9574666,"lng":25.6182741},{"id":"c8dfe3b6-6822-4b88-932d-d3afd49105ac","name":"Mapped taxi rank (osm:node:14109405977)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9572206","longitude":"25.6183011","lat":-33.9572206,"lng":25.6183011},{"id":"35875290-3e8e-4c63-913f-873d6d9d19f9","name":"Mapped taxi rank (osm:node:14142242043)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8842749","longitude":"25.5832339","lat":-33.8842749,"lng":25.5832339},{"id":"2a9903cc-edb7-4c45-8595-83c16d48e1cc","name":"Mapped taxi rank (osm:node:14142242044)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8844211","longitude":"25.5834357","lat":-33.8844211,"lng":25.5834357},{"id":"698ab2aa-c037-470d-aea1-87f91301312a","name":"Mapped taxi rank (osm:node:14156121450)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8830662","longitude":"25.5630787","lat":-33.8830662,"lng":25.5630787},{"id":"dc35cf5b-0516-430c-8caf-42d086af04a8","name":"Mapped taxi rank (osm:node:14156121451)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.883084","longitude":"25.5631253","lat":-33.883084,"lng":25.5631253},{"id":"5c95a6cd-7531-4122-9c93-2be51fb1e82d","name":"Mapped taxi rank (osm:node:14156121452)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.883105","longitude":"25.5631742","lat":-33.883105,"lng":25.5631742},{"id":"387c3f0e-d4ec-4f86-b4ff-a8e406256b42","name":"Mapped taxi rank (osm:node:14156121453)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8831241","longitude":"25.5632176","lat":-33.8831241,"lng":25.5632176},{"id":"05385b0b-0abe-4026-93e1-5a917f1260c0","name":"Mapped taxi rank (osm:node:14156121454)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8831492","longitude":"25.5632579","lat":-33.8831492,"lng":25.5632579},{"id":"5b900d9c-4e00-4479-8f39-0f6a5fe7b80a","name":"Mapped taxi rank (osm:node:14156121455)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8831666","longitude":"25.5632953","lat":-33.8831666,"lng":25.5632953},{"id":"b8c5003c-c0c9-4104-9464-3bf2dd7b2227","name":"Mapped taxi rank (osm:node:14156121456)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8831903","longitude":"25.5633369","lat":-33.8831903,"lng":25.5633369},{"id":"49de4b84-3d05-4a4b-9094-110412430e73","name":"Mapped taxi rank (osm:node:14156121457)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8832056","longitude":"25.5633828","lat":-33.8832056,"lng":25.5633828},{"id":"d3998324-cd9b-437b-a058-c3206bb75d47","name":"Mapped taxi rank (osm:node:1455813363)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.260218","longitude":"27.9031982","lat":-26.260218,"lng":27.9031982},{"id":"273cb500-3f7b-46c9-9af0-17edaff82d40","name":"Mapped taxi rank (osm:node:1519736698)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.310253","longitude":"26.5306251","lat":-33.310253,"lng":26.5306251},{"id":"fa7d86a2-3d83-4601-a0fb-2ec9cc5a2456","name":"Mapped taxi rank (osm:node:1526145070)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1836972","longitude":"28.3186264","lat":-26.1836972,"lng":28.3186264},{"id":"6c3d6baf-806a-4805-8ff8-6b2a155259c5","name":"Mapped taxi rank (osm:node:1801485337)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.3420651","longitude":"31.295713","lat":-29.3420651,"lng":31.295713},{"id":"8a7453c5-2022-45fd-9484-3462f57980d0","name":"Mapped taxi rank (osm:node:1955254985)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9340913","longitude":"18.417883","lat":-33.9340913,"lng":18.417883},{"id":"80d527d7-a547-4d1d-99c0-6f96c744178e","name":"Mapped taxi rank (osm:node:1955734860)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-30.7999729","longitude":"29.3656635","lat":-30.7999729,"lng":29.3656635},{"id":"aa803eaf-32d9-4250-a6b7-dc75ca69145b","name":"Mapped taxi rank (osm:node:1993651192)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.2848306","longitude":"26.4198938","lat":-25.2848306,"lng":26.4198938},{"id":"f1f08cf2-7b34-481a-865b-1cffc6d90705","name":"Mapped taxi rank (osm:node:2176216986)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7795788","longitude":"30.765005","lat":-29.7795788,"lng":30.765005},{"id":"17dd7355-64d8-4871-bcbb-ffb22350ed50","name":"Mapped taxi rank (osm:node:2539226708)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.6960215","longitude":"31.7486313","lat":-25.6960215,"lng":31.7486313},{"id":"ed9507eb-a448-410e-bb66-0b40ce8465e4","name":"Mapped taxi rank (osm:node:2539240360)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.6712415","longitude":"31.8548049","lat":-25.6712415,"lng":31.8548049},{"id":"2131f914-656d-4205-a97c-ae998f17a392","name":"Mapped taxi rank (osm:node:2539240361)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.6689521","longitude":"31.8550409","lat":-25.6689521,"lng":31.8550409},{"id":"d6e0606e-135f-4214-95b8-294def236932","name":"Mapped taxi rank (osm:node:2539247201)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.6376824","longitude":"31.6787903","lat":-25.6376824,"lng":31.6787903},{"id":"a8374938-2285-4b93-a2a5-19f5c8dfcda5","name":"Mapped taxi rank (osm:node:2575942859)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0212527","longitude":"18.6128399","lat":-34.0212527,"lng":18.6128399},{"id":"bf63fcfe-1f47-43a4-ae1f-5436bf34bb9e","name":"Mapped taxi rank (osm:node:2668265843)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.6715149","longitude":"27.7410934","lat":-23.6715149,"lng":27.7410934},{"id":"a7d7b8bc-2761-4da1-9e13-c6d37ce04d2f","name":"Mapped taxi rank (osm:node:2701053573)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-24.1308918","longitude":"28.9992383","lat":-24.1308918,"lng":28.9992383},{"id":"3823b011-6008-4299-be2d-1831326d35c8","name":"Mapped taxi rank (osm:node:278680691)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.8275691","longitude":"18.6513337","lat":-33.8275691,"lng":18.6513337},{"id":"710f84cc-507a-42bb-820e-94ed2f880a1a","name":"Mapped taxi rank (osm:node:300412032)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.947463","longitude":"18.402054","lat":-33.947463,"lng":18.402054},{"id":"b7c5a6ad-dae9-4edc-9156-31ef12427358","name":"Mapped taxi rank (osm:node:3129193854)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.6870174","longitude":"27.7029455","lat":-23.6870174,"lng":27.7029455},{"id":"ab2e9d07-0d98-40b1-9393-a990092e670d","name":"Mapped taxi rank (osm:node:3591384730)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.6965436","longitude":"30.1410256","lat":-23.6965436,"lng":30.1410256},{"id":"a99f05e7-73b1-415b-9608-01f4f9f9b282","name":"Mapped taxi rank (osm:node:3766967075)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0245288","longitude":"18.3622261","lat":-34.0245288,"lng":18.3622261},{"id":"82828f23-361b-4c77-a337-86ac30b89ee1","name":"Mapped taxi rank (osm:node:3811111973)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9377561","longitude":"18.4701336","lat":-33.9377561,"lng":18.4701336},{"id":"54e0f752-2e2f-48e0-9180-c3cb8e01d11e","name":"Mapped taxi rank (osm:node:3837561899)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.9829647","longitude":"26.7406312","lat":-27.9829647,"lng":26.7406312},{"id":"5747bb5c-44bb-4982-91f7-946163d463e7","name":"Mapped taxi rank (osm:node:3837561900)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.9789588","longitude":"26.7744211","lat":-27.9789588,"lng":26.7744211},{"id":"43f2a6e0-7e13-4fe1-9918-ef241708ad1c","name":"Mapped taxi rank (osm:node:4082858745)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8719269","longitude":"25.5505954","lat":-33.8719269,"lng":25.5505954},{"id":"ddac1816-c46f-44a8-bb36-ccddc51945bf","name":"Mapped taxi rank (osm:node:443196526)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.468957","longitude":"30.9823847","lat":-25.468957,"lng":30.9823847},{"id":"e01a1e84-c694-4707-97f6-762fdc8507fe","name":"Mapped taxi rank (osm:node:4459207971)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.8360082","longitude":"18.6759368","lat":-33.8360082,"lng":18.6759368},{"id":"a7774333-5079-4104-93de-e2a232106a58","name":"Mapped taxi rank (osm:node:4515038482)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-30.739978","longitude":"30.4440585","lat":-30.739978,"lng":30.4440585},{"id":"0b22c366-573f-4047-b9fb-4440dbd65afe","name":"Mapped taxi rank (osm:node:471798195)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.4660264","longitude":"30.9793798","lat":-25.4660264,"lng":30.9793798},{"id":"f8e7c7ba-dfeb-49b9-b99b-be103c13e98f","name":"Mapped taxi rank (osm:node:4718348837)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.6183797","longitude":"27.2571789","lat":-25.6183797,"lng":27.2571789},{"id":"bf3516cc-9aac-487a-8c0c-0351c7ec7c34","name":"Mapped taxi rank (osm:node:4786581581)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.5672424","longitude":"27.2385835","lat":-25.5672424,"lng":27.2385835},{"id":"9aae2c2a-531e-40cc-99a7-ef9ef9a647f9","name":"Mapped taxi rank (osm:node:5146863845)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.6875476","longitude":"27.7030009","lat":-23.6875476,"lng":27.7030009},{"id":"641cc67a-8ffd-4591-9599-da8ad944a79e","name":"Mapped taxi rank (osm:node:527198018)","point_type":"Taxi rank","route_name":null,"province":"Northern Cape","suburb":null,"city":null,"latitude":"-28.7344944","longitude":"24.7611359","lat":-28.7344944,"lng":24.7611359},{"id":"c0256d0a-4165-43e5-b6c8-bc2525773a16","name":"Mapped taxi rank (osm:node:593859913)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.4865516","longitude":"30.2322212","lat":-29.4865516,"lng":30.2322212},{"id":"0bd9a467-3700-434f-b527-37b4ab6b88aa","name":"Mapped taxi rank (osm:node:6172101166)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3404462","longitude":"27.47417","lat":-26.3404462,"lng":27.47417},{"id":"94628260-db1a-4312-8ea6-f5823e7355a3","name":"Mapped taxi rank (osm:node:6183282681)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.28716","longitude":"29.1384085","lat":-23.28716,"lng":29.1384085},{"id":"a39c2d3f-7316-4cbe-bf5c-d3631317b0b0","name":"Mapped taxi rank (osm:node:6443847902)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.7727793","longitude":"25.4017016","lat":-33.7727793,"lng":25.4017016},{"id":"6ebe5ba2-594f-4ba3-8b74-d18ae530595d","name":"Mapped taxi rank (osm:node:7014080935)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.6832928","longitude":"30.9911104","lat":-29.6832928,"lng":30.9911104},{"id":"20c7208f-0d8b-483a-a823-f0bdb18b83ef","name":"Mapped taxi rank (osm:node:7150798499)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.3640732","longitude":"29.320546","lat":-23.3640732,"lng":29.320546},{"id":"ae4a5d49-5073-4a2f-8d1c-f02229c1bba6","name":"Mapped taxi rank (osm:node:7421944419)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-28.2717016","longitude":"29.1209773","lat":-28.2717016,"lng":29.1209773},{"id":"5139d776-2ec5-4a76-bac3-a2d16afdb376","name":"Mapped taxi rank (osm:node:7477582978)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1871496","longitude":"28.3973448","lat":-26.1871496,"lng":28.3973448},{"id":"084cabe3-d187-48bd-b875-6656f200acb5","name":"Mapped taxi rank (osm:node:7477841940)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.4094678","longitude":"28.1788132","lat":-26.4094678,"lng":28.1788132},{"id":"75917c4e-66c6-41c4-acec-651a79f9ee57","name":"Mapped taxi rank (osm:node:7496984604)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2497302","longitude":"28.4388426","lat":-26.2497302,"lng":28.4388426},{"id":"6bf78400-e352-43f1-8bc8-46497cbd680d","name":"Mapped taxi rank (osm:node:7496984605)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2489027","longitude":"28.4388748","lat":-26.2489027,"lng":28.4388748},{"id":"304b85f5-f5d2-496d-81c1-0b5bf6d19f03","name":"Mapped taxi rank (osm:node:7496984692)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2536669","longitude":"28.4381439","lat":-26.2536669,"lng":28.4381439},{"id":"3e1e9b78-4eb5-4b7b-ab14-13ced6d5734d","name":"Mapped taxi rank (osm:node:7661576728)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.218636","longitude":"28.2451898","lat":-26.218636,"lng":28.2451898},{"id":"5079beba-b54c-488e-9e46-5719d5172592","name":"Mapped taxi rank (osm:node:7661577320)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2093006","longitude":"28.2873595","lat":-26.2093006,"lng":28.2873595},{"id":"aec4d59c-91f0-4c1f-b372-b7c6e17538d8","name":"Mapped taxi rank (osm:node:7700808098)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8234483","longitude":"25.595341","lat":-33.8234483,"lng":25.595341},{"id":"009aa7b7-51ff-440e-80de-0d77dd7f45e0","name":"Mapped taxi rank (osm:node:7700808136)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8124662","longitude":"25.5805492","lat":-33.8124662,"lng":25.5805492},{"id":"a9936da5-61f9-4537-9197-b08f5f5af0d2","name":"Mapped taxi rank (osm:node:7700808137)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8192719","longitude":"25.5870885","lat":-33.8192719,"lng":25.5870885},{"id":"4abd6c43-15cb-445a-8a92-312a037ccc40","name":"Mapped taxi rank (osm:node:7741737514)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.240461","longitude":"28.3615789","lat":-26.240461,"lng":28.3615789},{"id":"ffee9ac1-d590-4878-9c66-287a5edc6942","name":"Mapped taxi rank (osm:node:774443570)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.5770203","longitude":"26.8952838","lat":-33.5770203,"lng":26.8952838},{"id":"70f05004-ee75-465b-ab66-08d18ae2f852","name":"Mapped taxi rank (osm:node:7745711805)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.167557","longitude":"28.2056265","lat":-26.167557,"lng":28.2056265},{"id":"d259f178-9a3d-4493-b11b-856da69ac01b","name":"Mapped taxi rank (osm:node:7951846082)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.4954055","longitude":"28.0879372","lat":-25.4954055,"lng":28.0879372},{"id":"9c917260-c5d5-46e5-9c57-81303db17ce2","name":"Mapped taxi rank (osm:node:7951846083)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.4945146","longitude":"28.0885649","lat":-25.4945146,"lng":28.0885649},{"id":"16bef3f4-735b-41ce-bf45-366fcee92ef2","name":"Mapped taxi rank (osm:node:7978833778)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7219473","longitude":"30.9852931","lat":-29.7219473,"lng":30.9852931},{"id":"3972c89e-dc4b-4fea-933a-b8c9a53b80b8","name":"Mapped taxi rank (osm:node:8012990486)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7199629","longitude":"30.985606","lat":-29.7199629,"lng":30.985606},{"id":"1a19f1e0-a9b2-4c4d-9ac3-f7d708768dbb","name":"Mapped taxi rank (osm:node:8061318500)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.7317134","longitude":"18.9705549","lat":-33.7317134,"lng":18.9705549},{"id":"bd036141-c98a-4700-8298-3acd19be53aa","name":"Mapped taxi rank (osm:node:8061345595)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.7291989","longitude":"18.9773811","lat":-33.7291989,"lng":18.9773811},{"id":"763490fa-5677-4f76-bfc0-0adb961f94db","name":"Mapped taxi rank (osm:node:8071314125)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.8768908","longitude":"27.3869915","lat":-32.8768908,"lng":27.3869915},{"id":"22be771e-44e3-45b2-8545-80e5c3811bcd","name":"Mapped taxi rank (osm:node:8132680212)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2628737","longitude":"27.8478017","lat":-26.2628737,"lng":27.8478017},{"id":"6e734f94-1d4b-423e-819a-7dde46048e9e","name":"Mapped taxi rank (osm:node:8177734435)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2116504","longitude":"28.1693745","lat":-26.2116504,"lng":28.1693745},{"id":"7a7a92b6-6aad-41a9-8654-6c64085196d6","name":"Mapped taxi rank (osm:node:8192228115)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1583017","longitude":"27.8704517","lat":-26.1583017,"lng":27.8704517},{"id":"22574a8a-e51c-48c5-ac04-5a0f5ca8073f","name":"Mapped taxi rank (osm:node:8195310518)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2145297","longitude":"28.1690311","lat":-26.2145297,"lng":28.1690311},{"id":"428d77c6-84ae-4656-8a44-8713afa2a48d","name":"Mapped taxi rank (osm:node:8243931965)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2740074","longitude":"28.1234685","lat":-26.2740074,"lng":28.1234685},{"id":"45835af5-4e5c-4e13-8712-b716f69f9ca3","name":"Mapped taxi rank (osm:node:8441449640)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.5701981","longitude":"31.1157382","lat":-29.5701981,"lng":31.1157382},{"id":"0e9774b5-796c-4a20-a838-2af1162ac1c0","name":"Mapped taxi rank (osm:node:8441449641)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.5716939","longitude":"31.1145064","lat":-29.5716939,"lng":31.1145064},{"id":"26090971-348e-4871-9747-b6e2e8ba3614","name":"Mapped taxi rank (osm:node:8584448825)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-26.6610691","longitude":"28.5842826","lat":-26.6610691,"lng":28.5842826},{"id":"bf478e1e-5230-459a-8db6-5793e6bdbae6","name":"Mapped taxi rank (osm:node:8584448830)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-26.6596381","longitude":"28.5831598","lat":-26.6596381,"lng":28.5831598},{"id":"168d15ba-bca4-4442-9df3-049cdd5f8ac0","name":"Mapped taxi rank (osm:node:8887736990)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.6729462","longitude":"27.9346715","lat":-26.6729462,"lng":27.9346715},{"id":"5c4eb4cc-3fed-4ff7-90c1-dd63924f5dc9","name":"Mapped taxi rank (osm:node:8927785508)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-29.2029927","longitude":"26.7102174","lat":-29.2029927,"lng":26.7102174},{"id":"dd946f5c-2184-4b41-9579-fc695724292e","name":"Mapped taxi rank (osm:node:9054723050)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.0271475","longitude":"28.5993328","lat":-27.0271475,"lng":28.5993328},{"id":"d2f7c33c-023e-4fd6-859c-a81cefbbbeec","name":"Mapped taxi rank (osm:node:9107697826)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-26.1501186","longitude":"26.1549978","lat":-26.1501186,"lng":26.1549978},{"id":"28e03760-3e4d-4080-aab7-b422004c2ccf","name":"Mapped taxi rank (osm:node:9258046700)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.0701864","longitude":"27.8345172","lat":-26.0701864,"lng":27.8345172},{"id":"101d8379-5f78-4e5d-aeaa-2556fa46e41d","name":"Mapped taxi rank (osm:node:9631227522)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.0350636","longitude":"28.1925241","lat":-26.0350636,"lng":28.1925241},{"id":"20ba0b99-8a6c-44d3-8eb2-61c160ca6c04","name":"Mapped taxi rank (osm:node:9631227523)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.0350541","longitude":"28.1923548","lat":-26.0350541,"lng":28.1923548},{"id":"40684a8e-a2c2-48f8-abb4-cb100acd1741","name":"Mapped taxi rank (osm:node:9673082825)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.1841559","longitude":"28.4030485","lat":-25.1841559,"lng":28.4030485},{"id":"729821ff-c590-41e7-b41a-cc1059850e0d","name":"Mapped taxi rank (osm:node:9706333665)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-26.085351","longitude":"25.8835157","lat":-26.085351,"lng":25.8835157},{"id":"918a7749-35be-4d78-a61d-28ba6521566c","name":"Mapped taxi rank (osm:node:9708041720)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-26.4117653","longitude":"25.1967235","lat":-26.4117653,"lng":25.1967235},{"id":"d2915f5b-d073-49d4-971b-36baf8b23486","name":"Mapped taxi rank (osm:node:9750298896)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7271412","longitude":"30.9868137","lat":-29.7271412,"lng":30.9868137},{"id":"7a08d136-e107-4c22-8fd6-d0af3f1b31e5","name":"Mapped taxi rank (osm:way:1009390550)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-24.6604957","longitude":"30.3112045","lat":-24.6604957,"lng":30.3112045},{"id":"c05aeb0d-54a5-47d7-97a5-1850d789f36b","name":"Mapped taxi rank (osm:way:1104114161)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7269259","longitude":"31.0637891","lat":-29.7269259,"lng":31.0637891},{"id":"6d722ee7-c020-44b5-88e2-fa1b5ef28e9f","name":"Mapped taxi rank (osm:way:1185727789)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3115309","longitude":"28.3895257","lat":-26.3115309,"lng":28.3895257},{"id":"f4c7e938-cb26-47d3-a4dc-74fc295a058d","name":"Mapped taxi rank (osm:way:1185727790)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3109308","longitude":"28.3893424","lat":-26.3109308,"lng":28.3893424},{"id":"023d344b-69bc-43a5-af1b-0c4c4131d33c","name":"Mapped taxi rank (osm:way:1231587368)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3328836","longitude":"27.8656206","lat":-26.3328836,"lng":27.8656206},{"id":"70e6f639-6d29-466f-8381-3573d355c175","name":"Mapped taxi rank (osm:way:1270390741)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0140624","longitude":"22.8002239","lat":-34.0140624,"lng":22.8002239},{"id":"c3f3001e-45b5-4e8b-914c-51a1ba57ad69","name":"Mapped taxi rank (osm:way:1271272700)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9029976","longitude":"18.4195112","lat":-33.9029976,"lng":18.4195112},{"id":"2293b001-3562-4d6f-8bb5-2fc4cd5e4ad6","name":"Mapped taxi rank (osm:way:1346379851)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.8649933","longitude":"25.6405911","lat":-25.8649933,"lng":25.6405911},{"id":"79cfa889-d73c-4784-bfc9-3fa2cab42e73","name":"Mapped taxi rank (osm:way:1346379860)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.8611322","longitude":"25.6412684","lat":-25.8611322,"lng":25.6412684},{"id":"a32fd0d6-0c17-4066-ab8d-ec5e1af37d2d","name":"Mapped taxi rank (osm:way:1413218466)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-30.096143","longitude":"30.8565895","lat":-30.096143,"lng":30.8565895},{"id":"20e0818e-84c6-4f4e-9637-b7d995fde11a","name":"Mapped taxi rank (osm:way:1456854233)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.174324","longitude":"27.9113563","lat":-26.174324,"lng":27.9113563},{"id":"8b770e18-74bb-4e96-b2e7-a61e03e8172a","name":"Mapped taxi rank (osm:way:148254570)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.4094327","longitude":"28.2813213","lat":-25.4094327,"lng":28.2813213},{"id":"198e26cf-a46c-46f0-97cb-adf39c5a802a","name":"Mapped taxi rank (osm:way:1485345911)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.3422144","longitude":"31.2948422","lat":-29.3422144,"lng":31.2948422},{"id":"4c49dc5b-edd4-47f9-81e3-ee022c920f9d","name":"Mapped taxi rank (osm:way:1485345912)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.3420748","longitude":"31.2946445","lat":-29.3420748,"lng":31.2946445},{"id":"04543a8d-f15e-4e54-86ff-9f781d45ef6f","name":"Mapped taxi rank (osm:way:1503609161)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.084536","longitude":"18.8504326","lat":-34.084536,"lng":18.8504326},{"id":"2ac2f083-7bd0-4206-8ee4-7561d9c40a78","name":"Mapped taxi rank (osm:way:1523969736)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.8547949","longitude":"18.6977998","lat":-33.8547949,"lng":18.6977998},{"id":"dabdbd2e-7000-4066-b4f6-cd569b5d435a","name":"Mapped taxi rank (osm:way:1524744293)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-22.9703145","longitude":"30.4572262","lat":-22.9703145,"lng":30.4572262},{"id":"db8e21e1-8675-44a4-bf52-4cb11586d543","name":"Mapped taxi rank (osm:way:1545105858)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9812444","longitude":"25.5540729","lat":-33.9812444,"lng":25.5540729},{"id":"fa0366cd-b993-4948-a914-7b5d98a02c64","name":"Mapped taxi rank (osm:way:1553519270)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":"uMnambithi","city":"uMnambithi","latitude":"-28.5615237","longitude":"29.7830369","lat":-28.5615237,"lng":29.7830369},{"id":"e862648e-2925-494f-b79d-055a542c8b0c","name":"Mapped taxi rank (osm:way:1556433531)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.8831677","longitude":"25.5632666","lat":-33.8831677,"lng":25.5632666},{"id":"b1fc1683-9231-4637-8104-2571448fea66","name":"Mapped taxi rank (osm:way:188800311)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0427297","longitude":"18.6172581","lat":-34.0427297,"lng":18.6172581},{"id":"06ec2d40-2526-4699-b8c7-291433bb3a9a","name":"Mapped taxi rank (osm:way:230195883)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.0384859","longitude":"28.0656885","lat":-26.0384859,"lng":28.0656885},{"id":"fec2a086-434f-4aea-9bb7-b94208792ad4","name":"Mapped taxi rank (osm:way:244513842)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.6410725","longitude":"19.0019982","lat":-33.6410725,"lng":19.0019982},{"id":"5180f0c1-90a9-4878-8b5f-d9067d6e63a9","name":"Mapped taxi rank (osm:way:310449025)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-28.8495201","longitude":"30.0899642","lat":-28.8495201,"lng":30.0899642},{"id":"686042a9-51f5-4501-8cb1-c1dd94293626","name":"Mapped taxi rank (osm:way:322558841)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.789839","longitude":"31.055463","lat":-25.789839,"lng":31.055463},{"id":"4081244c-bbfd-4151-88fb-20d870f6ef44","name":"Mapped taxi rank (osm:way:460837419)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-22.9769044","longitude":"30.4600429","lat":-22.9769044,"lng":30.4600429},{"id":"56097c0d-b78d-4810-90a8-88012f367b26","name":"Mapped taxi rank (osm:way:477298311)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.6322183","longitude":"27.2721702","lat":-25.6322183,"lng":27.2721702},{"id":"b6cf15a6-d236-4296-b6f5-b858212b9482","name":"Mapped taxi rank (osm:way:477298312)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.633511","longitude":"27.2675912","lat":-25.633511,"lng":27.2675912},{"id":"931ed895-efa9-4433-897f-d45cc87a2120","name":"Mapped taxi rank (osm:way:478482263)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.612787","longitude":"27.2659692","lat":-25.612787,"lng":27.2659692},{"id":"45b7bc7c-5bb4-4ef8-a17f-693da9a83387","name":"Mapped taxi rank (osm:way:478689677)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.6776337","longitude":"27.9338305","lat":-26.6776337,"lng":27.9338305},{"id":"82cd4392-1689-4bbf-8f0c-35fe95fdad48","name":"Mapped taxi rank (osm:way:484167943)","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.5683268","longitude":"27.2386483","lat":-25.5683268,"lng":27.2386483},{"id":"6955c986-e8fe-4790-87c7-50d3f2f8602c","name":"Mapped taxi rank (osm:way:578517546)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-27.9877387","longitude":"30.7214552","lat":-27.9877387,"lng":30.7214552},{"id":"59c7713c-6071-48fd-a514-cb7bbf1ca18b","name":"Mapped taxi rank (osm:way:667689507)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3468711","longitude":"27.8901063","lat":-26.3468711,"lng":27.8901063},{"id":"80cb7efb-bb8d-42a5-9d5f-6e94ebeaa5a0","name":"Mapped taxi rank (osm:way:67546746)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.8332238","longitude":"18.5254068","lat":-33.8332238,"lng":18.5254068},{"id":"466dae33-fd79-4bdf-ade8-a213f0b26a44","name":"Mapped taxi rank (osm:way:676256794)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-22.3451279","longitude":"30.0397942","lat":-22.3451279,"lng":30.0397942},{"id":"ddfcf19d-68ba-479d-a9f7-631bc9f52bec","name":"Mapped taxi rank (osm:way:683137709)","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.935987","longitude":"28.0002824","lat":-32.935987,"lng":28.0002824},{"id":"ef816c7a-d7f4-4d98-9fdf-af828165458b","name":"Mapped taxi rank (osm:way:712499210)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.8532423","longitude":"31.0102539","lat":-29.8532423,"lng":31.0102539},{"id":"f7b70c1c-e5f7-423a-9603-f66795c335a1","name":"Mapped taxi rank (osm:way:712658702)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.8559911","longitude":"31.030614","lat":-29.8559911,"lng":31.030614},{"id":"2e825c6c-493e-400b-b904-c56b13e85459","name":"Mapped taxi rank (osm:way:717735645)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0600626","longitude":"18.4634111","lat":-34.0600626,"lng":18.4634111},{"id":"9a7c13e1-d6d0-47e4-8135-75b2b34297e2","name":"Mapped taxi rank (osm:way:726614720)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.8546346","longitude":"31.0219173","lat":-29.8546346,"lng":31.0219173},{"id":"872ae93b-ceac-4b3f-9527-b60af8b5f368","name":"Mapped taxi rank (osm:way:726614721)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.8534514","longitude":"31.0208148","lat":-29.8534514,"lng":31.0208148},{"id":"3fa3ee35-b342-43a7-9d3c-b94caa78380f","name":"Mapped taxi rank (osm:way:733839561)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-24.5192421","longitude":"28.714981","lat":-24.5192421,"lng":28.714981},{"id":"79272eec-f24e-44fd-9360-de911d7b4f28","name":"Mapped taxi rank (osm:way:739477950)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2099873","longitude":"28.0353208","lat":-26.2099873,"lng":28.0353208},{"id":"384c24c3-4ed0-4d85-8a9a-b0b89a464223","name":"Mapped taxi rank (osm:way:739477951)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2104756","longitude":"28.0349816","lat":-26.2104756,"lng":28.0349816},{"id":"a391b2e4-d8ab-44a3-8f2d-7b5625738330","name":"Mapped taxi rank (osm:way:754718239)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.6912112","longitude":"27.7970212","lat":-26.6912112,"lng":27.7970212},{"id":"3df19f7f-22a4-44f0-a5c3-e9fe9f73942d","name":"Mapped taxi rank (osm:way:754718244)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.6895527","longitude":"27.7971307","lat":-26.6895527,"lng":27.7971307},{"id":"ca1029f1-0c26-4683-bea2-6cc0bffe10d1","name":"Mapped taxi rank (osm:way:769194741)","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-23.9073717","longitude":"29.442628","lat":-23.9073717,"lng":29.442628},{"id":"c97b8d1a-a3f9-4605-af7b-57972d902109","name":"Mapped taxi rank (osm:way:782701665)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9374358","longitude":"18.629027","lat":-33.9374358,"lng":18.629027},{"id":"050a321a-9739-4740-81c1-3976ca4301aa","name":"Mapped taxi rank (osm:way:785050570)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.909999","longitude":"18.5860579","lat":-33.909999,"lng":18.5860579},{"id":"4316083b-522a-4923-97b7-79c05c26e26d","name":"Mapped taxi rank (osm:way:810545632)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2356729","longitude":"27.9016059","lat":-26.2356729,"lng":27.9016059},{"id":"10b46715-fade-423f-92b4-a87311582137","name":"Mapped taxi rank (osm:way:810548060)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3426063","longitude":"28.2184965","lat":-26.3426063,"lng":28.2184965},{"id":"1d7a6c09-e0be-4b7d-809d-47f6e963ef53","name":"Mapped taxi rank (osm:way:810556250)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3554246","longitude":"28.1969595","lat":-26.3554246,"lng":28.1969595},{"id":"c76c6c05-197f-491a-99ce-10f68503e9af","name":"Mapped taxi rank (osm:way:810828259)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.471835","longitude":"27.8698271","lat":-26.471835,"lng":27.8698271},{"id":"0db0b394-e4c1-4036-a8d5-8d351ecc6765","name":"Mapped taxi rank (osm:way:812512821)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3262591","longitude":"28.1846151","lat":-26.3262591,"lng":28.1846151},{"id":"3b8e6973-ea86-4ba3-bf19-b62593d9e849","name":"Mapped taxi rank (osm:way:812524414)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3281476","longitude":"28.1438766","lat":-26.3281476,"lng":28.1438766},{"id":"0c4f50d4-2547-464c-b4af-ff2de3d9921a","name":"Mapped taxi rank (osm:way:823116527)","point_type":"Taxi rank","route_name":null,"province":"Mpumalanga","suburb":null,"city":null,"latitude":"-25.09375","longitude":"30.4482427","lat":-25.09375,"lng":30.4482427},{"id":"4c7e944c-8834-42dd-b753-152f9717f546","name":"Mapped taxi rank (osm:way:846201029)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1988875","longitude":"28.0390331","lat":-26.1988875,"lng":28.0390331},{"id":"b1717d05-ab43-4202-ab1c-27d50faa95b5","name":"Mapped taxi rank (osm:way:854233384)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7543126","longitude":"31.0667564","lat":-29.7543126,"lng":31.0667564},{"id":"639a20ff-ce52-435a-ba82-cce1180b221f","name":"Mapped taxi rank (osm:way:859656351)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.7199909","longitude":"30.985599","lat":-29.7199909,"lng":30.985599},{"id":"32eec18e-356c-41dd-9288-92504f5d43ec","name":"Mapped taxi rank (osm:way:885162157)","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.472153","longitude":"27.8701031","lat":-26.472153,"lng":27.8701031},{"id":"9a3225b4-7c61-480c-a5e0-9dbdc6c4f8e7","name":"Mapped taxi rank (osm:way:889172802)","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.785096","longitude":"20.1253172","lat":-33.785096,"lng":20.1253172},{"id":"78fac3e6-ff52-44fd-977e-593c30a982ee","name":"Mapped taxi rank (osm:way:893776950)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-27.7647781","longitude":"30.8010757","lat":-27.7647781,"lng":30.8010757},{"id":"6b9450fb-b092-4689-95c2-956a12941282","name":"Mapped taxi rank (osm:way:910602566)","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.5545576","longitude":"30.30154","lat":-29.5545576,"lng":30.30154},{"id":"6ddeda15-0f2f-4f3c-9410-f5df04010824","name":"Mapped taxi rank (osm:way:956961635)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.6607704","longitude":"27.2341296","lat":-27.6607704,"lng":27.2341296},{"id":"82b70c9f-be9c-4f0f-b24c-d6b50e79f868","name":"Marabastad","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.739367","longitude":"28.1735131","lat":-25.739367,"lng":28.1735131},{"id":"4c494bf7-0d32-4686-9d0f-a0f2c9d259fd","name":"Marabastad to Midrand","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7385744","longitude":"28.1807951","lat":-25.7385744,"lng":28.1807951},{"id":"9368751c-beab-4fb3-90ab-840f69d32199","name":"Masiphumele Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.1329763","longitude":"18.3794556","lat":-34.1329763,"lng":18.3794556},{"id":"a9a9fcd9-97b2-4c23-a38c-27db1510a49a","name":"Metro Mall Market & Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Johannesburg","city":"Johannesburg","latitude":"-26.2007676","longitude":"28.038267","lat":-26.2007676,"lng":28.038267},{"id":"402986ba-2df8-4883-9b45-ff16dc2ac250","name":"Mini Bus","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.9161662","longitude":"18.3892872","lat":-33.9161662,"lng":18.3892872},{"id":"a55a75f0-290e-4035-bf9b-0a30e7d33d0a","name":"Mini Bus Taxis","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.2497322","longitude":"24.5381815","lat":-32.2497322,"lng":24.5381815},{"id":"920f31ad-ffeb-4914-8bf2-81f875f54341","name":"Minibus taxi rank","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.4781562","longitude":"19.6692885","lat":-33.4781562,"lng":19.6692885},{"id":"f047e647-4be2-482d-8999-714fd506eb6e","name":"Minibus Taxis","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-33.8761433","longitude":"18.5756687","lat":-33.8761433,"lng":18.5756687},{"id":"a8f4ab20-2004-484c-928d-33cb8a6d3315","name":"Mitchells Plain Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0482175","longitude":"18.619669","lat":-34.0482175,"lng":18.619669},{"id":"cf1c409c-f0aa-4df3-8853-7304c1f668d9","name":"Mogwasetaxi Rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.2726677","longitude":"27.2376877","lat":-25.2726677,"lng":27.2376877},{"id":"8c51346c-f79e-450b-98d0-49d135ab3b96","name":"Moreleta","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.743647","longitude":"28.1952935","lat":-25.743647,"lng":28.1952935},{"id":"f5fc28ab-21d1-4c60-965c-994558d947a3","name":"Moreleta taxi 1","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7432239","longitude":"28.1951621","lat":-25.7432239,"lng":28.1951621},{"id":"1d98b61c-9408-4ecb-8bd8-4d41401dc2a5","name":"MTN Taxi Rank (Local & Shorter Long Distance)","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-28.5325852","longitude":"28.8048217","lat":-28.5325852,"lng":28.8048217},{"id":"7e75ea7e-148c-48b1-a6bd-98ee06dc5663","name":"Naledi Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.5041725","longitude":"27.8757839","lat":-26.5041725,"lng":27.8757839},{"id":"dd306270-26db-4650-94a2-0dca7a38f937","name":"Noord Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Johannesburg","city":"Johannesburg","latitude":"-26.1990483","longitude":"28.0476914","lat":-26.1990483,"lng":28.0476914},{"id":"5f136785-f57b-4614-8688-8a25a7b29a1b","name":"Noord Taxi Rank Pickup Area","point_type":"Taxi rank","route_name":"Johannesburg CBD taxi routes","province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1969","longitude":"28.0456","lat":-26.1969,"lng":28.0456},{"id":"ccf30879-239e-487a-a703-92c56f05e2de","name":"Norwich Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9612446","longitude":"25.6254134","lat":-33.9612446,"lng":25.6254134},{"id":"43bf67d6-66e8-4102-bb18-7c8d27f23e83","name":"Nqobo","point_type":"Taxi rank","route_name":null,"province":"KwaZulu-Natal","suburb":null,"city":null,"latitude":"-29.4671672","longitude":"30.6860681","lat":-29.4671672,"lng":30.6860681},{"id":"d7a8d34f-4f9d-4828-8f48-edf1e37b2c97","name":"Ntabozuko Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-32.8834334","longitude":"27.5836278","lat":-32.8834334,"lng":27.5836278},{"id":"91f155a6-5047-4500-843e-bb0ad0d3f6b2","name":"Parktown Taxi Rank - JR068","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Parktown","city":"Parktown","latitude":"-26.1755048","longitude":"28.043064","lat":-26.1755048,"lng":28.043064},{"id":"aad0337b-d4fd-4b88-8111-f7dd9e136a25","name":"Randburg Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.0954497","longitude":"28.0069393","lat":-26.0954497,"lng":28.0069393},{"id":"06668e27-29de-4ed1-b99d-1936227047ce","name":"Randfontein Station Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1805015","longitude":"27.698974","lat":-26.1805015,"lng":27.698974},{"id":"3fda4483-f079-4e4b-9e90-4339d3ed1100","name":"Retreat Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0597291","longitude":"18.4624179","lat":-34.0597291,"lng":18.4624179},{"id":"f04a4f07-152a-407f-b077-e35ba6f88317","name":"Rosebank Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Rosebank","city":"Rosebank","latitude":"-26.142807","longitude":"28.0415396","lat":-26.142807,"lng":28.0415396},{"id":"bc0f5761-dd73-4e3d-93e4-cd183496025d","name":"Rustenburg Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.6622908","longitude":"27.2361029","lat":-25.6622908,"lng":27.2361029},{"id":"faf0f94f-ef59-4019-a0dc-1918b7c3e2d7","name":"Sandton (Gautrain) Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1075288","longitude":"28.0559228","lat":-26.1075288,"lng":28.0559228},{"id":"f729cd01-be0c-467e-981c-a3e735da15b1","name":"Sandton (Stella Str) Taxi Cabs","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1064096","longitude":"28.0581099","lat":-26.1064096,"lng":28.0581099},{"id":"e3fc8573-5e3b-4317-85a9-58ae61769d3e","name":"Schauderville Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9364525","longitude":"25.5808585","lat":-33.9364525,"lng":25.5808585},{"id":"21c17ecb-4313-4f4d-a9a8-24b14141e217","name":"Selcourt Taxi","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3040638","longitude":"28.4476075","lat":-26.3040638,"lng":28.4476075},{"id":"af3446b9-94f7-4cea-bd3f-51f260eaecb8","name":"Taxi","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-34.0252949","longitude":"24.7710827","lat":-34.0252949,"lng":24.7710827},{"id":"e27fa11b-ab19-4e92-b56a-f863036b6d8d","name":"Taxi rank","point_type":"Taxi rank","route_name":null,"province":"North West","suburb":null,"city":null,"latitude":"-25.5683841","longitude":"27.2389523","lat":-25.5683841,"lng":27.2389523},{"id":"14368b44-4b3c-42e8-9975-0fdf9eca31b9","name":"Taxi Rank - JR107","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1997945","longitude":"28.0368069","lat":-26.1997945,"lng":28.0368069},{"id":"49fdae81-9c70-4b04-884f-789bde76ec4a","name":"Taxi Rank ER011","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.252685","longitude":"28.3338109","lat":-26.252685,"lng":28.3338109},{"id":"bd98ebf1-c39d-4e21-999e-75376a9e0210","name":"Taxi rank moreleta park","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7435717","longitude":"28.1952657","lat":-25.7435717,"lng":28.1952657},{"id":"97d4a048-1fa9-4bff-b094-8c8f08126408","name":"Taxi Rank Shopping mall","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":"Johnannesburg","city":"Johnannesburg","latitude":"-26.0350256","longitude":"28.1924395","lat":-26.0350256,"lng":28.1924395},{"id":"1db5e5a0-b043-4131-9daf-18285a662f55","name":"taxi stand","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1790544","longitude":"28.1181363","lat":-26.1790544,"lng":28.1181363},{"id":"1d2c6423-762c-4ffd-9810-8520ddbb71c9","name":"Taxi to Hatfield","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.7459735","longitude":"28.192883","lat":-25.7459735,"lng":28.192883},{"id":"2ed632a4-5f70-4efa-9f0f-65b605fef041","name":"Taxi to wekker","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.808317","longitude":"28.2991138","lat":-25.808317,"lng":28.2991138},{"id":"7f1a138b-c72c-449d-a334-6bc052a5f927","name":"Taxis to Port St-John","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-31.5900684","longitude":"28.7925614","lat":-31.5900684,"lng":28.7925614},{"id":"1dd8300a-e15a-4251-893f-80380c205088","name":"Terminus Main Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.9573362","longitude":"25.6190403","lat":-33.9573362,"lng":25.6190403},{"id":"0c959506-4f05-4b46-92f6-bbc03751dfff","name":"Terminus Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-33.7720303","longitude":"25.401046","lat":-33.7720303,"lng":25.401046},{"id":"985a1dae-0f8f-4e8b-9846-0b8e7ecfcfe0","name":"The Oaks Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":"Hoedspruit","city":"Hoedspruit","latitude":"-24.3605804","longitude":"30.6668581","lat":-24.3605804,"lng":30.6668581},{"id":"8e3d5104-da9f-49cb-8a43-0260599c4b79","name":"Thembisa Taxi Rank - ER019, Esangweni","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.0208889","longitude":"28.200749","lat":-26.0208889,"lng":28.200749},{"id":"6c0820a1-288a-4f1f-8802-bab8463d0acb","name":"Thulamela Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Limpopo","suburb":null,"city":null,"latitude":"-22.9701605","longitude":"30.4599027","lat":-22.9701605,"lng":30.4599027},{"id":"8dbbc29a-818a-4e1e-8848-b56760a4a217","name":"Tsolo Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":null,"city":null,"latitude":"-31.3100146","longitude":"28.7562832","lat":-31.3100146,"lng":28.7562832},{"id":"048aec49-6840-4451-a38d-8bf7fb299289","name":"Uncedo Taxi Association","point_type":"Taxi rank","route_name":null,"province":"Eastern Cape","suburb":"Makhanda","city":"Makhanda","latitude":"-33.3035352","longitude":"26.5473765","lat":-33.3035352,"lng":26.5473765},{"id":"bbac3d50-5b3a-41e9-9493-aa07ad62e283","name":"Vlakfontein Public Transport Facility","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.378294","longitude":"27.8865473","lat":-26.378294,"lng":27.8865473},{"id":"ace1b011-c8c3-4b2a-8218-aca67101662e","name":"Vosloorus Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.3426107","longitude":"28.2184466","lat":-26.3426107,"lng":28.2184466},{"id":"3315640b-4c62-4122-ad7a-05426d923da5","name":"Vrygrond Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Western Cape","suburb":null,"city":null,"latitude":"-34.0831225","longitude":"18.4871025","lat":-34.0831225,"lng":18.4871025},{"id":"d740a9be-34c6-4449-9c28-018f47f9c087","name":"Wanderers Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.1972986","longitude":"28.0442524","lat":-26.1972986,"lng":28.0442524},{"id":"32617567-ce48-498c-9571-084eb6ff1c7b","name":"Welkom Main Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.9806311","longitude":"26.7334793","lat":-27.9806311,"lng":26.7334793},{"id":"a5c2f8cf-148a-4f12-a9f9-76bc8e6e11fb","name":"Wepener Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-29.7299306","longitude":"27.0371295","lat":-29.7299306,"lng":27.0371295},{"id":"474094d5-6738-45e6-ad2c-77a0e5ab7678","name":"Wesselsbron taxi rank","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.8526092","longitude":"26.3651793","lat":-27.8526092,"lng":26.3651793},{"id":"89058a27-085a-4fa6-b153-3ed6a96a0b01","name":"Westgate Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-26.2102314","longitude":"28.0350715","lat":-26.2102314,"lng":28.0350715},{"id":"4ed59d08-7eef-49ce-8fca-12da071b09fd","name":"Wierdapark Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Gauteng","suburb":null,"city":null,"latitude":"-25.8565529","longitude":"28.1421644","lat":-25.8565529,"lng":28.1421644},{"id":"9c292d90-9391-4f90-b2fb-a82f6bf78eb1","name":"Zone 1 Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.9828208","longitude":"26.7402682","lat":-27.9828208,"lng":26.7402682},{"id":"f1f3c5c2-69b8-4a82-b044-0442529d21ce","name":"Zone 3 Taxi Rank","point_type":"Taxi rank","route_name":null,"province":"Free State","suburb":null,"city":null,"latitude":"-27.9835057","longitude":"26.7344685","lat":-27.9835057,"lng":26.7344685}]}
+{
+  "schema": 1,
+  "generated_on": "2026-10-20",
+  "notice": "Public preview snapshot of FareMap taxi fare and taxi-rank records. NOT independently verified. Data may be stale or disputed. Always confirm locally; the map does not assess physical safety.",
+  "fares": [
+    {
+      "id": "35302af1-0299-42bb-8e3d-47fc3d60ae91",
+      "route_from": "Aeroton",
+      "route_to": "Alberton North Taxi Rank",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-23 14:27:04.529433+00"
+    },
+    {
+      "id": "00c6ab4b-3baf-4ac8-aabc-817854bd4e17",
+      "route_from": "Alberton North Taxi Rank",
+      "route_to": "Bloemfontein Central",
+      "fare_price": "390.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "8d93474f-8f6f-4ce4-8211-24c1b5c32222",
+      "route_from": "Alberton North Taxi Rank",
+      "route_to": "Botshabelo Taxi Rank",
+      "fare_price": "400.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "12f6f371-07c4-478d-8818-698d62b6a643",
+      "route_from": "Alberton North Taxi Rank",
+      "route_to": "Northam",
+      "fare_price": "220.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "c282e8d1-cd23-4cab-aa4d-c5e1afddb105",
+      "route_from": "Alberton North Taxi Rank",
+      "route_to": "Sasolburg Taxi Rank",
+      "fare_price": "80.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "60b75850-e4cf-4beb-ae23-42f0ae6e68a2",
+      "route_from": "Alberton North Taxi Rank",
+      "route_to": "Welkom Taxi Rank",
+      "fare_price": "300.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "a2193cd1-b6ac-4883-b243-3d413fa8df09",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Aeroton",
+      "fare_price": "16.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "466ab8a2-b101-48ac-8e6a-a632a05e5255",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Drieziek",
+      "fare_price": "25.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "2691fa16-7de5-42ee-a4fc-217fb6a5e9b5",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Elias Motsoaledi",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "0f74a7ed-34ce-41b8-b367-dc71dd8bab4b",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Evaton",
+      "fare_price": "35.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "ab45edd5-248a-4b2e-bfe5-e72e93918b06",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Freedom Park",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "87f56c0c-afa4-4ef4-a8ac-537761f7a8b8",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "c4a2a344-3b8c-401d-a59e-e6d37a6e3bbf",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Klerksdorp",
+      "fare_price": "135.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "412e26d4-7f8e-4900-908f-33a514d58321",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Nasrec",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "9d55506e-7147-45d1-b2fa-ebc7817d1ed1",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Naturena",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "fb9f299b-1f58-4cc1-8de5-0719807871c1",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Palm Springs",
+      "fare_price": "30.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "cd83eaac-698b-4382-90dc-2e0e57f56b86",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Potchefstroom",
+      "fare_price": "115.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "81773927-b8e8-4fa5-bdaf-2efa3bead484",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Robertsham",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "e7878717-d4a8-4022-878a-baa3639a10cf",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Sandton",
+      "fare_price": "30.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-15 04:28:18.563818+00"
+    },
+    {
+      "id": "f5088997-a699-4a56-ba62-d9a10c886882",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Southgate",
+      "fare_price": "16.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "300d0637-ea37-4fce-8799-52d8fe80d4e9",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Sun City",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "6bd9632f-dcd4-49f7-b93f-c78a200b7880",
+      "route_from": "Baragwanath Taxi Rank",
+      "route_to": "Wolmaransstad",
+      "fare_price": "215.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "c13c47c9-8f6d-4ffc-b18d-77809d7fec6a",
+      "route_from": "Bhamshela Taxi Rank",
+      "route_to": "Durban",
+      "fare_price": "90.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "1018a101-3ab4-4d7f-bbbf-8a6cc6bff2bb",
+      "route_from": "Bhamshela Taxi Rank",
+      "route_to": "Mona",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "626c971f-6469-4045-86b0-185fcbca7a67",
+      "route_from": "Bhamshela Taxi Rank",
+      "route_to": "Tongaat Taxi Rank",
+      "fare_price": "45.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "3faeed6b-5558-41f4-ba8f-4568d037d572",
+      "route_from": "Bloemfontein Central Taxi Rank",
+      "route_to": "Qwaqwa",
+      "fare_price": "260.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "888b8700-cf81-422e-80f5-7640589cc416",
+      "route_from": "Bloemfontein Central Taxi Rank",
+      "route_to": "Welkom",
+      "fare_price": "120.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "c8f8fe59-efa5-4946-a4e5-eafbfb083d42",
+      "route_from": "Bloemfontein Central Taxi Rank to Qwaqwa",
+      "route_to": "Bloemfontein Central Taxi Rank",
+      "fare_price": "52.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-05 16:52:21.317327+00"
+    },
+    {
+      "id": "dd9e4b10-80a9-4f02-b329-e576ae0fcaae",
+      "route_from": "Bree Taxi Rank",
+      "route_to": "Meadowlands",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-27 09:26:01.687817+00"
+    },
+    {
+      "id": "c0d25ddd-d1b6-4ea5-be7e-c7e3bf590140",
+      "route_from": "Cape Town Station Deck Taxi Rank",
+      "route_to": "Khayelitsha",
+      "fare_price": "28.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "e124a005-b9fa-4e6b-99e1-cf0207ca9f7a",
+      "route_from": "Caroline",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "520cc1d4-553d-4869-a955-084567b44b2d",
+      "route_from": "Carr Street",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "7d9f1a83-0f33-40e8-9af2-013aaabbdde9",
+      "route_from": "Croesus",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "3f49b9a5-0f62-4454-855a-128da24ea278",
+      "route_from": "Crossroad Soweto",
+      "route_to": "Johannesburg CBD Taxi Rank",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "41147282-979a-4966-9d79-263d5ec47fe4",
+      "route_from": "Devland",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "353bda62-1280-418a-b70b-d0abf4a35e04",
+      "route_from": "Diepkloof Ext / Nasrec / Southgate",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "15e1190a-c6d8-46c4-9560-33a2b562d85c",
+      "route_from": "Dobsonville",
+      "route_to": "Baragwanath Taxi Rank",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "606209fe-c5aa-4a50-b8ce-cbe5c2db66bc",
+      "route_from": "Dobsonville",
+      "route_to": "Dube",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "b805cca3-0cc2-43b5-98e4-fe06415423cb",
+      "route_from": "Dobsonville",
+      "route_to": "Fleurhof",
+      "fare_price": "13.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "afbc957c-f7d1-4fee-9261-92c1221570ce",
+      "route_from": "Dobsonville",
+      "route_to": "Jabulani Mall",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "2a74f683-fea1-4c15-8b38-c7bc84f23366",
+      "route_from": "Dobsonville",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "84c9c6e2-e15c-4638-b35b-06c9c552f9ea",
+      "route_from": "Dobsonville",
+      "route_to": "New Canada / Pennyville",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "f816b2b2-5543-4fae-bedd-fe5d7d340355",
+      "route_from": "Dobsonville via Zone 10 / Clinic / Forbes",
+      "route_to": "Baragwanath Taxi Rank",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "c1ee3261-ae8d-4ee9-949b-6919ebfce535",
+      "route_from": "Dube",
+      "route_to": "Fleurhof",
+      "fare_price": "13.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "3df20e6e-458a-43c2-90ac-16a09eadf2e8",
+      "route_from": "Durban CBD",
+      "route_to": "Umhlanga / Gateway",
+      "fare_price": "25.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "ee92c070-aa5b-454e-86f2-606cda2faca8",
+      "route_from": "Durban Taxi Rank",
+      "route_to": "Johannesburg CBD Taxi Rank",
+      "fare_price": "400.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "2870dc39-f777-4df7-8309-ba6188e18ac5",
+      "route_from": "eMbalenhle Taxi Rank",
+      "route_to": "Evander Taxi Rank",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "812675c6-7c2a-478d-b204-27460139cdce",
+      "route_from": "eMbalenhle Taxi Rank",
+      "route_to": "Kinross Taxi Rank",
+      "fare_price": "21.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "1f6a2bfa-672c-4c10-9f2a-aa310a7d9c4c",
+      "route_from": "eMbalenhle Taxi Rank",
+      "route_to": "Leslie (Leandra)",
+      "fare_price": "37.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "d0045b83-ab6d-4ee9-8687-15a7c7a5e3d4",
+      "route_from": "eMbalenhle Taxi Rank",
+      "route_to": "Sasol Secunda Operations",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "e4ddb960-132a-4f10-be64-6515d2d8a906",
+      "route_from": "eMbalenhle Taxi Rank",
+      "route_to": "Secunda Taxi Rank",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "14755a00-9eb3-49aa-a089-d9d977c27656",
+      "route_from": "eMbalenhle Taxi Rank",
+      "route_to": "Trichardt",
+      "fare_price": "21.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "73c3fdaf-24b5-4241-87df-64c9fb1e587f",
+      "route_from": "Fleurhof",
+      "route_to": "Baragwanath Taxi Rank",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "a3781ab8-90c0-48d5-badd-e595bf9a46e0",
+      "route_from": "Fleurhof",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "e49b159c-2b66-4f27-be69-2755f97e3e1f",
+      "route_from": "Gqeberha CBD Taxi Rank",
+      "route_to": "Johannesburg",
+      "fare_price": "900.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "e723ac1c-202e-4f4e-9cd8-f8897aedc253",
+      "route_from": "Highgate",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "e36a6d5a-58a4-4acb-ac59-c31132f767d5",
+      "route_from": "Highgate",
+      "route_to": "Meadowlands",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "678c4ad9-0af9-44c4-baa9-520e6445f003",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Chiawelo",
+      "fare_price": "26.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "cbfb58f0-6d0c-4b46-b43c-17f2a07e228c",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Dlamini",
+      "fare_price": "26.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "2bafe9a0-f23f-4dd6-9df7-c292ca3fff94",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Edenvale Central",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "8740d437-ef0d-4c21-a338-dd127fefc093",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Glen Ridge",
+      "fare_price": "32.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "8167a279-2b8e-40ba-b0e4-688308f92305",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Green Village / Lufhereng",
+      "fare_price": "28.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "2617aee9-110f-4fe1-b1fa-8c5b5cb61f1a",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Greenstone Shopping Centre",
+      "fare_price": "23.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "9c6e44fc-cdc7-4c6a-ba09-834e9a44b51b",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Linbro Business Park",
+      "fare_price": "23.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "c4aa8fba-d4d7-4d21-908d-bc26cab8dd8f",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Longmeadow Business Estate",
+      "fare_price": "23.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "a4fa0216-d9b8-4995-a13a-b00d9a9beebc",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Lyndhurst",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "e303bfe1-fe57-4a64-b897-9469290f62b6",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Merafe",
+      "fare_price": "25.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "70eb75f5-68b0-4b92-aa79-a80c0e603aa0",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Modderfontein",
+      "fare_price": "23.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "f4f43f56-b9fd-4d33-abb0-7c0520c1ea69",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Naledi",
+      "fare_price": "25.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "5b6904a3-8def-4980-9c9c-1ef22f784368",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Pimville",
+      "fare_price": "23.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "f30f2ada-6405-4cbd-8203-172f7358ba5b",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Protea Glen",
+      "fare_price": "32.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "0e8abbf3-f239-4ba9-88e8-72201bc7d7b1",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Protea Glen Ext 22-35",
+      "fare_price": "32.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "d11d4fe3-d438-4af3-9582-9c6fcadb5ee1",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Protea North / South",
+      "fare_price": "28.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "5d96bdaf-a564-4d4c-916e-4fcc38b939d7",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Sandringham / Jewish Aged Home",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "720bf9ef-1e1a-4b27-91b7-eeb668df4cca",
+      "route_from": "Johannesburg CBD",
+      "route_to": "Zuurbekom",
+      "fare_price": "35.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "6a644767-acd9-4c26-ab3b-04f84b80472d",
+      "route_from": "Jumbo",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "c05d3ce4-4697-4b9a-9bae-6d2659f46e49",
+      "route_from": "Kakamas",
+      "route_to": "Upington",
+      "fare_price": "120.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "2347bbcc-cf00-4442-93d3-f62bd7978185",
+      "route_from": "Khayelitsha Local Taxi Route",
+      "route_to": "Khayelitsha Local Taxi Route",
+      "fare_price": "17.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "1befdbda-2df1-43b1-8057-2e476926afaa",
+      "route_from": "Killer Road",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "1861e5ac-7308-4ac3-a82a-cbdd942535f0",
+      "route_from": "Kinross Taxi Rank",
+      "route_to": "Evander Taxi Rank",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "05c00ea6-bf58-4d41-a87a-c531fac27c11",
+      "route_from": "Kinross Taxi Rank",
+      "route_to": "Secunda Taxi Rank",
+      "fare_price": "21.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "eafa6b04-c444-4ff2-93a2-d15c0f5a7314",
+      "route_from": "Kinross Taxi Rank",
+      "route_to": "Trichardt",
+      "fare_price": "21.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "d30fb1ba-25a7-49ee-b44b-b943515949ba",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Delareyville Taxi Rank",
+      "fare_price": "300.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "97607b98-2719-4f0a-98c3-a436041ccd04",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "28.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "04afbb4c-c071-4039-ad65-07b533120e57",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Lichtenburg Taxi Rank",
+      "fare_price": "250.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "e5f26ec1-cb99-4f0b-b35b-8ba2327b9866",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Mahikeng Taxi Rank",
+      "fare_price": "250.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "212ff4ce-a4d1-4bc6-af1b-12a7910595b1",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "R28 Krugersdorp (Key West / Pinehaven)",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "037c5670-9ba1-4850-a250-3d2f8ec1e1a8",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Randfontein Taxi Rank",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "7fe7db3a-a7df-4fd0-a6ba-d93656b70565",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Roodepoort Taxi Rank",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "7b26b6ca-a436-4fd3-a191-a9256dd7af78",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Taung Taxi Rank",
+      "fare_price": "340.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "c906f747-c01f-49a1-a773-ac44705d3066",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Toekomsrus",
+      "fare_price": "25.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "3d5940c6-9c74-4290-812f-8d4245255953",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Vryburg Taxi Rank",
+      "fare_price": "320.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "097060f2-5f9a-4c3a-9b58-29cb1b7932a9",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Westgate Shopping Centre",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "e98dde4f-4816-475f-b46d-2ebb4a921510",
+      "route_from": "Krugersdorp Taxi Rank",
+      "route_to": "Zeerust Taxi Rank",
+      "fare_price": "250.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "c658a5c8-7e4b-453a-90ef-b21c42b99578",
+      "route_from": "KuGompo City CBD",
+      "route_to": "Hemingways / Beacon Bay / Vincent / Berea / Gonubie",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "926dabb7-593d-4663-b0f5-b95db4b94f35",
+      "route_from": "Kwamhlanga Rank",
+      "route_to": "Johannesburg Taxi Rank",
+      "fare_price": "120.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "cd3a991a-1af5-4593-89f3-993f0dc07639",
+      "route_from": "Mayfair",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "ff9aac27-09d7-4601-9278-636cef364e9b",
+      "route_from": "Mdantsane Highway",
+      "route_to": "KuGompo City CBD",
+      "fare_price": "30.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "94717a63-e2bc-4891-a5a0-cf3ee4138612",
+      "route_from": "Mdantsane Zone 6",
+      "route_to": "Ntabozuko",
+      "fare_price": "50.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "af45a517-e18d-4f5d-a598-a7234fb8b4fa",
+      "route_from": "Mdantsane Zones 1-12",
+      "route_to": "Mdantsane Local Route",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "b1170520-1fa8-4133-9ce7-0f8c42038f04",
+      "route_from": "Meadowlands",
+      "route_to": "Baragwanath Taxi Rank",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-15 04:29:04.026004+00"
+    },
+    {
+      "id": "cb5a44c8-d561-4acb-82ec-f13ffb18f3ce",
+      "route_from": "Meadowlands",
+      "route_to": "Bree Taxi Rank",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "0ded8beb-46ca-4ed5-9694-2a993150e7b0",
+      "route_from": "Meadowlands",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "f0f166a3-c202-4986-8565-379fb9a0fb2f",
+      "route_from": "Meadowlands",
+      "route_to": "Maponya Mall",
+      "fare_price": "16.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "3477011f-fc8e-4214-b672-efc6b1e3372a",
+      "route_from": "Mkhuhlu Taxi Rank",
+      "route_to": "Hazyview Taxi Rank",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "443a2172-0e5a-4c75-84b3-028c95598f0c",
+      "route_from": "Mofolo Rank",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "17.00",
+      "currency": "ZAR",
+      "updated_at": "2026-08-10 09:05:26.277745+00"
+    },
+    {
+      "id": "ff117c63-4b07-4051-89cd-0387da897573",
+      "route_from": "Motetema/Leeufontein Cross Taxi Rank",
+      "route_to": "Monsterlus Taxi Rank",
+      "fare_price": "40.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "0ffa217f-9cce-4be7-a94f-e3ff1e7d5cb3",
+      "route_from": "Ndingiliza",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "22.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "f1edc083-a1a8-481d-9283-e8bc07528ffe",
+      "route_from": "Orlando",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "19.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "7c979c8f-16b4-4161-8b63-bb1bf759fa91",
+      "route_from": "Pennyville",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "18.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "7a440b97-c337-4363-9463-51451b910602",
+      "route_from": "Pietermaritzburg Market Square Taxi Rank",
+      "route_to": "Durban",
+      "fare_price": "90.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-27 11:00:14.045417+00"
+    },
+    {
+      "id": "f6868c16-0429-4405-84d9-3aabcf5a7cc4",
+      "route_from": "Plaza",
+      "route_to": "Johannesburg CBD",
+      "fare_price": "15.00",
+      "currency": "ZAR",
+      "updated_at": "2026-10-13 14:19:18.704841+00"
+    },
+    {
+      "id": "bf345fee-4966-466f-b806-de72e6d2db58",
+      "route_from": "Port St Johns Taxi Rank",
+      "route_to": "Bholani",
+      "fare_price": "42.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "b6bcfbaf-0f70-4fd5-bb0d-a91b10919095",
+      "route_from": "Port St Johns Taxi Rank",
+      "route_to": "Caguba",
+      "fare_price": "37.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "3ad69f9e-159f-4458-9746-ce4c21154242",
+      "route_from": "Port St Johns Taxi Rank",
+      "route_to": "Cwebeni",
+      "fare_price": "44.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "4bf84a99-2a44-4ded-8dba-4d49dff0e51d",
+      "route_from": "Port St Johns Taxi Rank",
+      "route_to": "Sicambeni",
+      "fare_price": "39.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "8343e733-25ae-46ae-923e-4d2af5f0d250",
+      "route_from": "Port St Johns Taxi Rank",
+      "route_to": "Vukandlule",
+      "fare_price": "39.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "f7b3999e-8965-43b5-88ff-9e38d8db0616",
+      "route_from": "Roodepoort Taxi Rank",
+      "route_to": "Keywest",
+      "fare_price": "23.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "c7d6c2e0-866f-498e-b95d-641647c79e1d",
+      "route_from": "Rustenburg Taxi Rank",
+      "route_to": "Johannesburg CBD Taxi Rank",
+      "fare_price": "210.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "6f1ceeee-0abf-4240-a398-ad09980e32dc",
+      "route_from": "Saldanha",
+      "route_to": "Eastern Cape",
+      "fare_price": "1200.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "13e1405f-86b6-410e-9b6c-c99db6c47d7f",
+      "route_from": "Secunda Taxi Rank",
+      "route_to": "Leslie (Leandra)",
+      "fare_price": "37.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "f2a7caee-469d-4c12-9f3c-8da770f06119",
+      "route_from": "Seshego",
+      "route_to": "Polokwane",
+      "fare_price": "20.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "9ede9b5b-58b7-4299-85d9-d3cb28d513e6",
+      "route_from": "Slovoville",
+      "route_to": "Dobsonville",
+      "fare_price": "14.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-25 08:14:43.374347+00"
+    },
+    {
+      "id": "96d1268d-31ea-4031-ad94-9156d76f89b7",
+      "route_from": "Sundumbili Taxi Rank",
+      "route_to": "Durban",
+      "fare_price": "130.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "b54f313c-6eb8-4387-934b-6bd70cfc8d71",
+      "route_from": "Sundumbili Taxi Rank",
+      "route_to": "Empangeni",
+      "fare_price": "95.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "79b46fd3-00da-4f8f-998d-d6f3eee25cb3",
+      "route_from": "Sundumbili Taxi Rank",
+      "route_to": "Gingindlovu",
+      "fare_price": "45.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "13a9d242-df13-48d1-afb1-0427e2ba7010",
+      "route_from": "Sundumbili Taxi Rank",
+      "route_to": "KwaDukuza (Stanger)",
+      "fare_price": "45.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "4d71ba48-dc2c-4a3e-9fe2-0afe26151792",
+      "route_from": "Tikelane Rank",
+      "route_to": "Mohlabeng",
+      "fare_price": "25.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    },
+    {
+      "id": "230894d1-78c8-4268-acf2-1a64557a9306",
+      "route_from": "Tongaat Taxi Rank",
+      "route_to": "Durban",
+      "fare_price": "37.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "4fce2b82-ca78-4e27-98c7-e2dedaad86d4",
+      "route_from": "Tongaat Taxi Rank",
+      "route_to": "KwaDukuza (Stanger)",
+      "fare_price": "43.00",
+      "currency": "ZAR",
+      "updated_at": "2026-09-22 21:15:15.248299+00"
+    },
+    {
+      "id": "ba313b34-f66a-4062-99e3-0021de9fb26b",
+      "route_from": "Western Cape",
+      "route_to": "Eastern Cape",
+      "fare_price": "1150.00",
+      "currency": "ZAR",
+      "updated_at": "2026-07-06 17:28:51.037593+00"
+    }
+  ],
+  "points": []
+}
