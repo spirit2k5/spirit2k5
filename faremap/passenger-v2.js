@@ -1,3 +1,5 @@
+import { createPassengerMapController } from "./passenger-map.js?v=20261021-native-map1";
+
 /**
  * FareMap Passenger Web 2.0
  * No driver mode, no fabricated routes, no safety guarantees.
@@ -67,10 +69,17 @@ export function confidenceDescription(row) {
 }
 
 export function createPassengerWebEnhancements({
-  supabase, state, $, element, setTab, openPoint, formatMoney, readableDate, status, showLogin
+  supabase, state, $, element, setTab, openPoint, formatMoney, readableDate, status, showLogin, locatePassenger
 }) {
   const trust = new Map();
-  let map = null, mapLayer = null, markers = new Map();
+  const maps = createPassengerMapController({
+    onSelectPoint: point => {
+      setTab("points");
+      openPoint(point);
+      maps.focusPoint(point);
+    },
+    onLocate: locatePassenger
+  });
   let issueTarget = null, issuePending = null, formGeneration = 0;
   const dispatchedReports = new WeakSet();
   let reportIdentity = { userId: null, sessionId: null, epoch: 0 };
@@ -97,6 +106,7 @@ export function createPassengerWebEnhancements({
     const userId = next?.userId || null, sessionId = next?.sessionId || null;
     if (reportIdentity.userId === userId && reportIdentity.sessionId === sessionId) return;
     reportIdentity = { userId, sessionId, epoch: reportIdentity.epoch + 1 };
+    maps.clearLocation();
     // This runs synchronously in the accepted auth callback, before UI deferral.
     closeIssue();
   }
@@ -146,15 +156,8 @@ export function createPassengerWebEnhancements({
     for (const node of document.querySelectorAll("[data-trust-type][data-trust-id]")) fillTrust(node);
     updateMarkerColours();
   }
-  function colourFor(id) {
-    const row = trust.get("pickup:" + id);
-    const level = row?.confidence_level || "unverified";
-    return ({ high: "#13A957", community: "#3997A6", stale: "#E9B000", disputed: "#DC3344",
-      unverified: "#8794A2" })[level] || "#8794A2";
-  }
   function updateMarkerColours() {
-    for (const [id, marker] of markers) marker.setStyle({ color: colourFor(id),
-      fillColor: colourFor(id) });
+    maps.setConfidence(trust);
   }
   async function fetchConfidence(type, ids) {
     if (!ids.length) return;
@@ -164,7 +167,7 @@ export function createPassengerWebEnhancements({
           p_entity_type: type, p_entity_ids: ids.slice(offset, offset + 200)
         });
         if (error) throw error;
-        for (const row of data || []) trust.set(type + ":" + row.entity_id, row);
+        for (const row of data || []) trust.set(type + ":" + row.entity_id, { ...row, fetched_at: new Date().toISOString() });
         refreshTrust();
       } catch (_) {
         // Confidence is optional; never promote a record to verified on an RPC failure.
@@ -181,59 +184,15 @@ export function createPassengerWebEnhancements({
     renderPlanner();
   }
 
-  function coordinates(point) {
-    const lat = Number(point.latitude ?? point.lat), lng = Number(point.longitude ?? point.lng);
-    return Number.isFinite(lat) && Number.isFinite(lng) &&
-      Math.abs(lat) <= 90 && Math.abs(lng) <= 180 && (lat !== 0 || lng !== 0)
-      ? [lat, lng] : null;
-  }
-  function ensureMap() {
-    if (!window.L) {
-      $("v2MapNote").textContent = "Interactive map is temporarily unavailable. The pickup-point list and individual map links still work.";
-      return;
-    }
-    if (map || !$("v2Map")) return;
-    const L = window.L;
-    map = L.map("v2Map", { scrollWheelZoom: false }).setView([-26.247, 27.855], 11);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18, attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
-    }).addTo(map);
-    mapLayer = L.layerGroup().addTo(map);
-  }
   function refreshMap() {
-    ensureMap();
-    if (!map || !mapLayer) return;
-    mapLayer.clearLayers(); markers.clear();
-    for (const point of state.points) {
-      const pos = coordinates(point);
-      if (!pos) continue;
-      const marker = window.L.circleMarker(pos, {
-        radius: 6, weight: 2, color: colourFor(point.id), fillColor: colourFor(point.id),
-        fillOpacity: .8
-      }).addTo(mapLayer);
-      const tip = document.createElement("span");
-      tip.textContent = point.name || "Taxi pickup point";
-      marker.bindTooltip(tip);
-      marker.on("click", () => { openPoint(point); focusPoint(point, false); });
-      markers.set(point.id, marker);
-    }
-    setTimeout(() => map?.invalidateSize(), 50);
-    $("v2MapNote").textContent = markers.size
-      ? markers.size + " mapped pickup point(s) · colours indicate data confidence, NOT physical safety."
-      : "No pickup coordinates available. Search recorded pickup points below.";
+    maps.setPoints(state.points);
+    maps.setConfidence(trust);
   }
   function focusPoint(point, zoom = true) {
-    ensureMap();
-    const coords = coordinates(point);
-    if (!map || !coords) return;
-    if (zoom) map.setView(coords, Math.max(map.getZoom(), 15));
-    markers.get(point.id)?.openTooltip();
+    maps.focusPoint(point, zoom);
   }
   function onTab(tab) {
-    if (tab === "points") {
-      ensureMap();
-      if (map) setTimeout(() => map.invalidateSize(), 70);
-    }
+    maps.onTab(tab);
     if (tab === "planner") renderPlanner();
   }
 
@@ -433,6 +392,7 @@ export function createPassengerWebEnhancements({
     }
   }
   function init() {
+    maps.init();
     $("v2PlanBtn").addEventListener("click", renderPlanner);
     $("v2PlanFrom").addEventListener("change", renderPlanner);
     $("v2PlanTo").addEventListener("change", renderPlanner);
@@ -458,5 +418,6 @@ export function createPassengerWebEnhancements({
     refreshMap();
     await refreshConfidence();
   }
-  return { init, onData, onIdentityChanged, showTrust, onTab, focusPoint, openIssue, openGeneralReport, openPlanner, renderPlanner };
+  return { init, onData, onIdentityChanged, showTrust, onTab, focusPoint, openIssue, openGeneralReport, openPlanner, renderPlanner,
+    setLocation: position => maps.setLocation(position) };
 }

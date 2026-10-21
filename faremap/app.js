@@ -1,5 +1,6 @@
+import "./maplibre-runtime.js?v=20261021-native-map1";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
-import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-passenger3";
+import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-native-map1";
 import { createIdentityClock, createGuardedAuthStorage } from "./web-auth.js?v=20261021-passenger3";
 
 // A publishable key is intended for browser apps. Never embed a service-role key.
@@ -38,6 +39,8 @@ let authOperation = 0;
 let emailChallenge = null;
 let catalogSource = null;
 let observedAuthEvent = false;
+let selectedPointId = "";
+let locationRequest = 0;
 
 function status(id, message, kind = "") {
   const el = $(id);
@@ -90,6 +93,7 @@ function acceptSession(session) {
   state.user = session?.user || null;
   v2.onIdentityChanged(session);
   if (changed) {
+    locationRequest++;
     catalogRequest++;
     state.loadedFor = null;
     state.saved = new Set();
@@ -133,6 +137,16 @@ function element(tag, className, content) {
   if (className) node.className = className;
   if (content !== undefined) node.textContent = content;
   return node;
+}
+function nativeIcon(name, className = "fm-native-icon") {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", className);
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", "/faremap/assets/native-map-icons.svg#" + name);
+  svg.append(use);
+  return svg;
 }
 function routeName(fare) {
   return String(fare.route_from || "Unknown origin") + " → " + String(fare.route_to || "Unknown destination");
@@ -214,8 +228,10 @@ function populateChoices() {
   }
 }
 function pointCoordinate(point) {
-  const lat = Number(point.latitude ?? point.lat);
-  const lng = Number(point.longitude ?? point.lng);
+  const rawLat = point.latitude ?? point.lat, rawLng = point.longitude ?? point.lng;
+  if (![rawLat, rawLng].every(value => (typeof value === "number" || typeof value === "string") && String(value).trim())) return null;
+  const lat = Number(rawLat);
+  const lng = Number(rawLng);
   if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180 ||
       (lat === 0 && lng === 0)) return null;
   return { lat, lng };
@@ -223,27 +239,35 @@ function pointCoordinate(point) {
 function openPoint(point) {
   const box = $("pointMap");
   box.replaceChildren();
-  const coords = pointCoordinate(point);
-  box.append(element("strong", "", point.name || "Pickup point"));
-  box.append(element("p", "micro muted", "Map data may be inaccurate. Check the actual queue, boarding side and route with the rank or operator."));
-  if (!coords) {
-    box.append(element("p", "muted", "Coordinates unavailable for this point."));
-    return;
+  selectedPointId = point.id;
+  for (const row of document.querySelectorAll("[data-point-id]")) {
+    const selected = row.dataset.pointId === point.id;
+    row.classList.toggle("is-selected", selected);
+    row.setAttribute("aria-pressed", String(selected));
   }
-  const map = document.createElement("iframe");
-  const bbox = [coords.lng - .022, coords.lat - .015, coords.lng + .022, coords.lat + .015].join(",");
-  map.src = "https://www.openstreetmap.org/export/embed.html?bbox=" + encodeURIComponent(bbox) +
-    "&layer=mapnik&marker=" + encodeURIComponent(coords.lat + "," + coords.lng);
-  map.title = "OpenStreetMap view of " + (point.name || "taxi pickup point");
-  map.loading = "lazy";
-  map.referrerPolicy = "strict-origin-when-cross-origin";
-  box.append(map);
-  const link = element("a", "micro", "Open larger map ↗");
-  link.href = "https://www.openstreetmap.org/?mlat=" + encodeURIComponent(coords.lat) +
-    "&mlon=" + encodeURIComponent(coords.lng) + "#map=15/" + coords.lat + "/" + coords.lng;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  box.append(link);
+  const coords = pointCoordinate(point);
+  const heading = element("div", "fm-selected-point-heading");
+  const icon = element("span", "fm-pickup-list-icon");
+  icon.append(nativeIcon("location"));
+  const copy = element("div", "fm-pickup-copy");
+  copy.append(element("strong", "", point.name || "Pickup point"));
+  copy.append(element("small", "muted", [point.suburb, point.city, point.province].filter(Boolean).join(" · ") || "Recorded pickup point"));
+  heading.append(icon, copy);
+  box.append(heading);
+  v2.showTrust(box, "pickup", point);
+  box.append(element("p", "micro muted", "Confirm the actual queue, boarding side, destination and fare with the rank or operator. Data confidence does not assess physical safety."));
+  if (coords) {
+    const centre = element("button", "action secondary", "Show this pickup on the map");
+    centre.type = "button";
+    centre.addEventListener("click", () => v2.focusPoint(point));
+    box.append(centre);
+    const link = element("a", "fm-small-link", "Open in a larger map ↗");
+    link.href = "https://www.openstreetmap.org/?mlat=" + encodeURIComponent(coords.lat) +
+      "&mlon=" + encodeURIComponent(coords.lng) + "#map=15/" + coords.lat + "/" + coords.lng;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    box.append(link);
+  } else box.append(element("p", "muted", "Coordinates unavailable for this point. Check the boarding location locally."));
   const report = element("button", "action secondary", "Report inaccurate location");
   report.type = "button";
   report.style.marginTop = "12px";
@@ -261,12 +285,19 @@ function renderPoints() {
     return;
   }
   for (const point of matches.slice(0, 35)) {
-    const button = element("button", "point");
+    const button = element("button", "point fm-pickup-row");
     button.type = "button";
-    button.append(element("strong", "", point.name || "Unnamed pickup point"));
+    button.dataset.pointId = point.id;
+    button.classList.toggle("is-selected", selectedPointId === point.id);
+    button.setAttribute("aria-pressed", String(selectedPointId === point.id));
+    const icon = element("span", "fm-pickup-list-icon");
+    icon.append(nativeIcon("location"));
+    const copy = element("span", "fm-pickup-copy");
+    copy.append(element("strong", "", point.name || "Unnamed pickup point"));
     const place = [point.suburb, point.city, point.province].filter(Boolean).join(" · ");
-    button.append(element("small", "", (place || point.point_type || "Taxi pickup") + " · Location not independently confirmed"));
-    v2.showTrust(button, "pickup", point);
+    copy.append(element("small", "", place || point.point_type || "Recorded taxi pickup"));
+    v2.showTrust(copy, "pickup", point);
+    button.append(icon, copy, nativeIcon("chevron-forward", "fm-native-icon fm-pickup-chevron"));
     button.addEventListener("click", () => { openPoint(point); v2.focusPoint(point); });
     box.append(button);
   }
@@ -551,7 +582,9 @@ async function signInWithGoogle() {
 function homeRow(icon, title, subtitle, onClick, price = "") {
   const row = element("button", "fm-row");
   row.type = "button";
-  const iconEl = element("span", "fm-row-icon", icon);
+  const iconEl = element("span", "fm-row-icon");
+  if (["location", "locate-outline", "map-outline"].includes(icon)) iconEl.append(nativeIcon(icon));
+  else iconEl.textContent = icon;
   const content = element("span", "fm-row-copy");
   content.append(element("b", "", title), element("small", "", subtitle));
   row.append(iconEl, content);
@@ -569,11 +602,11 @@ function renderHome() {
   if (!state.points.length) {
     list.append(element("div", "fm-row", "No taxi pickup points are recorded yet."));
   } else {
-    const locate = homeRow("⌖", "Find pickup points near me",
+    const locate = homeRow("locate-outline", "Find pickup points near me",
       "Tap My location and allow browser location access to view recorded points within 20 km.",
       locatePassengerOnWeb);
     list.append(locate);
-    const browse = homeRow("▧", "Browse all pickup points",
+    const browse = homeRow("location", "Browse all pickup points",
       "Search by taxi rank, suburb or province — accuracy is not guaranteed.",
       () => setTab("points"));
     list.append(browse);
@@ -595,20 +628,23 @@ function setMapAt(lat, lng, label) {
   const coords = { lat: Number(lat), lng: Number(lng) };
   if (!Number.isFinite(coords.lat) || !Number.isFinite(coords.lng) ||
       Math.abs(coords.lat) > 90 || Math.abs(coords.lng) > 180) return;
-  const map = $("fmHomeMap");
-  const bounds = [coords.lng - .022, coords.lat - .016, coords.lng + .022, coords.lat + .016].join(",");
-  map.src = "https://www.openstreetmap.org/export/embed.html?bbox=" + encodeURIComponent(bounds) +
-    "&layer=mapnik&marker=" + encodeURIComponent(coords.lat + "," + coords.lng);
+  v2.setLocation(coords);
   $("homeMapStatus").textContent = label + " · verify actual boarding points locally";
 }
 function locatePassengerOnWeb() {
+  const request = ++locationRequest;
   if (!("geolocation" in navigator)) {
     $("homeMapStatus").textContent = "Browser location is unavailable. You can search pickup points manually.";
     return;
   }
   $("homeMapStatus").textContent = "Requesting your location…";
   navigator.geolocation.getCurrentPosition(position => {
+    if (request !== locationRequest) return;
     const { latitude, longitude } = position.coords;
+    if (!pointCoordinate({ latitude, longitude })) {
+      $("homeMapStatus").textContent = "A reliable device location is unavailable. Search pickup points manually.";
+      return;
+    }
     setMapAt(latitude, longitude, "Approximate device location");
     const toRadians = d => d * Math.PI / 180;
     const distanceKm = point => {
@@ -630,12 +666,13 @@ function locatePassengerOnWeb() {
     }
     for (const item of nearby) {
       const point = item.point;
-      list.append(homeRow("⌖", point.name || "Taxi pickup point",
+      list.append(homeRow("location", point.name || "Taxi pickup point",
         (item.dist < 1 ? Math.round(item.dist * 1000) + " m" : item.dist.toFixed(1) + " km") +
           " from your location · not independently verified",
-        () => { setTab("points"); $("pointSearch").value = point.name || ""; renderPoints(); openPoint(point); }));
+        () => { setTab("points"); $("pointSearch").value = point.name || ""; renderPoints(); openPoint(point); v2.focusPoint(point); }));
     }
   }, () => {
+    if (request !== locationRequest) return;
     $("homeMapStatus").textContent = "Location unavailable or not allowed. You can still search taxi fares and ranks.";
   }, { enableHighAccuracy: false, maximumAge: 60000, timeout: 11000 });
 }
@@ -747,6 +784,7 @@ applyTheme();
 // V2 is kept inside FareMap's existing passenger UI and five-button native HUD.
 const v2 = createPassengerWebEnhancements({
   supabase, state, $, element, setTab, openPoint, formatMoney, readableDate, status,
+  locatePassenger: locatePassengerOnWeb,
   showLogin: async () => {
     browsingAsGuest = false;
     await displaySession(null);
