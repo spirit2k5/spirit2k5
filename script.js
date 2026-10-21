@@ -1149,3 +1149,15 @@
     });
   });
 })();
+
+
+/* Load Studio action animations once for every public studio page.
+ * Separate from FareMap's own app/HUD and the private assistant admin page. */
+(() => {
+  if (document.querySelector('script[data-spirit-action-icons]')) return;
+  const icons = document.createElement('script');
+  icons.src = '/studio-action-icons.js?v=20261021-icons1';
+  icons.defer = true;
+  icons.dataset.spiritActionIcons = '1';
+  document.head.appendChild(icons);
+})();
