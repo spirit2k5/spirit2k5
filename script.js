@@ -672,6 +672,7 @@
     initPackageCards();
     initWorkProcessAnimation();
     initConversionLayer();
+    window.spiritEnhanceSocials?.();
     trackEvent('page_view', location.pathname);
     if (currentPageName() === 'pricing.html') trackEvent('pricing_view', location.pathname);
     updateActiveNav();
@@ -1160,4 +1161,14 @@
   icons.defer = true;
   icons.dataset.spiritActionIcons = '1';
   document.head.appendChild(icons);
+})();
+
+
+/* Social logo links — loaded on every public Studio page. */
+(() => {
+  if (document.querySelector('script[data-spirit-social]')) return;
+  const script = document.createElement('script');
+  script.src = '/studio-social.js?v=20261021-social1';
+  script.dataset.spiritSocial = '1';
+  document.head.appendChild(script);
 })();

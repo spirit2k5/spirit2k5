@@ -1,0 +1,71 @@
+/* Spirit2k5 social links — mixed-colour animated borders using user-supplied logos. */
+.spirit-social-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:18px 0 6px}
+.spirit-social-btn,.footer a.spirit-social-btn{
+  --social-surface:#fff7eb;
+  position:relative;display:inline-grid;place-items:center;
+  width:68px;height:68px;min-width:68px;
+  border:1px solid rgba(255,255,255,.18);border-radius:21px;
+  margin:0;overflow:hidden;isolation:isolate;text-decoration:none;
+  color:inherit;cursor:pointer;vertical-align:middle;
+  background:var(--social-surface);
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.spirit-social-btn::before{
+  content:"";position:absolute;z-index:0;
+  inset:-65%;border-radius:50%;
+  background:var(--social-spectrum);
+  animation:spirit-social-spin 6s linear infinite;
+}
+.spirit-social-btn::after{
+  content:"";position:absolute;z-index:1;
+  inset:4px;border-radius:17px;
+  background:var(--social-surface);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
+}
+.spirit-social-btn img{
+  position:relative;z-index:2;display:block;
+  width:38px;max-width:calc(100% - 12px);height:38px;
+  object-fit:contain;pointer-events:none;
+  transition:transform .36s cubic-bezier(.2,.8,.2,1),filter .3s ease;
+  animation:spirit-social-logo-float 3.8s ease-in-out infinite;
+}
+.spirit-social-instagram{
+  --social-surface:linear-gradient(155deg,#fff7ef,#fce8dc);
+  --social-spectrum:conic-gradient(#ffc44e,#ff7b28,#e83682,#a438c0,#5952d8,#f9b64c,#ffc44e);
+}
+.spirit-social-instagram img{width:53px;height:auto;max-height:26px}
+.spirit-social-whatsapp{
+  --social-surface:linear-gradient(145deg,#24d765,#078c55);
+  --social-spectrum:conic-gradient(#25d366,#b6ffab,#00ab7e,#e2ffc2,#25d366);
+}
+.spirit-social-whatsapp img{width:42px;height:42px}
+.spirit-social-tiktok{
+  --social-surface:linear-gradient(145deg,#090a12,#161324);
+  --social-spectrum:conic-gradient(#25f4ee,#101725,#fe2c55,#25f4ee,#fe2c55);
+}
+.spirit-social-tiktok img{width:39px;height:42px}
+.spirit-social-btn:focus-visible{outline:3px solid #f3ae4a;outline-offset:4px}
+.spirit-social-btn:active{transform:scale(.93)}
+.spirit-social-inline{margin:8px 0!important}
+@media(hover:hover){
+  .spirit-social-btn:hover,.footer a.spirit-social-btn:hover{
+    transform:translateY(-5px) rotate(-2deg);
+    box-shadow:0 18px 35px rgba(16,15,14,.2)
+  }
+  .spirit-social-btn:hover img{transform:scale(1.12) rotate(5deg);filter:drop-shadow(0 2px 5px rgba(255,255,255,.15))}
+}
+@keyframes spirit-social-spin{to{transform:rotate(360deg)}}
+@keyframes spirit-social-logo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@media(max-width:680px){
+  .spirit-social-links{gap:9px;margin-top:14px}
+  .spirit-social-btn,.footer a.spirit-social-btn{width:56px;height:56px;min-width:56px;border-radius:17px}
+  .spirit-social-btn::after{inset:3px;border-radius:14px}
+  .spirit-social-instagram img{width:46px;max-height:21px}
+  .spirit-social-whatsapp img{width:35px;height:35px}
+  .spirit-social-tiktok img{width:33px;height:36px}
+}
+@media(prefers-reduced-motion:reduce){
+  .spirit-social-btn,.spirit-social-btn::before,.spirit-social-btn img{animation:none!important;transition:none!important;transform:none!important}
+}
