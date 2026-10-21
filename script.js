@@ -1167,6 +1167,13 @@
 /* Social logo links — loaded on every public Studio page. */
 (() => {
   if (document.querySelector('script[data-spirit-social]')) return;
+  if (!document.querySelector('link[data-spirit-social-style]')) {
+    const sheet = document.createElement('link');
+    sheet.rel = 'stylesheet';
+    sheet.href = '/studio-social.css?v=20261021-social1';
+    sheet.dataset.spiritSocialStyle = '1';
+    document.head.appendChild(sheet);
+  }
   const script = document.createElement('script');
   script.src = '/studio-social.js?v=20261021-social1';
   script.dataset.spiritSocial = '1';
