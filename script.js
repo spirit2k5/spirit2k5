@@ -634,18 +634,6 @@
         else if (/^https:\/\//.test(href) && !href.includes('spirit2k5.co.za')) trackEvent('live_site_click', href);
       }, { capture: true });
     }
-    if (!document.getElementById('whatsapp-float')) {
-      const whatsapp = document.createElement('a');
-      whatsapp.id = 'whatsapp-float';
-      whatsapp.className = 'whatsapp-float';
-      whatsapp.href = 'https://wa.me/27781888220?text=' + encodeURIComponent('Hi Carlton, I found Spirit2k5 Web Studio and I want to discuss a website project.');
-      whatsapp.target = '_blank';
-      whatsapp.rel = 'noopener';
-      whatsapp.setAttribute('aria-label', 'Chat with Spirit2k5 on WhatsApp');
-      whatsapp.innerHTML = '<span class="whatsapp-brand-icon" aria-hidden="true"><img src="/assets/logo-mark.svg" alt=""></span><b>Chat with us</b>';
-      document.body.appendChild(whatsapp);
-    }
-
     const footer = document.querySelector('.footer');
     if (footer && !footer.querySelector('[data-google-review-link]')) {
       const contactBlock = [...footer.children].find(el => el.querySelector && el.querySelector('h4')?.textContent.trim() === 'Contact');
