@@ -515,8 +515,11 @@ body{background:#f6f0e6;color:#191b1d}body::before{background:radial-gradient(ci
 .faremap-store-identity small{font-size:.85rem;color:#57655d}
 .faremap-store-platform{white-space:nowrap;padding:7px 10px;border-radius:100px;background:#e5f4e9;color:#18643e;font-size:.7rem;font-weight:850}
 @media(max-width:680px){
-  .faremap-showcase .faremap-access-link{min-height:70px;padding:12px 14px;border-radius:15px}
-  .faremap-showcase .faremap-access-link strong{font-size:.93rem}
+  .faremap-showcase .faremap-access-link{min-height:70px;padding:12px 14px;gap:10px;border-radius:15px}
+  .faremap-showcase .faremap-action-icon,.faremap-showcase .faremap-play-icon{width:32px;height:32px;flex-basis:32px}
+  .faremap-showcase .faremap-action-arrow{display:none}
+  .faremap-showcase .faremap-access-link strong{font-size:.9rem;white-space:nowrap}
+  .faremap-showcase .faremap-access-link small{font-size:.58rem;letter-spacing:.055em}
   .faremap-feature-banner{min-height:218px;gap:10px;padding:15px 12px}
   .faremap-showcase .case-media img.faremap-feature-icon{width:30%;min-width:70px;max-width:105px}
   .faremap-feature-title{font-size:clamp(1.75rem,8vw,2.9rem);letter-spacing:-.06em}
