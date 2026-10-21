@@ -28,6 +28,7 @@ jobs:
           node --check faremap/app.js
           node --check faremap/passenger-v2.js
           node --check faremap/passenger-map.js
+          node --check faremap/pickup-location-labels.js
           node --check faremap/maplibre-runtime.js
           node --check faremap/vendor/maplibre-gl.mjs
           node --check faremap/vendor/maplibre-gl-worker.mjs

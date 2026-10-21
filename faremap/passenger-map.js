@@ -1,3 +1,5 @@
+import { PICKUP_LOCATION_LABELS } from "./pickup-location-labels.js?v=20261021-named-pickups1";
+
 // Passenger map parity with FareMapPremiumMapMarkers and FareMapWebMap.android.
 // Public catalogue/confidence only: no driver operations or invented live taxis.
 export const NATIVE_STREET_STYLE = "https://tiles.openfreemap.org/styles/liberty";
@@ -18,10 +20,30 @@ const LONG_LABELS = { high: "High data confidence", community: "Community confir
 const SPRITE = "/faremap/assets/native-map-icons.svg";
 const CONTEXTS = { home: { id: "fmHomeMap", note: "homeMapStatus", size: 42 }, points: { id: "v2Map", note: "v2MapNote", size: 44 } };
 
+// Apply a reviewed label only to the exact original record and coordinates.
+// A later rename or moved point must never inherit an obsolete place description.
+export function pickupNameInfo(point) {
+  if (!point || !Object.hasOwn(PICKUP_LOCATION_LABELS, point.id)) return null;
+  const label = PICKUP_LOCATION_LABELS[point.id];
+  const coords = pickupCoordinates(point);
+  if (point.name !== label.expectedName || !coords ||
+      Math.abs(coords.lat - label.latitude) > 0.0000001 ||
+      Math.abs(coords.lng - label.longitude) > 0.0000001 ||
+      (point.source_key && point.source_key !== label.sourceKey)) return null;
+  return label;
+}
+
 // Source identifiers remain in canonical records, never in the passenger label.
 export function pickupDisplayName(point, fallback = "Taxi pickup point") {
+  const location = pickupNameInfo(point);
+  if (location) return location.name;
   const name = typeof point?.name === "string" ? point.name : "";
-  return name.replace(/(?:\s*\(\s*osm\s*:\s*(?:node|way|relation)\s*:\s*\d+\s*\))+\s*$/i, "").trim() || fallback;
+  const clean = name.replace(/(?:\s*\(\s*osm\s*:\s*(?:node|way|relation)\s*:\s*\d+\s*\))+\s*$/i, "").trim();
+  if (/^Mapped taxi rank$/i.test(clean)) {
+    const area = point.suburb || point.city || point.province;
+    return area ? "Taxi pickup in " + area : "Taxi pickup — local name needed";
+  }
+  return clean || fallback;
 }
 
 export function pickupCoordinates(point) {

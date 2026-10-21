@@ -120,6 +120,10 @@ html[data-theme="dark"] .fm-map-frame{--fm-map-panel:rgba(7,17,31,.94);--fm-map-
   display:flex;align-items:center;gap:9px;width:100%;min-height:66px;padding:8px 11px;
   text-align:left;color:var(--fm-text);background:var(--fm-card)!important;
 }
+/* The scrolling list has a maximum height, not fixed-height items. Let each
+   pickup keep all of its name, location and confidence details in its own row. */
+.points-list{min-width:0}
+.points-list>.fm-pickup-row{flex:0 0 auto;height:auto;max-height:none}
 .fm-pickup-row+.fm-pickup-row{border-top:1px solid var(--fm-border)}
 .fm-pickup-row.is-selected{border-color:var(--fm-green);box-shadow:inset 3px 0 var(--fm-green)}
 .fm-pickup-list-icon{
@@ -129,8 +133,15 @@ html[data-theme="dark"] .fm-map-frame{--fm-map-panel:rgba(7,17,31,.94);--fm-map-
 .fm-pickup-list-icon .fm-native-icon{width:18px;height:18px}
 .fm-row-icon .fm-native-icon{width:18px;height:18px}
 .fm-pickup-copy{flex:1;min-width:0}
-.fm-pickup-copy strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;line-height:1.4;font-weight:900}
-.fm-pickup-copy small{display:block;margin-top:3px;color:var(--fm-muted);font-size:10.5px;line-height:1.4;font-weight:700}
+.fm-pickup-copy strong{display:block;white-space:normal;overflow-wrap:anywhere;font-size:12.5px;line-height:1.4;font-weight:900}
+.fm-pickup-copy small{display:block;max-width:100%;margin-top:3px;white-space:normal;overflow-wrap:anywhere;color:var(--fm-muted);font-size:10.5px;line-height:1.4;font-weight:700}
+.fm-pickup-row .fm-trust,.fm-selected-point .fm-trust{min-width:0;max-width:100%;align-items:flex-start;gap:5px 7px}
+.fm-pickup-row .fm-trust-pill,.fm-selected-point .fm-trust-pill{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.fm-pickup-row .fm-trust small,.fm-selected-point .fm-trust small{flex:1 1 100%;min-width:0;max-width:100%;margin-top:0;white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+#homeNearbyList .fm-row{height:auto;max-height:none;flex:0 0 auto}
+#homeNearbyList .fm-row-copy b{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.4}
+#homeNearbyList .fm-row-copy small{white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+#homeNearbyList .fm-chevron{flex-shrink:0}
 .fm-pickup-chevron{flex:0 0 17px;width:17px;height:17px;color:var(--fm-faint)}
 .fm-pickup-chevron .fm-native-icon{width:17px;height:17px}
 .mapbox.fm-selected-point{

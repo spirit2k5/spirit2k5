@@ -1,7 +1,7 @@
 import "./maplibre-runtime.js?v=20261021-native-map1";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
-import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-clean-labels1";
-import { pickupDisplayName } from "./passenger-map.js?v=20261021-clean-labels1";
+import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-named-pickups1";
+import { pickupDisplayName, pickupNameInfo } from "./passenger-map.js?v=20261021-named-pickups1";
 import { createIdentityClock, createGuardedAuthStorage } from "./web-auth.js?v=20261021-passenger3";
 
 // A publishable key is intended for browser apps. Never embed a service-role key.
@@ -252,9 +252,18 @@ function openPoint(point) {
   icon.append(nativeIcon("location"));
   const copy = element("div", "fm-pickup-copy");
   copy.append(element("strong", "", pickupDisplayName(point, "Pickup point")));
-  copy.append(element("small", "muted", [point.suburb, point.city, point.province].filter(Boolean).join(" · ") || "Recorded pickup point"));
+  copy.append(element("small", "muted", [pickupNameInfo(point)?.context, point.suburb, point.city, point.province].filter(Boolean).join(" · ") || "Recorded pickup point"));
   heading.append(icon, copy);
   box.append(heading);
+  const labelInfo = pickupNameInfo(point);
+  if (labelInfo?.note) box.append(element("p", "micro muted", labelInfo.note));
+  if (labelInfo?.sourceUrl) {
+    const source = element("a", "fm-small-link", "View map name source ↗");
+    source.href = labelInfo.sourceUrl;
+    source.target = "_blank";
+    source.rel = "noopener noreferrer";
+    box.append(source);
+  }
   v2.showTrust(box, "pickup", point);
   box.append(element("p", "micro muted", "Confirm the actual queue, boarding side, destination and fare with the rank or operator. Data confidence does not assess physical safety."));
   if (coords) {
@@ -279,7 +288,7 @@ function renderPoints() {
   const box = $("pointResults");
   box.replaceChildren();
   const query = $("pointSearch").value.trim().toLocaleLowerCase();
-  const matches = state.points.filter(p => [pickupDisplayName(p), p.city, p.suburb, p.province, p.point_type, p.route_name]
+  const matches = state.points.filter(p => [pickupDisplayName(p), pickupNameInfo(p)?.context, p.city, p.suburb, p.province, p.point_type, p.route_name]
     .some(v => String(v || "").toLocaleLowerCase().includes(query)));
   if (!matches.length) {
     box.append(element("p", "muted", "No matching pickup points found. Try a different search."));
@@ -295,7 +304,7 @@ function renderPoints() {
     icon.append(nativeIcon("location"));
     const copy = element("span", "fm-pickup-copy");
     copy.append(element("strong", "", pickupDisplayName(point, "Unnamed pickup point")));
-    const place = [point.suburb, point.city, point.province].filter(Boolean).join(" · ");
+    const place = [pickupNameInfo(point)?.context, point.suburb, point.city, point.province].filter(Boolean).join(" · ");
     copy.append(element("small", "", place || point.point_type || "Recorded taxi pickup"));
     v2.showTrust(copy, "pickup", point);
     button.append(icon, copy, nativeIcon("chevron-forward", "fm-native-icon fm-pickup-chevron"));
@@ -669,7 +678,7 @@ function locatePassengerOnWeb() {
       const point = item.point;
       list.append(homeRow("location", pickupDisplayName(point),
         (item.dist < 1 ? Math.round(item.dist * 1000) + " m" : item.dist.toFixed(1) + " km") +
-          " from your location · not independently verified",
+          " from your location" + (pickupNameInfo(point)?.context ? " · " + pickupNameInfo(point).context : "") + " · not independently verified",
         () => { setTab("points"); $("pointSearch").value = pickupDisplayName(point); renderPoints(); openPoint(point); v2.focusPoint(point); }));
     }
   }, () => {

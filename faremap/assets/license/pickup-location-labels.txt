@@ -1,0 +1,9 @@
+FareMap pickup location-label data
+
+© OpenStreetMap contributors. OpenStreetMap data is available under the Open Database License (ODbL)1.0: https://www.openstreetmap.org/copyright and https://opendatacommons.org/licenses/odbl/1-0/ .
+
+This small derived collection contains196 record-bound display labels. One name is recorded on the exact source taxi object. The195 other labels are geographic descriptions using separately mapped nearby streets, stations, landmarks or settlements. They do not establish formal taxi-rank names, entrances, walking access, current operations, association approval, physical safety or fresh commuter verification.
+
+Primary map reads: 2026-10-21T10:41:59.724Z and 2026-10-21T10:44:11.586Z. Each data entry includes its map-source URL. The unchanged canonical pickup name, identity and coordinates determine whether a display label applies. Name/coordinate changes retire the label. Canonical records, Last Verified times and confidence evidence are not changed.
+
+Full source receipts, geometry calculations and review are preserved in the FareMap work folder faremap-named-pickups-20261021/resolved-display-labels.json, current-exact-objects.json and current-context.json. The16 original source objects not returned by the current exact-ID read remain marked for review; no nearby object was substituted as their identity.

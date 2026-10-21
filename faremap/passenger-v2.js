@@ -1,4 +1,4 @@
-import { createPassengerMapController, pickupDisplayName } from "./passenger-map.js?v=20261021-clean-labels1";
+import { createPassengerMapController, pickupDisplayName } from "./passenger-map.js?v=20261021-named-pickups1";
 
 /**
  * FareMap Passenger Web 2.0
