@@ -509,7 +509,7 @@ body{background:#f6f0e6;color:#191b1d}body::before{background:radial-gradient(ci
 .faremap-feature-rule{height:2px;width:63%;margin:23px 0 18px;background:linear-gradient(90deg,#399867,rgba(57,152,103,0))}
 .faremap-feature-tagline{font-size:clamp(.95rem,1.9vw,1.5rem);font-weight:750;line-height:1.35}
 .faremap-store-identity{display:flex;align-items:center;gap:14px;padding:17px 22px;background:#f7f8f5;color:#16271e}
-.faremap-showcase .case-media img.faremap-store-identity img{width:57px;height:57px;object-fit:cover;flex:none;border-radius:15px;background:#051014;transition:none}
+.faremap-showcase .case-media .faremap-store-identity img{width:57px;height:57px;object-fit:cover;flex:none;border-radius:15px;background:#051014;transition:none}
 .faremap-store-identity>div{display:flex;flex:1;flex-direction:column;gap:2px;min-width:0}
 .faremap-store-identity strong{font-size:1.2rem;line-height:1.2}
 .faremap-store-identity small{font-size:.85rem;color:#57655d}
@@ -524,7 +524,7 @@ body{background:#f6f0e6;color:#191b1d}body::before{background:radial-gradient(ci
   .faremap-feature-rule{margin:15px 0 13px}
   .faremap-feature-tagline{font-size:clamp(.69rem,2.7vw,.9rem)}
   .faremap-store-identity{gap:11px;padding:12px}
-  .faremap-showcase .case-media img.faremap-store-identity img{height:45px;width:45px;border-radius:12px}
+  .faremap-showcase .case-media .faremap-store-identity img{height:45px;width:45px;border-radius:12px}
   .faremap-store-identity strong{font-size:1rem}
   .faremap-store-identity small{font-size:.73rem}
   .faremap-store-platform{font-size:.6rem;padding:6px 8px}
