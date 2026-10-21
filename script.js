@@ -72,7 +72,7 @@
 
   const ROOT_PAGE = 'index.html';
   let revealObserver = null;
-  let routeInFlight = false;
+  let activeFlowTimer = null;
 
   // Persistent route progress line. It stays outside <main>, so it survives soft navigation.
   const progress = document.createElement('div');
@@ -389,7 +389,12 @@
 
   const initWorkProcessAnimation = () => {
     const main = document.querySelector('main');
-    if (!main || main.querySelector('.work-flow-animation')) return;
+    if (!main) return;
+    const existingFlow = main.querySelector('.work-flow-animation');
+    if (existingFlow) {
+      if (typeof existingFlow._resumeFlow === 'function') existingFlow._resumeFlow();
+      return;
+    }
 
     const page = currentPageName();
     const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
@@ -603,7 +608,9 @@
     const restartAuto = () => {
       clearInterval(timer);
       timer = setInterval(() => activate((current + 1) % cfg.steps.length), 3200);
+      activeFlowTimer = timer;
     };
+    section._resumeFlow = restartAuto;
 
     buttons.forEach(button => button.addEventListener('click', () => {
       activate(Number(button.dataset.index));
@@ -695,100 +702,221 @@
     });
   };
 
-  // Soft navigation: swap only <main> so page transitions stay fast and smooth.
-  const navigate = async (targetUrl, { push = true, restoreScroll = false } = {}) => {
+
+  // Browser history is an in-page visit stack, not a reason to re-download and reset a page.
+  const routeHTML = new Map();
+  const historyPages = new Map();
+  const scrollPositions = new Map();
+  let activePageUrl = location.href;
+  let activeEntryId = history.state?.spiritEntryId || '';
+  let navigationSerial = 0;
+  let navigationController = null;
+  let scrollSaveTimer = null;
+  const newEntryId = () => 'spirit-' + (crypto.randomUUID?.() || (Date.now() + '-' + Math.random().toString(36).slice(2)));
+  if (!activeEntryId) activeEntryId = newEntryId();
+  const entryScroll = Number.isFinite(history.state?.spiritScrollY)
+    ? history.state.spiritScrollY : window.scrollY;
+  const makeState = (id, y = 0) => ({
+    ...(history.state || {}), spiritSoftNav: true, spiritEntryId: id, spiritScrollY: y
+  });
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  history.replaceState(makeState(activeEntryId, entryScroll), '', location.href);
+  scrollPositions.set(activeEntryId, entryScroll);
+
+  const documentKey = url => {
+    const u = new URL(url, location.href);
+    return u.pathname + u.search;
+  };
+  const headSelectors = [
+    'meta[name="description"]', 'meta[name="keywords"]', 'link[rel="canonical"]',
+    'meta[property="og:title"]', 'meta[property="og:description"]',
+    'meta[property="og:url"]', 'meta[name="twitter:title"]', 'meta[name="twitter:description"]'
+  ];
+  const captureHead = () => ({
+    title: document.title,
+    fields: headSelectors.map(selector => {
+      const el = document.head.querySelector(selector);
+      return el ? [selector, [...el.attributes].map(a => [a.name, a.value])] : null;
+    }).filter(Boolean)
+  });
+  const restoreHead = snapshot => {
+    if (!snapshot) return;
+    document.title = snapshot.title;
+    snapshot.fields.forEach(([selector, attrs]) => {
+      const node = document.head.querySelector(selector);
+      if (node) attrs.forEach(([name, value]) => node.setAttribute(name, value));
+    });
+  };
+  const retainPage = (id, url, main, head = null) => {
+    const previous = historyPages.get(id);
+    historyPages.delete(id);
+    historyPages.set(id, { url, main, head: head || previous?.head || null });
+    while (historyPages.size > 12) {
+      const oldest = historyPages.keys().next().value;
+      if (oldest === activeEntryId) break;
+      historyPages.delete(oldest);
+    }
+  };
+  retainPage(activeEntryId, activePageUrl, document.querySelector('main'), captureHead());
+  const restorePosition = y => {
+    const root = document.documentElement, old = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, Math.max(0, Number(y) || 0));
+    requestAnimationFrame(() => { root.style.scrollBehavior = old; });
+  };
+  const rememberScroll = (persist = false) => {
+    const y = Math.max(0, Math.round(window.scrollY));
+    scrollPositions.set(activeEntryId, y);
+    if (persist && history.state?.spiritEntryId === activeEntryId) {
+      history.replaceState({ ...history.state, spiritScrollY: y }, '', location.href);
+    }
+  };
+  window.addEventListener('scroll', () => {
+    rememberScroll();
+    if (scrollSaveTimer) return;
+    scrollSaveTimer = setTimeout(() => {
+      scrollSaveTimer = null;
+      rememberScroll(true);
+    }, 150);
+  }, { passive: true });
+  window.addEventListener('pagehide', () => rememberScroll(true));
+  window.addEventListener('pageshow', e => {
+    const kind = performance.getEntriesByType?.('navigation')?.[0]?.type;
+    if (e.persisted || kind === 'back_forward' || kind === 'reload') {
+      const y = scrollPositions.get(activeEntryId) ?? history.state?.spiritScrollY ?? 0;
+      requestAnimationFrame(() => restorePosition(y));
+    }
+  });
+  const scrollToHash = hash => {
+    if (!hash || hash === '#') return false;
+    let target = null;
+    try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch (_) {}
+    if (!target) return false;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return true;
+  };
+
+  const navigate = async (targetUrl, { push = true, targetState = null } = {}) => {
     const url = new URL(targetUrl, location.href);
-    if (routeInFlight) return;
-    if (location.protocol === 'file:') {
-      location.href = url.href; // fetch() between local files is blocked by many browsers.
+    if (location.protocol === 'file:') { location.href = url.href; return; }
+    const serial = ++navigationSerial;
+    if (navigationController) navigationController.abort();
+    navigationController = new AbortController();
+
+    // Same document / fragment navigation should not touch the page DOM or fetch.
+    if (documentKey(url.href) === documentKey(activePageUrl)) {
+      if (push) {
+        if (url.href === activePageUrl && !url.hash) { restorePosition(0); return; }
+        rememberScroll(true);
+        const id = newEntryId();
+        history.pushState(makeState(id), '', url.href);
+        activeEntryId = id;
+        activePageUrl = url.href;
+        retainPage(id, activePageUrl, document.querySelector('main'), captureHead());
+        scrollPositions.set(id, 0);
+        if (!scrollToHash(url.hash)) restorePosition(0);
+      } else {
+        activeEntryId = targetState?.spiritEntryId || newEntryId();
+        activePageUrl = url.href;
+        if (!targetState?.spiritEntryId) history.replaceState(makeState(activeEntryId), '', url.href);
+        const y = scrollPositions.get(activeEntryId) ?? targetState?.spiritScrollY ?? 0;
+        restorePosition(y);
+        requestAnimationFrame(() => restorePosition(y));
+      }
       return;
     }
 
-    routeInFlight = true;
+    const id = push ? newEntryId() : (targetState?.spiritEntryId || newEntryId());
+    const cachedPage = push ? null : historyPages.get(id);
+    let nextMain = cachedPage && documentKey(cachedPage.url) === documentKey(url.href)
+      ? cachedPage.main : null;
+    let nextDoc = null;
     setRouteLoading('start');
     try {
-      const response = await fetch(url.href, { credentials: 'same-origin', cache: 'no-cache' });
-      if (!response.ok) throw new Error(`Navigation failed: ${response.status}`);
-      const html = await response.text();
-      const nextDoc = new DOMParser().parseFromString(html, 'text/html');
-      const nextMain = nextDoc.querySelector('main');
-      const currentMain = document.querySelector('main');
-      if (!nextMain || !currentMain) throw new Error('Page main content missing');
+      if (!nextMain) {
+        const key = documentKey(url.href);
+        const cache = routeHTML.get(key);
+        let html = cache && Date.now() - cache.time < 300000 ? cache.html : null;
+        if (!html) {
+          const response = await fetch(url.href, {
+            credentials: 'same-origin', cache: 'default', signal: navigationController.signal
+          });
+          if (!response.ok) throw new Error(`Navigation failed: ${response.status}`);
+          html = await response.text();
+          routeHTML.delete(key);
+          routeHTML.set(key, { html, time: Date.now() });
+          if (routeHTML.size > 16) routeHTML.delete(routeHTML.keys().next().value);
+        }
+        if (serial !== navigationSerial) return;
+        nextDoc = new DOMParser().parseFromString(html, 'text/html');
+        nextMain = nextDoc.querySelector('main');
+        if (!nextMain) throw new Error('Page main content missing');
+      }
+      if (serial !== navigationSerial) return;
 
       const swap = () => {
-        currentMain.replaceWith(nextMain);
-        copyHeadMetadata(nextDoc);
-        if (push) history.pushState({ spiritSoftNav: true }, '', url.href);
+        const oldMain = document.querySelector('main');
+        if (!oldMain) throw new Error('Current page main missing');
+        rememberScroll(true);
+        retainPage(activeEntryId, activePageUrl, oldMain, captureHead());
+        if (activeFlowTimer) clearInterval(activeFlowTimer);
+        activeFlowTimer = null;
+        oldMain.replaceWith(nextMain);
+        if (nextDoc) copyHeadMetadata(nextDoc);
+        else restoreHead(cachedPage?.head);
+        if (push) history.pushState(makeState(id), '', url.href);
+        else if (!targetState?.spiritEntryId) history.replaceState(makeState(id), '', url.href);
+        activeEntryId = id;
+        activePageUrl = url.href;
+        retainPage(id, url.href, nextMain, captureHead());
         initPage();
-        if (url.hash) {
-          requestAnimationFrame(() => {
-            const target = document.querySelector(url.hash);
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-        } else if (!restoreScroll) {
-          window.scrollTo({ top: 0, behavior: 'auto' });
-        }
+        const y = push ? 0 : (scrollPositions.get(id) ?? targetState?.spiritScrollY ?? 0);
+        restorePosition(y);
+        if (push && url.hash) requestAnimationFrame(() => scrollToHash(url.hash));
+        else requestAnimationFrame(() => restorePosition(y));
       };
-
-      if (document.startViewTransition) {
-        const transition = document.startViewTransition(swap);
-        await transition.finished.catch(() => {});
+      if (push && document.startViewTransition &&
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        await document.startViewTransition(swap).finished.catch(() => {});
       } else {
-        currentMain.style.opacity = '.35';
-        await new Promise(resolve => setTimeout(resolve, 90));
         swap();
       }
-      setRouteLoading('done');
-    } catch (err) {
-      console.warn('[Spirit2k5] Soft navigation fallback:', err);
-      location.href = url.href;
-    } finally {
-      routeInFlight = false;
+      if (serial === navigationSerial) setRouteLoading('done');
+    } catch (error) {
+      if (serial !== navigationSerial || error.name === 'AbortError') return;
+      console.warn('[Spirit2k5] Navigation fallback:', error);
+      location.assign(url.href);
     }
   };
 
   document.addEventListener('click', event => {
     const anchor = event.target.closest('a[href]');
-    if (!anchor) return;
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (anchor.target && anchor.target !== '_self') return;
-    if (anchor.hasAttribute('download')) return;
-
+    if (!anchor || event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if ((anchor.target && anchor.target !== '_self') || anchor.hasAttribute('download')) return;
     const raw = anchor.getAttribute('href') || '';
-    if (!raw || raw.startsWith('mailto:') || raw.startsWith('tel:') || raw.startsWith('javascript:')) return;
-
+    if (!raw || /^(mailto:|tel:|javascript:)/i.test(raw)) return;
     const url = new URL(anchor.href, location.href);
     if (url.origin !== location.origin) return;
 
-    // The FareMap passenger web is a standalone app with its own module and auth lifecycle.
-    // Let the browser load it normally instead of swapping only <main> via soft navigation.
+    // Standalone FareMap uses a different runtime/authentication lifecycle.
     if (url.pathname === '/faremap' || url.pathname.startsWith('/faremap/')) return;
-
-    if (raw.startsWith('#')) {
-      const target = document.querySelector(raw);
-      if (target) {
-        event.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      return;
-    }
-
-    const samePage = url.pathname === location.pathname;
-    if (samePage && url.hash) {
+    if (raw.startsWith('#') || (url.pathname === location.pathname && url.hash)) {
       event.preventDefault();
-      const target = document.querySelector(url.hash);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      void navigate(url.href);
       return;
     }
-
     const file = currentPageName(url.href).toLowerCase();
     if (file.endsWith('.html') || url.pathname.endsWith('/')) {
       event.preventDefault();
-      navigate(url.href);
+      void navigate(url.href);
     }
   });
-
-  window.addEventListener('popstate', () => navigate(location.href, { push: false }));
+  window.addEventListener('popstate', event => {
+    // Browser URL changes before popstate; store the outgoing position in memory.
+    rememberScroll();
+    void navigate(location.href, { push: false, targetState: event.state });
+  });
 
 
   initPage();
