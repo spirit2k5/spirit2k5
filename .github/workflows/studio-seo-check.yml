@@ -1,0 +1,47 @@
+name: Spirit2k5 Studio SEO checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+      - 'script.js'
+      - 'style.css'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'scripts/spirit2k5_seo_check.py'
+      - 'tests/studio-seo.test.cjs'
+      - '.github/workflows/studio-seo-check.yml'
+  pull_request:
+    paths:
+      - '*.html'
+      - 'script.js'
+      - 'style.css'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'scripts/spirit2k5_seo_check.py'
+      - 'tests/studio-seo.test.cjs'
+      - '.github/workflows/studio-seo-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+      - name: Use supported Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate public search metadata and navigation
+        run: |
+          node --check script.js
+          node --test tests/studio-seo.test.cjs
+          python scripts/spirit2k5_seo_check.py

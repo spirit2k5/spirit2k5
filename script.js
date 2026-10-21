@@ -126,19 +126,42 @@
 
   const initReveal = () => {
     if (revealObserver) revealObserver.disconnect();
-    if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-      return;
-    }
-    revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+    revealObserver = null;
+    const elements = [...document.querySelectorAll('main .reveal')];
+    const show = el => {
+      el.classList.add('visible');
+      el.classList.remove('reveal-pending');
+    };
+    try {
+      if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || typeof window.IntersectionObserver !== 'function') {
+        elements.forEach(show);
+        return;
+      }
+      const observer = new window.IntersectionObserver(entries => {
+        if (revealObserver !== observer) return;
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            show(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
+      revealObserver = observer;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      elements.forEach(el => {
+        const bounds = el.getBoundingClientRect();
+        if (el.classList.contains('visible') || el.matches('.hero, .page-hero, .about-hero, .contact-hero') || (bounds.top < viewportHeight && bounds.bottom > 0)) {
+          show(el);
+        } else {
+          el.classList.add('reveal-pending');
+          observer.observe(el);
         }
       });
-    }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('main .reveal').forEach(el => revealObserver.observe(el));
+    } catch (_) {
+      if (revealObserver) revealObserver.disconnect();
+      revealObserver = null;
+      elements.forEach(show);
+    }
   };
 
   // Keep every site video silent and make each video a clean tap-to-pause/play surface.
@@ -682,26 +705,33 @@
     if (btn) btn.setAttribute('aria-expanded', 'false');
   };
 
-  const copyHeadMetadata = (nextDoc) => {
-    document.title = nextDoc.title || document.title;
-    const selectors = [
-      'meta[name="description"]',
-      'meta[name="keywords"]',
-      'link[rel="canonical"]',
-      'meta[property="og:title"]',
-      'meta[property="og:description"]',
-      'meta[property="og:url"]',
-      'meta[name="twitter:title"]',
-      'meta[name="twitter:description"]'
-    ];
-    selectors.forEach(sel => {
-      const current = document.head.querySelector(sel);
-      const incoming = nextDoc.head.querySelector(sel);
-      if (current && incoming) {
-        [...incoming.attributes].forEach(attr => current.setAttribute(attr.name, attr.value));
-      }
-    });
+  // Page metadata travels with the main content, including cached Back/Forward visits.
+  // Verification tags, styles, icons and executable global scripts stay in place.
+  const headSelectors = [
+    'meta[name="description"]', 'meta[name="keywords"]',
+    'meta[name="robots"]', 'meta[name="googlebot"]', 'meta[name="bingbot"]',
+    'link[rel="canonical"]', 'link[rel="alternate"][hreflang]',
+    'meta[property^="og:"]', 'meta[name^="twitter:"]',
+    'script[type="application/ld+json"]'
+  ];
+  const captureHead = (sourceDoc = document) => {
+    const seen = new Set();
+    const nodes = [...sourceDoc.head.querySelectorAll(headSelectors.join(','))].filter(node => {
+      const attributes = [...node.attributes].map(attr => [attr.name, attr.value]).sort((a, b) => a[0].localeCompare(b[0]));
+      const key = JSON.stringify([node.tagName, attributes, node.textContent.trim()]);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).map(node => node.cloneNode(true));
+    return { title: sourceDoc.title, nodes };
   };
+  const restoreHead = snapshot => {
+    if (!snapshot) return;
+    document.title = snapshot.title;
+    document.head.querySelectorAll(headSelectors.join(',')).forEach(node => node.remove());
+    snapshot.nodes.forEach(node => document.head.appendChild(document.importNode(node, true)));
+  };
+  const copyHeadMetadata = nextDoc => restoreHead(captureHead(nextDoc));
 
 
   // Browser history is an in-page visit stack, not a reason to re-download and reset a page.
@@ -727,26 +757,6 @@
   const documentKey = url => {
     const u = new URL(url, location.href);
     return u.pathname + u.search;
-  };
-  const headSelectors = [
-    'meta[name="description"]', 'meta[name="keywords"]', 'link[rel="canonical"]',
-    'meta[property="og:title"]', 'meta[property="og:description"]',
-    'meta[property="og:url"]', 'meta[name="twitter:title"]', 'meta[name="twitter:description"]'
-  ];
-  const captureHead = () => ({
-    title: document.title,
-    fields: headSelectors.map(selector => {
-      const el = document.head.querySelector(selector);
-      return el ? [selector, [...el.attributes].map(a => [a.name, a.value])] : null;
-    }).filter(Boolean)
-  });
-  const restoreHead = snapshot => {
-    if (!snapshot) return;
-    document.title = snapshot.title;
-    snapshot.fields.forEach(([selector, attrs]) => {
-      const node = document.head.querySelector(selector);
-      if (node) attrs.forEach(([name, value]) => node.setAttribute(name, value));
-    });
   };
   const retainPage = (id, url, main, head = null) => {
     const previous = historyPages.get(id);
