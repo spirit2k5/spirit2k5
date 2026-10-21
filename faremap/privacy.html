@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Passenger Website Privacy | FareMap</title>
+  <meta name="description" content="How FareMap Passenger Web uses account sign-in, browser storage, optional location access, map providers and private issue reports, with contact details for privacy and account requests.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://spirit2k5.co.za/faremap/privacy.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FareMap · Spirit2k5">
+  <meta property="og:title" content="FareMap Passenger Website Privacy">
+  <meta property="og:description" content="Understand passenger account information, browser storage, optional location, maps and issue reports.">
+  <meta property="og:url" content="https://spirit2k5.co.za/faremap/privacy.html">
+  <meta name="theme-color" content="#101827">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" href="/favicon-48.png">
+  <style>
+    :root{color-scheme:light;--bg:#f7f9fc;--card:#fff;--soft:#f2f6fa;--text:#101827;--muted:#465468;--line:#dfe6ee;--green:#08723c;--green-bg:#eaf8f0;--yellow:#e9b000;--nav:#101827;--nav-text:#fff;--link:#1455ac;--focus:#2868d8}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}a{color:var(--link);text-underline-offset:.18em;overflow-wrap:anywhere}a:hover{text-decoration-thickness:2px}a:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:4px}.skip{position:absolute;left:16px;top:-80px;z-index:2;padding:12px 18px;background:var(--card);color:var(--text);border:2px solid var(--focus);border-radius:10px}.skip:focus{top:12px}.wrap{width:min(940px,100%);margin:auto;padding-inline:24px}
+    .site-head{background:var(--nav);color:var(--nav-text)}.head-row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-block:18px}.brand{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:24px;font-weight:850;letter-spacing:-.06em}.brand img{width:44px;height:44px;border-radius:12px}.brand em{color:#67e597;font-style:normal}.brand small{display:block;color:#c6d0dc;font-size:11px;letter-spacing:.08em;font-weight:650}.nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:700}.nav a{color:#f8fafc}.nav a[aria-current=page]{text-decoration-color:#ffc400;text-decoration-thickness:3px}.hero{padding-block:48px 24px}.eyebrow{margin:0 0 10px;color:var(--green);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(2rem,5vw,3rem);line-height:1.13;letter-spacing:-.055em;margin:0 0 18px}h2{font-size:1.42rem;letter-spacing:-.025em;line-height:1.3;margin:0 0 16px}h3{font-size:1.05rem;line-height:1.4;margin:0 0 7px}p{margin:0 0 16px}.lead{max-width:730px;color:var(--muted);font-size:1.08rem}.updated{color:var(--muted);font-size:13px}.jump{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 6px}.jump a{background:var(--card);border:1px solid var(--line);padding:8px 12px;border-radius:30px;font-size:13px;font-weight:700;text-decoration:none}.overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:12px 0 26px}.overview article{border:1px solid var(--line);border-top:3px solid var(--yellow);border-radius:16px;background:var(--card);padding:20px}.overview p{font-size:14px;color:var(--muted);margin:0}.section{scroll-margin-top:20px;margin-block:18px;padding:28px;border:1px solid var(--line);border-radius:20px;background:var(--card)}.section>p:last-child{margin-bottom:0}ul{padding-left:23px;margin-block:0 18px}li+li{margin-top:9px}.note{padding:16px 18px;border-left:4px solid var(--green);border-radius:0 12px 12px 0;background:var(--green-bg);color:var(--text);font-size:15px}.table-wrap{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:18px 0}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line);min-width:135px}thead{background:var(--soft)}tr:last-child td{border-bottom:0}caption{text-align:left;padding:13px 14px;color:var(--muted);font-weight:700}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 18px;border-radius:12px;background:var(--nav);color:#fff;font-weight:800;text-decoration:none}.support{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.support p{color:var(--muted);max-width:570px}.foot{padding-block:30px 38px;color:var(--muted);font-size:13px}.foot p{margin-bottom:8px}.foot a+a{margin-left:16px}
+    @media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#07111f;--card:#0c1828;--soft:#102033;--text:#f8fafc;--muted:#c6d0dc;--line:#24364b;--green:#67e597;--green-bg:#102c23;--link:#91beff;--focus:#ffc400}.button{background:#19c463;color:#07111f}.eyebrow{color:#67e597}}
+    @media(max-width:600px){.wrap{padding-inline:18px}.head-row{gap:15px}.nav{gap:15px;font-size:13px}.hero{padding-top:32px}.overview{grid-template-columns:1fr;gap:10px}.overview article{padding:17px}.section{padding:22px 18px;border-radius:16px}.jump a{font-size:12px}.support .button{width:100%}.foot a{display:inline-block;margin-bottom:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to privacy information</a>
+  <header class="site-head">
+    <div class="wrap head-row">
+      <a class="brand" href="/faremap/" aria-label="FareMap passenger home"><img src="/faremap/assets/faremap_app_icon_v2.png" alt="" width="44" height="44"><span>Fare<em>Map</em><small>PASSENGER WEB</small></span></a>
+      <nav class="nav" aria-label="FareMap pages"><a href="/faremap/">Open FareMap</a><a href="/faremap/help.html">Help</a><a href="/faremap/privacy.html" aria-current="page">Privacy</a></nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Your information</p>
+      <h1>Passenger website privacy.</h1>
+      <p class="lead">This page explains how FareMap Passenger Web uses information when you browse fares, sign in, save routes, view maps or submit an issue. FareMap is a Spirit2k5 Web Studio project.</p>
+      <p class="updated">Updated <time datetime="2026-10-21">21 October 2026</time> · Applies to <a href="/faremap/">spirit2k5.co.za/faremap/</a></p>
+      <nav class="jump" aria-label="On this page"><a href="#browse">Public browsing</a><a href="#account">Account</a><a href="#storage">Browser storage</a><a href="#location">Location &amp; maps</a><a href="#reports">Reports</a><a href="#providers">Providers</a><a href="#requests">Your requests</a></nav>
+    </div>
+    <div class="overview" aria-label="Privacy at a glance">
+      <article><h2>An account is optional for browsing</h2><p>Public fare and pickup-point information can be viewed as a guest. Submitting a report requires sign-in.</p></article>
+      <article><h2>Location is your choice</h2><p>The website asks for device location when you select My location. You can decline and search manually.</p></article>
+      <article><h2>Saved routes are local</h2><p>Website favourites and theme preferences are stored in this browser. They are not automatic mobile-app sync.</p></article>
+    </div>
+    <section class="section" id="browse" aria-labelledby="browse-title">
+      <h2 id="browse-title">Browsing public information</h2>
+      <p>FareMap loads a public catalogue of taxi-fare and pickup-point records, together with available aggregate confidence information. If the online catalogue is unavailable, the website can load a dated public snapshot. Browsing these records does not require you to send a report or share your device location.</p>
+      <p>As with other websites, loading the page and its resources sends technical request information, such as your IP address and browser details, to the hosting and resource providers. This page describes the passenger website; the <a href="/privacy.html">Spirit2k5 Web Studio privacy page</a> covers the Studio’s separate website and project-enquiry context.</p>
+    </section>
+    <section class="section" id="account" aria-labelledby="account-title">
+      <h2 id="account-title">Account sign-in</h2>
+      <p>FareMap uses Supabase for authentication and its account-backed services. When you request an email code or sign-in link, your email address is sent to the authentication service so the message can be delivered. Using an existing password sends it to that service for checking.</p>
+      <p>If you choose Google, Google and FareMap’s authentication service process the sign-in and the account information shared through that flow. Review the information shown by Google before continuing.</p>
+      <p>The website keeps a sign-in session in browser storage so it can remember your account and refresh the session. Sign out on a shared device. Do not send passwords, email codes, sign-in links or session information to support.</p>
+    </section>
+    <section class="section" id="storage" aria-labelledby="storage-title">
+      <h2 id="storage-title">What stays in your browser</h2>
+      <div class="table-wrap"><table><caption>Passenger website storage</caption><thead><tr><th scope="col">Information</th><th scope="col">Purpose</th><th scope="col">Your control</th></tr></thead><tbody><tr><td>Authentication session</td><td>Keep the website signed in and refresh your session.</td><td>Sign out, or remove this website’s browser data.</td></tr><tr><td>Saved fare-record identifiers</td><td>Show favourites for the current account or guest profile in this browser.</td><td>Remove individual saved routes or clear this website’s browser data.</td></tr><tr><td>Light/dark theme preference</td><td>Remember your display choice.</td><td>Change the theme or clear this website’s browser data.</td></tr></tbody></table></div>
+      <p>Website favourites are kept separately by the account or guest profile using this browser. They are not automatically sent to another browser or synchronised with the mobile app.</p>
+      <p>Clearing browser data may remove saved routes, preferences and the remembered sign-in. It does not delete your FareMap account or reports that have already reached the service. Browser privacy settings that block local storage can prevent favourites or remembered sign-in from working.</p>
+    </section>
+    <section class="section" id="location" aria-labelledby="location-title">
+      <h2 id="location-title">Optional location and third-party maps</h2>
+      <p>Selecting <strong>My location</strong> asks your browser for permission to obtain a device location. The passenger website uses the result to centre a map and compare distances to recorded pickup points. You can refuse permission and use place-name searches instead. You can also revoke permission in your browser’s site settings.</p>
+      <p>The website’s location action does not submit a passenger-presence or journey-tracking record to FareMap. However, the map view is loaded from OpenStreetMap: an embedded map centred on your location includes its centre coordinates in the map request. OpenStreetMap and map-tile servers can therefore receive map-view information as well as ordinary network request details.</p>
+      <p>Opening an external map link also takes you to that provider. See <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OpenStreetMap Foundation’s privacy information</a> for its handling of requests.</p>
+    </section>
+    <section class="section" id="reports" aria-labelledby="reports-title">
+      <h2 id="reports-title">Issue reports</h2>
+      <p>When you submit an issue, FareMap sends the selected fare or pickup-point identifier, issue type, your description and the record revision to its backend. The submission is associated with your signed-in account for moderation and duplicate/abuse handling.</p>
+      <p>The website does not display your report text as a public comment. Reports are submitted for review; public confidence information may show aggregate report counts. Submitting a report does not automatically change a fare, move a pin or establish a fresh verification.</p>
+      <div class="note">Include only what is needed to explain the transport-information problem. Avoid identity documents, passwords, login codes, private contact details and unnecessary personal information about you or another person.</div>
+      <p style="margin-top:16px">A private safety-concern report is not live emergency monitoring. Do not rely on the report form for an urgent response.</p>
+    </section>
+    <section class="section" id="providers" aria-labelledby="providers-title">
+      <h2 id="providers-title">Services used by this website</h2>
+      <ul><li><strong>GitHub Pages</strong> serves the website’s public files.</li><li><strong>Supabase</strong> provides authentication and the backend APIs used for the public catalogue, confidence information and signed-in reports.</li><li><strong>Google</strong> processes sign-in if you choose that option.</li><li><strong>OpenStreetMap</strong> provides embedded maps and map tiles.</li><li><strong>jsDelivr and unpkg</strong> deliver browser libraries, map styling and icons. Loading those resources sends normal web requests to those providers.</li></ul>
+      <p>Their services have their own privacy terms and operational logging. FareMap support can answer questions about the passenger website’s use of your account or report information; this page does not state a fixed provider-log or report-retention period.</p>
+    </section>
+    <section class="section support" id="requests" aria-labelledby="requests-title">
+      <div><h2 id="requests-title">Privacy, account or data requests</h2><p>Contact <a href="mailto:mahloricarlton@gmail.com?subject=FareMap%20privacy%20or%20account%20request">mahloricarlton@gmail.com</a> to ask about your FareMap information or request an account/data review, correction or deletion. State what you want reviewed. The team may need to confirm account ownership before acting.</p><p>Do not email a password, verification code, login link or identity document. Sending a request is not an immediate account-deletion action; clearing browser data is a separate local step.</p></div>
+      <a class="button" href="mailto:mahloricarlton@gmail.com?subject=FareMap%20privacy%20or%20account%20request">Contact FareMap</a>
+    </section>
+  </main>
+  <footer class="wrap foot"><p>FareMap Passenger Web · A <a href="/">Spirit2k5 Web Studio</a> project</p><p><a href="/faremap/">Return to FareMap</a><a href="/faremap/help.html">Passenger help</a></p></footer>
+</body>
+</html>

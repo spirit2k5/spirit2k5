@@ -176,3 +176,14 @@ html[data-theme="dark"] .fm-map-frame{background-image:url('/faremap/assets/fare
 .fm-nav-icon ion-icon{font-size:33px}
 ion-icon.fm-nav-icon{display:block;font-size:22px;width:23px;height:24px}
 .fm-icon-btn ion-icon{font-size:22px}
+
+/* Passenger sign-in and help, with the same light/dark theme tokens. */
+.fm-skip-link{position:absolute;left:16px;top:-80px;z-index:9999;padding:12px 18px;background:var(--fm-text);color:var(--fm-card);border-radius:10px}
+.fm-skip-link:focus{top:12px}
+.fm-email-code{margin:18px 0;padding:18px;border:1px solid var(--fm-border);border-radius:16px;background:var(--fm-card2)}
+.fm-email-code h3{margin:0 0 6px;color:var(--fm-text);font-size:18px}
+.fm-email-code .field input{background:var(--fm-card);color:var(--fm-text);font-size:20px;letter-spacing:.12em;font-variant-numeric:tabular-nums}
+.fm-email-code .action{width:100%}
+.fm-hero-help{font-size:13px!important;line-height:1.8!important}
+.fm-hero-help a{text-underline-offset:4px}
+@media(max-width:400px){.fm-email-code{padding:14px}.fm-hero-help a{display:inline-block}}

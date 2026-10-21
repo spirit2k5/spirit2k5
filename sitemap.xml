@@ -162,8 +162,20 @@
   </url>
   <url>
     <loc>https://spirit2k5.co.za/faremap/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/faremap/help.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://spirit2k5.co.za/faremap/privacy.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.40</priority>
   </url>
 </urlset>

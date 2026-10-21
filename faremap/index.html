@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#0c2028">
 <link rel="icon" href="/favicon-48.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="/faremap/passenger-v2.css">
+<link rel="stylesheet" href="/faremap/passenger-v2.css?v=20261021-passenger3">
 <meta name="google-site-verification" content="QhMxAh_XEDwUKgHbBXPk90Hqn8c-KR7zEQWvM7P7mQ0">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"FareMap Passenger Web","url":"https://spirit2k5.co.za/faremap/","description":"A passenger-focused web interface for South African minibus taxi fare lookup, pickup-point discovery and trip budgeting. Data may be unconfirmed and should be checked locally.","applicationCategory":"TravelApplication","operatingSystem":"Any modern web browser","isAccessibleForFree":true,"inLanguage":"en-ZA","creator":{"@type":"Organization","name":"Spirit2k5 Web Studio","url":"https://spirit2k5.co.za/"}}</script>
 <style>
@@ -33,9 +33,10 @@
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{border:1px solid #c4d9d0;background:white;border-radius:12px;padding:10px 14px;font-weight:800;color:#355b50}.tab[aria-selected=true]{background:var(--ink);color:white;border-color:var(--ink)}
 .panel{padding:24px;margin:14px 0}.filter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.filter-grid .field{margin:0}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}.result{background:#f9fcfa;border:1px solid #d9e6dd;padding:16px;border-radius:15px;display:flex;flex-direction:column;gap:8px}.result h3{font-size:1.04rem;margin:0;line-height:1.4}.fare-price{font-size:1.7rem;font-weight:900;color:#116c58}.result .line{display:flex;align-items:center;justify-content:space-between;gap:12px}.result .line button{padding:7px 10px;font-size:.78rem;border-radius:9px;background:#fff;border:1px solid #c7d9cd;color:#214a3d}.tag-low{font-size:.73rem;border-radius:16px;background:#fff4d8;color:#734d04;padding:3px 9px;align-self:flex-start}.map-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.points-list{max-height:490px;overflow:auto;display:flex;flex-direction:column;gap:8px}.point{padding:12px;text-align:left;background:#f7faf8;border:1px solid #d3e3da;border-radius:12px}.point:hover{border-color:#058769}.point strong{display:block}.point small{color:#60776e}.mapbox{background:#f2f6f3;border-radius:14px;overflow:hidden;min-height:320px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:12px;border:1px solid #d9e6dd}.mapbox iframe{width:100%;height:340px;border:0;border-radius:9px}.budget{display:flex;gap:14px;flex-wrap:wrap;align-items:end}.budget .field{flex:1 1 140px}.footinfo{padding:15px 22px;text-align:center;background:#102d34;color:#c4dcd6;font-size:.85rem}.footinfo a{color:#93f1c4}.seo-content{max-width:1180px;margin:0 auto 60px;padding:20px 22px}.seo-content h2{font-size:1.5rem}.seo-content p{color:#435b55}.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:800px){.hero-inner{grid-template-columns:1fr}.hero-feature{display:none}.map-layout{grid-template-columns:1fr}.headlinks{gap:11px}.content{margin:-18px auto 0}}@media(max-width:580px){.hero{padding:45px 18px 60px}.bar{padding:12px 16px}.headlinks{font-size:.82rem}.content{padding:0 14px 40px}.auth-card,.panel{padding:17px}.auth-grid,.filter-grid,.results{grid-template-columns:1fr}.stats{gap:6px}.stat{padding:11px}.stat strong{font-size:1.25rem}.tab{padding:9px 11px}.hero h1{font-size:2.55rem}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-</style><link rel="stylesheet" href="/faremap/mobile-ui.css?v=20261018-native1">
+</style><link rel="stylesheet" href="/faremap/mobile-ui.css?v=20261021-passenger3">
 </head>
 <body>
+<a class="fm-skip-link" href="#passenger">Skip to passenger features</a>
 <header class="header">
   <div class="bar">
     <div class="fm-top-link"><a href="/">← Spirit2k5 Web Studio</a><span class="fm-only">Passenger mode · Web</span></div>
@@ -55,17 +56,23 @@
 <div class="fm-hero-card"><span class="fm-hero-pill"><span class="fm-dot"></span> BUILT FOR SOUTH AFRICAN COMMUTERS</span>
 <h1>Know the <span>fare</span> before you go.</h1>
 <p>Search taxi prices, see pickup points and keep your route information in one place.</p>
-<div class="hero-points"><span class="pill">◈ Prices</span><span class="pill">⌖ Live map</span><span class="pill">♧ Pickup points</span></div></div></div></section>
+<div class="hero-points"><span class="pill">◈ Fare records</span><span class="pill">⌖ Pickup map</span><span class="pill">♧ Trip planning</span></div><p class="fm-hero-help"><a href="/faremap/help.html">How to use FareMap</a> · <a href="https://play.google.com/store/apps/details?id=com.spirit2k5.faremap" target="_blank" rel="noopener noreferrer">Get FareMap for Android ↗</a></p></div></div></section>
 <main class="content" id="passenger">
 <section class="auth-card" id="authSection" aria-labelledby="authTitle">
 <h2 id="authTitle">Welcome Back!</h2><p class="muted micro">Know the fare before you go. Continue with your FareMap account to use the passenger features. Your saved account role stays unchanged.</p><div class="fm-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
 <div class="auth-grid"><button type="button" class="action" id="emailLinkBtn">✉ &nbsp; Continue with Email</button><button type="button" class="action secondary" id="googleBtn" aria-describedby="googleStatus">G &nbsp; Continue with Google</button></div>
 <button type="button" class="action secondary" id="guestBtn" style="display:block;width:100%;margin-top:12px">Browse fares &amp; taxi ranks without signing in →</button>
-<p class="muted micro" style="margin:8px 0 0">No app or Expo required. Public preview data is dated and may not reflect current fares or boarding locations.</p>
-<p id="googleStatus" class="muted micro" style="margin:9px 0 0">Google sign-in returns to this passenger website. No FareMap app or Expo Go is required.</p>
+<p class="muted micro" style="margin:8px 0 0">Browse in your browser. Each result shows available confidence information; the catalogue notice tells you when a dated fallback is being used.</p>
+<p id="googleStatus" class="muted micro" style="margin:9px 0 0">Google sign-in returns to this passenger website. You do not need to install the app.</p>
+<section id="emailCodeSection" class="fm-email-code hidden" aria-labelledby="emailCodeTitle">
+<h3 id="emailCodeTitle">Check your email</h3><p class="muted micro">Reading it on another device? Enter its verification code here to sign in on this browser. Keep the code private.</p>
+<div class="field"><label for="emailCode">Email verification code</label><input id="emailCode" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]{6,14}" maxlength="14" aria-describedby="emailCodeHint" placeholder="Enter your email code"></div>
+<p id="emailCodeHint" class="muted micro">Use the newest email. Its link also works when opened in the browser where you requested it.</p>
+<button type="button" id="verifyEmailCodeBtn" class="action">Verify code &amp; continue</button>
+</section>
 <details style="margin-top:18px"><summary style="font-weight:780;cursor:pointer">Already have an email password?</summary><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your FareMap password"></div><button type="button" class="action secondary" id="passwordBtn">Sign in with password</button></details>
-<div class="notice warn">Email sign-in depends on the FareMap email provider being correctly configured. If delivery fails, the app will tell you. Never share sign-in codes or links.</div><p id="authMessage" class="notice hidden" role="status" aria-live="polite"></p>
+<p class="muted micro">Keep sign-in codes and links private. By using the passenger website, you can read how your information is handled in <a href="/faremap/privacy.html">FareMap privacy</a>. <a href="/faremap/help.html#sign-in">Need sign-in help?</a></p><p id="authMessage" class="notice hidden" role="status" aria-live="polite"></p>
 </section>
 <section id="appSection" class="hidden" aria-label="FareMap passenger dashboard">
 <section class="fm-home" id="fmHomeView" aria-label="FareMap Passenger Home">
@@ -159,10 +166,10 @@
  </div>
 </div>
 </main>
-<section class="seo-content" aria-label="About FareMap"><h2>South African minibus taxi information for passengers</h2><p>FareMap is a passenger-focused web experience for browsing minibus taxi routes, reported fares and pickup-point information in South Africa. Information can be incorrect, disputed or outdated; always confirm your destination, actual boarding point, fare and surroundings before travelling. Data-confidence indicators describe the reliability of information and never guarantee physical safety.</p><p>FareMap is developed by <a href="/">Spirit2k5 Web Studio</a> in Soweto, Johannesburg. If a fare or pickup location is incorrect, passenger reports can help the project identify information that needs review.</p><h2>Questions passengers often ask</h2><p><strong>Are taxi fares guaranteed?</strong> No. Fare records are indicative and may differ by taxi association, direction and date. <strong>Does FareMap verify location safety?</strong> No. Pin accuracy and personal safety are separate questions. <strong>Can drivers use this website?</strong> Anyone with an existing FareMap account can access passenger features, but the website does not offer Driver Mode.</p></section>
-<footer class="footinfo">FareMap passenger web · A <a href="/">Spirit2k5 Web Studio</a> project · <a href="/privacy.html">Privacy</a> · <a href="mailto:mahloricarlton@gmail.com?subject=FareMap%20passenger%20web%20feedback">Send feedback</a><div style="margin-top:6px">Taxi data is informational. Confirm locally before travelling.</div></footer>
+<section class="seo-content" aria-label="About FareMap"><h2>South African minibus taxi information for passengers</h2><p>FareMap is a passenger-focused web experience for browsing minibus taxi routes, reported fares and pickup-point information in South Africa. Information can be incorrect, disputed or outdated; always confirm your destination, actual boarding point, fare and surroundings before travelling. Data-confidence indicators describe the reliability of information and never guarantee physical safety.</p><p>FareMap is developed by <a href="/">Spirit2k5 Web Studio</a> in Soweto, Johannesburg. If a fare or pickup location is incorrect, passenger reports can help the project identify information that needs review.</p><h2>Questions passengers often ask</h2><p><strong>Are taxi fares guaranteed?</strong> No. Fare records are indicative and may differ by taxi association, direction and date. <strong>Does FareMap verify location safety?</strong> No. Pin accuracy and personal safety are separate questions. <strong>Do I need an account?</strong> You can browse public fares, pickup points and trip estimates as a guest. Sign in to send a private issue report. <a href="/faremap/help.html">Read the passenger guide</a>.</p></section>
+<footer class="footinfo">FareMap passenger web · A <a href="/">Spirit2k5 Web Studio</a> project · <a href="/faremap/help.html">Help</a> · <a href="/faremap/privacy.html">FareMap privacy</a> · <a href="mailto:mahloricarlton@gmail.com?subject=FareMap%20passenger%20web%20feedback">Send feedback</a><div style="margin-top:6px">Taxi data is informational. Confirm locally before travelling.</div></footer>
 <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script type="module" src="/faremap/app.js"></script>
+<script type="module" src="/faremap/app.js?v=20261021-passenger3"></script>
 </body>
 </html>

@@ -71,7 +71,63 @@ export function createPassengerWebEnhancements({
 }) {
   const trust = new Map();
   let map = null, mapLayer = null, markers = new Map();
-  let issueTarget = null, issuePending = false;
+  let issueTarget = null, issuePending = null, formGeneration = 0;
+  const dispatchedReports = new WeakSet();
+  let reportIdentity = { userId: null, sessionId: null, epoch: 0 };
+  const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
+
+  // Local cancellation identity only. The protected RPC checks the actual user.
+  function sessionIdentity(session) {
+    const userId = session?.user?.id, token = session?.access_token;
+    if (session?.user?.is_anonymous === true || typeof userId !== "string" || !uuid.test(userId) || typeof token !== "string" || token.length > 32768) return null;
+    const parts = token.split(".");
+    if (parts.length !== 3 || !parts[0] || !parts[2] || !/^[A-Za-z0-9_-]+$/.test(parts[1]) || parts[1].length % 4 === 1) return null;
+    try {
+      const payload = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+      const claims = JSON.parse(atob(payload.padEnd(Math.ceil(payload.length / 4) * 4, "=")));
+      return claims.sub === userId && typeof claims.session_id === "string" && uuid.test(claims.session_id)
+        ? { userId, sessionId: claims.session_id } : null;
+    } catch (_) { return null; }
+  }
+  function canReport() {
+    return Boolean(reportIdentity.userId && reportIdentity.sessionId && state.user?.id === reportIdentity.userId);
+  }
+  function onIdentityChanged(session) {
+    const next = sessionIdentity(session);
+    const userId = next?.userId || null, sessionId = next?.sessionId || null;
+    if (reportIdentity.userId === userId && reportIdentity.sessionId === sessionId) return;
+    reportIdentity = { userId, sessionId, epoch: reportIdentity.epoch + 1 };
+    // This runs synchronously in the accepted auth callback, before UI deferral.
+    closeIssue();
+  }
+  function targetFacts(type, item) {
+    return JSON.stringify(type === "fare"
+      ? [item.id, item.route_from, item.route_to, item.fare_price, item.updated_at, item.fact_revision]
+      : [item.id, item.name, item.latitude ?? item.lat, item.longitude ?? item.lng, item.updated_at, item.fact_revision]);
+  }
+  function targetIsCurrent(target) {
+    const item = (target.type === "fare" ? state.fares : state.points).find(row => row.id === target.item.id);
+    return Boolean(item && targetFacts(target.type, item) === target.facts);
+  }
+  function ownsAction(action) {
+    return issuePending === action && formGeneration === action.formGeneration && issueTarget === action.target &&
+      reportIdentity.epoch === action.epoch && reportIdentity.userId === action.userId &&
+      reportIdentity.sessionId === action.sessionId && state.user?.id === action.userId;
+  }
+  function actionIsCurrent(action) {
+    return ownsAction(action) && targetIsCurrent(action.target) &&
+      $("v2ReportKind").value === action.kind && $("v2ReportDetails").value.trim() === action.details;
+  }
+  function invalidateEditedAction() {
+    if (!issueTarget) return;
+    const alreadyDispatched = issuePending && dispatchedReports.has(issuePending);
+    formGeneration += 1;
+    issuePending = null;
+    $("v2ReportSubmit").disabled = !canReport();
+    $("v2ReportMessage").textContent = alreadyDispatched
+      ? "Your earlier submission may already have been received. These edits have not been sent."
+      : "Your changes have not been sent. Review them before submitting.";
+  }
 
   function showTrust(parent, type, item) {
     const box = element("div", "fm-trust");
@@ -247,7 +303,11 @@ export function createPassengerWebEnhancements({
       target.item.name || "Taxi pickup point";
   }
   function setIssueTarget(target) {
-    issueTarget = target;
+    formGeneration += 1;
+    issuePending = null;
+    const item = Object.freeze({ ...target.item });
+    const factRevision = trust.get(target.type + ":" + item.id)?.fact_revision || item.fact_revision || null;
+    issueTarget = Object.freeze({ type: target.type, item, facts: targetFacts(target.type, item), factRevision });
     $("v2ReportTitle").textContent = describeTarget(target);
     $("v2ReportKind").replaceChildren();
     for (const [value, label] of issueTypes[target.type] || []) {
@@ -255,12 +315,12 @@ export function createPassengerWebEnhancements({
       $("v2ReportKind").append(opt);
     }
     $("v2ReportDetails").value = "";
-    $("v2ReportMessage").textContent = state.user
+    $("v2ReportMessage").textContent = canReport()
       ? "Your report will be private until reviewed. It does not automatically change the displayed fare or pin."
       : "Sign in to submit a report. Guest browsing remains available without an account.";
-    $("v2ReportSubmit").disabled = !state.user;
-    $("v2ReportSubmit").classList.toggle("hidden", !state.user);
-    $("v2ReportLogin").classList.toggle("hidden", !!state.user);
+    $("v2ReportSubmit").disabled = !canReport();
+    $("v2ReportSubmit").classList.toggle("hidden", !canReport());
+    $("v2ReportLogin").classList.toggle("hidden", canReport());
   }
   function openIssue(type, item) {
     if (!issueTypes[type] || !item?.id) return;
@@ -290,13 +350,20 @@ export function createPassengerWebEnhancements({
     $("v2ReportClose").focus();
   }
   function closeIssue() {
+    formGeneration += 1;
+    issuePending = null;
     $("v2ReportModal").classList.add("hidden");
     $("v2ReportRecordWrap").classList.add("hidden");
+    $("v2ReportDetails").value = "";
+    $("v2ReportTitle").textContent = "";
+    $("v2ReportMessage").textContent = "";
+    $("v2ReportKind").replaceChildren();
+    $("v2ReportSubmit").disabled = true;
     issueTarget = null;
   }
   async function submitIssue() {
     if (!issueTarget || issuePending) return;
-    if (!state.user) {
+    if (!canReport()) {
       $("v2ReportMessage").textContent = "Sign in before submitting. This helps prevent false reports.";
       return;
     }
@@ -305,37 +372,64 @@ export function createPassengerWebEnhancements({
       $("v2ReportMessage").textContent = "Please describe the issue in 8–1000 characters.";
       return;
     }
-    issuePending = true;
+    const kind = $("v2ReportKind").value;
+    if (!issueTypes[issueTarget.type].some(([value]) => value === kind) || !targetIsCurrent(issueTarget)) {
+      $("v2ReportMessage").textContent = "This record changed. Refresh FareMap and open the report again.";
+      return;
+    }
+    const action = Object.freeze({ ...reportIdentity, formGeneration, target: issueTarget, kind, details: description });
+    issuePending = action;
     $("v2ReportSubmit").disabled = true;
     $("v2ReportMessage").textContent = "Checking the record and submitting privately…";
     try {
-      // Re-fetch the current revision so we never submit against stale data.
+      if (!actionIsCurrent(action)) return;
       const {data: facts, error: revisionError} = await supabase.rpc("faremap_get_data_confidence", {
-        p_entity_type: issueTarget.type, p_entity_ids: [issueTarget.item.id]
+        p_entity_type: action.target.type, p_entity_ids: [action.target.item.id]
       });
+      if (!actionIsCurrent(action)) return;
       if (revisionError) throw revisionError;
-      const revision = facts?.find(f => f.entity_id === issueTarget.item.id)?.fact_revision;
-      if (!revision) throw new Error("This record changed or is unavailable. Refresh before reporting.");
+      const revision = facts?.find(f => f.entity_id === action.target.item.id)?.fact_revision;
+      if (typeof revision !== "string" || !revision ||
+        (action.target.factRevision && action.target.factRevision !== revision)) {
+        throw new Error("This record changed or is unavailable. Refresh before reporting.");
+      }
+      const request = Object.freeze({ type: action.target.type, id: action.target.item.id,
+        kind: action.kind, details: action.details, revision, actor: action.userId });
+      if (!actionIsCurrent(action)) return;
+      // One dispatch only. expected actor remains the initiating user even if
+      // Supabase obtains a replacement account token after this final UI guard.
+      dispatchedReports.add(action);
       const {data, error} = await supabase.rpc("faremap_report_data_issue_as", {
-        p_entity_type: issueTarget.type,
-        p_entity_id: issueTarget.item.id,
-        p_issue_type: $("v2ReportKind").value,
-        p_details: description,
-        p_expected_revision: revision,
-        p_expected_actor: state.user.id
+        p_entity_type: request.type,
+        p_entity_id: request.id,
+        p_issue_type: request.kind,
+        p_details: request.details,
+        p_expected_revision: request.revision,
+        p_expected_actor: request.actor
       });
+      if (!actionIsCurrent(action)) return;
       if (error) throw error;
+      if (data?.status !== "saved" && data?.status !== "duplicate") throw new Error("Unexpected report response");
       $("v2ReportMessage").textContent = data?.status === "duplicate"
         ? "You already have an open report for this issue. The existing report is still awaiting review."
         : "Report received for review. No automatic fare or location changes were made.";
       $("v2ReportDetails").value = "";
     } catch (error) {
+      if (!actionIsCurrent(action)) return;
       $("v2ReportMessage").textContent = /changed|refresh|no longer active/i.test(error?.message || "")
         ? "The record has changed. Refresh FareMap and open the report again."
         : /limit/i.test(error?.message || "") ? "Report limit reached. Please wait before reporting again."
-        : "Could not submit your report. Please check your connection and try again.";
+        : dispatchedReports.has(action)
+          ? "Could not confirm whether your report was received. It was not automatically resent. Check before submitting again."
+          : "Could not check this record. Your report was not sent. Check your connection and reopen the report.";
     } finally {
-      issuePending = false; $("v2ReportSubmit").disabled = !state.user;
+      if (ownsAction(action)) {
+        issuePending = null;
+        $("v2ReportSubmit").disabled = !canReport();
+        if ($("v2ReportMessage").textContent === "Checking the record and submitting privately…") {
+          $("v2ReportMessage").textContent = "This report changed before completion. Review it before submitting again.";
+        }
+      }
     }
   }
   function init() {
@@ -354,12 +448,15 @@ export function createPassengerWebEnhancements({
       const item = items.find(x => x.id === $("v2ReportRecord").value);
       if (item) setIssueTarget({ type, item });
     });
+    $("v2ReportDetails").addEventListener("input", invalidateEditedAction);
+    $("v2ReportKind").addEventListener("change", invalidateEditedAction);
   }
   async function onData() {
+    if (issueTarget && !targetIsCurrent(issueTarget)) closeIssue();
     populateStops();
     renderPlanner();
     refreshMap();
     await refreshConfidence();
   }
-  return { init, onData, showTrust, onTab, focusPoint, openIssue, openGeneralReport, openPlanner, renderPlanner };
+  return { init, onData, onIdentityChanged, showTrust, onTab, focusPoint, openIssue, openGeneralReport, openPlanner, renderPlanner };
 }

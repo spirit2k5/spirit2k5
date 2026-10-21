@@ -19,11 +19,16 @@ jobs:
     steps:
       - name: Checkout website
         uses: actions/checkout@v4
+      - name: Use supported Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
       - name: Check passenger scripts and journey tests
         run: |
           node --check faremap/app.js
           node --check faremap/passenger-v2.js
-          node --experimental-default-type=module --test faremap/tests/*.test.mjs
+          node --check faremap/web-auth.js
+          node --test faremap/tests/*.test.mjs
       - name: Validate passenger page and HUD
         run: |
           python3 - <<'PY'
@@ -56,9 +61,13 @@ jobs:
                            'fareResults','pointResults','fmHomeMap','homeSearchBtn'):
               assert required in p.ids, f'Missing critical UI node: {required}'
           assert p.nav == ['home','fares','add','points','profile'], p.nav
-          assert '/faremap/mobile-ui.css?v=20261018-native1' in p.links
-          assert '/faremap/app.js' in p.links
-          assert '/faremap/passenger-v2.css' in p.links
+          local_paths = [link.split('?')[0] for link in p.links]
+          assert '/faremap/mobile-ui.css' in local_paths
+          assert '/faremap/app.js' in local_paths
+          assert '/faremap/passenger-v2.css' in local_paths
+          for required in ('emailCodeSection','emailCode','verifyEmailCodeBtn'):
+              assert required in p.ids, f'Missing email-code UI: {required}'
+          assert '/faremap/help.html' in local_paths and '/faremap/privacy.html' in local_paths
           for required in ('view-planner','v2Map','v2ReportModal','v2ReportSubmit','v2PlanFrom','v2PlanTo'):
               assert required in p.ids, f'Missing FareMap V2 UI node: {required}'
           assert 'getElementById' in js

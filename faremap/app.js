@@ -1,15 +1,26 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
-import { createPassengerWebEnhancements } from "./passenger-v2.js";
+import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-passenger3";
+import { createIdentityClock, createGuardedAuthStorage } from "./web-auth.js?v=20261021-passenger3";
 
 // A publishable key is intended for browser apps. Never embed a service-role key.
 // All reads and account operations remain subject to Supabase Row Level Security.
+const authStorage = createGuardedAuthStorage({
+  getItem: key => localStorage.getItem(key),
+  setItem: (key, value) => localStorage.setItem(key, value),
+  removeItem: key => localStorage.removeItem(key)
+});
 const supabase = createClient("https://gspydyktmdepgjhpgvyv.supabase.co", "sb_publishable_6LT8qH_6AypUkuZI5jOq_w_2_Nj7p7F", {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,
-    flowType: "pkce"
+    flowType: "pkce",
+    storage: authStorage
   }
+});
+const emailVerifier = createClient("https://gspydyktmdepgjhpgvyv.supabase.co", "sb_publishable_6LT8qH_6AypUkuZI5jOq_w_2_Nj7p7F", {
+  auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false,
+    storageKey: "faremap-web-email-verifier-v1" }
 });
 
 const $ = (id) => document.getElementById(id);
@@ -19,6 +30,14 @@ let busy = false;
 let browsingAsGuest = false;
 let previewLoaded = false;
 let catalogRequest = 0;
+const identityClock = createIdentityClock();
+let renderRequest = 0;
+let displayedUserId = null;
+let activeSession = null;
+let authOperation = 0;
+let emailChallenge = null;
+let catalogSource = null;
+let observedAuthEvent = false;
 
 function status(id, message, kind = "") {
   const el = $(id);
@@ -33,13 +52,13 @@ function authError(error) {
     return "Too many sign-in attempts. Please wait and try again.";
   }
   if (/expired|otp_expired|invalid.?token|token.*invalid/i.test(text)) {
-    return "Your link or code has expired. Request a new sign-in link.";
+    return "Your link or code is invalid or expired. Request a new email and use its newest code or link.";
   }
   if (/smtp|email.*not sent|error sending|mail.*error|credentials invalid/i.test(text)) {
     return "FareMap email delivery is currently unavailable. Please try again later or use another enabled sign-in method.";
   }
   if (/redirect.*not.*allowed|invalid redirect/i.test(text)) {
-    return "Website sign-in is not fully configured yet. The FareMap team needs to allow this website callback.";
+    return "Website sign-in could not finish. Try a new email code or browse as a guest. Contact support if this continues.";
   }
   if (/invalid login credentials/i.test(text)) {
     return "Email or password was not accepted. Check the details, or use an email sign-in link.";
@@ -52,9 +71,38 @@ function authError(error) {
 
 function setBusy(working) {
   busy = working;
-  for (const id of ["emailLinkBtn", "googleBtn", "passwordBtn"]) {
+  for (const id of ["emailLinkBtn", "googleBtn", "passwordBtn", "verifyEmailCodeBtn"]) {
     $(id).disabled = working;
   }
+  $("email").readOnly = working;
+}
+function resetEmailChallenge() {
+  authOperation++;
+  emailChallenge = null;
+  $("emailCode").value = "";
+  $("emailCodeSection").classList.add("hidden");
+  $("password").value = "";
+  setBusy(false);
+}
+function acceptSession(session) {
+  const changed = identityClock.observe(session);
+  activeSession = session || null;
+  state.user = session?.user || null;
+  v2.onIdentityChanged(session);
+  if (changed) {
+    catalogRequest++;
+    state.loadedFor = null;
+    state.saved = new Set();
+    $("profileEmail").textContent = "";
+    $("accountLabel").textContent = "";
+    status("authMessage", "");
+    $("savedResults").replaceChildren();
+    $("savedCount").textContent = "0";
+    closeAddSheet();
+    resetEmailChallenge();
+  }
+  const request = ++renderRequest;
+  setTimeout(() => { void displaySession(activeSession, request); }, 0);
 }
 function userKey() {
   return "faremap-web-favourites-v1:" + (state.user?.id || "guest");
@@ -287,6 +335,7 @@ async function loadData() {
       f.route_from && f.route_to);
     state.points = data.points.filter(p => p.id && p.name);
     previewLoaded = true;
+    catalogSource = { source: data.source, generatedAt: data.generatedAt };
     $("fareCount").textContent = state.fares.length;
     $("pointCount").textContent = state.points.length;
     populateChoices();
@@ -294,6 +343,7 @@ async function loadData() {
     renderPoints();
     renderSaved();
     renderHome();
+    updateCatalogLabel();
     status("dataMessage", data.source === "live"
       ? "Live FareMap catalog checked " + readableDate(data.generatedAt) +
         " · These are current records, NOT independently verified prices or safe locations. Confirm locally."
@@ -309,10 +359,20 @@ async function loadData() {
 async function loadPreview() {
   await loadData();
 }
-async function displaySession(session) {
+function updateCatalogLabel() {
+  if (!catalogSource) {
+    $("guestModeLabel").textContent = "Public taxi information is loading. Its source and date appear above the results.";
+    return;
+  }
+  $("guestModeLabel").textContent = (state.user ? "Signed-in passenger" : "Guest passenger") +
+    (catalogSource.source === "live" ? " · current public catalogue checked " : " · dated fallback from ") +
+    readableDate(catalogSource.generatedAt) + ". Records may still be incorrect or outdated; confirm locally.";
+}
+async function displaySession(session, request = renderRequest) {
+  if (request !== renderRequest || (session?.user?.id || null) !== (state.user?.id || null)) return;
   const user = session?.user || null;
-  const previousUserId = state.user?.id || null;
-  state.user = user;
+  const previousUserId = displayedUserId;
+  displayedUserId = user?.id || null;
   const signedIn = Boolean(user);
   if (signedIn) browsingAsGuest = false;
   const guest = !signedIn && browsingAsGuest;
@@ -326,7 +386,7 @@ async function displaySession(session) {
   if (signedIn) {
     $("accountLabel").textContent = "Signed in as " + (user.email || "FareMap account") + " · passenger interface only";
     $("profileEmail").textContent = user.email || "FareMap account";
-    $("guestModeLabel").textContent = "Your FareMap passenger session is active.";
+    updateCatalogLabel();
     setTab(currentTab);
     if (previousUserId !== user.id || state.loadedFor !== user.id) {
       state.loadedFor = user.id;
@@ -337,7 +397,7 @@ async function displaySession(session) {
   } else if (guest) {
     $("accountLabel").textContent = "Guest passenger · public taxi information";
     $("profileEmail").textContent = "Browsing without signing in";
-    $("guestModeLabel").textContent = "Guest preview: fares and taxi ranks are a dated snapshot. Sign in for account features.";
+    updateCatalogLabel();
     $("savedCount").textContent = state.saved.size;
     setTab(currentTab === "profile" ? "home" : currentTab);
     if (!previewLoaded) await loadPreview();
@@ -348,11 +408,15 @@ async function displaySession(session) {
     state.fares = [];
     state.points = [];
     state.saved.clear();
+    $("profileEmail").textContent = "";
+    $("savedResults").replaceChildren();
     currentTab = "home";
     setTab("home");
   }
 }
 async function enterGuestMode() {
+  if (state.user) return;
+  resetEmailChallenge();
   browsingAsGuest = true;
   previewLoaded = false;
   restoreSaved();
@@ -368,18 +432,64 @@ async function sendEmailLink() {
     $("email").focus();
     return;
   }
+  resetEmailChallenge();
   setBusy(true);
-  status("authMessage", "Sending your sign-in link…");
+  const operation = ++authOperation;
+  const owner = identityClock.snapshot();
+  status("authMessage", "Sending your sign-in email…");
   try {
     const result = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: "https://spirit2k5.co.za/faremap/" }
     });
+    if (operation !== authOperation || !identityClock.isCurrent(owner) || $("email").value.trim() !== email) return;
     if (result.error) throw result.error;
-    status("authMessage", "Check your email for a FareMap sign-in link. You may need to check Spam or Junk.");
+    emailChallenge = { email, operation, owner };
+    $("emailCodeSection").classList.remove("hidden");
+    $("emailCode").value = "";
+    $("emailCode").focus();
+    status("authMessage", "Email requested for " + email + ". Enter the code here, even if you read the email on another device, or open its link in this browser. Check Spam or Junk too.");
   } catch (error) {
-    status("authMessage", authError(error), "error");
-  } finally { setBusy(false); }
+    if (operation === authOperation && identityClock.isCurrent(owner)) status("authMessage", authError(error), "error");
+  } finally { if (operation === authOperation) setBusy(false); }
+}
+async function verifyEmailCode() {
+  if (busy || !emailChallenge) return;
+  const challenge = emailChallenge;
+  const token = $("emailCode").value.replace(/\s/g, "");
+  if (!/^\d{6,10}$/.test(token)) {
+    status("authMessage", "Enter the 6–10 digit code from your newest FareMap email.", "warn");
+    return;
+  }
+  const current = () => emailChallenge === challenge && authOperation === challenge.operation &&
+    identityClock.isCurrent(challenge.owner) && !state.user && $("email").value.trim() === challenge.email;
+  if (!current()) return;
+  setBusy(true);
+  status("authMessage", "Checking your email code…");
+  try {
+    const result = await emailVerifier.auth.verifyOtp({ email: challenge.email, token, type: "email" });
+    if (!current()) return;
+    if (result.error) throw result.error;
+    await adoptVerifiedSession(result.data?.session, challenge.email, current);
+    // The synchronous auth observer owns successful account display and cleanup.
+  } catch (error) {
+    if (current()) status("authMessage", authError(error), "error");
+  } finally {
+    if (emailChallenge === challenge && authOperation === challenge.operation) setBusy(false);
+  }
+}
+async function adoptVerifiedSession(session, expectedEmail, current) {
+  if (!current()) return;
+  if (!session?.access_token || !session.refresh_token ||
+      session.user?.email?.toLowerCase() !== expectedEmail.toLowerCase() ||
+      !Number.isFinite(session.expires_at) || session.expires_at * 1000 <= Date.now() + 30000) {
+    throw new Error("Email verification could not establish the requested account.");
+  }
+  const releaseGuard = authStorage.guardSession(session.access_token, current);
+  try {
+    const result = await supabase.auth.setSession({ access_token:session.access_token, refresh_token:session.refresh_token });
+    if (result.error) throw result.error;
+  } finally { releaseGuard(); }
 }
 async function signInWithPassword() {
   if (busy) return;
@@ -389,21 +499,29 @@ async function signInWithPassword() {
     status("authMessage", "Enter your email address and existing password.", "warn");
     return;
   }
+  resetEmailChallenge();
+  const operation = ++authOperation;
+  const owner = identityClock.snapshot();
+  const current = () => operation === authOperation && identityClock.isCurrent(owner) && !state.user && $("email").value.trim() === email;
   setBusy(true);
   status("authMessage", "Checking your account…");
   try {
-    const result = await supabase.auth.signInWithPassword({ email, password });
+    const result = await emailVerifier.auth.signInWithPassword({ email, password });
+    if (!current()) return;
     if (result.error) throw result.error;
-    status("authMessage", "");
-    await displaySession(result.data.session);
+    await adoptVerifiedSession(result.data?.session, email, current);
   } catch (error) {
-    status("authMessage", authError(error), "error");
-  } finally { setBusy(false); }
+    if (current()) status("authMessage", authError(error), "error");
+  } finally { if (operation === authOperation) setBusy(false); }
 }
 // The public FareMap HTTPS callback is allowlisted in Supabase Auth.
 // This website uses browser PKCE, not the Expo/Android auth-callback.
 async function signInWithGoogle() {
   if (busy) return;
+  resetEmailChallenge();
+  const operation = ++authOperation;
+  const owner = identityClock.snapshot();
+  const current = () => operation === authOperation && identityClock.isCurrent(owner) && !state.user;
   setBusy(true);
   status("authMessage", "Opening Google sign-in for FareMap Passenger Web…");
   try {
@@ -414,6 +532,7 @@ async function signInWithGoogle() {
       provider: "google",
       options: { redirectTo: webReturnUrl, skipBrowserRedirect: true }
     });
+    if (!current()) return;
     if (result.error) throw result.error;
     if (!result.data?.url) throw new Error("Missing Google authorization URL");
     const authorizationUrl = new URL(result.data.url);
@@ -425,8 +544,8 @@ async function signInWithGoogle() {
     }
     window.location.assign(authorizationUrl.toString());
   } catch (error) {
-    status("authMessage", authError(error), "error");
-  } finally { setBusy(false); }
+    if (current()) status("authMessage", authError(error), "error");
+  } finally { if (operation === authOperation) setBusy(false); }
 }
 
 function homeRow(icon, title, subtitle, onClick, price = "") {
@@ -548,6 +667,14 @@ function toggleTheme() {
 }
 
 $("emailLinkBtn").addEventListener("click", sendEmailLink);
+$("verifyEmailCodeBtn").addEventListener("click", verifyEmailCode);
+$("emailCode").addEventListener("keydown", event => {
+  if (event.key === "Enter") { event.preventDefault(); void verifyEmailCode(); }
+});
+$("email").addEventListener("input", () => {
+  resetEmailChallenge();
+  status("authMessage", "");
+});
 $("passwordBtn").addEventListener("click", signInWithPassword);
 $("googleBtn").addEventListener("click", signInWithGoogle);
 $("guestBtn").addEventListener("click", enterGuestMode);
@@ -563,9 +690,11 @@ $("signOutBtn").addEventListener("click", async () => {
     status("dataMessage", "Sign-out could not be completed; please retry.", "error");
     return;
   }
-  browsingAsGuest = false;
-  await displaySession(null);
-  status("authMessage", "Signed out of the FareMap website.");
+  if (!state.user) {
+    browsingAsGuest = false;
+    await displaySession(null);
+    status("authMessage", "Signed out of the FareMap website.");
+  }
 });
 $("refreshBtn").addEventListener("click", loadData);
 $("fromInput").addEventListener("input", renderFares);
@@ -627,24 +756,28 @@ const v2 = createPassengerWebEnhancements({
 v2.init();
 
 supabase.auth.onAuthStateChange((_event, session) => {
-  // Avoid awaiting further Supabase work inside an auth callback.
-  setTimeout(() => { displaySession(session); }, 0);
+  // Invalidate private work synchronously, and defer reads outside the auth lock.
+  identityClock.event();
+  if (_event === "INITIAL_SESSION" && observedAuthEvent) return;
+  if (_event !== "INITIAL_SESSION") observedAuthEvent = true;
+  acceptSession(session);
 });
+const seedVersion = identityClock.beginSeed();
 try {
   const { data, error } = await supabase.auth.getSession();
   if (error) throw error;
-  await displaySession(data.session);
+  if (identityClock.acceptSeed(seedVersion)) acceptSession(data.session);
   // Remove OAuth / PKCE codes from visible browser history only after processing.
   const url = new URL(location.href);
-  if (data.session && (url.searchParams.has("code") || url.hash.includes("access_token"))) {
+  if (state.user && (url.searchParams.has("code") || url.hash.includes("access_token"))) {
     history.replaceState(null, "", "/faremap/");
   }
   const redirectError = url.searchParams.get("error_description") ||
     new URLSearchParams(url.hash.slice(1)).get("error_description");
-  if (redirectError && !data.session) {
-    status("authMessage", "Google or email sign-in could not finish. Please request a fresh login, use an existing email password, or browse as a guest while website redirects are being configured.", "error");
+  if (redirectError && !state.user) {
+    status("authMessage", "Sign-in could not finish. Request a fresh email and enter its code, try another sign-in method, or continue as a guest.", "error");
     history.replaceState(null, "", "/faremap/");
   }
 } catch (_) {
-  status("authMessage", "Cannot connect to FareMap sign-in at the moment. Retry when your connection is available.", "error");
+  if (identityClock.acceptSeed(seedVersion)) status("authMessage", "Cannot connect to FareMap sign-in at the moment. Retry or continue as a guest.", "error");
 }
