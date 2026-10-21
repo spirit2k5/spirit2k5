@@ -1,4 +1,4 @@
-import { createPassengerMapController } from "./passenger-map.js?v=20261021-native-map1";
+import { createPassengerMapController, pickupDisplayName } from "./passenger-map.js?v=20261021-clean-labels1";
 
 /**
  * FareMap Passenger Web 2.0
@@ -259,7 +259,7 @@ export function createPassengerWebEnhancements({
   };
   function describeTarget(target) {
     return target.type === "fare" ? target.item.route_from + " → " + target.item.route_to :
-      target.item.name || "Taxi pickup point";
+      pickupDisplayName(target.item);
   }
   function setIssueTarget(target) {
     formGeneration += 1;
@@ -299,7 +299,7 @@ export function createPassengerWebEnhancements({
     for (const item of items) {
       const opt = document.createElement("option");
       opt.value = item.id;
-      opt.textContent = type === "fare" ? item.route_from + " → " + item.route_to : item.name;
+      opt.textContent = type === "fare" ? item.route_from + " → " + item.route_to : pickupDisplayName(item);
       select.append(opt);
     }
     $("v2ReportRecordWrap").classList.remove("hidden");

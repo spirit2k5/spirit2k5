@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import {createIdentityClock, createGuardedAuthStorage} from "../web-auth.js";
+import {pickupDisplayName} from "../passenger-map.js";
 
 const session = (id, sid = id + "-session", email = id + "@example.test") => ({
   user:{id,email}, access_token:"e30."+Buffer.from(JSON.stringify({sub:id,session_id:sid})).toString("base64url")+".test",
@@ -52,10 +53,10 @@ async function fixture(options={}) {
   const v2={onIdentityChanged:s=>calls.identity.push(s),onTab(){},onData:async()=>{},init(){},showTrust(){},focusPoint(){},openIssue(){},openGeneralReport(){}};
   let code=fs.readFileSync(new URL(options.original?"../../../source/faremap/app.js":"../app.js",import.meta.url),"utf8").replace(/^import .*;\r?\n/gm,"");
   const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
-  const run=new AsyncFunction("createClient","createPassengerWebEnhancements","createIdentityClock","createGuardedAuthStorage","document","window","localStorage","navigator","location","history","setTimeout",code+"\nreturn {state};");
+  const run=new AsyncFunction("createClient","createPassengerWebEnhancements","createIdentityClock","createGuardedAuthStorage","pickupDisplayName","document","window","localStorage","navigator","location","history","setTimeout",code+"\nreturn {state};");
   const document={getElementById:$,createElement:()=>new Node(),querySelectorAll:()=>[],addEventListener(){},documentElement:{dataset:{}}};
   const window={matchMedia:()=>({matches:false,addEventListener(){}}),scrollTo(){},location:{assign(){}}};
-  const pending=run(createClient,()=>v2,createIdentityClock,createGuardedAuthStorage,document,window,storage,{}, {href:"https://spirit2k5.co.za/faremap/"},{replaceState(){}},fn=>timers.push(fn));
+  const pending=run(createClient,()=>v2,createIdentityClock,createGuardedAuthStorage,pickupDisplayName,document,window,storage,{}, {href:"https://spirit2k5.co.za/faremap/"},{replaceState(){}},fn=>timers.push(fn));
   const flush=async()=>{for(let i=0;i<6;i++){while(timers.length)timers.shift()();await Promise.resolve();}};
   const api={$,calls,store,pending,event:(event,s)=>listener(event,s),flush,
     click:async id=>{assert.equal(typeof $(id).events.click,"function",id+" action exists");return $(id).events.click();},

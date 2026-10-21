@@ -1,6 +1,7 @@
 import "./maplibre-runtime.js?v=20261021-native-map1";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/+esm";
-import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-native-map1";
+import { createPassengerWebEnhancements } from "./passenger-v2.js?v=20261021-clean-labels1";
+import { pickupDisplayName } from "./passenger-map.js?v=20261021-clean-labels1";
 import { createIdentityClock, createGuardedAuthStorage } from "./web-auth.js?v=20261021-passenger3";
 
 // A publishable key is intended for browser apps. Never embed a service-role key.
@@ -250,7 +251,7 @@ function openPoint(point) {
   const icon = element("span", "fm-pickup-list-icon");
   icon.append(nativeIcon("location"));
   const copy = element("div", "fm-pickup-copy");
-  copy.append(element("strong", "", point.name || "Pickup point"));
+  copy.append(element("strong", "", pickupDisplayName(point, "Pickup point")));
   copy.append(element("small", "muted", [point.suburb, point.city, point.province].filter(Boolean).join(" · ") || "Recorded pickup point"));
   heading.append(icon, copy);
   box.append(heading);
@@ -278,7 +279,7 @@ function renderPoints() {
   const box = $("pointResults");
   box.replaceChildren();
   const query = $("pointSearch").value.trim().toLocaleLowerCase();
-  const matches = state.points.filter(p => [p.name, p.city, p.suburb, p.province, p.point_type, p.route_name]
+  const matches = state.points.filter(p => [pickupDisplayName(p), p.city, p.suburb, p.province, p.point_type, p.route_name]
     .some(v => String(v || "").toLocaleLowerCase().includes(query)));
   if (!matches.length) {
     box.append(element("p", "muted", "No matching pickup points found. Try a different search."));
@@ -293,7 +294,7 @@ function renderPoints() {
     const icon = element("span", "fm-pickup-list-icon");
     icon.append(nativeIcon("location"));
     const copy = element("span", "fm-pickup-copy");
-    copy.append(element("strong", "", point.name || "Unnamed pickup point"));
+    copy.append(element("strong", "", pickupDisplayName(point, "Unnamed pickup point")));
     const place = [point.suburb, point.city, point.province].filter(Boolean).join(" · ");
     copy.append(element("small", "", place || point.point_type || "Recorded taxi pickup"));
     v2.showTrust(copy, "pickup", point);
@@ -666,10 +667,10 @@ function locatePassengerOnWeb() {
     }
     for (const item of nearby) {
       const point = item.point;
-      list.append(homeRow("location", point.name || "Taxi pickup point",
+      list.append(homeRow("location", pickupDisplayName(point),
         (item.dist < 1 ? Math.round(item.dist * 1000) + " m" : item.dist.toFixed(1) + " km") +
           " from your location · not independently verified",
-        () => { setTab("points"); $("pointSearch").value = point.name || ""; renderPoints(); openPoint(point); v2.focusPoint(point); }));
+        () => { setTab("points"); $("pointSearch").value = pickupDisplayName(point); renderPoints(); openPoint(point); v2.focusPoint(point); }));
     }
   }, () => {
     if (request !== locationRequest) return;

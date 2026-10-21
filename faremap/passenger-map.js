@@ -18,6 +18,12 @@ const LONG_LABELS = { high: "High data confidence", community: "Community confir
 const SPRITE = "/faremap/assets/native-map-icons.svg";
 const CONTEXTS = { home: { id: "fmHomeMap", note: "homeMapStatus", size: 42 }, points: { id: "v2Map", note: "v2MapNote", size: 44 } };
 
+// Source identifiers remain in canonical records, never in the passenger label.
+export function pickupDisplayName(point, fallback = "Taxi pickup point") {
+  const name = typeof point?.name === "string" ? point.name : "";
+  return name.replace(/(?:\s*\(\s*osm\s*:\s*(?:node|way|relation)\s*:\s*\d+\s*\))+\s*$/i, "").trim() || fallback;
+}
+
 export function pickupCoordinates(point) {
   const rawLat = point?.latitude ?? point?.lat, rawLng = point?.longitude ?? point?.lng;
   if (rawLat === null || rawLat === undefined || rawLat === "" || rawLng === null || rawLng === undefined || rawLng === "") return null;
@@ -74,7 +80,7 @@ export function createPassengerMapController({ onSelectPoint = () => {}, onLocat
     el.style.zIndex = selected ? "5" : "1";
     el.classList.toggle("is-selected", selected);
     el.setAttribute("aria-pressed", String(selected));
-    el.setAttribute("aria-label", (record.point.name || "Taxi pickup point") + ": " + display.description + ". Colours describe data confidence, not physical safety.");
+    el.setAttribute("aria-label", pickupDisplayName(record.point) + ": " + display.description + ". Colours describe data confidence, not physical safety.");
     el.dataset.confidence = display.level;
     record.label.textContent = display.label;
   }
@@ -83,7 +89,7 @@ export function createPassengerMapController({ onSelectPoint = () => {}, onLocat
   }
   function markerElement(view, point) {
     const button = document.createElement("button"); button.type = "button"; button.className = "fm-pickup-marker";
-    button.title = point.name || "Taxi pickup point";
+    button.title = pickupDisplayName(point);
     const halo = span("fm-pin-halo"), head = span("fm-pin-head"), inner = span("fm-pin-inner");
     inner.append(icon("bus", "fm-pin-glyph")); head.append(inner);
     const tail = span("fm-pin-tail"), badge = span("fm-pin-location"), label = span("fm-pin-confidence");
