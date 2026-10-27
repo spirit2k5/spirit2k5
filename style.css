@@ -540,3 +540,17 @@ body{background:#f6f0e6;color:#191b1d}body::before{background:radial-gradient(ci
   .faremap-feature-tagline{font-size:.65rem}
 }
 @media(prefers-reduced-motion:reduce){.faremap-showcase .faremap-access-link{transition:none}}
+
+/* Persistent labels and accessible enquiry feedback. */
+.wizard-field{display:grid;gap:8px;min-width:0;color:#453d34;font-size:.86rem;font-weight:750}
+.wizard-field>span{display:block;line-height:1.4}
+.wizard-field input,.wizard-field select,.wizard-field textarea{width:100%;min-width:0;font-weight:400}
+.wizard-field-wide{margin-top:20px}
+.wizard-step h2:focus{outline:2px solid #956021;outline-offset:6px;border-radius:4px}
+.enquiry-success.show{max-height:none;align-items:flex-start;overflow:visible}
+.enquiry-fallback{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.enquiry-fallback a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;border:1px solid #537064;border-radius:10px;color:#173d2e;background:#fff;font-size:.85rem;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.enquiry-fallback a:focus-visible{outline:3px solid #956021;outline-offset:3px}
+.spirit-ai-panel[inert]{visibility:hidden}
+.spirit-ai-panel[hidden]{display:none}
+@media(max-width:680px){.wizard-field{font-size:.88rem}.enquiry-fallback a{flex:1 1 140px}}

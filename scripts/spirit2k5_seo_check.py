@@ -86,7 +86,7 @@ def main():
     assert len(set(descriptions)) == count, "Duplicate public-page descriptions"
     robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
     assert "Sitemap: " + ORIGIN + "/sitemap.xml" in robots, "Sitemap not advertised"
-    for private in ("assistant-admin.html", "previews/vlandf-home/index.html"):
+    for private in ("assistant-admin.html", "previews/vlandf-home/index.html", "previews/vlandf-home/index.production.html"):
         source = ROOT / private
         if source.is_file():
             page = Page()

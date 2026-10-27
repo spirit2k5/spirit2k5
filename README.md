@@ -37,11 +37,11 @@ The payment approach is:
 
 ### Denz iPhones
 
-Business information website created by Spirit2k5 for a mobile trading company.
+An iPhone e-commerce storefront created by Spirit2k5.
 
 Live website: https://denziphone.com/
 
-The live website focuses on clear company information, mobile trading, logistics, bulk distribution, responsive design and customer contact paths.
+The current website includes product and condition categories, product options, a cart and checkout, responsive design and direct customer contact paths.
 
 ### RONMAXAKS Security Solutions
 
@@ -53,7 +53,7 @@ Project work includes services, project gallery, responsive design, contact flow
 
 ### FareMap
 
-FareMap is currently under development.
+FareMap is publicly available on the web and Android, with development and transport-data improvements continuing.
 
 It is a South African taxi-focused product with fare information, route search, live vehicle tracking, driver/passenger features and community fare reporting.
 

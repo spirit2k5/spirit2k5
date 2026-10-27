@@ -39,6 +39,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
       - name: Apply safe automatic repairs
         id: repair
         continue-on-error: true
@@ -53,6 +58,8 @@ jobs:
         shell: bash
         run: |
           node --check script.js
+          node --test tests/studio-*.test.cjs
+          python scripts/spirit2k5_seo_check.py
           python - <<'PY'
           from pathlib import Path
 

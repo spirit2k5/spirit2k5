@@ -34,9 +34,32 @@
     };
   };
 
+  // Bound both the network request and its response body; a stalled service must
+  // not leave a customer waiting indefinitely or prevent the other route working.
+  const requestJSON = async (url, options = {}, timeoutMs = 10000) => {
+    const controller = new AbortController();
+    let timer;
+    try {
+      return await Promise.race([
+        fetch(url, { ...options, signal: controller.signal }).then(async response => ({
+          ok: response.ok,
+          data: await response.json().catch(() => ({}))
+        })),
+        new Promise((_, reject) => {
+          timer = setTimeout(() => {
+            controller.abort();
+            reject(new Error('Request timed out'));
+          }, timeoutMs);
+        })
+      ]);
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
   const sendToCollector = async payload => {
     try {
-      const response = await fetch(SPIRIT_COLLECT_URL, {
+      const response = await requestJSON(SPIRIT_COLLECT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         keepalive: true,
@@ -48,11 +71,45 @@
     }
   };
 
+  const firstSuccessfulRoute = routes => new Promise(resolve => {
+    let remaining = routes.length;
+    if (!remaining) { resolve({ ok: false, route: '' }); return; }
+    routes.forEach(([route, request]) => {
+      Promise.resolve(request).catch(() => false).then(ok => {
+        if (ok) resolve({ ok: true, route });
+        else if (--remaining === 0) resolve({ ok: false, route: '' });
+      });
+    });
+  });
+
+  const enquiryContactLinks = data => {
+    const names = ['Name', 'Business', 'Email', 'Phone', 'Project type', 'Budget', 'Timeline', 'Existing site', 'Project details'];
+    const details = names.map(name => [name, String(data.get(name) || '').trim()])
+      .filter(([, value]) => value).map(([name, value]) => name + ': ' + value).join('\n');
+    const message = 'Hi Carlton, here is my Spirit2k5 project enquiry.\n\n' + details;
+    return {
+      whatsapp: 'https://wa.me/27781888220?text=' + encodeURIComponent(message),
+      email: 'mailto:mahloricarlton@gmail.com?subject=' + encodeURIComponent('Spirit2k5 website project enquiry') + '&body=' + encodeURIComponent(message)
+    };
+  };
+
+  const safeTrackingTarget = target => {
+    const value = String(target || '');
+    // Contact links can carry private enquiry details in their query strings.
+    // Keep only the destination; conversion records never need those details.
+    if (/^(mailto:|tel:)/i.test(value)) return value.split(/[?#]/, 1)[0].slice(0, 500);
+    try {
+      const url = new URL(value);
+      if (/^https?:$/.test(url.protocol)) return (url.origin + url.pathname).slice(0, 500);
+    } catch (_) {}
+    return value.slice(0, 500);
+  };
+
   const trackEvent = (eventName, target = '') => {
     const payload = {
       type: 'event',
       event_name: eventName,
-      target: String(target || '').slice(0, 500),
+      target: safeTrackingTarget(target),
       ...getTrackingContext()
     };
     sendToCollector(payload);
@@ -100,12 +157,18 @@
 
   const updateActiveNav = (url = location.href) => {
     const page = currentPageName(url);
+    const currentUrl = new URL(url, location.href);
     const packagePages = ['starter-website.html','business-website.html','ecommerce-website.html','custom-web-app.html'];
     const servicePages = ['wordpress.html'];
     document.querySelectorAll('.nav a').forEach(a => {
       const href = a.getAttribute('href') || '';
       if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-      const hrefPage = currentPageName(new URL(href, location.href).href);
+      const hrefUrl = new URL(href, location.href);
+      if (hrefUrl.pathname === '/faremap' || hrefUrl.pathname.startsWith('/faremap/')) {
+        a.classList.toggle('active', currentUrl.pathname === '/faremap' || currentUrl.pathname.startsWith('/faremap/'));
+        return;
+      }
+      const hrefPage = currentPageName(hrefUrl.href);
       const active = hrefPage === page || (packagePages.includes(page) && hrefPage === 'pricing.html') || (servicePages.includes(page) && hrefPage === 'services.html');
       a.classList.toggle('active', active && !a.classList.contains('nav-cta'));
     });
@@ -164,31 +227,112 @@
     }
   };
 
-  // Keep every site video silent and make each video a clean tap-to-pause/play surface.
+  let videoObserver = null;
+  let activeVideos = [];
+  let videoMotion = null;
+  let videoMotionChange = null;
+
+  // Video URLs stay deferred until the video enters the viewport. Native controls
+  // remain available when autoplay is disabled or reduced motion is requested.
   const initVideos = () => {
-    document.querySelectorAll('main video').forEach(video => {
+    if (videoObserver) videoObserver.disconnect();
+    activeVideos.forEach(video => { video.dataset.autoPaused = '1'; video.pause(); });
+    if (videoMotion && videoMotionChange) videoMotion.removeEventListener?.('change', videoMotionChange);
+    activeVideos = [...document.querySelectorAll('main video')];
+    videoMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)') || { matches: false };
+    videoObserver = null;
+    const loadVideo = video => {
+      let changed = false;
+      [video, ...video.querySelectorAll('source[data-src]')].forEach(source => {
+        if (!source.dataset.src) return;
+        source.setAttribute('src', source.dataset.src);
+        delete source.dataset.src;
+        changed = true;
+      });
+      if (changed) video.load();
+    };
+    const update = video => {
+      if (video.dataset.inViewport !== '1' || document.hidden) {
+        video.dataset.autoPaused = '1';
+        video.pause();
+        return;
+      }
+      if (!videoMotion.matches) loadVideo(video);
+      if (!videoMotion.matches && video.dataset.autoplay === 'true' && video.dataset.userPaused !== '1') {
+        delete video.dataset.autoPaused;
+        video.dataset.autoPlaying = '1';
+        video.play().catch(() => { delete video.dataset.autoPlaying; });
+      } else if (videoMotion.matches && video.dataset.userPlaying !== '1') {
+        video.dataset.autoPaused = '1';
+        video.pause();
+      }
+    };
+    activeVideos.forEach(video => {
       video.muted = true;
       video.defaultMuted = true;
       video.volume = 0;
       video.playsInline = true;
+      video.controls = true;
+      if (video.hasAttribute('autoplay')) video.dataset.autoplay = 'true';
+      video.removeAttribute('autoplay');
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
-      if (!video.dataset.bound) {
-        video.dataset.bound = '1';
-        const toggle = () => {
-          if (video.paused) video.play().catch(() => {});
-          else video.pause();
-        };
-        video.addEventListener('click', toggle);
-        video.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggle();
+      // A deferred video with reduced motion still needs a direct play action.
+      video._spiritLoad = () => loadVideo(video);
+      if (video.dataset.videoBound !== '1') {
+        video.dataset.videoBound = '1';
+        video.addEventListener('pointerdown', () => video._spiritLoad(), { passive: true });
+        video.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') video._spiritLoad();
+        });
+        video.addEventListener('play', () => {
+          delete video.dataset.userPaused;
+          delete video.dataset.autoPaused;
+          if (video.dataset.autoPlaying !== '1') video.dataset.userPlaying = '1';
+          delete video.dataset.autoPlaying;
+        });
+        video.addEventListener('pause', () => {
+          if (video.dataset.autoPaused !== '1' && video.dataset.inViewport === '1') {
+            video.dataset.userPaused = '1';
+            delete video.dataset.userPlaying;
           }
+          delete video.dataset.autoPaused;
         });
       }
-      if (video.hasAttribute('autoplay')) video.play().catch(() => {});
+      video.dataset.inViewport = '0';
     });
+    try {
+      if (typeof window.IntersectionObserver === 'function') {
+        const observer = new window.IntersectionObserver(entries => {
+          if (videoObserver !== observer) return;
+          entries.forEach(entry => {
+            entry.target.dataset.inViewport = entry.isIntersecting ? '1' : '0';
+            update(entry.target);
+          });
+        }, { threshold: 0.05 });
+        videoObserver = observer;
+        activeVideos.forEach(video => videoObserver.observe(video));
+      }
+    } catch (_) {
+      // Observation is an enhancement. Native playback and the enquiry form
+      // must remain usable when a browser cannot initialize it.
+      videoObserver?.disconnect();
+      videoObserver = null;
+    }
+    videoMotionChange = () => {
+      activeVideos.forEach(video => { delete video.dataset.userPlaying; update(video); });
+    };
+    videoMotion.addEventListener?.('change', videoMotionChange);
+    if (!document.documentElement.dataset.videoVisibilityBound) {
+      document.documentElement.dataset.videoVisibilityBound = '1';
+      document.addEventListener('visibilitychange', () => activeVideos.forEach(video => {
+        if (document.hidden) { video.dataset.autoPaused = '1'; video.pause(); }
+        else if (!videoMotion.matches && video.dataset.inViewport === '1' && video.dataset.autoplay === 'true' && video.dataset.userPaused !== '1') {
+          video.dataset.autoPlaying = '1';
+          video.play().catch(() => { delete video.dataset.autoPlaying; });
+        }
+      }));
+    }
   };
 
   const initProjectWizard = () => {
@@ -199,7 +343,7 @@
     const dots = [...form.querySelectorAll('.wizard-dot')];
     const line = form.querySelector('.wizard-line i');
     let current = 0;
-    let transitioning = false;
+    let submitting = false;
     let formStarted = false;
     const markFormStarted = () => {
       if (formStarted) return;
@@ -208,50 +352,100 @@
     };
     form.addEventListener('input', markFormStarted, { passive:true });
     form.addEventListener('change', markFormStarted, { passive:true });
-    const show = (index, direction = 1) => {
-      if (index < 0 || index >= steps.length || index === current || transitioning) return;
-      transitioning = true;
-      const oldIndex = current;
-      const outgoing = steps[oldIndex];
-      const incoming = steps[index];
-      outgoing.classList.add(direction > 0 ? 'step-exit-left' : 'step-exit-right');
-      setTimeout(() => {
-        outgoing.classList.remove('active','step-exit-left','step-exit-right');
-        current = index;
-        incoming.classList.add('active');
-        dots.forEach((dot,i) => {
-          dot.classList.toggle('active', i === current);
-          dot.classList.toggle('complete', i < current);
-        });
-        if (line) line.style.width = (current / (steps.length - 1) * 100) + '%';
-        form.scrollIntoView({behavior:'smooth', block:'center'});
-        setTimeout(() => { transitioning = false; }, 460);
-      }, 260);
+    const updateProgress = () => {
+      steps.forEach((step, i) => {
+        step.classList.toggle('active', i === current);
+        step.setAttribute('aria-hidden', String(i !== current));
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+        dot.classList.toggle('complete', i < current);
+        if (i === current) dot.setAttribute('aria-current', 'step');
+        else dot.removeAttribute('aria-current');
+      });
+      if (line) line.style.width = (current / Math.max(1, steps.length - 1) * 100) + '%';
+    };
+    const show = index => {
+      if (index < 0 || index >= steps.length || submitting) return;
+      current = index;
+      updateProgress();
+      const heading = steps[current].querySelector('h2');
+      if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
+      form.scrollIntoView({ behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     };
     const validStep = () => {
       const required = [...steps[current].querySelectorAll('[required]')];
       for (const field of required) if (!field.reportValidity()) return false;
       return true;
     };
-    form.querySelectorAll('.wizard-next').forEach(btn => btn.addEventListener('click', () => {
-      if (validStep()) {
+    const advance = () => {
+      if (!submitting && validStep() && current < steps.length - 1) {
         markFormStarted();
         trackEvent('enquiry_step', 'step-' + (current + 1) + '-complete');
-        show(current + 1, 1);
+        show(current + 1);
       }
-    }));
-    form.querySelectorAll('.wizard-back').forEach(btn => btn.addEventListener('click', () => show(current - 1, -1)));
+    };
+    const validForm = () => {
+      for (let index = 0; index < steps.length; index++) {
+        const invalid = [...steps[index].querySelectorAll('[required]')].find(field => !field.checkValidity());
+        if (invalid) {
+          show(index);
+          invalid.focus({ preventScroll: true });
+          invalid.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    };
+    updateProgress();
+    form.querySelectorAll('.wizard-next').forEach(btn => btn.addEventListener('click', advance));
+    form.querySelectorAll('.wizard-back').forEach(btn => btn.addEventListener('click', () => show(current - 1)));
     dots.forEach((dot,i) => dot.addEventListener('click', () => {
-      if (i < current || (i === current + 1 && validStep())) show(i, i > current ? 1 : -1);
+      if (i < current || (i === current + 1 && validStep())) show(i);
     }));
+    form.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.isComposing && event.target.tagName === 'INPUT' && current < steps.length - 1) {
+        event.preventDefault();
+        advance();
+      }
+    });
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      if (!validStep()) return;
+      if (submitting) return;
+      // Browsers may implicitly submit when Enter is pressed in an early step.
+      if (current < steps.length - 1) { advance(); return; }
+      if (!validForm()) return;
+      submitting = true;
+      form.setAttribute('aria-busy', 'true');
       const data = new FormData(form);
       const subject = 'New website project enquiry — ' + (data.get('Business') || data.get('Name') || 'Spirit2k5');
       const button = form.querySelector('.send-enquiry');
       const success = form.querySelector('.enquiry-success');
       const originalButton = button ? button.innerHTML : '';
+      const contactLinks = enquiryContactLinks(data);
+      const showResult = (received, route = '') => {
+        if (!success) return;
+        const title = success.querySelector('b');
+        const copy = success.querySelector('p');
+        if (title) title.textContent = received ? 'Enquiry received' : 'Send your enquiry directly';
+        if (copy) copy.textContent = received
+          ? (route === 'stored' ? 'Your project details were saved. You can also follow up using the links below.' : 'Your project details were submitted. You can also follow up using the links below.')
+          : 'The form could not confirm delivery. Your details are still here. Send them using WhatsApp or email below.';
+        success.querySelector('.enquiry-fallback')?.remove();
+        const links = document.createElement('div');
+        links.className = 'enquiry-fallback';
+        [['WhatsApp your enquiry', contactLinks.whatsapp, 'whatsapp'], ['Email your enquiry', contactLinks.email, 'email']].forEach(([label, href, method]) => {
+          const anchor = document.createElement('a');
+          anchor.textContent = label;
+          anchor.href = href;
+          if (method === 'whatsapp') { anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; }
+          anchor.addEventListener('click', () => trackEvent(method === 'whatsapp' ? 'enquiry_fallback_whatsapp' : 'enquiry_fallback_email', received ? 'enquiry-followup' : 'form-failed'));
+          links.appendChild(anchor);
+        });
+        (success.querySelector('div') || success).appendChild(links);
+        success.classList.add('show');
+        if (title) { title.tabIndex = -1; title.focus({ preventScroll: true }); }
+      };
       const payload = {};
       data.forEach((value, key) => { payload[key] = value; });
       payload._subject = subject;
@@ -282,58 +476,28 @@
           button.textContent = 'Sending…';
         }
 
-        const [stored, emailResult] = await Promise.all([
-          sendToCollector(leadPayload),
-          fetch('https://formsubmit.co/ajax/mahloricarlton@gmail.com', {
+        const delivery = await firstSuccessfulRoute([
+          ['stored', sendToCollector(leadPayload)],
+          ['email', requestJSON('https://formsubmit.co/ajax/mahloricarlton@gmail.com', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(payload)
-          }).then(async response => {
-            const result = await response.json().catch(() => ({}));
-            return { ok: response.ok && result.success !== false, message: result.message || '' };
-          }).catch(() => ({ ok: false, message: '' }))
+          }).then(response => response.ok && (response.data.success === true || response.data.success === 'true'))]
         ]);
 
-        if (!stored && !emailResult.ok) throw new Error(emailResult.message || 'Unable to send');
-
-        trackEvent('enquiry_success', stored && emailResult.ok ? 'stored+email' : stored ? 'stored' : 'email');
-
-        if (success) {
-          const title = success.querySelector('b');
-          const copy = success.querySelector('p');
-          if (title) title.textContent = 'Enquiry received';
-          if (copy) copy.textContent = emailResult.ok
-            ? 'Thanks — your project details were submitted. You’ll receive a reply using the contact details you provided.'
-            : 'Your project details were saved securely. WhatsApp will open as an extra backup so you can reach Spirit2k5 immediately.';
-          success.classList.add('show');
-        }
-
+        if (!delivery.ok) throw new Error('Unable to confirm delivery');
+        trackEvent('enquiry_success', delivery.route);
+        showResult(true, delivery.route);
         form.reset();
-
-        if (!emailResult.ok && stored) {
-          const phone = '27781888220';
-          const message = 'Hi Carlton, I submitted a Spirit2k5 website enquiry on spirit2k5.co.za. My details were saved, and I am following up here on WhatsApp.';
-          trackEvent('enquiry_fallback_whatsapp', 'stored-without-email');
-          setTimeout(() => window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(message), '_blank', 'noopener'), 450);
-        }
       } catch (error) {
-        const phone = '27781888220';
-        const message = 'Hi Carlton, I tried to send a Spirit2k5 website enquiry but the form could not send. I would like to discuss a website project.';
-        trackEvent('enquiry_fallback_whatsapp', 'form-failed');
-        if (success) {
-          const title = success.querySelector('b');
-          const copy = success.querySelector('p');
-          if (title) title.textContent = 'Use WhatsApp instead';
-          if (copy) copy.textContent = 'The form could not send right now. WhatsApp is available as an immediate backup.';
-          success.classList.add('show');
-        }
-        setTimeout(() => window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(message), '_blank', 'noopener'), 450);
+        showResult(false);
       } finally {
+        submitting = false;
+        form.setAttribute('aria-busy', 'false');
         if (button) {
           button.disabled = false;
           button.innerHTML = originalButton;
         }
-        if (success) setTimeout(() => success.classList.remove('show'), 7000);
       }
     });
   };
@@ -351,7 +515,7 @@
     main.dataset.motionControls = '1';
 
     // Make visual project/media surfaces pressable, not hover-only.
-    main.querySelectorAll('.case-media, .about-portrait, .media-card, .page-hero > img, .page-hero > video').forEach(el => {
+    main.querySelectorAll('.case-media, .about-portrait, .media-card, .page-hero > img').forEach(el => {
       el.classList.add('pressable-visual');
       if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
       const press = () => {
@@ -362,6 +526,7 @@
       };
       el.addEventListener('click', press);
       el.addEventListener('keydown', e => {
+        if (e.target !== el) return;
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); press(); }
       });
     });
@@ -630,6 +795,7 @@
 
     const restartAuto = () => {
       clearInterval(timer);
+      if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
       timer = setInterval(() => activate((current + 1) % cfg.steps.length), 3200);
       activeFlowTimer = timer;
     };
@@ -970,6 +1136,44 @@
     return node;
   };
 
+  const setAssistantOpen = (panel, launcher, input, open) => {
+    clearTimeout(panel._focusTimer);
+    panel.hidden = !open;
+    panel.inert = !open;
+    panel.style.display = open ? '' : 'none';
+    panel.classList.toggle('open', open);
+    panel.setAttribute('aria-hidden', String(!open));
+    launcher.setAttribute('aria-expanded', String(open));
+    if (open) panel._focusTimer = setTimeout(() => { if (!panel.hidden) input.focus(); }, 120);
+    else launcher.focus({ preventScroll: true });
+  };
+
+  // The standalone assistant bounds its request and response body. A failed
+  // question is retried only when the customer chooses Send again.
+  const requestAssistant = async (question, sessionId, timeoutMs = 12000) => {
+    const controller = new AbortController();
+    let timer;
+    try {
+      return await Promise.race([
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({ question, session_id: sessionId })
+        }).then(async response => {
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok && !data?.answer) throw new Error('assistant_unavailable');
+          return data;
+        }),
+        new Promise((_, reject) => {
+          timer = setTimeout(() => { controller.abort(); reject(new Error('assistant_timeout')); }, timeoutMs);
+        })
+      ]);
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
   ready(() => {
     if (document.getElementById('spirit-ai-launcher')) return;
 
@@ -988,6 +1192,9 @@
 
     const panel = el('section','spirit-ai-panel');
     panel.id = 'spirit-ai-panel';
+    panel.hidden = true;
+    panel.inert = true;
+    panel.style.display = 'none';
     panel.setAttribute('aria-label','Spirit2k5 Customer Assistant');
     panel.setAttribute('aria-hidden','true');
 
@@ -1063,17 +1270,8 @@
     document.body.append(panel,launcher);
 
     let busy=false;
-    const openPanel=()=>{
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden','false');
-      launcher.setAttribute('aria-expanded','true');
-      setTimeout(()=>input.focus(),120);
-    };
-    const closePanel=()=>{
-      panel.classList.remove('open');
-      panel.setAttribute('aria-hidden','true');
-      launcher.setAttribute('aria-expanded','false');
-    };
+    const openPanel=()=>setAssistantOpen(panel,launcher,input,true);
+    const closePanel=()=>setAssistantOpen(panel,launcher,input,false);
 
     launcher.addEventListener('click',()=>{
       if (panel.classList.contains('open')) closePanel();
@@ -1118,23 +1316,19 @@
       addMessage(question,'user');
       track('ai_question','submitted');
       setBusy(true);
+      let answered=false;
       try{
-        const response=await fetch(ENDPOINT,{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({question,session_id:getSession()})
-        });
-        const data=await response.json().catch(()=>({}));
-        if(!response.ok && !data?.answer) throw new Error('assistant_unavailable');
+        const data=await requestAssistant(question,getSession());
         addMessage(data.answer||'I could not confirm that right now. Please contact Spirit2k5 directly.','bot',data);
+        answered=true;
         track('ai_answer',[data.layer||'unknown',data.ai_provider||'local',data.learned_status||''].filter(Boolean).join('|'));
       }catch(_){
-        addMessage('I could not reach the website assistant right now. You can still contact Spirit2k5 directly on WhatsApp or send a project enquiry.','bot',{contact_url:WHATSAPP});
+        addMessage('I could not reach the website assistant right now. Your question is still in the box so you can try again, or contact Spirit2k5 on WhatsApp.','bot',{contact_url:WHATSAPP});
       }finally{
         setBusy(false);
-        input.value='';
+        input.value=answered?'':question;
         input.style.height='';
-        input.focus();
+        if (!panel.hidden) input.focus();
       }
     };
 

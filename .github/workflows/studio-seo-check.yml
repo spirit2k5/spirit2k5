@@ -10,7 +10,10 @@ on:
       - 'sitemap.xml'
       - 'robots.txt'
       - 'scripts/spirit2k5_seo_check.py'
-      - 'tests/studio-seo.test.cjs'
+      - 'tests/studio-*.test.cjs'
+      - 'assets/*-optimized.*'
+      - 'assets/*-poster.*'
+      - 'previews/**/*.html'
       - '.github/workflows/studio-seo-check.yml'
   pull_request:
     paths:
@@ -20,7 +23,10 @@ on:
       - 'sitemap.xml'
       - 'robots.txt'
       - 'scripts/spirit2k5_seo_check.py'
-      - 'tests/studio-seo.test.cjs'
+      - 'tests/studio-*.test.cjs'
+      - 'assets/*-optimized.*'
+      - 'assets/*-poster.*'
+      - 'previews/**/*.html'
       - '.github/workflows/studio-seo-check.yml'
 
 permissions:
@@ -43,5 +49,5 @@ jobs:
       - name: Validate public search metadata and navigation
         run: |
           node --check script.js
-          node --test tests/studio-seo.test.cjs
+          node --test tests/studio-*.test.cjs
           python scripts/spirit2k5_seo_check.py
