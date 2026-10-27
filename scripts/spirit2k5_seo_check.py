@@ -1,7 +1,7 @@
 """Validate public-page search metadata without making network requests."""
 import json
 from collections import Counter
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -9,6 +9,12 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://spirit2k5.co.za"
+SITE_TIMEZONE = timezone(timedelta(hours=2), "Africa/Johannesburg")
+
+
+def site_today(now=None):
+    """Compare publication dates in the business timezone, including on UTC CI."""
+    return (now or datetime.now(timezone.utc)).astimezone(SITE_TIMEZONE).date()
 
 
 class Page(HTMLParser):
@@ -78,7 +84,7 @@ def main():
         assert not duplicates, f"{path}: duplicate IDs {duplicates}"
         stamp = entry.findtext("s:lastmod", namespaces=ns)
         if stamp:
-            assert date.fromisoformat(stamp) <= date.today(), f"{path}: invalid/future lastmod {stamp}"
+            assert date.fromisoformat(stamp) <= site_today(), f"{path}: invalid/future lastmod {stamp}"
         titles.append(page.titles[0])
         descriptions.append(page.descriptions[0])
         count += 1

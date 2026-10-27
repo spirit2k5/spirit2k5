@@ -11,6 +11,7 @@ on:
       - 'robots.txt'
       - 'scripts/spirit2k5_seo_check.py'
       - 'tests/studio-*.test.cjs'
+      - 'tests/test_*.py'
       - 'assets/*-optimized.*'
       - 'assets/*-poster.*'
       - 'previews/**/*.html'
@@ -24,6 +25,7 @@ on:
       - 'robots.txt'
       - 'scripts/spirit2k5_seo_check.py'
       - 'tests/studio-*.test.cjs'
+      - 'tests/test_*.py'
       - 'assets/*-optimized.*'
       - 'assets/*-poster.*'
       - 'previews/**/*.html'
@@ -50,4 +52,5 @@ jobs:
         run: |
           node --check script.js
           node --test tests/studio-*.test.cjs
+          python -m unittest discover -s tests -p 'test_*.py'
           python scripts/spirit2k5_seo_check.py
