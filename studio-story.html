@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1b1b1a">
+  <title>From an Idea to a Website | Spirit2k5 Animated Story</title>
+  <meta name="description" content="Step inside Spirit2k5 Web Studio's interactive illustrated story. Follow an idea from its first spark to a website ready for customers.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://spirit2k5.co.za/studio-story.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="From an Idea to a Website — Spirit2k5 Story">
+  <meta property="og:description" content="A playful, illustrated, scroll-driven story about bringing a business online.">
+  <meta property="og:url" content="https://spirit2k5.co.za/studio-story.html">
+  <meta property="og:image" content="https://spirit2k5.co.za/assets/spirit2k5-google-logo-128.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+/* Spirit2k5 / Studio Story — standalone stylesheet. No homepage styles are changed. */
+:root{color-scheme:dark;--ink:#1b1b1a;--cream:#f8f0df;--warm:#f4e7cf;--orange:#f69b51;--red:#d84631;--green:#a6dbac;--black:#1a1b1a}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body.story-page{margin:0;background:var(--ink);color:var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}button{font:inherit}img,svg{display:block;max-width:100%}a,button{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible{outline:3px solid #f8bd72;outline-offset:5px}
+.skip-link{position:absolute;left:15px;top:-70px;z-index:100;background:#fff;color:#111;padding:10px 15px}.skip-link:focus{top:15px}
+.story-header{position:relative;z-index:20;width:min(1600px,100%);margin:0 auto;padding:21px clamp(17px,4vw,65px);display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #f8f0df26}
+.story-logo{display:flex;align-items:center;gap:12px;font-size:1.15rem;font-weight:950;letter-spacing:-.04em;line-height:.93}.story-logo img{width:42px;height:42px;border-radius:12px}.story-logo small{display:block;letter-spacing:.17em;font-size:.48rem;margin-top:7px;color:#c4b9a9}.logo-accent{color:#f19a56}
+.story-header nav{display:flex;align-items:center;gap:22px}.story-header-label{font-size:.67rem;font-weight:900;letter-spacing:.15em;color:#a9a297}.story-home{padding:12px 16px;border-radius:100px;border:1px solid #f6e2c64d;font-size:.8rem;font-weight:850;transition:background .2s,color .2s}.story-home:hover{background:#f8ead2;color:#1b1b1a}
+.story-intro{position:relative;min-height:min(830px,88svh);padding:clamp(70px,10vw,135px) 18px clamp(65px,9vw,120px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 110%,#ae423d70,transparent 47%),#1b1b1a}
+.story-intro::before{content:"";width:min(95vw,870px);height:min(95vw,870px);border:1px solid #f9d8a240;border-radius:50%;position:absolute;top:8%;left:50%;transform:translateX(-50%);z-index:-1;box-shadow:0 0 0 72px #f3d7a10a,0 0 0 160px #f3d7a108}
+.story-intro-stamp{display:inline-flex;align-items:center;gap:15px;color:#f8bf7f;font-size:clamp(.61rem,1.15vw,.84rem);letter-spacing:.19em;font-weight:950;position:relative;z-index:1}
+.star-symbol{font-size:1.7rem;color:#d65a3d;line-height:.9}
+.story-intro h1{font-size:clamp(3.75rem,10.1vw,10.7rem);font-weight:1000;letter-spacing:-.09em;line-height:.86;margin:30px auto 29px;max-width:1550px;text-wrap:balance;text-shadow:0 5px 0 #0000000a;position:relative;z-index:1}
+.story-intro h1 em,.story-outro h2 em{font-style:normal;color:#ed784e}
+.story-intro>p{font-size:clamp(1rem,1.4vw,1.18rem);max-width:570px;line-height:1.6;color:#ded3c3;position:relative;z-index:1}
+.story-start{display:inline-flex;align-items:center;gap:12px;background:#f5b86c;color:#232019;padding:14px 24px;border-radius:99px;margin-top:26px;font-weight:950;font-size:.88rem;box-shadow:0 9px 0 #a45331;transition:transform .25s,box-shadow .25s;position:relative;z-index:1}
+.story-start:hover{transform:translateY(-3px);box-shadow:0 12px 0 #a45331}.story-start>span{font-size:1.4rem;line-height:1}
+.intro-scribble{position:absolute;color:#ef864e;font-size:clamp(5rem,12vw,12rem);opacity:.65;z-index:0;animation:starDrift 6s ease-in-out infinite}.intro-scribble-left{left:5%;bottom:14%;transform:rotate(-15deg)}.intro-scribble-right{right:7%;top:13%;color:#f4dfac;animation-delay:-2s}
+.story-experience{padding:30px 0 15px;position:relative}
+.story-track{position:relative;width:100%}.story-pin{position:relative;width:min(1450px,calc(100% - 44px));margin:0 auto}
+.story-stage{border-radius:26px;border:1px solid #dfbb8c55;box-shadow:0 35px 100px #0009;background:#24201e;overflow:hidden;isolation:isolate}
+.story-stage-top,.story-stage-bottom{min-height:62px;display:flex;align-items:center;justify-content:space-between;padding:12px clamp(17px,2.6vw,38px);gap:12px;background:#25201e}
+.story-kicker{font-size:clamp(.6rem,.9vw,.74rem);font-weight:950;letter-spacing:.13em;display:inline-flex;align-items:center;gap:12px}.story-kicker-dot{width:10px;height:10px;background:#f7a161;border-radius:50%;box-shadow:0 0 0 5px #f7a1612a;display:inline-block}
+.story-counter{color:#ffa65e;font-size:.85rem;font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:.1em}
+.story-progress{height:3px;background:#58443b;position:relative;z-index:4}.story-progress span{display:block;width:20%;height:100%;background:linear-gradient(90deg,#ed6247,#fec86b);transition:width .35s ease}
+.story-panels{position:relative}.story-scene{display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);min-height:600px;position:relative;border-bottom:1px solid #4b3d35}
+.story-scene:last-child{border-bottom:0}.story-art{min-width:0;min-height:580px;position:relative;overflow:hidden;display:grid;place-items:center;isolation:isolate}
+.art-idea{background:#dc5136}.art-plan{background:#eadbc0}.art-build{background:#317e61}.art-mobile{background:#e5a84a}.art-launch{background:#cf4134}
+.story-art::before{content:"";position:absolute;inset:-15%;background:repeating-radial-gradient(circle at 52% 50%,transparent 0 45px,#1d201c1f 46px 48px,transparent 49px 98px);transform:rotate(-12deg);pointer-events:none;z-index:0}
+.art-grain{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.17;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E")}
+.art-svg{position:relative;z-index:2;width:min(100%,650px);height:100%;max-height:650px;object-fit:contain;filter:drop-shadow(0 16px 0 #2821191a);overflow:visible}
+.art-label{position:absolute;z-index:5;left:6%;top:6%;display:block;padding:10px 17px;background:#fef1d7;border:3px solid #22201d;color:#28231d;font-size:clamp(.57rem,.9vw,.75rem);font-weight:1000;letter-spacing:.07em;transform:rotate(-7deg);box-shadow:5px 5px 0 #24201e}
+.label-plan{background:#f29b4f;transform:rotate(-6deg)}.label-build{background:#eacc8d;transform:rotate(-4deg)}.label-mobile{background:#bce4bb;transform:rotate(6deg)}.label-launch{background:#f8d174;transform:rotate(-7deg)}
+.art-corner-mark{position:absolute;z-index:6;right:4%;bottom:4%;color:#1d211d;font-weight:1000;letter-spacing:.1em;font-size:.72rem;background:#fff2cebf;padding:8px 13px;border:2px solid #24201e;transform:rotate(3deg)}
+.story-copy{background:radial-gradient(circle at 95% 90%,#5a352633,transparent 55%),#231f1d;display:flex;align-items:center;position:relative;min-width:0;padding:clamp(30px,5vw,78px);border-left:1px solid #fffffe24}
+.story-copy-inner{max-width:530px;margin:auto;width:100%}.chapter-eyebrow{display:block;font-size:clamp(.63rem,.9vw,.78rem);letter-spacing:.14em;font-weight:950;color:#f5ad70;margin-bottom:21px}
+.story-copy h2{font-size:clamp(3rem,5vw,6.2rem);font-weight:950;letter-spacing:-.052em;line-height:.99;margin:0 0 26px;color:#fff5e5;text-wrap:balance}
+.story-copy h2 em{font-style:normal;color:#f0a363}.story-copy p{color:#d9cec1;line-height:1.65;font-size:clamp(.98rem,1.25vw,1.12rem);margin:0 0 27px}.story-copy p strong{color:#fff1d6;font-weight:850}
+.story-icon-row{display:flex;gap:12px;align-items:center;margin-bottom:26px}
+.story-icon-row span{width:51px;height:51px;display:grid;place-items:center;background:#ffb769;border:3px solid #201e1b;color:#221e19;border-radius:12px;transform:rotate(-9deg);font-size:1.7rem;font-weight:950;box-shadow:5px 5px 0 #171717;transition:transform .3s ease}
+.story-icon-row span:nth-child(2){transform:rotate(8deg);background:#b4d9a1}.story-icon-row span:nth-child(3){background:#e4765b;transform:rotate(-4deg)}
+.story-icon-row span:hover{transform:rotate(0deg) translateY(-5px)}
+.story-next{display:none;align-items:center;justify-content:center;gap:12px;background:#f6e6c9;color:#211e1a;border:2px solid #171919;padding:13px 20px;border-radius:3px;box-shadow:6px 6px 0 #e17645;cursor:pointer;font-weight:950;transition:transform .25s,box-shadow .25s;font-size:.88rem;max-width:max-content}
+.story-next:hover{transform:translate(2px,2px);box-shadow:4px 4px 0 #e17645}.story-next span{font-size:1.2rem}
+.story-finish{display:inline-flex}
+.story-stage-bottom{border-top:1px solid #f6d1b633;gap:10px}.story-scroll-label{font-size:.7rem;letter-spacing:.14em;font-weight:950;color:#c5afa0}.story-scroll-label span{color:#ffb777;font-size:1rem;padding-left:6px}
+.story-steps{display:flex;gap:7px;align-items:center}
+.story-steps button{font-size:.68rem;font-weight:950;color:#d6c6b9;background:#3e3530;border:1px solid #6a544a;border-radius:50%;width:37px;height:37px;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.story-steps button:hover{transform:translateY(-3px)}.story-steps button[aria-current="step"]{background:#f6aa66;color:#20201c;border-color:#f6aa66}
+/* Enhancements are only enabled by JavaScript if the browser supports scroll storytelling. */
+.story-experience.is-enhanced .story-track{height:510svh}
+.story-experience.is-enhanced .story-pin{position:sticky;top:clamp(8px,7svh,65px)}
+.story-experience.is-enhanced .story-stage{height:min(86svh,790px);min-height:560px;display:grid;grid-template-rows:auto 3px minmax(0,1fr) auto}
+.story-experience.is-enhanced .story-panels{min-height:0;overflow:hidden}
+.story-experience.is-enhanced .story-scene{position:absolute;inset:0;min-height:0;height:100%;opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.035);transition:opacity .48s ease,transform .65s cubic-bezier(.18,.75,.22,1),visibility .48s}
+.story-experience.is-enhanced .story-scene.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:scale(1)}
+.story-experience.is-enhanced .story-art{height:100%;min-height:0}
+.story-experience.is-enhanced .story-next{display:inline-flex}
+.story-experience.is-enhanced .story-finish{display:inline-flex}
+.story-experience.is-enhanced .scene-one.is-active .story-bob,.story-experience.is-enhanced .story-scene.is-active .story-bob{animation:characterBounce 4.4s ease-in-out infinite}
+.story-experience.is-enhanced .story-scene.is-active .story-float{animation:characterFloat 4.2s ease-in-out infinite}
+.story-experience.is-enhanced .story-scene.is-active .story-float-delay{animation:characterFloat 4.8s ease-in-out -2s infinite}
+.story-experience.is-enhanced .story-scene.is-active .story-rock{animation:characterRock 5.6s ease-in-out infinite;transform-origin:50% 75%}
+.story-experience.is-enhanced .story-scene.is-active .story-tilt{animation:characterRock 3s ease-in-out infinite;transform-origin:60% 20%}
+.story-experience.is-enhanced .story-scene.is-active .story-spin{animation:starSpin 12s linear infinite;transform-origin:50% 50%}
+.story-experience.is-enhanced .story-scene.is-active .story-rise{animation:rocketRise 4.4s ease-in-out infinite}
+.story-experience.is-enhanced .story-scene.is-active .story-confetti{animation:characterBounce 4s ease-in-out infinite}
+@keyframes characterBounce{50%{transform:translateY(-14px)}}
+@keyframes characterFloat{50%{transform:translate(0,-18px) rotate(4deg)}}
+@keyframes characterRock{50%{transform:rotate(2.5deg)}}
+@keyframes rocketRise{50%{transform:translate(20px,-26px)}}
+@keyframes starSpin{50%{transform:rotate(8deg)}}
+@keyframes starDrift{50%{translate:0 -19px}}
+.story-outro{position:relative;margin:50px 0 0;background:#f2dfc1;color:#201d19;text-align:center;padding:clamp(65px,9vw,135px) 20px;overflow:hidden}
+.story-outro::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 72px,#cfaa8538 73px 74px,transparent 75px 145px);pointer-events:none}
+.story-outro>.outro-star{font-size:clamp(5rem,9vw,9rem);color:#d45b3f;line-height:1;display:inline-block;animation:starDrift 6s ease-in-out infinite}
+.story-outro p{font-size:.76rem;letter-spacing:.2em;font-weight:1000;position:relative;margin:10px 0 24px}
+.story-outro h2{position:relative;font-size:clamp(3.2rem,7vw,8rem);letter-spacing:-.08em;line-height:.96;max-width:980px;margin:0 auto 35px;text-wrap:balance}
+.story-outro>div{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;position:relative}
+.outro-cta{background:#24211d;color:#fff5e2;padding:17px 27px;border:2px solid #23201d;font-weight:950;box-shadow:7px 7px 0 #d7583b;transition:transform .2s}.outro-cta:hover{transform:translate(2px,2px)}.outro-link{font-weight:850;border-bottom:2px solid #24211d;padding:7px 0}
+.story-footer{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;max-width:1500px;margin:auto;padding:30px clamp(17px,4vw,65px);font-size:.75rem;letter-spacing:.04em;color:#bdb2a5}.story-footer a{color:#ffbd84;font-weight:950}
+@media(max-width:1000px){.story-scene{grid-template-columns:1.05fr .95fr}.story-copy{padding:clamp(22px,3vw,40px)}.story-copy h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}.story-copy p{font-size:.96rem}.art-label{font-size:.61rem;padding:8px 10px}}
+@media(max-width:700px){
+ .story-header{padding:15px 16px}.story-header-label{display:none}.story-home{font-size:.72rem;padding:11px 13px}.story-logo{font-size:.98rem}.story-logo img{height:34px;width:34px}
+ .story-intro{min-height:78svh;padding:60px 16px 85px}.story-intro h1{font-size:clamp(3.25rem,12.5vw,6rem);line-height:.91;margin:28px 0}.story-intro>p{font-size:.97rem;line-height:1.65}.story-intro-stamp{letter-spacing:.09em}.intro-scribble{opacity:.35}
+ .story-experience{padding-top:8px}.story-pin{width:calc(100% - 18px)}.story-stage{border-radius:18px}
+ .story-stage-top,.story-stage-bottom{min-height:49px;padding:8px 13px}.story-kicker{font-size:.58rem;letter-spacing:.07em;gap:8px}.story-counter{font-size:.72rem}.story-kicker-dot{width:7px;height:7px}
+ .story-scene{grid-template-columns:1fr;grid-template-rows:minmax(0,52%) minmax(0,48%);min-height:665px}
+ .story-art{min-height:345px}.story-copy{min-height:310px;padding:17px 22px;border-left:0;border-top:1px solid #ffffff2c;align-items:center}
+ .story-copy-inner{max-width:570px}.chapter-eyebrow{margin-bottom:8px;font-size:.64rem}.story-copy h2{font-size:clamp(2.05rem,7.1vw,3.2rem);line-height:.98;margin-bottom:9px}.story-copy p{font-size:clamp(.81rem,2.55vw,.96rem);line-height:1.45;margin:0 0 10px}.story-icon-row{gap:8px;margin-bottom:10px}.story-icon-row span{width:31px;height:31px;font-size:1.08rem;border-width:2px;border-radius:7px;box-shadow:3px 3px 0 #171717}
+ .story-next{padding:8px 11px;font-size:.7rem;box-shadow:3px 3px 0 #e17645;gap:8px}.story-next span{font-size:.88rem}
+ .art-svg{max-height:100%;width:100%;height:100%}.art-label{font-size:.52rem;left:5%;top:5%;padding:7px 8px;border-width:2px;box-shadow:3px 3px 0 #222}.art-corner-mark{font-size:.49rem;padding:5px 6px;border-width:1px}
+ .story-stage-bottom{gap:7px}.story-scroll-label{font-size:.54rem;letter-spacing:.03em}.story-steps{gap:5px}.story-steps button{width:30px;height:30px;font-size:.63rem}
+ .story-experience.is-enhanced .story-stage{height:min(88svh,790px);min-height:560px}
+ .story-experience.is-enhanced .story-scene{grid-template-rows:51% 49%}
+ .story-outro{padding:70px 15px}.story-outro h2{font-size:clamp(2.9rem,10vw,5.8rem)}.story-footer{padding:26px 15px;justify-content:center;text-align:center}
+}
+@media(max-width:380px){.story-stage-top{min-height:43px}.story-stage-bottom{min-height:44px}.story-experience.is-enhanced .story-stage{min-height:535px}.story-experience.is-enhanced .story-scene{grid-template-rows:46% 54%}.story-copy{padding:11px 13px}.story-copy h2{font-size:1.91rem}.story-copy p{font-size:.78rem}.story-scroll-label{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.story-page *, .story-page *::before, .story-page *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.story-experience.is-enhanced .story-track{height:auto}.story-experience.is-enhanced .story-pin{position:relative;top:auto}.story-experience.is-enhanced .story-stage{height:auto;min-height:0;display:block}.story-experience.is-enhanced .story-panels{overflow:visible}.story-experience.is-enhanced .story-scene{position:relative;inset:auto;opacity:1;visibility:visible;pointer-events:auto;transform:none;min-height:650px}.story-experience.is-enhanced .story-art{min-height:340px}.story-experience.is-enhanced .story-next{display:none}}
+
+</style>
+
+</head>
+<body class="story-page">
+  <a class="skip-link" href="#story">Skip to the story</a>
+  <header class="story-header">
+    <a class="story-logo" href="/" aria-label="Spirit2k5 Web Studio homepage">
+      <img src="/assets/logo-mark.svg" alt="" width="42" height="42"><span>spirit<span class="logo-accent">2k5</span><small>WEB STUDIO</small></span>
+    </a>
+    <nav aria-label="Story navigation"><span class="story-header-label">A SMALL INTERACTIVE FILM</span><a class="story-home" href="/">Back to website <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main>
+    <section class="story-intro" aria-labelledby="intro-title">
+      <div class="story-intro-stamp"><span class="star-symbol" aria-hidden="true">✳</span> AN ORIGINAL SPIRIT2K5 STORY <span class="star-symbol" aria-hidden="true">✳</span></div>
+      <h1 id="intro-title">EVERY BIG THING<br>STARTS <em>SMALL.</em></h1>
+      <p>Meet Nia, a business owner with a bright idea, and Pixel, the little creative sidekick who helps turn it into a website the world can see.</p>
+      <a class="story-start" href="#story"><span aria-hidden="true">↓</span> Scroll to start the story</a>
+      <div class="intro-scribble intro-scribble-left" aria-hidden="true">✦</div><div class="intro-scribble intro-scribble-right" aria-hidden="true">✳</div>
+    </section>
+    <section class="story-experience" id="story" aria-label="Five illustrated chapters of a website journey">
+      <div class="story-track">
+        <div class="story-pin">
+          <div class="story-stage" aria-live="off">
+            <div class="story-stage-top"><span class="story-kicker"><span class="story-kicker-dot"></span> THE MAKING OF A WEBSITE</span><span class="story-counter" aria-label="Current chapter">01 / 05</span></div>
+            <div class="story-progress" aria-hidden="true"><span></span></div>
+            <div class="story-panels">
+              <article class="story-scene scene-one is-active" data-chapter="0" aria-labelledby="chapter-title-1">
+                <div class="story-art art-idea">
+                  <div class="art-grain"></div><span class="art-label label-idea">A VERY BIG IDEA!</span>
+                  <svg class="art-svg" viewBox="0 0 700 650" role="img" aria-label="Nia, an illustrated small-business owner with curly hair and a yellow jacket, catches a bright spark of inspiration">
+                    <circle cx="341" cy="310" r="238" fill="#edcfac" stroke="#221b1a" stroke-width="7" stroke-dasharray="9 17"/>
+                    <path d="M87 183l44-39m-25 83 60-14M530 168l51-43M560 240l48 5" stroke="#201a1a" stroke-width="9" stroke-linecap="round"/>
+                    <g class="draw-spark story-spin" transform="translate(442 168)"><path d="M0 -88 19 -28 84 -8 25 16 2 89 -23 20 -87 -5 -23 -27Z" fill="#ffe68b" stroke="#201a1a" stroke-width="8"/><circle r="16" fill="#f86f37"/></g>
+                    <g class="story-bob"><path d="M208 475q-12-100 30-160l141-11q48 65 64 159l-75 50-152-4Z" fill="#ffd14f" stroke="#201a1a" stroke-width="9"/>
+                    <path d="M243 307q-43-44-27-104t81-67q66-9 105 49 29 42-1 110l-49 38Z" fill="#1f1c1c"/>
+                    <circle cx="270" cy="153" r="38" fill="#1f1c1c"/><circle cx="313" cy="124" r="41" fill="#1f1c1c"/><circle cx="365" cy="143" r="40" fill="#1f1c1c"/><circle cx="389" cy="188" r="36" fill="#1f1c1c"/>
+                    <path d="M259 224q-4 91 60 105 66-9 65-93l-12-35-100-7Z" fill="#a7694c" stroke="#201a1a" stroke-width="7"/>
+                    <path d="M269 229q-8-59 26-58 4 29 55 36l30 4q15-60-35-83l-76 28-38 58Z" fill="#211d1c"/>
+                    <ellipse cx="290" cy="244" rx="5" ry="8" fill="#181817"/><ellipse cx="345" cy="246" rx="5" ry="8" fill="#181817"/>
+                    <path d="M300 274q19 17 35-3" stroke="#201a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M381 356q42-26 63-79l29 9q-4 98-76 119" fill="#a7694c" stroke="#201a1a" stroke-width="8"/>
+                    <circle cx="474" cy="281" r="20" fill="#a7694c" stroke="#201a1a" stroke-width="7"/>
+                    <path d="M250 354q-54 25-76 91l26 16q56-39 77-75" fill="#a7694c" stroke="#201a1a" stroke-width="8"/>
+                    <path d="M278 335l-32 139 72 39 37-39-18-142" fill="#f1a328" stroke="#201a1a" stroke-width="7"/>
+                    <path d="M260 486q-10 28-21 85h65l16-62m18-5 33 67h63l-43-99" stroke="#201a1a" stroke-width="19" fill="none" stroke-linecap="round"/>
+                    <path d="M218 572h95m49 0h86" stroke="#ffedd4" stroke-width="10" stroke-linecap="round"/></g>
+                    <path d="M115 494q44 10 52 42m336-100q65-3 70 38" fill="none" stroke="#1b1b1b" stroke-width="8" stroke-linecap="round"/>
+                    <g class="story-float"><rect x="70" y="317" width="132" height="90" rx="12" fill="#fef3d6" stroke="#1d1c1c" stroke-width="7" transform="rotate(-11 70 317)"/><text x="91" y="362" transform="rotate(-11 91 362)" fill="#241d1b" font-size="21" font-family="sans-serif" font-weight="900">MY SHOP</text></g>
+                  </svg>
+                  <span class="art-corner-mark" aria-hidden="true">01 ✦ SPARK</span>
+                </div>
+                <div class="story-copy"><div class="story-copy-inner"><span class="chapter-eyebrow">CHAPTER ONE / THE SPARK</span><h2 id="chapter-title-1">It starts with <em>one idea.</em></h2><p>Nia has a great business. She just wishes more people could find it. Then one little thought changes everything: <strong>“What if my business had its own website?”</strong></p><div class="story-icon-row" aria-label="Business idea icons"><span title="Bright idea">✳</span><span title="A business">⌂</span><span title="A new plan">✎</span></div><button type="button" class="story-next" data-next-chapter="1">Turn the page <span aria-hidden="true">↗</span></button></div></div>
+              </article>
+              <article class="story-scene scene-two" data-chapter="1" aria-labelledby="chapter-title-2">
+                <div class="story-art art-plan"><div class="art-grain"></div><span class="art-label label-plan">LET'S MAKE A PLAN</span>
+                  <svg class="art-svg" viewBox="0 0 700 650" role="img" aria-label="Pixel, a friendly green robot character, sketches the first website design on a giant sheet of paper">
+                    <path d="M60 125 617 80l20 452-536 39Z" fill="#fff5dc" stroke="#1f1c1b" stroke-width="10"/>
+                    <path d="M87 172 595 129m-473 91 473-39M130 267l470-39" stroke="#d2c2a8" stroke-width="4" stroke-dasharray="8 8"/>
+                    <rect x="151" y="225" width="412" height="288" rx="12" fill="#f7dcb5" stroke="#1c1b19" stroke-width="8" transform="rotate(-3 151 225)"/>
+                    <g transform="translate(175 251) rotate(-3)"><rect width="360" height="35" rx="8" fill="#1f201b"/><circle cx="24" cy="17" r="7" fill="#ee7a4f"/><circle cx="45" cy="17" r="7" fill="#ffd161"/><circle cx="66" cy="17" r="7" fill="#98cc89"/><rect x="21" y="63" width="185" height="30" rx="7" fill="#e9824c"/><rect x="21" y="110" width="127" height="13" rx="6" fill="#272521"/><rect x="21" y="134" width="164" height="13" rx="6" fill="#272521" opacity=".45"/><rect x="21" y="169" width="126" height="39" rx="17" fill="#2b694e"/><rect x="233" y="64" width="103" height="151" rx="14" fill="#f0b944" stroke="#222" stroke-width="5"/><path d="m258 167 25-52 26 52Z" fill="#e9824c"/></g>
+                    <g class="story-bob" transform="translate(100 100)"><path d="M40 267q-65-12-68-83M183 254q70 29 104-13" stroke="#1d1e1c" stroke-width="14" fill="none" stroke-linecap="round"/><circle cx="-32" cy="183" r="19" fill="#c1e6ba" stroke="#1d1e1c" stroke-width="7"/><circle cx="285" cy="238" r="19" fill="#c1e6ba" stroke="#1d1e1c" stroke-width="7"/>
+                    <rect x="16" y="70" width="174" height="166" rx="42" fill="#a4dba1" stroke="#1d1e1c" stroke-width="10"/><rect x="35" y="92" width="137" height="95" rx="23" fill="#28312e"/><ellipse cx="78" cy="131" rx="12" ry="17" fill="#ffb95d"/><ellipse cx="133" cy="131" rx="12" ry="17" fill="#ffb95d"/><path d="M86 161q16 17 37 0" stroke="#ffb95d" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="60" y="228" width="27" height="53" rx="12" fill="#242b26"/><rect x="123" y="228" width="27" height="53" rx="12" fill="#242b26"/><path d="M103 70V37" stroke="#1d1e1c" stroke-width="9"/><circle cx="103" cy="30" r="15" fill="#ffb95d" stroke="#1d1e1c" stroke-width="6"/></g>
+                    <g class="story-tilt" transform="translate(527 76) rotate(24)"><rect width="27" height="157" rx="8" fill="#f2a43b" stroke="#1d1e1c" stroke-width="6"/><path d="M0 153 14 180 27 153" fill="#f7d4a5" stroke="#1d1e1c" stroke-width="5"/><path d="M14 177v-7" stroke="#1d1e1c" stroke-width="8"/></g>
+                    <path d="M520 570l30-35m-21 45 52-16M88 80l-24-27m15 52-37-3" stroke="#24221c" stroke-width="8" stroke-linecap="round"/>
+                  </svg><span class="art-corner-mark" aria-hidden="true">02 ✦ DESIGN</span></div>
+                <div class="story-copy"><div class="story-copy-inner"><span class="chapter-eyebrow">CHAPTER TWO / THE PLAN</span><h2 id="chapter-title-2">Meet <em>Pixel.</em></h2><p>Pixel has a pencil, plenty of ideas and a big smile. Together with Nia, we sketch a website that feels like her business, not just another template.</p><div class="story-icon-row" aria-label="Planning icons"><span title="Pencil">✎</span><span title="Layout">▦</span><span title="Favourite">♡</span></div><button type="button" class="story-next" data-next-chapter="2">See the build <span aria-hidden="true">↗</span></button></div></div>
+              </article>
+              <article class="story-scene scene-three" data-chapter="2" aria-labelledby="chapter-title-3">
+                <div class="story-art art-build"><div class="art-grain"></div><span class="art-label label-build">BUILD MODE: ON</span>
+                  <svg class="art-svg" viewBox="0 0 700 650" role="img" aria-label="Pixel works on a website displayed on a giant colourful desktop computer screen">
+                    <g class="story-rock"><path d="M108 114h482l21 359H94Z" fill="#21211f" stroke="#f4d8aa" stroke-width="9"/><path d="M132 146h434v286H132Z" fill="#fff3d8"/><rect x="147" y="162" width="403" height="29" rx="6" fill="#eaa964"/><circle cx="171" cy="176" r="7" fill="#252525"/><circle cx="191" cy="176" r="7" fill="#fff5e1"/><circle cx="211" cy="176" r="7" fill="#338d6c"/><rect x="170" y="218" width="194" height="27" rx="8" fill="#1f2522"/><rect x="170" y="260" width="165" height="11" rx="5" fill="#c6b5a0"/><rect x="170" y="284" width="143" height="11" rx="5" fill="#c6b5a0"/><rect x="170" y="324" width="124" height="39" rx="18" fill="#f28242"/><rect x="389" y="217" width="133" height="177" rx="22" fill="#388e66"/><circle cx="455" cy="278" r="44" fill="#f7c56a"/><path d="m413 357 44-57 43 57" stroke="#1f2522" stroke-width="8" fill="none"/><path d="M312 471v50h75v-50" fill="#1b1b19"/><path d="M273 535h151" stroke="#1b1b19" stroke-width="15" stroke-linecap="round"/></g>
+                    <g class="story-bob" transform="translate(432 312)"><path d="M0 176q-31 7-38 48m166-52q39 2 49-32" stroke="#20211e" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="-40" cy="224" r="16" fill="#f7c66b" stroke="#24231f" stroke-width="6"/><circle cx="180" cy="135" r="16" fill="#f7c66b" stroke="#24231f" stroke-width="6"/><rect x="10" y="35" width="135" height="136" rx="31" fill="#a4dba1" stroke="#20211e" stroke-width="9"/><rect x="28" y="51" width="101" height="79" rx="17" fill="#263b33"/><circle cx="62" cy="88" r="9" fill="#ffd26b"/><circle cx="96" cy="88" r="9" fill="#ffd26b"/><path d="M65 109q15 10 29-1" stroke="#ffd26b" stroke-width="6" fill="none"/><rect x="37" y="164" width="26" height="42" rx="12" fill="#20211e"/><rect x="94" y="164" width="26" height="42" rx="12" fill="#20211e"/><path d="M80 33V12" stroke="#20211e" stroke-width="8"/><circle cx="80" cy="7" r="12" fill="#f3b15a" stroke="#20211e" stroke-width="5"/></g>
+                    <g class="story-float"><rect x="72" y="80" width="146" height="85" rx="13" fill="#f3a34e" stroke="#20211e" stroke-width="7" transform="rotate(-8 72 80)"/><text x="90" y="116" transform="rotate(-8 90 116)" font-size="22" font-family="sans-serif" font-weight="900" fill="#20211e">&lt; CODE /&gt;</text></g>
+                    <g class="story-float-delay"><circle cx="588" cy="112" r="56" fill="#a4dba1" stroke="#201f1e" stroke-width="8"/><path d="m566 112 17 18 33-38" fill="none" stroke="#1f2522" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+                    <path d="m53 478 49-23m468 100 59-27M67 236l45 18" stroke="#fff3d8" stroke-width="10" stroke-linecap="round"/>
+                  </svg><span class="art-corner-mark" aria-hidden="true">03 ✦ BUILD</span></div>
+                <div class="story-copy"><div class="story-copy-inner"><span class="chapter-eyebrow">CHAPTER THREE / THE BUILD</span><h2 id="chapter-title-3">Ideas become <em>real.</em></h2><p>Colours become buttons. Sketches become pages. Pixel checks the details while the studio builds something people can actually use.</p><div class="story-icon-row" aria-label="Development icons"><span title="Code">⌘</span><span title="Technology">⚙</span><span title="Checked">✓</span></div><button type="button" class="story-next" data-next-chapter="3">Take it mobile <span aria-hidden="true">↗</span></button></div></div>
+              </article>
+              <article class="story-scene scene-four" data-chapter="3" aria-labelledby="chapter-title-4">
+                <div class="story-art art-mobile"><div class="art-grain"></div><span class="art-label label-mobile">OH, IT WORKS EVERYWHERE!</span>
+                  <svg class="art-svg" viewBox="0 0 700 650" role="img" aria-label="Nia and a customer celebrate using the new website on a mobile phone">
+                    <circle cx="379" cy="306" r="236" fill="#ffe4b2" stroke="#24201b" stroke-width="8" stroke-dasharray="12 20"/>
+                    <g class="story-rock"><rect x="202" y="81" width="296" height="514" rx="53" fill="#1c2320" stroke="#24201b" stroke-width="12"/><rect x="222" y="105" width="256" height="468" rx="38" fill="#fffbeb"/><rect x="294" y="114" width="110" height="22" rx="11" fill="#1c2320"/><rect x="244" y="161" width="212" height="174" rx="20" fill="#ffc25e"/><path d="m271 291 81-103 78 103" stroke="#d65f36" stroke-width="19" fill="none" stroke-linejoin="round"/><circle cx="369" cy="211" r="24" fill="#ffffff"/><rect x="245" y="361" width="208" height="21" rx="10" fill="#272c26"/><rect x="245" y="397" width="158" height="13" rx="6" fill="#bdb7a7"/><rect x="245" y="426" width="191" height="13" rx="6" fill="#bdb7a7"/><rect x="245" y="466" width="154" height="55" rx="25" fill="#268b66"/><text x="278" y="502" font-size="19" fill="#fff9e6" font-family="sans-serif" font-weight="900">CONTACT</text></g>
+                    <g class="story-bob"><circle cx="152" cy="368" r="52" fill="#a96e4c" stroke="#1c1e1b" stroke-width="8"/><path d="M94 350q-12-84 63-75 66-1 58 76l-20-34-80-6Z" fill="#22201e"/><circle cx="135" cy="364" r="5"/><circle cx="169" cy="364" r="5"/><path d="M138 390q17 12 30-2" stroke="#24201b" stroke-width="5" fill="none"/><path d="M104 425q-51 32-58 127h211q-9-98-63-126Z" fill="#e98f4b" stroke="#1c1e1b" stroke-width="9"/><path d="M213 471q45 16 55 24" stroke="#a96e4c" stroke-width="21" stroke-linecap="round"/><circle cx="272" cy="494" r="15" fill="#a96e4c" stroke="#24201b" stroke-width="6"/></g>
+                    <g class="story-float"><circle cx="536" cy="373" r="55" fill="#bbd9a7" stroke="#1b221d" stroke-width="8"/><path d="m511 374 18 18 35-43" stroke="#1c261f" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>
+                    <path d="M532 200 600 147m-58 96 87-1M108 178l-36-51m55 89-66-5" stroke="#24201b" stroke-width="9" stroke-linecap="round"/>
+                  </svg><span class="art-corner-mark" aria-hidden="true">04 ✦ EVERY SCREEN</span></div>
+                <div class="story-copy"><div class="story-copy-inner"><span class="chapter-eyebrow">CHAPTER FOUR / REAL PEOPLE</span><h2 id="chapter-title-4">Small screen. <em>Big impact.</em></h2><p>A customer opens Nia’s new website on their phone. It loads, it looks great, and they know exactly where to tap. That’s the real magic.</p><div class="story-icon-row" aria-label="Mobile experience icons"><span title="Mobile phone">▯</span><span title="Speed">ϟ</span><span title="Message">✉</span></div><button type="button" class="story-next" data-next-chapter="4">The big reveal <span aria-hidden="true">↗</span></button></div></div>
+              </article>
+              <article class="story-scene scene-five" data-chapter="4" aria-labelledby="chapter-title-5">
+                <div class="story-art art-launch"><div class="art-grain"></div><span class="art-label label-launch">WE ARE LIVE!</span>
+                  <svg class="art-svg" viewBox="0 0 700 650" role="img" aria-label="Nia and Pixel celebrate the website launch as confetti surrounds a cheerful shop and a rising rocket">
+                    <circle cx="359" cy="307" r="227" fill="#ecb36d" stroke="#1b1d1b" stroke-width="7"/>
+                    <g class="story-rise"><path d="M389 141q45-108 89-116 49 73 15 163l-61 49Z" fill="#fff0d4" stroke="#1c1d1b" stroke-width="8"/><path d="m409 191 81-69 28 75-64 38" fill="#df583e" stroke="#1c1d1b" stroke-width="8"/><circle cx="467" cy="109" r="23" fill="#91cbaa" stroke="#1c1d1b" stroke-width="7"/><path d="m431 230-19 57 53-38" fill="#ffc858" stroke="#1c1d1b" stroke-width="7"/><path d="m420 277-25 58 44-31" fill="#ffd362"/></g>
+                    <g class="story-rock"><path d="M105 372h407v182H105Z" fill="#ffe2a5" stroke="#1e1d1a" stroke-width="9"/><path d="m79 374 59-86h336l63 86Z" fill="#d9563b" stroke="#1e1d1a" stroke-width="9"/><path d="M138 288h337l16 34H122Z" fill="#fff2d9" stroke="#1e1d1a" stroke-width="7"/><rect x="151" y="400" width="117" height="153" fill="#9fd1a9" stroke="#1e1d1a" stroke-width="8"/><rect x="312" y="402" width="149" height="113" rx="6" fill="#fff6e4" stroke="#1e1d1a" stroke-width="8"/><path d="M332 454h107" stroke="#e09a47" stroke-width="9"/><path d="M363 487h62" stroke="#e09a47" stroke-width="8"/><text x="209" y="351" font-size="27" font-family="sans-serif" font-weight="900" fill="#191a19">NIA'S SHOP</text><path d="M106 554h408" stroke="#1e1d1a" stroke-width="13" stroke-linecap="round"/></g>
+                    <g class="story-bob" transform="translate(495 418)"><rect x="0" y="0" width="110" height="116" rx="29" fill="#9bd19b" stroke="#1c1d1b" stroke-width="8"/><rect x="17" y="16" width="76" height="68" rx="17" fill="#253a30"/><circle cx="43" cy="45" r="8" fill="#f5c05f"/><circle cx="67" cy="45" r="8" fill="#f5c05f"/><path d="M42 66q13 13 27 0" stroke="#f5c05f" stroke-width="5" fill="none"/><path d="M55 0v-16" stroke="#1c1d1b" stroke-width="7"/><circle cx="55" cy="-20" r="10" fill="#f5c05f" stroke="#1c1d1b" stroke-width="4"/><path d="M20 113v29m67-29v29" stroke="#1c1d1b" stroke-width="14" stroke-linecap="round"/></g>
+                    <g class="story-float"><path d="m129 94 15 24 30 0-19 23 8 30-30-11-26 18-1-30-26-17 29-7Z" fill="#ffedc5" stroke="#1d1d1c" stroke-width="7"/></g>
+                    <path d="m582 101 15-30m18 71 38-5M80 221l-35-27m36 64-43 4m245-151 8-49" stroke="#fff1d0" stroke-width="10" stroke-linecap="round"/>
+                    <g class="story-confetti"><rect x="214" y="82" width="16" height="28" fill="#ffca5f" transform="rotate(20 214 82)"/><rect x="588" y="305" width="18" height="27" fill="#fff5dd" transform="rotate(-25 588 305)"/><circle cx="110" cy="310" r="10" fill="#fff1cd"/><circle cx="545" cy="232" r="10" fill="#fbd769"/></g>
+                  </svg><span class="art-corner-mark" aria-hidden="true">05 ✦ LIVE</span></div>
+                <div class="story-copy"><div class="story-copy-inner"><span class="chapter-eyebrow">CHAPTER FIVE / THE LAUNCH</span><h2 id="chapter-title-5">Hello, <em>world!</em></h2><p>Nia’s idea is now a real place on the internet. Customers can discover her work, learn her story and get in touch. One little spark became something big.</p><div class="story-icon-row" aria-label="Launch celebration icons"><span title="A shining star">★</span><span title="Successful launch">↗</span><span title="Celebration">✦</span></div><a class="story-next story-finish" href="/contact.html#project-form">Start your own story <span aria-hidden="true">↗</span></a></div></div>
+              </article>
+            </div>
+            <div class="story-stage-bottom"><span class="story-scroll-label">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span><div class="story-steps" role="group" aria-label="Jump between chapters"><button type="button" data-step="0" aria-label="Chapter one: the idea" aria-current="step">01</button><button type="button" data-step="1" aria-label="Chapter two: the plan">02</button><button type="button" data-step="2" aria-label="Chapter three: the build">03</button><button type="button" data-step="3" aria-label="Chapter four: mobile experience">04</button><button type="button" data-step="4" aria-label="Chapter five: launch">05</button></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="story-outro"><span aria-hidden="true" class="outro-star">✳</span><p>THE END... OR MAYBE THE BEGINNING?</p><h2>Your idea deserves <em>its own story.</em></h2><div><a class="outro-cta" href="/contact.html#project-form">Let's make a website <span aria-hidden="true">↗</span></a><a class="outro-link" href="/">Explore Spirit2k5 Web Studio</a></div></section>
+  </main>
+  <footer class="story-footer"><a href="/">SPIRIT2K5 WEB STUDIO</a><span>Original characters &amp; illustrations · Made with care in South Africa</span><a href="/">BACK TO HOME ↑</a></footer>
+<script>
+/* Spirit2k5 Studio Story: isolated, dependency-free scrollytelling controller. */
+(() => {
+  'use strict';
+  const root = document.querySelector('.story-experience');
+  if (!root) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scenes = [...root.querySelectorAll('[data-chapter]')];
+  const buttons = [...root.querySelectorAll('[data-step]')];
+  const track = root.querySelector('.story-track');
+  const pin = root.querySelector('.story-pin');
+  const counter = root.querySelector('.story-counter');
+  const progressBar = root.querySelector('.story-progress span');
+  if (!track || !pin || scenes.length !== 5 || buttons.length !== 5 || !counter || !progressBar) return;
+
+  // Without motion, chapters remain readable and accessible in document order.
+  if (reduced.matches) {
+    root.querySelector('.story-stage-bottom').hidden = true;
+    return;
+  }
+  root.classList.add('is-enhanced');
+  let active = -1;
+  let ticking = false;
+  const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+  const chapterAt = index => {
+    index = clamp(index, 0, scenes.length - 1);
+    if (index === active) return;
+    active = index;
+    scenes.forEach((scene, i) => {
+      const shown = i === index;
+      scene.classList.toggle('is-active', shown);
+      scene.setAttribute('aria-hidden', shown ? 'false' : 'true');
+      scene.inert = !shown;
+    });
+    buttons.forEach((button, i) => {
+      if (i === index) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    });
+    counter.textContent = `${String(index + 1).padStart(2, '0')} / 05`;
+    progressBar.style.width = `${(index + 1) * 20}%`;
+  };
+  const measure = () => {
+    const pinTop = parseFloat(getComputedStyle(pin).top) || 0;
+    const total = Math.max(1, track.offsetHeight - pin.offsetHeight);
+    const value = clamp((pinTop - track.getBoundingClientRect().top) / total, 0, 1);
+    return { total, pinTop, value };
+  };
+  const render = () => {
+    ticking = false;
+    const { value } = measure();
+    chapterAt(Math.min(4, Math.floor(value * 5)));
+  };
+  const schedule = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  };
+  const goTo = (index) => {
+    const { total, pinTop } = measure();
+    const target = window.scrollY + track.getBoundingClientRect().top - pinTop + (index + 0.28) / 5 * total;
+    // Update the scene immediately, then let scroll settle to the same chapter.
+    chapterAt(index);
+    window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+  };
+  root.addEventListener('click', event => {
+    const button = event.target.closest('[data-step], [data-next-chapter]');
+    if (!button || !root.contains(button)) return;
+    const index = Number(button.dataset.step ?? button.dataset.nextChapter);
+    if (Number.isInteger(index) && index >= 0 && index < 5) goTo(index);
+  });
+  root.addEventListener('keydown', event => {
+    if (!event.target.matches('[data-step]')) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    const next = clamp(Number(event.target.dataset.step) + direction, 0, 4);
+    buttons[next].focus();
+    goTo(next);
+  });
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(track);
+  chapterAt(0);
+  requestAnimationFrame(render);
+})();
+
+</script>
+</body>
+</html>
