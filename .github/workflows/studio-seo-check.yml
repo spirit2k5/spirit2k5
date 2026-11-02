@@ -7,6 +7,9 @@ on:
       - '*.html'
       - 'script.js'
       - 'style.css'
+      - 'studio-*.js'
+      - 'studio-*.css'
+      - 'assets/showcase/**'
       - 'sitemap.xml'
       - 'robots.txt'
       - 'scripts/spirit2k5_seo_check.py'
@@ -21,6 +24,9 @@ on:
       - '*.html'
       - 'script.js'
       - 'style.css'
+      - 'studio-*.js'
+      - 'studio-*.css'
+      - 'assets/showcase/**'
       - 'sitemap.xml'
       - 'robots.txt'
       - 'scripts/spirit2k5_seo_check.py'
@@ -51,6 +57,8 @@ jobs:
       - name: Validate public search metadata and navigation
         run: |
           node --check script.js
+          node --check studio-action-icons.js
+          node --check studio-showcase.js
           node --test tests/studio-*.test.cjs
           python -m unittest discover -s tests -p 'test_*.py'
           python scripts/spirit2k5_seo_check.py

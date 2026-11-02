@@ -687,7 +687,10 @@
     };
 
     const cfg = packagePages.includes(page) ? packageConfig : (configs[page] || configs['index.html']);
-    const anchor = main.querySelector('.hero, .page-hero, .about-hero, .contact-hero, .package-hero') || main.firstElementChild;
+    // Show actual projects before the process story on the home and work pages.
+    const anchor = (main.querySelector('.studio-home-hero') && main.querySelector('#work')) ||
+      main.querySelector('[data-project-showcase]') ||
+      main.querySelector('.hero, .page-hero, .about-hero, .contact-hero, .package-hero') || main.firstElementChild;
     if (!anchor) return;
 
     const section = document.createElement('section');
@@ -1361,7 +1364,7 @@
 (() => {
   if (document.querySelector('script[data-spirit-action-icons]')) return;
   const icons = document.createElement('script');
-  icons.src = '/studio-action-icons.js?v=20261021-icons1';
+  icons.src = '/studio-action-icons.js?v=20261102-showcase';
   icons.defer = true;
   icons.dataset.spiritActionIcons = '1';
   document.head.appendChild(icons);
