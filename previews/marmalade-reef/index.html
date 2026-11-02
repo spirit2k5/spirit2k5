@@ -46,6 +46,26 @@
 .art .hero-logo{width:min(100%,525px);max-width:525px;filter:drop-shadow(0 18px 26px rgba(24,101,101,.13))}
 @media(max-width:720px){.nav .navin{height:64px}.nav .brand{width:50px;min-width:50px;flex-basis:50px}.nav .header-logo{width:50px;max-height:52px}.nav .links{top:70px}.art{margin-top:15px;min-height:0}.art .hero-logo{width:min(100%,390px)}}
 </style>
+
+<style id="marmalade-mist-update">
+.mist-section{background:linear-gradient(140deg,#fff9ef 0%,#fcead7 57%,#ecf3e9 100%);position:relative;overflow:hidden}
+.mist-section:before{content:"";position:absolute;right:-140px;top:-145px;width:500px;height:500px;border:1px solid rgba(230,138,81,.17);border-radius:50%;box-shadow:0 0 0 55px rgba(251,164,105,.035),0 0 0 115px rgba(251,164,105,.025);pointer-events:none}
+.mist-layout{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:clamp(28px,6vw,90px);align-items:center}
+.mist-section h2{max-width:670px}.mist-section h2 em{color:#df824e}
+.mist-copy .bodycopy{max-width:600px}.mist-note{font-size:12px;color:#7c756b;line-height:1.8;margin:22px 0 0;max-width:580px}
+.mist-panel{position:relative;background:#fffdf5;border:1px solid #f2d9c4;border-radius:29px;padding:clamp(24px,4vw,42px);box-shadow:0 24px 65px rgba(86,77,56,.09)}
+.mist-panel:before{content:"✳";position:absolute;top:10px;right:25px;font-size:42px;color:#edaa83;opacity:.7}
+.mist-panel-title{font:400 clamp(28px,3vw,39px)/1.14 'DM Serif Display',Georgia,serif;color:#0b6267;margin:0 0 13px}
+.mist-panel-intro{color:#58716b;font-size:14px;line-height:1.8;margin:0 0 24px;max-width:420px}
+.mist-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 25px}
+.mist-service{display:flex;align-items:center;gap:10px;border-radius:13px;border:1px solid #e5dfce;background:#f8f5e8;padding:13px 12px;color:#205a56;font-size:12px;font-weight:800}
+.mist-service span{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:8px;background:#d9eee5;color:#0e827d;font-size:15px}
+.mist-link{display:inline-flex;align-items:center;gap:8px;min-height:47px;padding:12px 18px;border-radius:999px;background:#0b6970;color:#fff;font-size:12px;font-weight:800;transition:background .2s,transform .2s}
+.mist-link:hover{background:#074d53;transform:translateY(-2px)}
+@media(max-width:900px){.mist-layout{gap:25px}}
+@media(max-width:720px){.mist-layout{grid-template-columns:1fr}.mist-section{padding-top:75px;padding-bottom:75px}.mist-services{gap:8px}.mist-service{font-size:11px;padding:11px 9px}.mist-panel{border-radius:23px;padding:24px}.mist-panel-title{font-size:31px}}
+@media(max-width:340px){.mist-services{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -53,7 +73,7 @@
 <header class="nav"><div class="wrap navin">
 <a class="brand" href="#home" aria-label="Marmalade Reef home"><picture class="logo-picture"><source media="(prefers-reduced-motion: reduce)" srcset="marmalade-logo.webp"><img class="reef-logo-image header-logo" src="marmalade-logo-animated.webp" alt="Marmalade Reef by Chef Rev — authentic illustrated logo with gently swimming orange fish" width="760" height="767" decoding="async" loading="eager"></picture></a>
 <button class="mobile-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<nav class="links" id="nav-links" aria-label="Main navigation"><a href="#story">Our story</a><a href="#experience">The experience</a><a href="#ocean">Our ocean</a><a href="#chef">Chef Rev</a><a class="smallbtn" href="#visit">Find us ↗</a></nav>
+<nav class="links" id="nav-links" aria-label="Main navigation"><a href="#story">Our story</a><a href="#experience">The experience</a><a href="#ocean">Our ocean</a><a href="#chef">Chef Rev</a><a href="#marmalade-mist">Marmalade Mist</a><a class="smallbtn" href="#visit">Find us ↗</a></nav>
 </div></header>
 <main id="main">
 <section class="hero" id="home"><div class="wrap hero-grid">
@@ -69,9 +89,32 @@
 </div><p class="draft-note"><b>Concept preview:</b> Specific dishes, prices and service availability have not been provided yet.</p></div></section>
 <section class="section pledge" id="ocean"><div class="wrap pledge-grid"><div><div class="kicker">03 / Our ocean</div><h2>We love the sea.<br><em>And we mean it.</em></h2><p class="bodycopy">Inspired by Chef Rev's public announcement, the vision reaches beyond the plate — towards a future where enjoying the ocean and caring for it can go hand in hand.</p><div class="value-list"><div class="value"><div class="value-icon">🐚</div><div><h3>Conscious seafood</h3><p>Encouraging more conversations about sustainable seafood choices.</p></div></div><div class="value"><div class="value-icon">🌊</div><div><h3>Cleaner coastlines</h3><p>A vision for beach cleanups and reducing unnecessary plastic pollution.</p></div></div><div class="value"><div class="value-icon">🪸</div><div><h3>Ocean culture</h3><p>Celebrating our coast through education, art and community involvement.</p></div></div></div></div><div class="quote-art"><span class="quote-mark">“</span><blockquote>A place where good food, good people and a genuine love for the ocean come together.</blockquote><span>— The Marmalade Reef vision</span></div></div></section>
 <section class="section chef" id="chef"><div class="wrap chef-grid"><figure class="portrait"><img src="chef-rev.webp" alt="Chef Rev in a professional kitchen holding a freshly caught large fish" width="950" height="1249" loading="lazy"><figcaption><span>Meet the person behind the passion</span><small>Chef Rev</small></figcaption></figure><div><div class="kicker">04 / Meet the founder</div><h2>The chef behind<br><em>the reef.</em></h2><p class="bodycopy">Chef Rev brings a love of hospitality, food and the ocean to Marmalade Reef. The café is his way of creating something that feels meaningful — not just a meal, but a gathering place with heart.</p><p class="bodycopy">The goal is simple: to bring people together over good food while encouraging greater care for the natural world around us.</p><a class="chef-link" href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer">Follow Chef Rev Hospitality on Instagram ↗</a></div></div></section>
-<section class="section visit" id="visit"><div class="wrap visit-grid"><div><div class="kicker">05 / Find us</div><h2>See you by<br><em>the seaside.</em></h2><p class="bodycopy">Set against the energy of Umhlanga, Marmalade Reef was announced as a welcoming space for seafood, conversations and ocean lovers.</p><p class="bodycopy" style="font-size:13px">Please confirm current operating hours, menu and availability with the business before visiting. This is a website concept awaiting final owner details.</p></div><div class="location"><div class="pin"><svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="#0a6c6f" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Umhlanga Centre</h3><p>Next to Harry James, Umhlanga Centre<br>Umhlanga Rocks, KwaZulu-Natal, South Africa</p><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=Umhlanga+Centre+Umhlanga+Rocks" target="_blank" rel="noopener noreferrer">Explore the location ↗</a><p style="font-size:11px;margin-bottom:0">Location description based on the original launch post; precise unit/address to be confirmed.</p></div></div></section>
+
+<section class="section mist-section" id="marmalade-mist" aria-labelledby="mist-title">
+  <div class="wrap mist-layout">
+    <div class="mist-copy">
+      <div class="kicker">05 / A new chapter at the reef</div>
+      <h2 id="mist-title">A new home for <em>Marmalade Mist.</em></h2>
+      <p class="bodycopy"><strong>Marmalade Mist Food Services</strong> has announced that it is moving into its new home at <strong>Marmalade Reef by Chef Rev</strong>, bringing another chapter of hospitality to Umhlanga Rocks.</p>
+      <p class="bodycopy">Marmalade Reef brings its seafood-inspired café experience, while Marmalade Mist continues its own food and event experiences. Together, they share a home and a love for bringing people together around food.</p>
+      <p class="mist-note">Information based on Marmalade Mist's public Instagram announcement. Please contact the respective business directly to confirm services, availability and arrangements.</p>
+    </div>
+    <div class="mist-panel">
+      <h3 class="mist-panel-title">The Marmalade Mist experience</h3>
+      <p class="mist-panel-intro">Continuing the food experiences Marmalade Mist is known for, now from its new home at the reef.</p>
+      <div class="mist-services" aria-label="Marmalade Mist services">
+        <div class="mist-service"><span aria-hidden="true">✦</span> Catering</div>
+        <div class="mist-service"><span aria-hidden="true">✦</span> Private dining</div>
+        <div class="mist-service"><span aria-hidden="true">✦</span> Grazing tables</div>
+        <div class="mist-service"><span aria-hidden="true">✦</span> Celebrations</div>
+      </div>
+      <a class="mist-link" href="https://www.instagram.com/marmalade_mist/" target="_blank" rel="noopener noreferrer" aria-label="Visit Marmalade Mist Instagram">Discover Marmalade Mist <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+<section class="section visit" id="visit"><div class="wrap visit-grid"><div><div class="kicker">06 / Find us</div><h2>See you by<br><em>the seaside.</em></h2><p class="bodycopy">Set against the energy of Umhlanga, Marmalade Reef was announced as a welcoming space for seafood, conversations and ocean lovers.</p><p class="bodycopy" style="font-size:13px">Please confirm current operating hours, menu and availability with the business before visiting. This is a website concept awaiting final owner details.</p></div><div class="location"><div class="pin"><svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="#0a6c6f" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Umhlanga Centre</h3><p>189 Ridge Road, Umhlanga Rocks<br>Umhlanga Centre, next to Harry James<br>KwaZulu-Natal, South Africa</p><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=189+Ridge+Road+Umhlanga+Rocks" target="_blank" rel="noopener noreferrer">Explore the location ↗</a><p style="font-size:11px;margin-bottom:0">Street address from Marmalade Mist’s announcement; the exact unit and visiting arrangements should be confirmed with the business.</p></div></div></section>
 </main>
-<footer class="footer"><div class="wrap"><div class="foot-top"><a class="brand" href="#home"><span class="brandword">marmalade reef<small>Café • Seafood • Good Times</small></span></a><div class="foot-links"><a href="#story">Our story</a><a href="#chef">Chef Rev</a><a href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></div><div class="foot-bottom"><p>© <span id="year">2026</span> Marmalade Reef by Chef Rev. Concept preview.</p><p>Website concept by Spirit2k5 Web Studio · Not an official launch.</p></div></div></footer>
+<footer class="footer"><div class="wrap"><div class="foot-top"><a class="brand" href="#home"><span class="brandword">marmalade reef<small>Café • Seafood • Good Times</small></span></a><div class="foot-links"><a href="#story">Our story</a><a href="#chef">Chef Rev</a><a href="#marmalade-mist">Marmalade Mist</a><a href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></div><div class="foot-bottom"><p>© <span id="year">2026</span> Marmalade Reef by Chef Rev. Concept preview.</p><p>Website concept by Spirit2k5 Web Studio · Not an official launch.</p></div></div></footer>
 <div class="mobile-bar"><a href="#story">✦ Our story</a><a href="#visit">⌖ Find us</a></div>
 <script>
 (function(){var btn=document.getElementById('menu-toggle');var menu=document.getElementById('nav-links');btn.addEventListener('click',function(){var expanded=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',String(!expanded));btn.setAttribute('aria-label',expanded?'Open navigation':'Close navigation');menu.classList.toggle('open',!expanded)});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')})});document.getElementById('year').textContent=new Date().getFullYear()})();
