@@ -854,6 +854,57 @@
     }
   };
 
+  let storyTeaser = null;
+  let storyTeaserReady = false;
+  let storyTeaserDismissed = false;
+  try { storyTeaserDismissed = sessionStorage.getItem('spirit_story_teaser_dismissed') === '1'; } catch (_) {}
+
+  const isStoryTeaserPage = () => /^\/[^/]*$/.test(location.pathname) &&
+    !['studio-story.html', 'assistant-admin.html', '404.html'].includes(currentPageName().toLowerCase());
+  const updateStoryTeaser = () => {
+    if (storyTeaser) storyTeaser.hidden = !storyTeaserReady || storyTeaserDismissed ||
+      !isStoryTeaserPage() || !!document.querySelector('.spirit-ai-panel.open');
+  };
+  const initStoryTeaser = () => {
+    if (!storyTeaser && !storyTeaserDismissed && isStoryTeaserPage() && document.querySelector('.site-header')) {
+      storyTeaser = document.createElement('aside');
+      storyTeaser.id = 'spirit-story-teaser';
+      storyTeaser.className = 'spirit-story-teaser';
+      storyTeaser.setAttribute('aria-label', 'Spirit2k5 illustrated story');
+      storyTeaser.hidden = true;
+      storyTeaser.innerHTML = '<a class="spirit-story-teaser-link" href="/studio-story.html" aria-label="View the Spirit2k5 illustrated story">' +
+        '<span class="spirit-story-teaser-art"><img src="/assets/story-teaser.webp" alt="" width="48" height="72" decoding="async"></span>' +
+        '<span class="spirit-story-teaser-copy"><small>THE SPARK</small><strong>View our story <span aria-hidden="true">↗</span></strong><span>Eight illustrated chapters.</span></span></a>' +
+        '<button class="spirit-story-teaser-close" type="button" aria-label="Dismiss story pop-up"><span aria-hidden="true">×</span></button>';
+      const dismiss = () => {
+        storyTeaserDismissed = true;
+        try { sessionStorage.setItem('spirit_story_teaser_dismissed', '1'); } catch (_) {}
+        updateStoryTeaser();
+      };
+      storyTeaser.querySelector('button').addEventListener('click', dismiss);
+      storyTeaser.querySelector('a').addEventListener('click', dismiss);
+      document.body.appendChild(storyTeaser);
+      setTimeout(() => { storyTeaserReady = true; updateStoryTeaser(); }, 1200);
+
+      // The assistant can be mounted after this component. Hide the teaser while
+      // its panel is open, including from the keyboard on narrow screens.
+      if (typeof MutationObserver === 'function') {
+        const watchAssistant = () => {
+          const panel = document.getElementById('spirit-ai-panel');
+          if (!panel) return false;
+          new MutationObserver(updateStoryTeaser).observe(panel, { attributes: true, attributeFilter: ['class', 'aria-hidden'] });
+          updateStoryTeaser();
+          return true;
+        };
+        if (!watchAssistant()) {
+          const mountObserver = new MutationObserver(() => { if (watchAssistant()) mountObserver.disconnect(); });
+          mountObserver.observe(document.body, { childList: true });
+        }
+      }
+    }
+    updateStoryTeaser();
+  };
+
   const initPage = () => {
     initMenu();
     initReveal();
@@ -864,6 +915,7 @@
     initPackageCards();
     initWorkProcessAnimation();
     initConversionLayer();
+    initStoryTeaser();
     window.spiritEnhanceSocials?.();
     trackEvent('page_view', location.pathname);
     if (currentPageName() === 'pricing.html') trackEvent('pricing_view', location.pathname);
@@ -1079,8 +1131,8 @@
     const url = new URL(anchor.href, location.href);
     if (url.origin !== location.origin) return;
 
-    // Standalone FareMap uses a different runtime/authentication lifecycle.
-    if (url.pathname === '/faremap' || url.pathname.startsWith('/faremap/')) return;
+    // Standalone experiences must load their own document, styles and runtime.
+    if (url.pathname === '/studio-story.html' || url.pathname === '/faremap' || url.pathname.startsWith('/faremap/')) return;
     if (raw.startsWith('#') || (url.pathname === location.pathname && url.hash)) {
       event.preventDefault();
       void navigate(url.href);
