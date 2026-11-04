@@ -20,6 +20,8 @@ on:
       - 'assets/*-optimized.*'
       - 'assets/*-poster.*'
       - 'previews/**/*.html'
+      - 'previews/**/*.css'
+      - 'previews/**/*.js'
       - '.github/workflows/studio-seo-check.yml'
   pull_request:
     paths:
@@ -39,6 +41,8 @@ on:
       - 'assets/*-optimized.*'
       - 'assets/*-poster.*'
       - 'previews/**/*.html'
+      - 'previews/**/*.css'
+      - 'previews/**/*.js'
       - '.github/workflows/studio-seo-check.yml'
 
 permissions:
@@ -63,6 +67,7 @@ jobs:
           node --check script.js
           node --check studio-action-icons.js
           node --check studio-showcase.js
+          node --check previews/marmalade-reef/preview.js
           node --test tests/studio-*.test.cjs
           python -m unittest discover -s tests -p 'test_*.py'
           python scripts/spirit2k5_seo_check.py
