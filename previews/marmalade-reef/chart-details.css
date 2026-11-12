@@ -1,0 +1,144 @@
+/* Chart details sit alongside the existing artwork and leave its layout intact. */
+.hero-grid {
+  position: relative;
+}
+
+.hero .reef-compass {
+  position: absolute;
+  inset-block-start: clamp(12px, 1.8vw, 28px);
+  inset-inline-end: clamp(0px, .7vw, 12px);
+  inline-size: clamp(54px, 6vw, 88px);
+  aspect-ratio: 1;
+  color: var(--deep);
+  opacity: .62;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, transparent 51%, currentColor 52% 53%, transparent 54%),
+    linear-gradient(currentColor 0 0) center / 76% 1px no-repeat,
+    linear-gradient(currentColor 0 0) center / 1px 76% no-repeat;
+}
+
+.reef-compass::before {
+  content: '';
+  position: absolute;
+  inset: 14%;
+  background: repeating-conic-gradient(currentColor 0 45deg, rgb(8 124 128 / 30%) 45deg 90deg);
+  clip-path: polygon(
+    50% 0, 57% 35%, 75% 25%, 65% 43%, 100% 50%, 65% 57%,
+    75% 75%, 57% 65%, 50% 100%, 43% 65%, 25% 75%, 35% 57%,
+    0 50%, 35% 43%, 25% 25%, 43% 35%
+  );
+}
+
+.reef-compass::after {
+  content: '';
+  position: absolute;
+  inset: 46%;
+  background: var(--cream);
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.reef-compass-north {
+  position: absolute;
+  inset-block-start: -2px;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  font: 700 9px/1 Georgia, serif;
+}
+
+.visit {
+  --reef-chart-image: url('reef-chart.webp');
+  position: relative;
+  isolation: isolate;
+}
+
+.visit::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 33%;
+  pointer-events: none;
+  opacity: .43;
+  background-image:
+    var(--reef-chart-image, none),
+    repeating-radial-gradient(
+      ellipse 56% 65% at 104% 110%,
+      transparent 0 16px,
+      rgb(7 91 100 / 18%) 17px 18px,
+      transparent 19px 31px
+    );
+  background-position: right bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(105deg, transparent 7%, rgb(0 0 0 / 75%) 47%, black 80%);
+}
+
+.reef-chart-nav {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-inline-size: 32rem;
+  margin: 26px auto 0;
+  text-align: center;
+}
+
+.reef-chart-nav::before {
+  content: '';
+  position: absolute;
+  inset: 16px calc(100% / 6) auto;
+  border-block-start: 2px dotted rgb(185 83 41 / 58%);
+  pointer-events: none;
+}
+
+.reef-chart-nav a {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 7px;
+  min-block-size: 44px;
+  padding: 11px 4px 6px;
+  border-radius: 6px;
+  color: var(--deep);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.reef-chart-nav a::before {
+  content: '';
+  inline-size: 12px;
+  block-size: 12px;
+  background: var(--cream);
+  border: 2px solid var(--orange);
+  border-radius: 50%;
+}
+
+.reef-chart-nav a:is(:hover, :focus-visible) {
+  color: #984222;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.reef-chart-nav a:is(:hover, :focus-visible)::before {
+  background: var(--orange);
+}
+
+@media (max-width: 700px) {
+  .hero .reef-compass {
+    inset-block-start: 10px;
+    inset-inline-end: 0;
+    inline-size: 42px;
+    opacity: .48;
+  }
+
+  .reef-compass-north {
+    font-size: 7px;
+  }
+
+  .visit::after {
+    inset-inline-start: 12%;
+    opacity: .32;
+  }
+}

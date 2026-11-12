@@ -1,0 +1,316 @@
+.menu-book {
+  --book-ink: #214743;
+  --book-paper: #fbf0db;
+  --book-rule: #bcad88;
+  --book-tide: #236565;
+  --book-orange: #a44829;
+  background: radial-gradient(ellipse at 50% 40%, #eef1e5, transparent 72%), var(--paper);
+  border-bottom: 1px solid #d4dfd0;
+}
+
+.menu-book-intro {
+  margin-inline: auto;
+  max-width: 580px;
+  text-align: center;
+}
+
+.menu-book-intro h2 { margin-bottom: 14px; }
+.menu-book-intro .bodycopy { margin: 0 auto; }
+
+.book-stage {
+  position: relative;
+  width: min(100%, 800px);
+  margin: clamp(24px, 5vw, 44px) auto 0;
+  isolation: isolate;
+}
+
+.book-stage::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 8% 0 -3%;
+  background: radial-gradient(ellipse at 50% 75%, rgb(61 83 62 / 14%), transparent 68%);
+  pointer-events: none;
+}
+
+.book-stage [data-book-pages] {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* StPageFlip 2.0.7 creates this wrapper with a misspelled vendor selector. */
+.menu-book .stf__parent { touch-action: pan-y pinch-zoom; }
+
+.menu-book .stf__wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.menu-book .stf__wrapper.--portrait { padding-bottom: min(140%, 560px) !important; }
+
+/* The right-hand cover rests beside the atlas until the book is opened. */
+.menu-book[data-book-layout='landscape'][data-book-position='front-cover'] .book-stage::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 3% 51% 5% 1%;
+  background: url('reef-chart.webp') center / cover;
+  mask-image: radial-gradient(ellipse at center, #000 16%, transparent 68%);
+  opacity: .52;
+  pointer-events: none;
+}
+
+/* Keep the same pages readable if the animation cannot run. */
+.book-stage [data-book-pages]:not(.stf__parent) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 3vw, 24px);
+}
+
+.book-stage [data-book-pages]:not(.stf__parent) .book-page { display: grid; }
+
+.book-stage [data-book-pages]:not(.stf__parent) .book-sheet {
+  min-height: clamp(330px, 112cqi, 510px);
+  height: auto;
+}
+
+.book-page {
+  min-width: 0;
+  color: var(--book-ink);
+  container-type: inline-size;
+}
+
+.book-sheet {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: clamp(25px, 8cqi, 42px) clamp(19px, 8cqi, 44px) clamp(32px, 10cqi, 49px);
+  background:
+    linear-gradient(90deg, rgb(92 72 37 / 16%), transparent 8%, transparent 92%, rgb(134 103 60 / 11%)),
+    linear-gradient(145deg, rgb(255 251 238 / 94%) 24%, rgb(253 245 223 / 90%) 68%, rgb(242 231 202 / 75%)),
+    var(--book-paper) url('reef-chart.webp') center / cover;
+  border: 1px solid var(--book-rule);
+  border-radius: 3px 10px 10px 3px;
+  box-shadow: inset 0 0 18px rgb(121 94 47 / 12%);
+}
+
+.book-page:nth-child(even) .book-sheet:not(.book-sheet--cover, .book-sheet--back) {
+  border-radius: 10px 3px 3px 10px;
+}
+
+.book-sheet h3 {
+  margin: 0 0 clamp(9px, 3cqi, 15px);
+  color: var(--book-tide);
+  font: 400 clamp(28px, 8.2cqi, 44px) / 1.05 'DM Serif Display', Georgia, serif;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+}
+
+.book-sheet p {
+  margin: 0;
+  font-size: clamp(14px, 3.6cqi, 16px);
+  line-height: 1.55;
+}
+
+.book-sheet p + p { margin-top: .75em; }
+
+.book-sheet .book-overline {
+  margin: 0 0 9px;
+  color: var(--book-orange);
+  font-size: clamp(10px, 2.55cqi, 12px);
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.book-sheet .book-note {
+  margin-top: clamp(12px, 4cqi, 20px);
+  padding-top: clamp(9px, 3cqi, 13px);
+  border-top: 1px solid rgb(98 83 52 / 26%);
+  color: #4e6355;
+  font-size: clamp(12px, 3.1cqi, 14px);
+  line-height: 1.5;
+}
+
+.book-sheet .book-folio {
+  position: absolute;
+  inset-inline: clamp(19px, 8cqi, 44px);
+  bottom: clamp(10px, 3.7cqi, 20px);
+  margin: 0;
+  color: #4d645a;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .12em;
+  text-align: end;
+  text-transform: uppercase;
+}
+
+.book-sheet--cover,
+.book-sheet--back {
+  align-items: center;
+  padding-inline: clamp(23px, 9cqi, 45px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 37%, rgb(252 244 222 / 94%) 5%, rgb(250 240 213 / 77%) 42%, transparent 90%),
+    linear-gradient(145deg, rgb(245 233 206 / 17%) 42%, rgb(14 91 92 / 32%)),
+    #cadbd0 url('reef-chart.webp') center / cover;
+  border: 1px solid #81988b;
+  border-radius: 5px 12px 12px 5px;
+  box-shadow: inset 0 0 24px rgb(26 68 61 / 22%), inset 0 0 0 3px rgb(255 242 208 / 36%);
+}
+
+/* The cloth binding and the inset rule stay attached to the cover as it turns. */
+.book-sheet--cover::before,
+.book-sheet--back::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-block: -1px;
+  inset-inline-start: -1px;
+  width: clamp(13px, 4.5cqi, 22px);
+  background:
+    repeating-linear-gradient(0deg, rgb(255 223 174 / 10%) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgb(82 33 10 / 12%) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, #844a2b, #c5783e 28% 72%, #9d522d 91%, #744428);
+  border-radius: 5px 0 0 5px;
+  box-shadow: 2px 0 5px rgb(46 59 46 / 24%);
+  pointer-events: none;
+}
+
+.book-sheet--back { border-radius: 12px 5px 5px 12px; }
+
+.book-sheet--back::before {
+  inset-inline: auto -1px;
+  border-radius: 0 5px 5px 0;
+  box-shadow: -2px 0 5px rgb(46 59 46 / 24%);
+}
+
+.book-sheet--cover::after,
+.book-sheet--back::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 10px 10px 10px clamp(19px, 6cqi, 30px);
+  border: 1px solid rgb(34 88 81 / 38%);
+  border-radius: 2px 6px 6px 2px;
+  pointer-events: none;
+}
+
+.book-sheet--back::after { inset-inline: 10px clamp(19px, 6cqi, 30px); }
+
+.book-cover-logo {
+  display: block;
+  width: clamp(126px, 51cqi, 228px);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 760 / 767;
+  margin: 0 auto clamp(11px, 4cqi, 20px);
+  border: 1px solid #c2ad82;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgb(53 77 59 / 13%);
+  object-fit: contain;
+}
+
+.book-sheet--cover h3 { margin-bottom: 6px; }
+.book-sheet--cover .book-overline { margin-bottom: clamp(8px, 3cqi, 13px); }
+.book-sheet--cover .book-folio, .book-sheet--back .book-folio { text-align: center; }
+
+.book-compass {
+  position: absolute;
+  inset-block-start: clamp(9px, 4cqi, 19px);
+  inset-inline-end: clamp(12px, 5cqi, 24px);
+  width: clamp(24px, 9cqi, 45px);
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: #347675;
+  opacity: .72;
+  background:
+    linear-gradient(90deg, transparent calc(50% - .5px), currentColor calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)),
+    linear-gradient(0deg, transparent calc(50% - .5px), currentColor calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px));
+  pointer-events: none;
+}
+
+.book-compass::before {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  background: conic-gradient(from -18deg, #347675 0 36deg, #8caaa0 36deg 90deg, #347675 90deg 126deg, #8caaa0 126deg 180deg, #347675 180deg 216deg, #8caaa0 216deg 270deg, #347675 270deg 306deg, #8caaa0 306deg);
+  clip-path: polygon(50% 0, 58% 39%, 100% 50%, 58% 58%, 50% 100%, 41% 58%, 0 50%, 41% 41%);
+  transform: rotate(-13deg);
+}
+
+.book-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.book-controls[hidden], .is-book-ready .book-fallback { display: none; }
+
+.book-controls button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px clamp(12px, 3vw, 18px);
+  border: 1px solid #b5c6b6;
+  border-radius: 999px;
+  background: #fffaf0;
+  color: var(--deep);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.book-controls button:hover:not(:disabled, [aria-disabled='true']) { background-color: #e7efe3; }
+.book-controls button:is(:disabled, [aria-disabled='true']) { opacity: .55; cursor: default; }
+
+.book-controls [data-book-open] {
+  color: #fffaf0;
+  background: var(--book-orange);
+  border-color: transparent;
+}
+
+.book-controls [data-book-open]:hover:not(:disabled, [aria-disabled='true']) { background: #803a25; }
+
+.book-status, .book-fallback, .book-instructions {
+  margin: 12px auto 0;
+  color: #466157;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.book-controls .book-status { flex-basis: 100%; margin-top: 3px; }
+.book-controls .book-instructions { flex-basis: 100%; margin: -3px 0 0; font-size: 12px; }
+
+@media (max-width: 680px) {
+  .book-stage [data-book-pages]:not(.stf__parent) {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 430px;
+  }
+  .book-stage [data-book-pages]:not(.stf__parent) .book-sheet { min-height: clamp(300px, 112cqi, 510px); }
+  .book-controls { gap: 8px; margin-top: 18px; }
+  .book-controls button { font-size: 12px; }
+}
+
+@media (max-width: 440px) {
+  .book-control-suffix {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
