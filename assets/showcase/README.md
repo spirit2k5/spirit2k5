@@ -1,6 +1,7 @@
 # Project capture sources
 
-These are genuine website screenshots captured in Chrome on 2 November 2026.
+These are genuine website screenshots captured in Chrome. The original set was
+captured on 2 November 2026, and Marmalade Reef was captured on 12 November 2026.
 They are static portfolio illustrations. Use each card's website link to inspect
 the current website; the illustrated screenshot is not an embedded live page.
 
@@ -10,6 +11,7 @@ the current website; the illustrated screenshot is not an embedded live page.
 | ronmaxaks | https://ronmaxaks.com/ | Live business website |
 | lovers | https://loversiphones.co.za/ | Live storefront |
 | vlandf | https://spirit2k5.co.za/previews/vlandf-home/ | Our redesign preview |
+| marmalade-reef | https://spirit2k5.co.za/previews/marmalade-reef/ | Website preview in progress |
 | faremap | https://spirit2k5.co.za/faremap/ | Passenger website |
 | vlandf-existing | https://www.vlandf.co.za/ | Existing client website |
 | vlandf-preview | https://spirit2k5.co.za/previews/vlandf-home/ | Our redesign preview |
