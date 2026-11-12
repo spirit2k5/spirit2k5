@@ -68,6 +68,7 @@ jobs:
           node --check studio-action-icons.js
           node --check studio-showcase.js
           node --check previews/marmalade-reef/preview.js
+          node --check previews/marmalade-reef/menu-book.js
           node --test tests/studio-*.test.cjs
           python -m unittest discover -s tests -p 'test_*.py'
           python scripts/spirit2k5_seo_check.py
