@@ -1,0 +1,43 @@
+name: One-time import Inanda Greens pitch demo
+on:
+  push:
+    paths:
+      - '.github/workflows/import-inanda-demo.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+      - name: Download original demo files
+        shell: bash
+        run: |
+          python3 - <<'PY'
+            import json, urllib.request, pathlib
+            items = json.loads("[{\"path\":\"inanda-greens-demo/index.html\",\"url\":\"https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-12a4-8211-a194-058d50d36407/raw?se=2026-11-12T13%3A27%3A18Z&sp=r&sv=2026-06-06&sr=b&scid=59988114-40a2-5f7b-9af5-247480787a7c&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T02%3A53%3A20Z&ske=2026-11-13T02%3A53%3A20Z&sks=b&skv=2026-06-06&sig=dmQogeDFedLUIferlcp9foTrjqZjMcLyPBKe9oh9JOw%3D\"},{\"path\":\"inanda-greens-demo/assets/hero.webp\",\"url\":\"https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-49c8-8211-aa7b-83781249a7b0/raw?se=2026-11-12T13%3A27%3A19Z&sp=r&sv=2026-06-06&sr=b&scid=d3de27d4-4878-5634-85be-864b3a7b8a72&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T00%3A56%3A32Z&ske=2026-11-13T00%3A56%3A32Z&sks=b&skv=2026-06-06&sig=SlwQojQRmkRv4Jyk8WN3mIgYjPxYWTODrbWIYY2Chxs%3D\"},{\"path\":\"inanda-greens-demo/assets/office-open-plan.webp\",\"url\":\"https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-6ed4-8211-8c33-efa376e7e8c7/raw?se=2026-11-12T13%3A27%3A18Z&sp=r&sv=2026-06-06&sr=b&scid=998fc0d4-21a6-5a29-886d-bca1bdd0cf4a&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T00%3A21%3A10Z&ske=2026-11-13T00%3A21%3A10Z&sks=b&skv=2026-06-06&sig=ay3taYkjoI40nD6Me5fRB%2BlIS2typq3Sa4ZXLEsyD%2B8%3D\"},{\"path\":\"inanda-greens-demo/assets/office-green.webp\",\"url\":\"https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-f488-8211-8fff-457a00e70902/raw?se=2026-11-12T13%3A27%3A19Z&sp=r&sv=2026-06-06&sr=b&scid=2f2d0963-1926-57a7-8be4-91e8c2d94c96&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T00%3A11%3A02Z&ske=2026-11-13T00%3A11%3A02Z&sks=b&skv=2026-06-06&sig=ek6Tz5NoPzlx6Pkln0zxzcnxFGc%2B2W9/pb0VnrDpbrs%3D\"},{\"path\":\"inanda-greens-demo/assets/lobby-concept.webp\",\"url\":\"https://sdmntprseasia.oaiusercontent.com/files/00000000-3890-8207-9596-06de15bf2247/raw?se=2026-11-12T13%3A27%3A18Z&sp=r&sv=2026-06-06&sr=b&scid=de13db45-a1d2-5b26-b2c7-9eed63cfc92e&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T02%3A24%3A17Z&ske=2026-11-13T02%3A24%3A17Z&sks=b&skv=2026-06-06&sig=mosYjVlZiuGYMTHIe7D3uz%2BxOBUNA3VquRHzrUyEu5c%3D\"},{\"path\":\"inanda-greens-demo/assets/cafe-terrace.webp\",\"url\":\"https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-6eb4-8211-93fa-2e9a687d9379/raw?se=2026-11-12T13%3A27%3A20Z&sp=r&sv=2026-06-06&sr=b&scid=10c87b60-b810-5087-a54e-faf1219225d7&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T02%3A44%3A05Z&ske=2026-11-13T02%3A44%3A05Z&sks=b&skv=2026-06-06&sig=91bMNjqu515aFxMjrgqNTzj63c3wZb%2B/Dwohpz0vFhg%3D\"},{\"path\":\"inanda-greens-demo/assets/garden.webp\",\"url\":\"https://sdmntprseasia.oaiusercontent.com/files/00000000-def4-8207-895e-2102cc0ef17f/raw?se=2026-11-12T13%3A27%3A19Z&sp=r&sv=2026-06-06&sr=b&scid=72442c4c-73c9-5f21-84a6-be9202660fdd&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T00%3A41%3A16Z&ske=2026-11-13T00%3A41%3A16Z&sks=b&skv=2026-06-06&sig=gUHzsvtDMdkUcRd1R2xHq7a2tpUQBAgoX4NUp3pX6Qw%3D\"},{\"path\":\"inanda-greens-demo/assets/park-exterior.webp\",\"url\":\"https://sdmntprseasia.oaiusercontent.com/files/00000000-a3a0-8207-ba59-976fea8d0b4a/raw?se=2026-11-12T13%3A27%3A19Z&sp=r&sv=2026-06-06&sr=b&scid=86899de3-8f92-5e10-8f5e-ff16f9fc9513&skoid=54865dd2-31dc-44cc-a877-635aa4250446&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-12T00%3A32%3A04Z&ske=2026-11-13T00%3A32%3A04Z&sks=b&skv=2026-06-06&sig=TMa6Qq4wGbfhNzWe0GWhG4YV%2Bdh2X1G%2BsBxWuY3P9IU%3D\"}]")
+            for row in items:
+                dest = pathlib.Path(row['path'])
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                req = urllib.request.Request(row['url'], headers={'User-Agent':'GitHubActions-Spirit2k5'})
+                with urllib.request.urlopen(req, timeout=45) as response:
+                    content = response.read()
+                if len(content) < 300:
+                    raise RuntimeError(f'Unexpectedly small content for {dest}')
+                dest.write_bytes(content)
+                print('Saved', dest, len(content), 'bytes')
+          PY
+      - name: Commit demo files to the current website
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add inanda-greens-demo/
+          if git diff --cached --quiet; then
+            echo "Demo files already present"
+          else
+            git commit -m "Add unlisted Inanda Greens pitch demo with local images"
+            git push
+          fi
