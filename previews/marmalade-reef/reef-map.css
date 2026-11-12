@@ -1,0 +1,231 @@
+/* The coastline is an illustration. The stop labels and route are HTML and CSS. */
+.reef-map-return {
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+.reef-map-return a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: 10px;
+  color: var(--deep);
+  font-size: .8125rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.reef-map {
+  --reef-map-ink: #244b49;
+  --reef-map-accent: #984222;
+  --reef-map-paper: #f5ebd7;
+  --reef-map-route: #ac532e;
+  position: relative;
+  isolation: isolate;
+  inline-size: min(100%, 960px);
+  margin: clamp(22px, 4vw, 40px) auto 0;
+  padding: clamp(20px, 4.2vw, 48px);
+  border: 1px solid #bba98d;
+  border-radius: 7px 11px 9px 5px;
+  background:
+    linear-gradient(120deg, rgb(255 247 226 / 28%), rgb(247 232 203 / 10%)),
+    url('reef-map-art.webp') center / cover no-repeat,
+    var(--reef-map-paper);
+  box-shadow: 0 16px 34px rgb(44 53 40 / 14%), inset 0 0 20px rgb(90 65 38 / 14%);
+  color: var(--reef-map-ink);
+  text-align: start;
+}
+
+.reef-map::before {
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgb(102 92 60 / 36%);
+  border-radius: 3px 5px 3px 2px;
+  pointer-events: none;
+  content: '';
+}
+
+.reef-map-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.reef-map-heading > div {
+  max-inline-size: 34ch;
+  padding: 6px 10px 9px 0;
+  background: radial-gradient(ellipse at 26% 55%, rgb(251 243 224 / 96%) 14%, rgb(251 243 224 / 64%) 62%, transparent 76%);
+}
+
+.reef-map-location {
+  margin: 0;
+  color: var(--reef-map-accent);
+  font: 700 .69rem/1.45 Georgia, serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.reef-map-heading h3 {
+  margin: .16em 0 .2em;
+  font: 400 clamp(1.95rem, 3.8vw, 3.4rem)/1.05 'DM Serif Display', Georgia, serif;
+  letter-spacing: -.025em;
+}
+
+.reef-map-guide {
+  margin: 0;
+  font-size: .875rem;
+  line-height: 1.45;
+}
+
+.reef-map .reef-map-compass {
+  position: relative;
+  flex: 0 0 auto;
+  inline-size: clamp(44px, 7vw, 80px);
+  aspect-ratio: 1;
+  margin: 7px 2px 0 0;
+  color: var(--reef-map-ink);
+  background: radial-gradient(circle, transparent 50%, currentColor 51% 52%, transparent 53%);
+}
+
+.reef-map-trail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(88px, auto));
+  column-gap: 3px;
+  row-gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reef-map-trail::before,
+.reef-map-trail::after {
+  position: absolute;
+  pointer-events: none;
+  content: '';
+}
+
+.reef-map-trail::before {
+  inset: 16% 28% auto 29%;
+  block-size: 35%;
+  border-block-start: 3px dotted var(--reef-map-route);
+  border-inline-end: 3px dotted var(--reef-map-route);
+  border-start-end-radius: 85% 90%;
+  rotate: 8deg;
+}
+
+.reef-map-trail::after {
+  inset: 46% 23% auto 38%;
+  block-size: 37%;
+  border-block-end: 3px dotted var(--reef-map-route);
+  border-inline-end: 3px dotted var(--reef-map-route);
+  border-end-end-radius: 85% 100%;
+  rotate: -6deg;
+}
+
+.reef-map-stop {
+  position: relative;
+  z-index: 1;
+  min-inline-size: 0;
+  align-self: center;
+}
+
+.reef-map-stop--shore { grid-area: 1 / 2 / auto / span 4; }
+.reef-map-stop--coral { grid-area: 2 / 8 / auto / span 4; }
+.reef-map-stop--reef { grid-area: 3 / 4 / auto / span 4; }
+
+.reef-map-stop a {
+  position: relative;
+  display: grid;
+  grid-template: 'name arrow' auto 'dish arrow' auto / minmax(0, 1fr) auto;
+  align-content: center;
+  align-items: center;
+  gap: 2px 12px;
+  min-block-size: 74px;
+  padding: 11px 14px 11px 17px;
+  border: 1px solid #a99d82;
+  border-radius: 4px 6px 4px 5px;
+  background: #fff4dc;
+  box-shadow: 1px 2px 0 rgb(119 91 57 / 16%), 0 3px 8px rgb(80 64 45 / 10%);
+  color: var(--reef-map-ink);
+}
+
+.reef-map-stop a::before {
+  position: absolute;
+  inset-block-start: calc(50% - 7px);
+  inset-inline-start: -7px;
+  inline-size: 14px;
+  block-size: 14px;
+  border: 2px solid var(--reef-map-route);
+  border-radius: 50%;
+  background: var(--reef-map-paper);
+  box-shadow: inset 0 0 0 2px var(--reef-map-paper), inset 0 0 0 6px var(--reef-map-route);
+  content: '';
+}
+
+.reef-map-stop-name {
+  grid-area: name;
+  font: 700 .73rem/1.35 Georgia, serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.reef-map-dish {
+  grid-area: dish;
+  font: 400 1.35rem/1.15 'DM Serif Display', Georgia, serif;
+  overflow-wrap: anywhere;
+}
+
+.reef-map-arrow {
+  grid-area: arrow;
+  color: var(--reef-map-accent);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.reef-map-stop a:is(:hover, :focus-visible) {
+  border-color: var(--reef-map-accent);
+  background: #fffaef;
+  color: var(--reef-map-accent);
+}
+
+.reef-map-stop a:focus-visible {
+  outline: 3px solid var(--reef-map-ink);
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .reef-map {
+    background-position: center, 67% bottom;
+  }
+
+  .reef-map-trail {
+    grid-template: none;
+    gap: 12px;
+    margin-block-start: 16px;
+    padding-inline-start: 24px;
+  }
+
+  .reef-map-trail::before {
+    inset: 37px auto 37px 8px;
+    block-size: auto;
+    border: 0;
+    border-inline-start: 3px dotted var(--reef-map-route);
+    border-radius: 0;
+    rotate: none;
+  }
+
+  .reef-map-trail::after { display: none; }
+  .reef-map-stop { grid-area: auto; }
+  .reef-map-stop a { padding-inline-start: 14px; }
+  .reef-map-stop a::before { inset-inline-start: -22px; }
+}
+
+@media (max-width: 360px) {
+  .reef-map { padding-inline: 15px; }
+  .reef-map-heading { gap: 8px; }
+  .reef-map-location { letter-spacing: .08em; }
+}

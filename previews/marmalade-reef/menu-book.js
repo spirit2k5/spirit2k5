@@ -14,12 +14,23 @@
   const pages = Array.from(host.children).filter((page) => page.matches('.book-page'));
   if (pages.length < 4 || pages.length % 2 !== 0) return;
 
+  const chartTargets = new Map();
+  for (const link of root.querySelectorAll('a[data-book-target][href^="#"]')) {
+    const hash = link.getAttribute('href');
+    const heading = document.getElementById(hash.slice(1));
+    if (!heading) continue;
+    const index = pages.findIndex((page) => page.contains(heading));
+    if (index >= 0) chartTargets.set(hash, { hash, heading, index, link });
+  }
+
   const openLabel = open.querySelector('[data-book-open-label]') || open;
   const coverAction = openLabel.textContent.trim();
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const originalHost = host.cloneNode(true);
   const last = pages.length - 1;
   let gesture = null;
+  let requestedTarget = null;
+  let activeTarget = null;
 
   const book = new PageFlip(host, {
     width: 400,
@@ -44,6 +55,11 @@
     const front = index === 0;
     const back = index === last;
     const facing = layout === 'landscape' && !front && !back;
+    const isVisible = (number) => number === index || (facing && number === index + 1);
+
+    if (activeTarget && root.dataset.bookLayout === layout && !isVisible(activeTarget.index)) {
+      activeTarget = null;
+    }
 
     root.dataset.bookLayout = layout;
     root.dataset.bookPage = String(index);
@@ -62,7 +78,8 @@
       .map((page) => page.dataset.bookTitle).filter(Boolean).join(' · ');
 
     for (const [number, page] of pages.entries()) {
-      const visible = number === index || (facing && number === index + 1);
+      const visible = isVisible(number);
+      if (!visible && page.contains(document.activeElement)) host.focus({ preventScroll: true });
       page.inert = !visible;
       if (visible) page.removeAttribute('aria-hidden');
       else page.setAttribute('aria-hidden', 'true');
@@ -92,11 +109,39 @@
     if (book.getState() === 'read') book.turnToPage(index);
   }
 
+  function revealRequestedTarget() {
+    if (!requestedTarget || gesture || book.getState() !== 'read') return;
+    const target = requestedTarget;
+    requestedTarget = null;
+    if (window.location.hash !== target.hash) return;
+
+    activeTarget = target;
+    book.turnToPage(target.index);
+    // The engine draws the selected spread on the next frame.
+    requestAnimationFrame(() => {
+      if (activeTarget !== target || window.location.hash !== target.hash) return;
+      target.heading.focus({ preventScroll: true });
+      target.heading.scrollIntoView({
+        block: 'start', inline: 'nearest', behavior: motion.matches ? 'instant' : 'smooth',
+      });
+    });
+  }
+
+  function routeHash() {
+    requestedTarget = chartTargets.get(window.location.hash) || null;
+    if (!requestedTarget) activeTarget = null;
+    revealRequestedTarget();
+  }
+
   book.on('flip', syncPage);
-  book.on('changeOrientation', syncPage);
+  book.on('changeOrientation', () => {
+    if (activeTarget && book.getState() === 'read') book.turnToPage(activeTarget.index);
+    else syncPage();
+  });
   book.on('changeState', ({ data }) => {
     root.dataset.bookState = data;
     host.setAttribute('aria-busy', String(data !== 'read'));
+    if (data === 'read' && requestedTarget) requestAnimationFrame(revealRequestedTarget);
   });
 
   try {
@@ -121,10 +166,23 @@
   host.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight Home End');
   controls.hidden = false;
   syncPage();
-  book.on('init', syncPage);
+  book.on('init', () => {
+    syncPage();
+    routeHash();
+  });
+  window.addEventListener('hashchange', routeHash);
+  for (const { link, hash } of chartTargets.values()) {
+    link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.altKey || event.ctrlKey
+        || event.metaKey || event.shiftKey) return;
+      event.preventDefault();
+      if (window.location.hash === hash) routeHash();
+      else window.location.hash = hash;
+    });
+  }
 
   // The engine temporarily clones the turned page in portrait. Keep the clone
-  // visual only so its text or links do not appear twice to assistive technology.
+  // visual only so its content and fragment IDs stay unique on the real pages.
   if (window.MutationObserver) {
     const sourcePages = new Set(pages);
     new MutationObserver((records) => {
@@ -133,6 +191,8 @@
           if (!node.matches?.('.book-page') || sourcePages.has(node)) continue;
           node.inert = true;
           node.setAttribute('aria-hidden', 'true');
+          node.removeAttribute('id');
+          for (const child of node.querySelectorAll('[id]')) child.removeAttribute('id');
         }
       }
     }).observe(surface, { childList: true });
@@ -148,7 +208,8 @@
 
   root.addEventListener('keydown', (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-    if (event.target !== host && !controls.contains(event.target)) return;
+    if (!host.contains(event.target) && !controls.contains(event.target)) return;
+    if (event.target.closest('input, select, textarea, [contenteditable]')) return;
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
     if (event.key === 'Home') jump(0);
@@ -201,6 +262,7 @@
     } else if (!cancelled && Math.hypot(dx, dy) < 8 && drag.tapDirection) {
       turn(drag.tapDirection, drag.corner);
     }
+    revealRequestedTarget();
   }
 
   surface.addEventListener('pointerdown', (event) => {

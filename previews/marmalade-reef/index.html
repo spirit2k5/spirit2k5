@@ -15,10 +15,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=reef20261112">
 <link rel="stylesheet" href="chart-details.css?v=20261112">
-<link rel="stylesheet" href="menu-book.css?v=20261112">
+<link rel="stylesheet" href="menu-book.css?v=reefmap20261112">
+<link rel="stylesheet" href="reef-map.css?v=reefmap20261112">
 <script src="preview.js?v=reef20261104" defer></script>
 <script src="vendor/page-flip-2.0.7.js" defer></script>
-<script src="menu-book.js?v=20261112" defer></script>
+<script src="menu-book.js?v=reefmap20261112" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -40,14 +41,47 @@
 <article class="food-card"><div class="food-art"><svg viewBox="0 0 150 125" aria-hidden="true"><ellipse cx="76" cy="72" rx="66" ry="43" fill="#e0f0e9" stroke="#60aca2" stroke-width="4"/><ellipse cx="75" cy="71" rx="53" ry="32" fill="#fffaf0"/><path d="M29 72c20-40 63-36 95 4-27 31-72 32-95-4Z" fill="#f3a77b"/><path d="M38 70c22-13 44-11 70 2M49 83c22-10 43-8 57 0" stroke="#d2724d" stroke-width="4" fill="none"/><path d="M86 38c-11-18-25-25-31-16M94 39c8-16 24-18 28-12" stroke="#75ad7a" stroke-width="5" fill="none"/></svg></div><h3>Seafood & soul</h3><p>An ocean-inspired food offering. Menu details and pricing pending approval.</p></article>
 <article class="food-card"><div class="food-art"><svg viewBox="0 0 150 125" aria-hidden="true"><path d="M48 18h54l-6 82H54Z" fill="#a7ddd2" stroke="#418e8b" stroke-width="4"/><path d="M51 42h47l-4 50H56Z" fill="#edba78"/><path d="M80 18 112 3" stroke="#418e8b" stroke-width="5"/><path d="M69 52c12 12 18 4 22 0" stroke="#f7f5e0" stroke-width="5" fill="none"/><circle cx="76" cy="15" r="19" fill="#f6a265" stroke="#fff0ce" stroke-width="5"/><path d="M76-2v34M59 15h34" stroke="#fff0ce" stroke-width="4"/></svg></div><h3>Café moments</h3><p>Relaxed, joyful moments by the coast, whether catching up or slowing down.</p></article>
 <article class="food-card"><div class="food-art"><svg viewBox="0 0 150 125" aria-hidden="true"><path d="M12 92q24-52 61 0t65 0" stroke="#49aba8" stroke-width="5" fill="none"/><path d="M26 85 40 27 54 85M39 59 20 37M41 52 62 36" stroke="#ef956f" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M101 92 112 23 126 92M115 61 90 40M117 56 136 43" stroke="#f1b28c" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M63 43q18-20 37 0-20 20-37 0Z" fill="#ef895e"/><circle cx="71" cy="42" r="3" fill="#24585a"/></svg></div><h3>Ocean connection</h3><p>A place for environmental awareness, marine appreciation and community.</p></article>
-</div><p class="draft-note"><b>Concept preview:</b> Specific dishes, prices and service availability have not been provided yet.</p></div></section>
+</div><p class="draft-note"><b>Concept preview:</b> Final dishes, prices and service availability are subject to confirmation.</p></div></section>
 
 <section class="section menu-book" id="menu" data-menu-book aria-labelledby="menu-book-title">
   <div class="wrap">
     <div class="menu-book-intro center">
       <h2 id="menu-book-title">The <em>menu book.</em></h2>
-      <p class="bodycopy">Take a look inside our menu preview. We’ll add the dishes, prices and restaurant photos when they’re ready.</p>
+      <p class="bodycopy">Follow the chart to three sample dishes, or open the book and turn the pages. The final menu and restaurant photos are still to come.</p>
     </div>
+    <nav id="reef-map" class="reef-map" tabindex="-1" aria-labelledby="reef-map-title" aria-describedby="reef-map-guide">
+      <div class="reef-map-heading">
+        <div>
+          <p class="reef-map-location">Umhlanga · KwaZulu-Natal</p>
+          <h3 id="reef-map-title">The reef chart</h3>
+          <p id="reef-map-guide" class="reef-map-guide">Choose a stop to turn to its page in the menu book.</p>
+        </div>
+        <span class="reef-compass reef-map-compass" aria-hidden="true"><span class="reef-compass-north">N</span></span>
+      </div>
+      <ol class="reef-map-trail" role="list">
+        <li class="reef-map-stop reef-map-stop--shore">
+          <a href="#menu-demo-calamari" data-book-target aria-controls="reef-menu-pages">
+            <span class="reef-map-stop-name">The Shore</span>
+            <span class="reef-map-dish">Calamari</span>
+            <span class="reef-map-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="reef-map-stop reef-map-stop--coral">
+          <a href="#menu-demo-prawn" data-book-target aria-controls="reef-menu-pages">
+            <span class="reef-map-stop-name">The Coral Gardens</span>
+            <span class="reef-map-dish">Grilled prawn</span>
+            <span class="reef-map-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="reef-map-stop reef-map-stop--reef">
+          <a href="#menu-demo-hake" data-book-target aria-controls="reef-menu-pages">
+            <span class="reef-map-stop-name">The Reef</span>
+            <span class="reef-map-dish">Cape hake</span>
+            <span class="reef-map-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ol>
+    </nav>
     <p class="book-fallback">The menu preview pages are shown in reading order below.</p>
     <div class="book-stage">
       <div id="reef-menu-pages" class="book-pages" data-book-pages role="group" aria-label="Menu book pages">
@@ -69,14 +103,37 @@
             <p class="book-folio" aria-hidden="true">01</p>
           </div>
         </article>
-        <article class="book-page" data-book-title="Food">
-          <div class="book-sheet">
-            <p class="book-overline">Food</p>
-            <h3>From the kitchen</h3>
-            <p>Fresh flavours and a love of the sea are at the heart of the Marmalade Reef concept.</p>
-            <!-- Replace this note with confirmed food descriptions and prices when supplied. -->
-            <p class="book-note">The food menu and prices will be added here once confirmed.</p>
+        <article class="book-page" data-book-title="Calamari">
+          <div class="book-sheet book-sheet--demo">
+            <p class="book-overline">The Shore</p>
+            <h3 id="menu-demo-calamari" tabindex="-1">Calamari</h3>
+            <div class="book-specimen book-specimen--calamari" aria-hidden="true"></div>
+            <p class="book-demo-description">Salt and vinegar, lime aioli.</p>
+            <p class="book-demo-price"><span>Sample price</span> <strong>R36</strong></p>
+            <p class="book-note">Illustrative only. Final menu subject to approval.</p>
             <p class="book-folio" aria-hidden="true">02</p>
+          </div>
+        </article>
+        <article class="book-page" data-book-title="Grilled prawn">
+          <div class="book-sheet book-sheet--demo">
+            <p class="book-overline">The Coral Gardens</p>
+            <h3 id="menu-demo-prawn" tabindex="-1">Grilled prawn</h3>
+            <div class="book-specimen book-specimen--prawn" aria-hidden="true"></div>
+            <p class="book-demo-description">Avocado, mango, sea greens.</p>
+            <p class="book-demo-price"><span>Sample price</span> <strong>R88</strong></p>
+            <p class="book-note">Illustrative only. Final menu subject to approval.</p>
+            <p class="book-folio" aria-hidden="true">03</p>
+          </div>
+        </article>
+        <article class="book-page" data-book-title="Cape hake">
+          <div class="book-sheet book-sheet--demo">
+            <p class="book-overline">The Reef</p>
+            <h3 id="menu-demo-hake" tabindex="-1">Cape hake</h3>
+            <div class="book-specimen book-specimen--hake" aria-hidden="true"></div>
+            <p class="book-demo-description">Smoked mussel cream, crispy leeks.</p>
+            <p class="book-demo-price"><span>Sample price</span> <strong>R168</strong></p>
+            <p class="book-note">Illustrative only. Final menu subject to approval.</p>
+            <p class="book-folio" aria-hidden="true">04</p>
           </div>
         </article>
         <article class="book-page" data-book-title="Drinks">
@@ -86,7 +143,7 @@
             <p>Make time to catch up, slow down and enjoy a moment by the coast.</p>
             <!-- Replace this note with the confirmed drinks list and prices when supplied. -->
             <p class="book-note">The drinks menu and prices will be added here once confirmed.</p>
-            <p class="book-folio" aria-hidden="true">03</p>
+            <p class="book-folio" aria-hidden="true">05</p>
           </div>
         </article>
         <article class="book-page" data-book-title="Find the reef">
@@ -95,7 +152,7 @@
             <h3>See you by the seaside</h3>
             <p>Umhlanga Centre<br>189 Ridge Road, Umhlanga Rocks<br>KwaZulu-Natal, South Africa</p>
             <p class="book-note">Please confirm opening hours and availability before visiting.</p>
-            <p class="book-folio" aria-hidden="true">04</p>
+            <p class="book-folio" aria-hidden="true">06</p>
           </div>
         </article>
         <article class="book-page" data-book-title="Back cover" data-density="hard">
@@ -116,6 +173,7 @@
       <p class="book-status" data-book-status role="status" aria-atomic="true">Front cover</p>
       <p class="book-instructions" id="book-control-help">Drag a page corner, swipe, or use the arrow keys.</p>
     </div>
+    <p class="reef-map-return"><a href="#reef-map">↑ Back to the reef map</a></p>
     <nav class="reef-chart-nav" aria-label="Explore Marmalade Reef">
       <a href="#experience">The experience</a>
       <a href="#ocean">Our ocean</a>
