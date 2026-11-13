@@ -64,6 +64,8 @@
     root.dataset.bookLayout = layout;
     root.dataset.bookPage = String(index);
     root.dataset.bookPosition = front ? 'front-cover' : back ? 'back-cover' : 'spread';
+    previous.disabled = front;
+    next.disabled = back;
     previous.setAttribute('aria-disabled', String(front));
     next.setAttribute('aria-disabled', String(back));
     openLabel.textContent = front ? coverAction : 'Back to cover';
@@ -156,6 +158,9 @@
   const controller = book.getFlipController();
   // minWidth is an orientation threshold. The page itself can fit smaller phones.
   host.style.removeProperty('min-width');
+  // The vendor computes its initial bounds while its temporary 320px min-width
+  // is still applied. Recalculate after removing it to fit narrow phones.
+  book.update();
   root.dataset.bookMode = motion.matches ? 'instant' : 'animated';
   root.dataset.bookState = 'read';
   root.classList.add('is-book-ready');
