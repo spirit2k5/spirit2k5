@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=reef20261112">
 <link rel="stylesheet" href="chart-details.css?v=20261112">
-<link rel="stylesheet" href="menu-book.css?v=reefmap20261112">
+<link rel="stylesheet" href="menu-book.css?v=reef-icons-1">
 <link rel="stylesheet" href="reef-map.css?v=reefmap20261112">
 <link rel="stylesheet" href="reef-visuals-top.css?v=reefvisuals20261113">
 <link rel="stylesheet" href="reef-visuals-book.css?v=reefvisuals20261113">
@@ -23,18 +23,40 @@
 <script src="vendor/page-flip-2.0.7.js" defer></script>
 <script src="menu-book.js?v=reefmap20261112" defer></script>
 <link rel="stylesheet" href="reef-visuals-lower.css?v=reefvisuals20261113">
+<link rel="stylesheet" href="action-icons.css?v=reef-icons-1">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<svg class="reef-action-symbols" aria-hidden="true" focusable="false">
+  <symbol id="reef-icon-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9H3zM9 20v-7h6v7"/></symbol>
+  <symbol id="reef-icon-book" viewBox="0 0 24 24"><path d="M12 6v15M3 4h4a5 5 0 0 1 5 2 5 5 0 0 1 5-2h4v15h-4a5 5 0 0 0-5 2 5 5 0 0 0-5-2H3z"/></symbol>
+  <symbol id="reef-icon-closed-book" viewBox="0 0 24 24"><path d="M20 21H6a3 3 0 0 1 0-6h14M6 15V3h14v18M9 7h7M9 10h5"/></symbol>
+  <symbol id="reef-icon-menu-book" viewBox="0 0 24 24"><rect x="5" y="3" width="15" height="18" rx="2"/><path d="M9 3v18m3-13h5m-5 4h5m-5 4h3M3 7h3m-3 5h3m-3 5h3"/></symbol>
+  <symbol id="reef-icon-utensils" viewBox="0 0 24 24"><path d="M4 3v5a3 3 0 0 0 6 0V3M7 3v18M20 3c-3 0-5 3-5 7v2h5m0-9v18"/></symbol>
+  <symbol id="reef-icon-wave" viewBox="0 0 24 24"><path d="M2 12c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3M2 18c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3"/></symbol>
+  <symbol id="reef-icon-chef" viewBox="0 0 24 24"><path d="M6 15a4 4 0 1 1 1-8 5 5 0 0 1 10 0 4 4 0 1 1 1 8v6H6zM6 17h12"/></symbol>
+  <symbol id="reef-icon-cloche" viewBox="0 0 24 24"><path d="M3 18h18M5 15a7 7 0 0 1 14 0v3H5zm7-7V5m-1 0h2"/></symbol>
+  <symbol id="reef-icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="reef-icon-map" viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15"/></symbol>
+  <symbol id="reef-icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.7h.01" stroke-width="2.6"/></symbol>
+  <symbol id="reef-icon-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol>
+  <symbol id="reef-icon-left" viewBox="0 0 24 24"><path d="M20 12H4m6-6-6 6 6 6"/></symbol>
+  <symbol id="reef-icon-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+  <symbol id="reef-icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="reef-icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="reef-icon-shell" viewBox="0 0 24 24"><path d="M11 20C8 19 3 15 3 10a3 3 0 0 1 3-3 3 3 0 0 1 4-2 3 3 0 0 1 4 0 3 3 0 0 1 4 2 3 3 0 0 1 3 3c0 5-5 9-8 10zM7 8l4 10m6-10-4 10m-1-12v11"/></symbol>
+  <symbol id="reef-icon-coral" viewBox="0 0 24 24"><path d="M12 21V6m0 9-6-4-2-4m2 4-3 2m9 5 6-4 3-6m-3 6 3 1m-9-5 5-4m-5 2-4-4"/></symbol>
+  <symbol id="reef-icon-fish" viewBox="0 0 24 24"><path d="M3 12s3-5 8-5c4 0 7 5 7 5s-3 5-7 5c-5 0-8-5-8-5zm15 0 4-4v8zm-10-1h.01" /></symbol>
+</svg>
+<a class="skip reef-action" href="#main"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-down"></use></svg>Skip to content</a>
 <div class="ribbon">✦ <span>PRIVATE CONCEPT PREVIEW</span> · Content subject to Chef Rev's approval ✦</div>
 <header class="nav"><div class="wrap navin">
 <a class="brand" href="#home" aria-label="Marmalade Reef home"><picture class="logo-picture"><source media="(prefers-reduced-motion: reduce)" srcset="marmalade-logo.webp"><img class="reef-logo-image header-logo" src="marmalade-logo-animated.webp" alt="Marmalade Reef by Chef Rev — authentic illustrated logo with gently swimming orange fish" width="760" height="767" decoding="async" loading="eager"></picture><span class="brand-name" aria-hidden="true">Marmalade Reef<small>By Chef Rev · Umhlanga</small></span></a>
-<button class="mobile-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<nav class="links" id="nav-links" aria-label="Main navigation"><a href="#story">Our story</a><a href="#experience">The experience</a><a href="#menu">Menu</a><a href="#ocean">Our ocean</a><a href="#chef">Chef Rev</a><a href="#marmalade-mist">Marmalade Mist</a><a class="smallbtn" href="#visit">Find us ↗</a></nav>
+<button class="mobile-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><svg class="reef-action-icon reef-icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-menu"></use></svg><svg class="reef-action-icon reef-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-close"></use></svg></button>
+<nav class="links" id="nav-links" aria-label="Main navigation"><a href="#story" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-book"></use></svg>Our story</a><a href="#experience" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-utensils"></use></svg>The experience</a><a href="#menu" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-menu-book"></use></svg>Menu</a><a href="#ocean" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-wave"></use></svg>Our ocean</a><a href="#chef" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-chef"></use></svg>Chef Rev</a><a href="#marmalade-mist" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-cloche"></use></svg>Marmalade Mist</a><a class="smallbtn reef-action" href="#visit"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-pin"></use></svg>Find us</a></nav>
 </div></header>
 <main id="main">
 <section class="hero" id="home"><div class="wrap hero-grid">
-<div><div class="eyebrow">Ocean-inspired · Umhlanga, KZN</div><h1>A little <em>reef,</em><br>a lot of <span class="mark"><span>heart.</span></span></h1><p class="lead">Welcome to the world of <strong>Marmalade Reef by Chef Rev</strong> — a joyful, ocean-inspired seafood café where good food, good people and a love for our blue planet come together.</p><div class="actions"><a class="btn btn-primary" href="#story">Explore our story <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#visit">Plan your visit <span aria-hidden="true">⌁</span></a></div><div class="mini-note"><span>↝</span> Made with love for the sea and everything in it.</div></div>
+<div><div class="eyebrow">Ocean-inspired · Umhlanga, KZN</div><h1>A little <em>reef,</em><br>a lot of <span class="mark"><span>heart.</span></span></h1><p class="lead">Welcome to the world of <strong>Marmalade Reef by Chef Rev</strong> — a joyful, ocean-inspired seafood café where good food, good people and a love for our blue planet come together.</p><div class="actions"><a class="btn btn-primary reef-action" href="#story"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-book"></use></svg>Explore our story</a><a class="btn btn-outline reef-action" href="#visit"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-pin"></use></svg>Plan your visit</a></div><div class="mini-note"><span>↝</span> Made with love for the sea and everything in it.</div></div>
 <div class="art" aria-label="Marmalade Reef original logo with five orange fish gently swimming"><picture class="logo-picture"><source media="(prefers-reduced-motion: reduce)" srcset="marmalade-logo.webp"><img class="reef-logo-image hero-logo" src="marmalade-logo-animated.webp" alt="Marmalade Reef by Chef Rev — authentic illustrated logo with gently swimming orange fish" width="760" height="767" decoding="async" loading="eager"></picture></div>
 <span class="reef-compass" aria-hidden="true"><span class="reef-compass-north">N</span></span>
 </div></section>
@@ -66,21 +88,21 @@
           <a href="#menu-demo-calamari" data-book-target aria-controls="reef-menu-pages">
             <span class="reef-map-stop-name">The Shore</span>
             <span class="reef-map-dish">Calamari</span>
-            <span class="reef-map-arrow" aria-hidden="true">↗</span>
+            <svg class="reef-action-icon reef-map-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-shell"></use></svg>
           </a>
         </li>
         <li class="reef-map-stop reef-map-stop--coral">
           <a href="#menu-demo-prawn" data-book-target aria-controls="reef-menu-pages">
             <span class="reef-map-stop-name">The Coral Gardens</span>
             <span class="reef-map-dish">Grilled prawn</span>
-            <span class="reef-map-arrow" aria-hidden="true">↗</span>
+            <svg class="reef-action-icon reef-map-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-coral"></use></svg>
           </a>
         </li>
         <li class="reef-map-stop reef-map-stop--reef">
           <a href="#menu-demo-hake" data-book-target aria-controls="reef-menu-pages">
             <span class="reef-map-stop-name">The Reef</span>
             <span class="reef-map-dish">Cape hake</span>
-            <span class="reef-map-arrow" aria-hidden="true">↗</span>
+            <svg class="reef-action-icon reef-map-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-fish"></use></svg>
           </a>
         </li>
       </ol>
@@ -90,6 +112,7 @@
       <div id="reef-menu-pages" class="book-pages" data-book-pages role="group" aria-label="Menu book pages">
         <article class="book-page" data-book-title="Front cover" data-density="hard">
           <div class="book-sheet book-sheet--cover">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <span class="book-compass" aria-hidden="true"></span>
             <p class="book-overline">Umhlanga Rocks · KwaZulu-Natal</p>
             <img class="book-cover-logo" src="marmalade-logo.webp" alt="Marmalade Reef by Chef Rev" width="760" height="767" decoding="async" loading="lazy">
@@ -99,6 +122,7 @@
         </article>
         <article class="book-page" data-book-title="Welcome to the reef">
           <div class="book-sheet">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <div class="book-plate book-plate--welcome" aria-hidden="true"></div>
             <p class="book-overline">Welcome</p>
             <h3>Your guide to the reef</h3>
@@ -109,6 +133,7 @@
         </article>
         <article class="book-page" data-book-title="Calamari">
           <div class="book-sheet book-sheet--demo">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <p class="book-overline">The Shore</p>
             <h3 id="menu-demo-calamari" tabindex="-1">Calamari</h3>
             <div class="book-specimen book-specimen--calamari" aria-hidden="true"></div>
@@ -120,6 +145,7 @@
         </article>
         <article class="book-page" data-book-title="Grilled prawn">
           <div class="book-sheet book-sheet--demo">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <p class="book-overline">The Coral Gardens</p>
             <h3 id="menu-demo-prawn" tabindex="-1">Grilled prawn</h3>
             <div class="book-specimen book-specimen--prawn" aria-hidden="true"></div>
@@ -131,6 +157,7 @@
         </article>
         <article class="book-page" data-book-title="Cape hake">
           <div class="book-sheet book-sheet--demo">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <p class="book-overline">The Reef</p>
             <h3 id="menu-demo-hake" tabindex="-1">Cape hake</h3>
             <div class="book-specimen book-specimen--hake" aria-hidden="true"></div>
@@ -142,6 +169,7 @@
         </article>
         <article class="book-page" data-book-title="Drinks">
           <div class="book-sheet">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <div class="book-plate book-plate--drinks" aria-hidden="true"></div>
             <p class="book-overline">Drinks</p>
             <h3>Café moments</h3>
@@ -153,6 +181,7 @@
         </article>
         <article class="book-page" data-book-title="Find the reef">
           <div class="book-sheet">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <div class="book-plate book-plate--visit" aria-hidden="true"></div>
             <p class="book-overline">Find us</p>
             <h3>See you by the seaside</h3>
@@ -163,6 +192,7 @@
         </article>
         <article class="book-page" data-book-title="Back cover" data-density="hard">
           <div class="book-sheet book-sheet--back">
+            <span class="reef-page-turn-cues" aria-hidden="true"><svg class="reef-action-icon reef-icon-prev-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><svg class="reef-action-icon reef-icon-next-corner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></span>
             <span class="book-compass" aria-hidden="true"></span>
             <div class="book-plate book-plate--seal" aria-hidden="true"></div>
             <p class="book-overline">Marmalade Reef by Chef Rev</p>
@@ -174,23 +204,23 @@
       </div>
     </div>
     <div class="book-controls" data-book-controls hidden>
-      <button type="button" data-book-prev aria-controls="reef-menu-pages"><span aria-hidden="true">←</span> Previous<span class="book-control-suffix"> page</span></button>
-      <button type="button" data-book-open aria-controls="reef-menu-pages">Open book</button>
-      <button type="button" data-book-next aria-controls="reef-menu-pages">Next<span class="book-control-suffix"> page</span> <span aria-hidden="true">→</span></button>
+      <button type="button" data-book-prev aria-controls="reef-menu-pages" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-left"></use></svg><span>Previous<span class="book-control-suffix"> page</span></span></button>
+      <button type="button" data-book-open aria-controls="reef-menu-pages" class="reef-action"><svg class="reef-action-icon reef-icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-book"></use></svg><svg class="reef-action-icon reef-icon-book-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-closed-book"></use></svg><span data-book-open-label>Open book</span></button>
+      <button type="button" data-book-next aria-controls="reef-menu-pages" class="reef-action"><span>Next<span class="book-control-suffix"> page</span></span><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-right"></use></svg></button>
       <p class="book-status" data-book-status role="status" aria-atomic="true">Front cover</p>
       <p class="book-instructions" id="book-control-help">Drag a page corner, swipe, or use the arrow keys.</p>
     </div>
-    <p class="reef-map-return"><a href="#reef-map">↑ Back to the reef map</a></p>
+    <p class="reef-map-return"><a href="#reef-map" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-map"></use></svg>Back to the reef map</a></p>
     <nav class="reef-chart-nav" aria-label="Explore Marmalade Reef">
-      <a href="#experience">The experience</a>
-      <a href="#ocean">Our ocean</a>
-      <a href="#visit">Find us</a>
+      <a href="#experience" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-utensils"></use></svg>The experience</a>
+      <a href="#ocean" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-wave"></use></svg>Our ocean</a>
+      <a href="#visit" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-pin"></use></svg>Find us</a>
     </nav>
   </div>
 </section>
 
 <section class="section pledge" id="ocean"><div class="wrap pledge-grid"><div><div class="kicker">03 / Our ocean</div><h2>We love the sea.<br><em>And we mean it.</em></h2><p class="bodycopy">Inspired by Chef Rev's public announcement, the vision reaches beyond the plate — towards a future where enjoying the ocean and caring for it can go hand in hand.</p><div class="value-list"><div class="value"><div class="value-icon">🐚</div><div><h3>Conscious seafood</h3><p>Encouraging more conversations about sustainable seafood choices.</p></div></div><div class="value"><div class="value-icon">🌊</div><div><h3>Cleaner coastlines</h3><p>A vision for beach cleanups and reducing unnecessary plastic pollution.</p></div></div><div class="value"><div class="value-icon">🪸</div><div><h3>Ocean culture</h3><p>Celebrating our coast through education, art and community involvement.</p></div></div></div></div><figure class="quote-art reef-ocean-card"><img class="reef-ocean-plate" src="reef-ocean-plate.webp" alt="" width="1080" height="720" loading="lazy" decoding="async"><figcaption class="reef-ocean-caption"><span class="quote-mark" aria-hidden="true">“</span><blockquote>A place where good food, good people and a genuine love for the ocean come together.</blockquote><span>— The Marmalade Reef vision</span></figcaption></figure></div></section>
-<section class="section chef" id="chef"><div class="wrap chef-grid"><figure class="portrait reef-chef-portrait"><img src="chef-rev.webp" alt="Chef Rev in a professional kitchen holding a freshly caught large fish" width="950" height="1249" loading="lazy"><figcaption><span>Meet the person behind the passion</span><small>Chef Rev</small></figcaption></figure><div><div class="kicker">04 / Meet the founder</div><h2>The chef behind<br><em>the reef.</em></h2><p class="bodycopy">Chef Rev brings a love of hospitality, food and the ocean to Marmalade Reef. The café is his way of creating something that feels meaningful — not just a meal, but a gathering place with heart.</p><p class="bodycopy">The goal is simple: to bring people together over good food while encouraging greater care for the natural world around us.</p><a class="chef-link" href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer">Follow Chef Rev Hospitality on Instagram ↗</a></div></div></section>
+<section class="section chef" id="chef"><div class="wrap chef-grid"><figure class="portrait reef-chef-portrait"><img src="chef-rev.webp" alt="Chef Rev in a professional kitchen holding a freshly caught large fish" width="950" height="1249" loading="lazy"><figcaption><span>Meet the person behind the passion</span><small>Chef Rev</small></figcaption></figure><div><div class="kicker">04 / Meet the founder</div><h2>The chef behind<br><em>the reef.</em></h2><p class="bodycopy">Chef Rev brings a love of hospitality, food and the ocean to Marmalade Reef. The café is his way of creating something that feels meaningful — not just a meal, but a gathering place with heart.</p><p class="bodycopy">The goal is simple: to bring people together over good food while encouraging greater care for the natural world around us.</p><a class="chef-link reef-action" href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-instagram"></use></svg>Follow Chef Rev Hospitality on Instagram</a></div></div></section>
 
 <section class="section mist-section" id="marmalade-mist" aria-labelledby="mist-title">
   <div class="wrap mist-layout">
@@ -211,12 +241,12 @@
         <div class="mist-service"><span aria-hidden="true">✦</span> Grazing tables</div>
         <div class="mist-service"><span aria-hidden="true">✦</span> Celebrations</div>
       </div>
-      <a class="mist-link" href="https://www.instagram.com/marmalade_mist/" target="_blank" rel="noopener noreferrer" aria-label="Visit Marmalade Mist Instagram">Discover Marmalade Mist <span aria-hidden="true">↗</span></a>
+      <a class="mist-link reef-action" href="https://www.instagram.com/marmalade_mist/" target="_blank" rel="noopener noreferrer" aria-label="Visit Marmalade Mist Instagram"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-instagram"></use></svg>Discover Marmalade Mist</a>
     </div>
   </div>
 </section>
-<section class="section visit" id="visit"><div class="wrap visit-grid"><div><div class="kicker">06 / Find us</div><h2>See you by<br><em>the seaside.</em></h2><p class="bodycopy">Set against the energy of Umhlanga, Marmalade Reef was announced as a welcoming space for seafood, conversations and ocean lovers.</p><p class="bodycopy" style="font-size:13px">Please confirm current operating hours, menu and availability with the business before visiting. This is a website concept awaiting final owner details.</p></div><div class="location reef-location-card"><div class="reef-location-heading"><div class="pin" aria-hidden="true"><svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="#0a6c6f" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><span class="reef-hospitality-art reef-location-art" aria-hidden="true"><img src="reef-hospitality-strip.webp" alt="" loading="lazy" decoding="async"></span></div><h3>Umhlanga Centre</h3><p>189 Ridge Road, Umhlanga Rocks<br>Umhlanga Centre, next to Harry James<br>KwaZulu-Natal, South Africa</p><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=189+Ridge+Road+Umhlanga+Rocks" target="_blank" rel="noopener noreferrer">Explore the location ↗</a><p style="font-size:11px;margin-bottom:0">Street address from Marmalade Mist’s announcement; the exact unit and visiting arrangements should be confirmed with the business.</p></div></div></section>
+<section class="section visit" id="visit"><div class="wrap visit-grid"><div><div class="kicker">06 / Find us</div><h2>See you by<br><em>the seaside.</em></h2><p class="bodycopy">Set against the energy of Umhlanga, Marmalade Reef was announced as a welcoming space for seafood, conversations and ocean lovers.</p><p class="bodycopy" style="font-size:13px">Please confirm current operating hours, menu and availability with the business before visiting. This is a website concept awaiting final owner details.</p></div><div class="location reef-location-card"><div class="reef-location-heading"><div class="pin" aria-hidden="true"><svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="#0a6c6f" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><span class="reef-hospitality-art reef-location-art" aria-hidden="true"><img src="reef-hospitality-strip.webp" alt="" loading="lazy" decoding="async"></span></div><h3>Umhlanga Centre</h3><p>189 Ridge Road, Umhlanga Rocks<br>Umhlanga Centre, next to Harry James<br>KwaZulu-Natal, South Africa</p><a class="btn btn-primary reef-action" href="https://www.google.com/maps/search/?api=1&amp;query=189+Ridge+Road+Umhlanga+Rocks" target="_blank" rel="noopener noreferrer"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-pin"></use></svg>Explore the location</a><p style="font-size:11px;margin-bottom:0">Street address from Marmalade Mist’s announcement; the exact unit and visiting arrangements should be confirmed with the business.</p></div></div></section>
 </main>
-<footer class="footer"><div class="wrap"><div class="foot-top"><a class="brand" href="#home"><span class="brandword">marmalade reef<small>Café • Seafood • Good Times</small></span></a><div class="foot-links"><a href="#story">Our story</a><a href="#chef">Chef Rev</a><a href="#marmalade-mist">Marmalade Mist</a><a href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></div><div class="foot-bottom"><p>© <span id="year">2026</span> Marmalade Reef by Chef Rev. Concept preview.</p><p>Website concept by Spirit2k5 Web Studio · Not an official launch.</p></div></div></footer>
-<div class="mobile-bar"><a href="#story">✦ Our story</a><a href="#visit">⌖ Find us</a></div>
+<footer class="footer"><div class="wrap"><div class="foot-top"><a class="brand reef-action" href="#home"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-home"></use></svg><span class="brandword">marmalade reef<small>Café • Seafood • Good Times</small></span></a><div class="foot-links"><a href="#story" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-book"></use></svg>Our story</a><a href="#chef" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-chef"></use></svg>Chef Rev</a><a href="#marmalade-mist" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-cloche"></use></svg>Marmalade Mist</a><a href="https://www.instagram.com/chefrevhospitality/" target="_blank" rel="noopener noreferrer" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-instagram"></use></svg>Instagram</a></div></div><div class="foot-bottom"><p>© <span id="year">2026</span> Marmalade Reef by Chef Rev. Concept preview.</p><p>Website concept by Spirit2k5 Web Studio · Not an official launch.</p></div></div></footer>
+<div class="mobile-bar"><a href="#story" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-book"></use></svg>Our story</a><a href="#visit" class="reef-action"><svg class="reef-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#reef-icon-pin"></use></svg>Find us</a></div>
 </body></html>

@@ -1,0 +1,91 @@
+/* The decorative line icons inherit each control's colour. */
+.reef-action-symbols {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.reef-action-icon {
+  display: block;
+  flex: none;
+  width: 1.25em;
+  height: 1.25em;
+  pointer-events: none;
+}
+
+.reef-action {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.links .reef-action-icon { width: 14px; height: 14px; }
+.links .smallbtn, .book-controls .reef-action { justify-content: center; }
+.chef-link.reef-action, .mist-link.reef-action { gap: 8px; }
+.footer .brand > .reef-action-icon { width: 22px; height: 22px; color: #a6d8cb; }
+.footer .foot-links .reef-action-icon { color: #e7c6a9; }
+
+.mobile-toggle .reef-action-icon { width: 22px; height: 22px; }
+.mobile-toggle[aria-expanded="true"] .reef-icon-menu,
+.mobile-toggle[aria-expanded="false"] .reef-icon-close,
+[data-book-position="front-cover"] .reef-icon-book-closed,
+[data-book-position]:not([data-book-position="front-cover"]) .reef-icon-book-open {
+  display: none;
+}
+
+.reef-map-stop .reef-map-arrow { width: 22px; height: 22px; }
+
+/* Small corner cues follow the same page-turn areas as the flipbook. */
+.reef-page-turn-cues {
+  display: none;
+  position: absolute;
+  inset: auto 10px 11px;
+  height: 18px;
+  pointer-events: none;
+  color: var(--book-tide);
+}
+
+.reef-page-turn-cues .reef-action-icon {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.reef-page-turn-cues .reef-icon-prev-corner { left: 0; }
+.reef-page-turn-cues .reef-icon-next-corner { right: 0; }
+
+[data-book-state="read"] .book-page:not([aria-hidden="true"]) .reef-page-turn-cues,
+[data-book-layout="landscape"] .book-page.--left .reef-icon-prev-corner,
+[data-book-layout="landscape"] .book-page.--right .reef-icon-next-corner,
+[data-book-layout="portrait"]:not([data-book-position="front-cover"]) .reef-icon-prev-corner,
+[data-book-layout="portrait"]:not([data-book-position="back-cover"]) .reef-icon-next-corner {
+  display: block;
+}
+
+/* These icons replace the old dots, using the same connected trail. */
+.reef-chart-nav::before { inset-block-start: 22px; }
+.reef-chart-nav .reef-action::before { content: none; }
+.reef-chart-nav .reef-action-icon {
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  border: 1px solid var(--orange);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--orange);
+}
+
+@media (941px <= width <= 1080px) {
+  .navin { gap: 12px; }
+  .links { gap: 10px; }
+  .links .reef-action { gap: 4px; }
+  .links .smallbtn { padding-inline: 13px; }
+}
+
+@media (max-width: 440px) {
+  .book-controls .reef-action { gap: 4px; padding-inline: 9px; }
+}

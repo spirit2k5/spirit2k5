@@ -140,7 +140,7 @@
 
 .book-sheet .book-folio {
   position: absolute;
-  inset-inline: clamp(19px, 8cqi, 44px);
+  inset-inline: clamp(34px, 9cqi, 44px);
   bottom: clamp(10px, 3.7cqi, 20px);
   margin: 0;
   color: #4d645a;
