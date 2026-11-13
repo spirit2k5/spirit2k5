@@ -1,0 +1,54 @@
+/* Square artwork cells let the plates scale with the leaf during a turn. */
+.menu-book .book-plate {
+  flex: none;
+  align-self: center;
+  width: clamp(54px, 23cqi, 104px);
+  max-width: 100%;
+  aspect-ratio: 1;
+  margin: 0 auto clamp(8px, 3cqi, 14px);
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.menu-book .book-plate--welcome,
+.menu-book .book-plate--drinks,
+.menu-book .book-plate--seal::before {
+  background-image: url('reef-experience-strip.webp');
+  background-repeat: no-repeat;
+  background-size: 300% auto;
+  background-position: right center;
+}
+
+.menu-book .book-plate--drinks {
+  width: clamp(64px, 28cqi, 124px);
+  background-position: center;
+}
+
+.menu-book .book-plate--visit {
+  width: clamp(60px, 27cqi, 114px);
+  background: url('reef-hospitality-strip.webp') right center / 200% auto no-repeat;
+}
+
+.menu-book .book-plate--seal {
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 22cqi, 92px);
+  border: 1px solid rgb(153 78 47 / 56%);
+  border-radius: 50%;
+  background: rgb(249 239 214 / 54%);
+  box-shadow: inset 0 0 0 3px rgb(249 239 214 / 54%), inset 0 0 0 4px rgb(153 78 47 / 28%);
+  transform: rotate(-7deg);
+}
+
+.menu-book .book-plate--seal::before {
+  content: '';
+  width: 77%;
+  aspect-ratio: 1;
+}
+
+@container (max-width: 310px) {
+  /* Leave room for wrapping text above the numbered folio on narrow leaves. */
+  .menu-book .book-plate { margin-bottom: 8px; }
+  .menu-book .book-plate--welcome { width: clamp(48px, 20cqi, 62px); }
+  .menu-book .book-plate--visit { width: clamp(54px, 24cqi, 74px); }
+}

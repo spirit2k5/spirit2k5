@@ -1,0 +1,59 @@
+/* Framed field-guide print in the existing story split. */
+.reef-story-plate {
+  width: min(100%, 382px);
+  margin: 0;
+  padding: clamp(9px, 1.2vw, 16px);
+  justify-self: center;
+  background: #f3e9d5;
+  border: 1px solid #d4c3a4;
+  border-radius: 6px 6px 12px 12px;
+  box-shadow: 0 14px 32px rgb(60 78 61 / 12%);
+}
+
+.reef-story-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f7ecd7;
+  border: 1px solid #caba9c;
+  border-radius: 3px;
+}
+
+.reef-story-plate figcaption {
+  margin-top: clamp(6px, 1vw, 12px);
+  color: var(--deep);
+  font: 600 clamp(19px, 2.1vw, 26px) / 1.25 'Caveat', cursive;
+  text-align: center;
+}
+
+/* One transparent image holds the three square specimen plates. */
+#experience .reef-experience-plate {
+  position: relative;
+  width: min(100%, clamp(128px, 13vw, 174px));
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto 17px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e7ede0, rgb(231 237 224 / 0%) 72%);
+}
+
+.reef-experience-plate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('reef-experience-strip.webp') var(--reef-plate-position, 0%) 50% / 300% auto no-repeat;
+}
+
+.reef-experience-plate--cafe { --reef-plate-position: 50%; }
+.reef-experience-plate--ocean { --reef-plate-position: 100%; }
+
+@media (max-width: 700px) {
+  .reef-story-plate { max-width: 274px; }
+
+  #experience .food-card {
+    grid-template-columns: clamp(65px, 22vw, 104px) minmax(0, 1fr);
+    column-gap: clamp(12px, 3.6vw, 18px);
+  }
+
+  #experience .reef-experience-plate { width: 100%; margin: 0; }
+}
