@@ -160,7 +160,7 @@ h2 em { color: var(--teal); font-weight: 400; }
   .mist-panel { padding: 26px; }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1160px) {
   html { scroll-padding-top: 94px; }
   .nav:not(.nav-ready) { position: relative; }
   .navin { flex-wrap: wrap; min-height: 76px; gap: 0; padding-block: 8px; }
