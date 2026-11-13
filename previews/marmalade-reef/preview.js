@@ -19,7 +19,7 @@
     link.addEventListener('click', () => {
       setOpen(false);
       // Move keyboard focus into the chosen section before hiding the menu.
-      if (matchMedia('(max-width: 940px)').matches) {
+      if (matchMedia('(max-width: 1160px)').matches) {
         const target = document.querySelector(link.hash);
         if (target) {
           target.setAttribute('tabindex', '-1');
@@ -38,7 +38,10 @@
   document.addEventListener('click', (event) => {
     if (!nav.contains(event.target)) setOpen(false);
   });
-  matchMedia('(min-width: 941px)').addEventListener('change', () => setOpen(false));
+  const desktop = matchMedia('(min-width: 1161px)');
+  const closeOnDesktop = () => setOpen(false);
+  if (desktop.addEventListener) desktop.addEventListener('change', closeOnDesktop);
+  else if (desktop.addListener) desktop.addListener(closeOnDesktop);
 
   const updateCurrent = () => {
     links.forEach((link) => {
