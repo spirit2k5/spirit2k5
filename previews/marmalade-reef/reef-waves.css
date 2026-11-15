@@ -1,0 +1,90 @@
+/* Shallow shoreline edges between existing sections. */
+.ticker,
+#experience,
+.footer {
+  --reef-wave-height: clamp(13px, 2.7vw, 32px);
+  position: relative;
+}
+
+.ticker,
+#experience { border-block-start-color: transparent; }
+
+.ticker::before,
+.ticker::after,
+#experience::before,
+.footer::before {
+  position: absolute;
+  inset: auto 0 calc(100% - 1px);
+  block-size: var(--reef-wave-height);
+  background: var(--reef-wave-fill);
+  border-radius: 40% 56% 0 0 / 88% 78% 0 0;
+  clip-path: shape(from 0 66%,
+    curve to 32% 45% with 12% 15% / 20% 13%,
+    curve to 64% 49% with 45% 80% / 55% 76%,
+    curve to 100% 30% with 78% 7% / 89% 6%,
+    line to 100% 100%, line to 0 100%, close);
+  pointer-events: none;
+  content: '';
+}
+
+.ticker::before,
+.ticker::after { --reef-wave-fill: #f1b28b; }
+
+.ticker::after {
+  inset-block-end: calc(100% + 4px);
+  opacity: .32;
+}
+
+#experience::before {
+  --reef-wave-fill: var(--aqua);
+  scale: -1 1;
+}
+
+#ocean::after {
+  position: absolute;
+  inset: 0 0 auto;
+  block-size: clamp(11px, 2.3vw, 28px);
+  background: var(--paper);
+  border-radius: 0 0 52% 39% / 0 0 70% 90%;
+  clip-path: shape(from 0 0, line to 100% 0, line to 100% 27%,
+    curve to 65% 48% with 90% 67% / 79% 72%,
+    curve to 30% 50% with 52% 25% / 44% 25%,
+    curve to 0 79% with 17% 77% / 8% 94%, close);
+  pointer-events: none;
+  content: '';
+}
+
+.footer::before {
+  --reef-wave-fill: #123b40;
+  block-size: clamp(12px, 2vw, 27px);
+  scale: -1 1;
+}
+
+@supports (clip-path: shape(from 0 0, line to 100% 100%, close)) {
+  .ticker::before,
+  .ticker::after,
+  #experience::before,
+  #ocean::after,
+  .footer::before { border-radius: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-reef-motion='paused']) .ticker::after {
+    animation: reef-tide-line 8s ease-in-out 2;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html:not([data-reef-motion='paused']) :is(.reef-story-plate, .reef-chef-portrait, .reef-experience-plate) {
+    transition: translate 420ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  html:not([data-reef-motion='paused']) :is(.reef-story-plate:hover, .reef-chef-portrait:hover, .food-card:hover .reef-experience-plate) {
+    translate: 0 -3px;
+  }
+}
+
+@keyframes reef-tide-line {
+  0%, 100% { translate: 0 0; opacity: .32; }
+  50% { translate: 0 -4px; opacity: .48; }
+}

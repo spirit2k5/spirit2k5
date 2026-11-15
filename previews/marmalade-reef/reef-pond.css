@@ -1,0 +1,116 @@
+.art.reef-pond {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: clamp(8px, 1.1vw, 13px);
+}
+
+.reef-pond-water {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 50%;
+  background: #faefdd;
+}
+
+.reef-pond-water .logo-picture { width: 100%; height: 100%; border-radius: 50%; }
+.reef-pond-water .hero-logo,
+.reef-pond-base {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  aspect-ratio: 1;
+}
+
+.reef-pond-layers { display: none; position: absolute; inset: 0; pointer-events: none; }
+.reef-pond-base { display: block; }
+.reef-pond[data-pond-ready] .reef-pond-layers { display: block; }
+
+.reef-koi {
+  position: absolute;
+  inset: 0;
+  animation: reef-koi-swim var(--swim-time) linear var(--swim-delay) infinite;
+}
+
+.reef-koi img {
+  position: absolute;
+  top: var(--swim-depth);
+  left: 50%;
+  width: var(--koi-size);
+  height: auto;
+  transform: translate(-50%, -50%);
+  transform-origin: 68% 52%;
+  animation: reef-koi-glide 1.8s ease-in-out var(--swim-delay) infinite alternate;
+  filter: drop-shadow(0 3px 2px rgb(93 73 55 / 18%));
+}
+
+.reef-koi:nth-of-type(1) { --swim-time: 38s; --swim-delay: -33s; --swim-depth: 15%; --koi-size: 14%; }
+.reef-koi:nth-of-type(2) { --swim-time: 42s; --swim-delay: -5s; --swim-depth: 19%; --koi-size: 15%; }
+.reef-koi:nth-of-type(3) { --swim-time: 39s; --swim-delay: -13s; --swim-depth: 12%; --koi-size: 13%; }
+.reef-koi:nth-of-type(4) { --swim-time: 44s; --swim-delay: -22s; --swim-depth: 16%; --koi-size: 13.5%; }
+.reef-koi:nth-of-type(5) { --swim-time: 41s; --swim-delay: -29s; --swim-depth: 11%; --koi-size: 11%; }
+
+.reef-pond-water::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 50%;
+  box-shadow: inset 0 0 21px rgb(31 119 111 / 19%);
+  pointer-events: none;
+  content: '';
+}
+
+.reef-pond-ripple {
+  position: absolute;
+  width: 16%;
+  aspect-ratio: 1;
+  inset: 62% auto auto 10%;
+  border-radius: 50%;
+  border: 1px solid rgb(27 117 114 / 42%);
+  opacity: 0;
+  animation: reef-pond-ripple 8s ease-out infinite;
+}
+.reef-pond-ripple:last-child { inset: 16% 13% auto auto; animation-delay: -4s; }
+
+@keyframes reef-koi-swim { to { transform: rotate(1turn); } }
+@keyframes reef-koi-glide {
+  from { transform: translate(-50%, -50%) rotate(-9deg); }
+  to { transform: translate(-50%, -50%) rotate(11deg); }
+}
+@keyframes reef-pond-ripple {
+  0% { transform: scale(.15); opacity: 0; }
+  14% { opacity: .48; }
+  52%, 100% { transform: scale(1.45); opacity: 0; }
+}
+
+.reef-pond:not([data-pond-visible]) :is(.reef-koi, .reef-koi img, .reef-pond-ripple),
+html[data-reef-motion="paused"] :is(.reef-koi, .reef-koi img, .reef-pond-ripple) {
+  animation-play-state: paused;
+}
+
+.reef-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 5px 9px;
+  margin: 2px 0 0 -9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--deep);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.reef-motion-toggle[hidden] { display: none; }
+.reef-motion-toggle:hover { background: rgb(20 90 82 / 8%); }
+html:not([data-reef-motion="paused"]) .reef-motion-icon-play,
+html[data-reef-motion="paused"] .reef-motion-icon-pause { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reef-pond[data-pond-ready] .reef-pond-layers,
+  .reef-motion-toggle { display: none; }
+}

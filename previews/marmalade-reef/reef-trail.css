@@ -1,0 +1,129 @@
+/* A small chart along the approach to Find Us. */
+.reef-trail {
+  padding-block: clamp(19px, 4.2vw, 47px);
+  background: #f4e8d4;
+  border-block-end: 1px solid #dbd7bf;
+}
+
+.reef-trail-frame {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(130px, 20vw, 188px);
+  overflow: hidden;
+  border: 1px solid #bcad8c;
+  border-radius: 4px 8px 6px 5px;
+  background:
+    linear-gradient(105deg, rgb(248 237 213 / 69%), rgb(247 235 210 / 82%) 45%, rgb(243 231 203 / 40%)),
+    url('reef-map-art.webp') center 72% / cover no-repeat,
+    #f5ebd6;
+  box-shadow: 0 10px 25px rgb(59 50 32 / 9%), inset 0 0 16px rgb(118 85 48 / 16%);
+}
+
+.reef-trail-frame::before {
+  position: absolute;
+  z-index: -1;
+  inset: 6px;
+  border: 1px solid rgb(129 107 74 / 38%);
+  border-radius: 2px 5px 3px 3px;
+  content: '';
+}
+
+.reef-trail-compass {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 12%;
+  inset-inline-start: 3.1%;
+  inline-size: clamp(32px, 6.8vw, 58px);
+  aspect-ratio: 1;
+  color: #416e67;
+  opacity: .65;
+  background: radial-gradient(circle, transparent 50%, currentColor 51% 53%, transparent 54%);
+}
+
+.reef-trail-route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: #964727;
+}
+
+.reef-trail-dots {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.7;
+  stroke-linecap: round;
+  stroke-dasharray: .2 7;
+  vector-effect: non-scaling-stroke;
+}
+
+.reef-trail-ghost { opacity: .55; }
+.reef-trail-progress { opacity: 0; }
+.reef-trail[data-trail-moving] .reef-trail-progress { opacity: .9; }
+
+.reef-trail-fish {
+  position: absolute;
+  top: var(--trail-fish-y, 49%);
+  left: var(--trail-fish-x, 54%);
+  width: clamp(29px, 5.4vw, 58px);
+  height: auto;
+  color: #216862;
+  transform: translate(-50%, -50%) rotate(var(--trail-fish-angle, -9deg));
+  filter: drop-shadow(0 2px #f8ecd8);
+}
+
+.reef-trail-fish--middle {
+  --trail-fish-lane: -3%;
+  --trail-fish-x: 47.4%;
+  --trail-fish-y: 55%;
+  --trail-fish-angle: -15deg;
+  width: clamp(25px, 4.6vw, 48px);
+  color: #ac592f;
+}
+
+.reef-trail-fish--back {
+  --trail-fish-lane: 4%;
+  --trail-fish-x: 41.5%;
+  --trail-fish-y: 66%;
+  --trail-fish-angle: -9deg;
+  width: clamp(22px, 3.8vw, 41px);
+  color: #3a786c;
+}
+
+.reef-trail[data-trail-moving] .reef-trail-fish {
+  top: calc(var(--trail-fish-y, 49%) + var(--trail-fish-lane, 0%));
+}
+
+.reef-trail-treasure {
+  position: absolute;
+  inset-block-start: 47%;
+  inset-inline-start: 87%;
+  width: clamp(39px, 8.8vw, 90px);
+  height: auto;
+  color: #873c20;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 0 #f6e8ca);
+}
+
+.reef-trail-treasure-glint {
+  opacity: .9;
+  transform: scale(1);
+  transform-origin: 50% 35%;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.reef-trail[data-trail-moving]:not([data-trail-arrived]) .reef-trail-treasure-glint {
+  opacity: 0;
+  transform: scale(.6);
+}
+
+html[data-reef-motion='paused'] .reef-trail-treasure-glint { transition: none; }
+
+@media (max-width: 700px) {
+  .reef-trail-frame { min-height: clamp(112px, 28vw, 150px); }
+  .reef-trail-compass { inset-inline-start: 4%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reef-trail-treasure-glint { transition: none; }
+}
