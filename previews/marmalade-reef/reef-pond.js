@@ -1,28 +1,6 @@
 (() => {
   const pond = document.querySelector('[data-reef-pond]');
-  const control = document.querySelector('[data-reef-motion-toggle]');
-  if (!pond || !control) return;
-
-  const root = document.documentElement;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const label = control.querySelector('[data-reef-motion-label]');
-  const storageKey = 'marmalade-reef-motion-paused';
-  let preference = false;
-  try { preference = localStorage.getItem(storageKey) === 'true'; } catch {}
-
-  const syncMotion = () => {
-    root.dataset.reefMotion = reduce.matches || preference ? 'paused' : 'playing';
-    label.textContent = preference ? 'Resume animations' : 'Pause animations';
-    control.hidden = reduce.matches;
-    window.dispatchEvent(new Event('reef-motion-change'));
-  };
-  control.addEventListener('click', () => {
-    preference = !preference;
-    try { localStorage.setItem(storageKey, String(preference)); } catch {}
-    syncMotion();
-  });
-  reduce.addEventListener('change', syncMotion);
-  syncMotion();
+  if (!pond) return;
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {

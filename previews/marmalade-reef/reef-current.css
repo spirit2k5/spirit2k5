@@ -1,0 +1,98 @@
+/* Keep the fish above each section's background and behind its contents. */
+:where(main > section, main > article, footer):has(> .reef-current) {
+  position: relative;
+  isolation: isolate;
+}
+
+.reef-current {
+  --current-fish: url('reef-pond-koi.webp');
+  --current-sea: #187a78;
+  --current-citrus: #bc633e;
+  --current-interval: 34s;
+  --current-delay: -8s;
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.reef-current::before,
+.reef-current::after {
+  position: absolute;
+  inset-block-start: 10%;
+  inset-inline-start: 0;
+  inline-size: clamp(81px, 13vw, 190px);
+  aspect-ratio: 2.5;
+  mask: var(--current-fish) right top / 78% 80% no-repeat,
+        var(--current-fish) left bottom / 35% 51% no-repeat;
+  background: var(--current-sea);
+  opacity: .24;
+  transform: translateX(16vw);
+  animation: reef-current-swim var(--current-interval) linear var(--current-delay) infinite paused;
+  content: '';
+}
+
+.reef-current::after {
+  --current-facing: -1;
+  inset-block-start: auto;
+  inset-block-end: 8%;
+  inline-size: clamp(73px, 11vw, 156px);
+  mask-position: right bottom, left top;
+  background: var(--current-citrus);
+  opacity: .20;
+  transform: translateX(68vw) scaleX(-1);
+  animation-duration: calc(var(--current-interval) + 9s);
+  animation-delay: calc(var(--current-delay) - 7s);
+  animation-direction: reverse;
+}
+
+:where(section, article):nth-of-type(even) > .reef-current {
+  --current-interval: 40s;
+  --current-delay: -16s;
+}
+
+:is(.gallery-section, .footer) > .reef-current {
+  --current-sea: #79c1b5;
+  --current-citrus: #f4a373;
+}
+
+html[data-reef-motion='playing'] .reef-current[data-current-visible]::before,
+html[data-reef-motion='playing'] .reef-current[data-current-visible]::after {
+  animation-play-state: running;
+}
+
+@keyframes reef-current-swim {
+  0% { transform: translate3d(-100%, 0, 0) rotate(-4deg) scaleX(var(--current-facing, 1)); }
+  26% { transform: translate3d(25vw, -8px, 0) rotate(2deg) scaleX(var(--current-facing, 1)); }
+  57% { transform: translate3d(62vw, 6px, 0) rotate(4deg) scaleX(var(--current-facing, 1)); }
+  100% { transform: translate3d(100vw, -11px, 0) rotate(-3deg) scaleX(var(--current-facing, 1)); }
+}
+
+.reef-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 5px 9px;
+  margin: 2px 0 0 -9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--deep);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reef-motion-toggle svg { width: 14px; height: 14px; }
+.reef-motion-toggle[hidden] { display: none; }
+.reef-motion-toggle:hover { background: rgb(20 90 82 / 8%); }
+html:not([data-reef-motion='paused']) .reef-motion-icon-play,
+html[data-reef-motion='paused'] .reef-motion-icon-pause { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reef-current::before,
+  .reef-current::after { animation: none; }
+  .reef-motion-toggle { display: none; }
+}
